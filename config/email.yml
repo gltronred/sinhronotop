@@ -1,0 +1,12 @@
+development:
+  :address: mail.gmx.net
+  :port: 25
+  :authentication: plain
+  :user_name: mperlin@gmx.de
+  :password: jkas8901
+production:
+  :address: mail.gmx.net
+  :port: 25
+  :authentication: plain
+  :user_name: mperlin@gmx.de
+  :password: jkas8901

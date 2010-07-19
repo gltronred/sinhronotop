@@ -1,0 +1,14 @@
+<% if !@event.nil? %>
+<h3>Добавить команду из списка</h3>
+
+<% form_for(@result) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :event_id, :value => @event.id %>
+  <p>
+    <%= collection_select(:result, :team_id, @teams, :id, :name) %> 
+  </p>
+  <p>
+    <%= f.submit 'Добавить' %>
+  </p>
+<% end %>
+<% end %>

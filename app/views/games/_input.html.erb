@@ -1,0 +1,39 @@
+<% form_for(@game) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :tournament_id, :value => @tournament.id %>
+ <p>
+   <%= f.label "Название (например '3 этап')" %><br />
+   <%= f.text_field :name %>
+ </p>
+ <p>
+   <%= f.label "Количество туров" %><br />
+   <%= f.text_field :num_tours %>
+ </p>
+ <p>
+   <%= f.label "Количество вопросов в туре" %><br />
+   <%= f.text_field :num_questions %>
+ </p>
+ <p>
+   <%= f.label "Начало регистрации" %><br />
+   <%= f.date_select :begin %>
+ </p>
+ <p>
+   <%= f.label "Конец регистрации" %><br />
+   <%= f.date_select :end %>
+ </p>
+ <p>
+   <%= f.label "Привем спорных до" %><br />
+   <%= f.date_select :submit_disp_until %>
+ </p>
+ <p>
+   <%= f.label "Привем апелляций до:" %><br />
+   <%= f.date_select :submit_appeal_until %>
+ </p>
+ <p>
+   <%= f.label "Привем результатов до до:" %><br />
+   <%= f.date_select :submit_results_until %>
+ </p>
+ <p>
+   <%= f.submit 'Сохранить' %>
+ </p>
+<% end %>

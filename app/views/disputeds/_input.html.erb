@@ -1,0 +1,20 @@
+<% if !@disputed.nil? %>
+<h3>Добавить спорный</h3>
+<% form_for(@disputed) do |f| %>
+<%= f.hidden_field :event_id, :value => @event.id %>
+
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label "Номер вопроса (сквозной)" %><br />
+    <%= f.select ( :question_index, options_for_select(1.upto(@game.num_questions*@game.num_tours), :selected => @disputed.question_index.to_i)) %>
+  </p>
+  <p>
+    <%= f.label "Ответ" %><br />
+    <%= f.text_field :answer %>
+  </p>
+  <p>
+    <%= f.submit 'Сохранить' %>
+  </p>
+<% end %>
+<% end %>

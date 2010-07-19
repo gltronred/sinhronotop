@@ -1,0 +1,29 @@
+<h1>Турниры</h1>
+
+<% if @tournaments.length > 0 %>
+<table>
+  <tr>
+    <th>Название</th>
+    <th>email оргкомитета</th>
+    <th>Составы?</th>
+    <th>Апелляции на снятие?</th>
+  </tr>
+
+<% @tournaments.each do |tournament| %>
+  <tr>
+    <td><%=h tournament.name %></td>
+    <td><%=h tournament.org_email %></td>
+    <td><%=h tournament.needTeams %></td>
+    <td><%=h tournament.appeal_for_dismiss %></td>
+	<td><%= link_to 'Новая игра', new_tournament_game_path(tournament) %></td>
+	<td><%= link_to 'Игры', tournament_games_path(tournament) %></td>
+    <td><%= link_to 'Подробности', tournament %></td>
+    <td><%= link_to 'Изменить параметры', edit_tournament_path(tournament) %></td>
+    <td><%= link_to 'Удалить', tournament, :confirm => 'Вы уверены?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
+<br />
+
+<%= link_to 'Новый турнир', new_tournament_path %>

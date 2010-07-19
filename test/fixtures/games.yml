@@ -1,0 +1,15 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  begin: 2010-07-05
+  end: 2010-07-05
+  submit_disp_until: 2010-07-05
+  submit_appeal_until: 2010-07-05
+  submit_results_until: 2010-07-05
+
+two:
+  begin: 2010-07-05
+  end: 2010-07-05
+  submit_disp_until: 2010-07-05
+  submit_appeal_until: 2010-07-05
+  submit_results_until: 2010-07-05

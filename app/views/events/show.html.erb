@@ -1,0 +1,47 @@
+<h1>Регистрация</h1>
+<p>
+  <b>Турнир:</b>
+  <%= link_to @event.game.tournament.name, @event.game.tournament %>
+</p>
+<p>
+  <b>Игра:</b>
+  <%= link_to @event.game.name, @event.game %>
+</p>
+
+<p>
+  <b>Город:</b>
+  <%=h @event.city.name %>
+</p>
+
+<p>
+  <b>Дата:</b>
+  <%=h @event.date %>
+</p>
+
+<p>
+  <b>Ведущий:</b>
+  <%=h @event.moderator_name %>
+</p>
+
+<p>
+  <b>email ведущего:</b>
+  <%=h @event.moderator_email %>
+</p>
+
+<p>
+  <b>Ответственный:</b>
+  <%=h @event.resp_name %>
+</p>
+
+<p>
+  <b>email ответственного:</b>
+  <%=h @event.resp_email %>
+</p>
+
+<%= link_to 'Спорные ответы', event_disputeds_path(@event) %>
+<%= link_to 'Апелляции', event_appeals_path(@event) %>
+<%= link_to 'Результаты', event_results_path(@event) %>
+<% if @event.game.registrable %>
+<%= link_to 'Изменить', edit_event_path(@event) %>
+<% end %>
+<%= link_to 'Все регистрации на эту игру', game_events_path(@event.game) %>

@@ -1,0 +1,25 @@
+<h1>Турнир</h1>
+<p>
+  <b>Название:</b>
+  <%=h @tournament.name %>
+</p>
+<p>
+  <b>email оргкомитета:</b>
+  <%=h @tournament.org_email %>
+</p>
+<p>
+  <b>Составы нужны?</b>
+  <%=h @tournament.needTeams %>
+</p>
+<p>
+  <b>Принимаются ли апелляции на снятие?</b>
+  <%=h @tournament.appeal_for_dismiss %>
+</p>
+<p>
+  <b>Города-участники:</b>
+   <%=h @tournament.cities.collect {|c| c.name + " "} %>
+ </p>
+<%= link_to 'Новая игра', new_tournament_game_path(@tournament) %>
+<%= link_to 'Игры', tournament_games_path(@tournament) %>
+<%= link_to 'Изменить', edit_tournament_path(@tournament) %> |
+<%= link_to 'Все турниры', tournaments_path %>

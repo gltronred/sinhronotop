@@ -1,0 +1,29 @@
+<h1>Апелляции / <%= link_to @parent.to_s, @parent %></h1>
+
+<table>
+  <tr>
+    <th>Номер вопроса</th>
+    <th>Ответ</th>
+    <th>Апелляция на</th>
+    <th>Аргументация</th>
+  </tr>
+
+<% changeable = !@event.nil? && @game.disp_changeable %>
+<% @appeals.each do |appeal| %>
+  <tr>
+    <td><%=h appeal.question_index %></td>
+    <td><%=h appeal.answer %></td>
+    <td><%=h appeal.goal %></td>
+    <td><%=h appeal.argument %></td>
+	<% if changeable %>
+    <td><%= link_to 'Изменить', edit_event_appeal_path(appeal.event, appeal) %></td>
+    <td><%= link_to 'Удалить', appeal, :confirm => 'Вы уверены?', :method => :delete %></td>
+	<% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+<% if changeable %>
+<%= render :partial => "input" %>
+<% end %>

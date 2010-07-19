@@ -1,0 +1,15 @@
+Регистрация  (<%=h @action %>)
+
+Город: <%=h @event.city.name %> 
+На игру <%= @event.game.name %> турнира <%= @event.game.tournament.name %>.
+Дата игры: <%=h @event.date %>
+Ведущий: <%=h @event.moderator_name %> (<%=h @event.moderator_email %>)
+Ответственный: <%=h @event.resp_name %> (<%=h @event.resp_email %> )
+
+Изменить данные регистрации можно по адресу:  <%= @update_url %>
+Спорные ответы принимаются до <%=h @event.game.submit_disp_until %> по адресу:  <%= @disputeds_url %>
+Апелляции принимаются до <%=h @event.game.submit_appeal_until %> по адресу: <%= @appeals_url %>
+Результаты принимаются до <%=h @event.game.submit_results_until %> по адресу:  <%= @results_url %>
+
+Всего наилучшего,
+Оргкомитет.

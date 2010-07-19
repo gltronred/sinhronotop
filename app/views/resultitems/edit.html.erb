@@ -1,0 +1,16 @@
+<h1>Editing resultitem</h1>
+
+<% form_for(@resultitem) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :score %><br />
+    <%= f.text_field :score %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @resultitem %> |
+<%= link_to 'Back', resultitems_path %>

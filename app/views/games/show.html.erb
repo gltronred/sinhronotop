@@ -1,0 +1,47 @@
+<h1>Игра</h1>
+<p>
+  <b>Название:</b>
+  <%=h @game.name %>
+</p>
+<p>
+  <b>Туров:</b>
+  <%=h @game.num_tours %>
+</p>
+<p>
+  <b>Вопросов в туре:</b>
+  <%=h @game.num_questions %>
+</p>
+<p>
+  <b>Регистрация с:</b>
+  <%=h @game.begin %>
+</p>
+
+<p>
+  <b>Регистрация до:</b>
+  <%=h @game.end %>
+</p>
+
+<p>
+  <b>Прием спорных до:</b>
+  <%=h @game.submit_disp_until %>
+</p>
+
+<p>
+  <b>Прием апелляций до:</b>
+  <%=h @game.submit_appeal_until %>
+</p>
+
+<p>
+  <b>Прием результатов до:</b>
+  <%=h @game.submit_results_until %>
+</p>
+
+<%= link_to 'Все регистрации', game_events_path(@game) %>
+<% if @game.registrable %>
+<%= link_to 'Зарегистрироваться', new_game_event_path(@game) %>
+<% end %>
+<%= link_to 'Спорные ответы', game_disputeds_path(@game) %>
+<%= link_to 'Апелляции', game_appeals_path(@game) %>
+<%= link_to 'Результаты', game_results_path(@game) %>
+<%= link_to 'Изменить параметры', edit_tournament_game_path(@game.tournament, @game) %>
+<%= link_to 'Все игры турнира', tournament_games_path(@game.tournament) %>

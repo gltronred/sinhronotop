@@ -1,0 +1,38 @@
+<h1>Игры / <%= link_to @tournament.to_s, @tournament %></h1>
+
+<% if @games.length > 0 %>
+<table>
+  <tr>
+	<th>Название</th>
+    <th>Туров</th>
+    <th>Вопросов в туре</th>
+    <th>Регистрация с</th>
+    <th>Регистрация до</th>
+    <th>Cпорные до</th>
+    <th>Апелляции до</th>
+    <th>Результаты до</th>
+  </tr>
+
+<% @games.each do |game| %>
+  <tr>
+    <td><%=h game.name %></td>
+    <td><%=h game.num_tours %></td>	
+    <td><%=h game.num_questions %></td>	
+    <td><%=h game.begin %></td>
+    <td><%=h game.end %></td>
+    <td><%=h game.submit_disp_until %></td>
+    <td><%=h game.submit_appeal_until %></td>
+    <td><%=h game.submit_results_until %></td>
+<% if game.registrable %>
+	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) %></td>
+<% end %>	
+	<td><%= link_to 'Все регистрации', game_events_path(game) %></td>
+    <td><%= link_to 'Подробности', game %></td>
+    <td><%= link_to 'Изменить', edit_game_path(game) %></td>
+    <td><%= link_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete %></td>
+  </tr>
+<% end %>
+</table>
+<% end %>
+<br />
+

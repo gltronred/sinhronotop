@@ -1,0 +1,32 @@
+<h1>Регистрации / <%= link_to @game.to_s, @game %></h1>
+
+<table>
+  <tr>
+    <th>Турнир</th>
+    <th>Игра</th>
+    <th>Город</th>
+    <th>Дата</th>
+    <th>Ведущий</th>
+    <th>email ведущего</th>
+    <th>Ответственный</th>
+    <th>email ответственного</th>
+  </tr>
+
+<% @events.each do |event| %>
+  <tr>
+    <td><%=link_to event.game.tournament.name, event.game.tournament %></td>
+    <td><%=link_to event.game.name, event.game %></td>
+    <td><%=link_to event.city.name, event.city %></td>
+    <td><%=h event.date %></td>
+    <td><%=h event.moderator_name %></td>
+    <td><%=h event.moderator_email %></td>
+    <td><%=h event.resp_name %></td>
+    <td><%=h event.resp_email %></td>
+    <td><%= link_to 'Подробности', event %></td>
+<% if event.game.registrable %>
+    <td><%= link_to 'Изменить', edit_event_path(event) %></td>
+    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>
+<% end %>
+  </tr>
+<% end %>
+</table>

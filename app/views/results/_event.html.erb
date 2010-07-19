@@ -1,0 +1,31 @@
+<% for tour in 1..@event.game.num_tours %>
+<h3>Тур <%= tour %>
+<table>
+  <tr>
+    <th>Команда</th>
+<% for question_in_tour in 1..@event.game.num_questions %>
+<th><%= (tour-1)*@event.game.num_questions+question_in_tour %></th>
+<% end %>
+    <th>Сумма</th>
+  </tr>
+
+<% @results.each do |result| %>
+  <tr>
+    <td><%= result.team.name %></td>
+<% for item in result.items_for_tour(tour) %>
+    <td>
+<% field_id = "team#{result.team.id}_tour#{tour}_question#{item.question_index}" %>
+<%= check_box_tag field_id, 1, item.score==1 %>
+<%= observe_field field_id, :url => "../../resultitems/update/#{item.id}", :with => "checked"  %>
+    </td>
+<% end %>
+<% field_id = "team#{result.team.id}_tour#{tour}" %>
+	<td id="<%= field_id %>"><%= result.score_for_tour(tour) %></td>
+  </tr>
+<% end %>
+</table>
+
+<% end %>
+
+<%= render :partial => "newteam" %>
+<%= render :partial => "listedteams" %>
