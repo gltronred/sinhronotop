@@ -1,3 +1,5 @@
+require 'smtp-tls'
+
 class Emailer < ActionMailer::Base
   def notify_event(event)
     subject = "ChGK game registration"
@@ -18,10 +20,10 @@ class Emailer < ActionMailer::Base
   def send(recipient, subject, message, sent_at = Time.now)
     @subject = subject
     @recipients = recipient
-    @from = 'mperlin@gmx.de'
+    @from = 'ChGK Results'
     @sent_on = sent_at
     @body["title"] = subject
-    @body["email"] = 'mperlin@gmx.de'
+    @body["email"] = 'ckgkresults@googlemail.com'
     @body["message"] = message
     @headers = {}
   end  

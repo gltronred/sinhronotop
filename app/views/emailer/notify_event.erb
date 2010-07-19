@@ -11,5 +11,7 @@
 Апелляции принимаются до <%=h @event.game.submit_appeal_until %> по адресу: <%= @appeals_url %>
 Результаты принимаются до <%=h @event.game.submit_results_until %> по адресу:  <%= @results_url %>
 
+Отвечать на это письмо не имеет смысла. По всем вопросам обращайтесь в оргкомитет турнира: <%= @event.game.tournament.org_email %>
+
 Всего наилучшего,
 Оргкомитет.

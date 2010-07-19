@@ -1,12 +1,16 @@
 development:
-  :address: mail.gmx.net
-  :port: 25
+  :address: smtp.gmail.com
+  :port: 587
   :authentication: plain
-  :user_name: mperlin@gmx.de
-  :password: jkas8901
+  :domain: gmail.com
+  :user_name: ckgkresults
+  :password: 34erdfcv
+  :enable_starttls_auto: true
 production:
-  :address: mail.gmx.net
-  :port: 25
+  :address: smtp.gmail.com
+  :port: 587
   :authentication: plain
-  :user_name: mperlin@gmx.de
-  :password: jkas8901
+  :domain: gmail.com
+  :user_name: ckgkresults
+  :password: 34erdfcv
+  :enable_starttls_auto: true
