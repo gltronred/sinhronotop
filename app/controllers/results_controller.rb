@@ -1,12 +1,13 @@
-require 'event_subresources_controller'
+class ResultsController < EventSubresourcesController
+  include PermissionHelper
 
-class ResultsController < EventsSubresourcesController
+  before_filter :authenticate
   before_filter :load_parents
 
   # GET /results
   # GET /results.xml
   def index
-    if !@event.nil?
+    if @event
       @result = Result.new
       @results = @parent.results
       @results.each {|result| result.calculate_and_save }
@@ -15,6 +16,7 @@ class ResultsController < EventsSubresourcesController
     elsif
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
     end
+    check_see(@parent, 'results')
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -25,7 +27,7 @@ class ResultsController < EventsSubresourcesController
   def create
     @result = Result.new(params[:result])
     @result.score = 0
-    validate_update_by_date(@result)
+    check_modify(Event.find_by_id(@result.event_id), 'results')
 
     respond_to do |format|
       if @result.save
@@ -36,15 +38,16 @@ class ResultsController < EventsSubresourcesController
       end
     end
   end
-  
+
+  private
   def create_resultitems(result)
     for i in 1..result.event.game.num_tours*result.event.game.num_questions
-      params = 
+      params =
       { :result_id      => result.id,
         :question_index => i,
-        :score          => 0 }
-        resultitem = Resultitem.new(params)
-        resultitem.save
+      :score          => 0 }
+      resultitem = Resultitem.new(params)
+      resultitem.save
     end
   end
 
@@ -52,7 +55,7 @@ class ResultsController < EventsSubresourcesController
   # PUT /results/1.xml
   def update
     @result = Result.find(params[:id])
-    validate_update_by_date(@result)
+    check_modify(@result.event, 'results')
 
     respond_to do |format|
       if @result.update_attributes(params[:result])
@@ -67,7 +70,7 @@ class ResultsController < EventsSubresourcesController
   # DELETE /results/1.xml
   def destroy
     @result = Result.find(params[:id])
-    validate_update_by_date(@result)
+    check_modify(@result.event, 'results')
 
     @result.destroy
     respond_to do |format|

@@ -15,9 +15,9 @@
     <td><%=h tournament.org_email %></td>
     <td><%=h tournament.needTeams %></td>
     <td><%=h tournament.appeal_for_dismiss %></td>
-	<td><%= link_to 'Новая игра', new_tournament_game_path(tournament) %></td>
-	<td><%= link_to 'Игры', tournament_games_path(tournament) %></td>
-    <td><%= link_to 'Подробности', tournament %></td>
+	<td><%= link_to 'Новый этап', new_tournament_game_path(tournament) %></td>
+	<td><%= link_to 'Этапы', tournament_games_path(tournament) %></td>
+    <td><%= link_to 'Детали', tournament %></td>
     <td><%= link_to 'Изменить параметры', edit_tournament_path(tournament) %></td>
     <td><%= link_to 'Удалить', tournament, :confirm => 'Вы уверены?', :method => :delete %></td>
   </tr>

@@ -1,5 +1,5 @@
-<h1>Новая игра / <%=h @tournament.to_s %></h1>
+<h1>Новый этап / <%=h @tournament.to_s %></h1>
 
 <%= render :partial => "input" %>
 
-<%= link_to 'Все игры турнира', tournament_games_path(@tournament) %>
+<%= link_to 'Все этапы турнира', tournament_games_path(@tournament) %>

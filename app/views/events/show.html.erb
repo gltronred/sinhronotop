@@ -44,4 +44,4 @@
 <% if @event.game.registrable %>
 <%= link_to 'Изменить', edit_event_path(@event) %>
 <% end %>
-<%= link_to 'Все регистрации на эту игру', game_events_path(@event.game) %>
+<%= link_to 'Все игры этапа', game_events_path(@event.game) %>

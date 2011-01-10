@@ -1,13 +1,15 @@
-require 'event_subresources_controller'
+class AppealsController < EventSubresourcesController
+  include PermissionHelper
 
-class AppealsController < EventsSubresourcesController
+  before_filter :authenticate
   before_filter :load_parents
 
   # GET /appeals
   # GET /appeals.xml
   def index
     @appeal = Appeal.new
-    @appeals = @parent.appeals    
+    @appeals = @parent.appeals.sort {|x,y| x.question_index <=> y.question_index}
+    check_see(@parent, 'appeal')
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -16,18 +18,24 @@ class AppealsController < EventsSubresourcesController
   # GET /appeals/1/edit
   def edit
     @appeal = Appeal.find(params[:id])
+    check_modify(@appeal.event, 'appeal')
   end
 
   # POST /appeals
   # POST /appeals.xml
   def create
     @appeal = Appeal.new(params[:appeal])
-    validate_update_by_date(@appeal)
-    
+    @event = Event.find_by_id(@appeal.event_id)
+    @game = @event.game
+    check_modify(@event, 'appeal')
     respond_to do |format|
       if @appeal.save
-        format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция сохранена.') }
+        format.html {
+          @appeals = @event.appeals
+          redirect_to(event_appeals_url(@event), :notice => 'Апелляция сохранена.')
+        }
       else
+        @appeals = @event.appeals
         format.html { render :action => "index" }
       end
     end
@@ -37,8 +45,7 @@ class AppealsController < EventsSubresourcesController
   # PUT /appeals/1.xml
   def update
     @appeal = Appeal.find(params[:id])
-    validate_update_by_date(@appeal)
-    
+    check_modify(@appeal.event, 'appeal')
     respond_to do |format|
       if @appeal.update_attributes(params[:appeal])
         format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция изменена.') }
@@ -52,8 +59,7 @@ class AppealsController < EventsSubresourcesController
   # DELETE /appeals/1.xml
   def destroy
     @appeal = Appeal.find(params[:id])
-    validate_update_by_date(@appeal)
-
+    check_modify(@appeal.event, 'appeal')
     @appeal.destroy
     respond_to do |format|
       format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция удалена.') }

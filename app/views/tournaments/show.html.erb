@@ -19,7 +19,7 @@
   <b>Города-участники:</b>
    <%=h @tournament.cities.collect {|c| c.name + " "} %>
  </p>
-<%= link_to 'Новая игра', new_tournament_game_path(@tournament) %>
-<%= link_to 'Игры', tournament_games_path(@tournament) %>
+<%= link_to 'Новый этап', new_tournament_game_path(@tournament) %>
+<%= link_to 'Этапы', tournament_games_path(@tournament) %>
 <%= link_to 'Изменить', edit_tournament_path(@tournament) %> |
 <%= link_to 'Все турниры', tournaments_path %>

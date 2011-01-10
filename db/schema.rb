@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100717054142) do
+ActiveRecord::Schema.define(:version => 20100724104105) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -95,6 +95,14 @@ ActiveRecord::Schema.define(:version => 20100717054142) do
     t.datetime "updated_at"
     t.string   "org_email"
     t.boolean  "appeal_for_dismiss"
+  end
+
+  create_table "users", :force => true do |t|
+    t.string   "email"
+    t.string   "password"
+    t.string   "role"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
 end

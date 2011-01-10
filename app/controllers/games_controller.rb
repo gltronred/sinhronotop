@@ -1,13 +1,15 @@
 class GamesController < ApplicationController
+  include PermissionHelper
+
+  before_filter :authenticate, :except => [:index, :show]
+
   # GET /games
   # GET /games.xml
   def index
-    @tournament = Tournament.find(params[:tournament_id])
+    @tournament = TournamentsController.find(params[:tournament_id])
     @games = @tournament.games
-
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @games }
     end
   end
 
@@ -15,7 +17,6 @@ class GamesController < ApplicationController
   # GET /games/1.xml
   def show
     @game = Game.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -24,8 +25,9 @@ class GamesController < ApplicationController
   # GET /games/new
   # GET /games/new.xml
   def new
+    @tournament = TournamentsController.find(params[:tournament_id])
+    check_modify_tournament(@tournament)
     @game = Game.new
-    @tournament = Tournament.find(params[:tournament_id])
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -33,18 +35,19 @@ class GamesController < ApplicationController
 
   # GET /games/1/edit
   def edit
-    @game = Game.find(params[:id])
+    @game = GamesController.find(params[:id])
     @tournament = @game.tournament
+    check_modify_game(@game)
   end
 
   # POST /games
   # POST /games.xml
   def create
     @game = Game.new(params[:game])
-
+    check_modify_tournament(@game.tournament)
     respond_to do |format|
       if @game.save
-        format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Игра создана.') }
+        format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап создан.') }
       else
         format.html { render :action => "new" }
       end
@@ -54,11 +57,11 @@ class GamesController < ApplicationController
   # PUT /games/1
   # PUT /games/1.xml
   def update
-    @game = Game.find(params[:id])
-
+    @game = GamesController.find(params[:id])
+    check_modify_game(@game)
     respond_to do |format|
       if @game.update_attributes(params[:game])
-        format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Параметры игры изменены.') }
+        format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
       else
         format.html { render :action => "edit" }
       end
@@ -68,11 +71,23 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.xml
   def destroy
-    @game = Game.find(params[:id])
+    @game = GamesController.find(params[:id])
+    check_modify_game @game
     @game.destroy
-
     respond_to do |format|
-      format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Игра удалена.') }
+      format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап удален.') }
     end
   end
+  
+  protected
+  
+  def self.find(id, options={})
+    game = Game.find(id, options)
+    if (!game)
+      flash[:notice] = "Этап с id #{id} не найдена"
+      redirect_to home_path
+    end
+    game
+  end
+  
 end
