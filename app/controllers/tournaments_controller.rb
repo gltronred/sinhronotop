@@ -26,7 +26,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/new.xml
   def new
     @tournament = Tournament.new
-    @cities = City.all
+    load_cities
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -36,7 +36,7 @@ class TournamentsController < ApplicationController
   def edit
     @tournament = TournamentsController.find(params[:id])
     org?(@tournament, true)
-    @cities = City.all
+    load_cities
   end
 
   # POST /tournaments
@@ -45,10 +45,10 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(params[:tournament])
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to(tournaments_path, :notice => 'Турнир создан') }
+        format.html { redirect_to(@tournament, :notice => 'Турнир создан') }
       else
         format.html { 
-          @cities = City.all
+          load_cities
           render :action => "new"
         }
       end
@@ -81,6 +81,10 @@ class TournamentsController < ApplicationController
   end
 
   protected
+  
+  def load_cities
+    @cities = City.all(:order => :name)
+  end
 
   def self.find(id, options={})
     tournament = Tournament.find(id, options)

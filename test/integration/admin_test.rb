@@ -26,10 +26,17 @@ class AdminTest < ActionController::IntegrationTest
       assert_contain "Кубок Городов"
       
       visit "/tournaments/#{Tournament.last.id}/edit"
-      assert_select "input[checked='checked']", :count => 2
+      assert_select "input[checked='checked'][id='tournament_needTeams']", :count => 1
+      assert_select "input[checked='checked'][id='tournament_appeal_for_dismiss']", :count => 1
+
+      visit "/tournaments/#{Tournament.last.id}/edit"      
+      check "tournament_city_ids_"
+      click_button 'Сохранить'
+      assert_contain "Данные турнира изменены"
+      assert_contain "Кельн"
     end
   end
-
+  
   def test_admin_deletes_tournament
     assert_difference 'Tournament.count', -1 do
       login_as_admin "/tournaments"

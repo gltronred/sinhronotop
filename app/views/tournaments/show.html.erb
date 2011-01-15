@@ -17,7 +17,7 @@
 </p>
 <p>
   <b>Города-участники:</b>
-   <%=h @tournament.cities.collect {|c| c.name + " "} %>
+   <%=h @tournament.cities.sort {|x,y| x.name <=> y.name }.map(&:name).join (', ') %>
  </p>
 <%= link_to 'Новый этап', new_tournament_game_path(@tournament) if org?(@tournament) %>
 <%= link_to 'Этапы', tournament_games_path(@tournament) %>
