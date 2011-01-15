@@ -50,15 +50,13 @@ module PermissionHelper
   end
 
   def do_no_permisstion
-    flash[:error] = "У Вас недостаточно прав для этого действия / просмотра этой страницы"
-    #redirect_to home_path
-    render :action => "../common/expired"
+    redirect_to(home_path, :notice => "У Вас недостаточно прав для этого действия или просмотра этой страницы")
   end
 
   def validate_update_by_date(subresource)
     @game = Event.find(subresource.event_id).game
     if !@game.is_sub_changeable(subresource)
-      render :action => "../common/expired"
+      render :action => "common/expired"
     end
   end
 end

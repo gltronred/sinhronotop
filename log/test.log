@@ -5285,3 +5285,966 @@ Rendering tournaments/index
 Rendered layouts/_menu (0.2ms)
 Completed in 11ms (View: 8, DB: 1) | 200 OK [http://www.example.com/tournaments]
   [4;36;1mSQL (0.3ms)[0m   [0;1mSELECT count(*) AS count_all FROM `tournaments` [0m
+  [4;36;1mUser Columns (26.3ms)[0m   [0;1mSHOW FIELDS FROM `users`[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`role` = 'visitor') LIMIT 1[0m
+  [4;36;1mUser Load (1.7ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`role` = 'visitor') LIMIT 1[0m
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.6ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:26:03) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 132) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (92.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.9ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:26:26) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 107) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:26:26) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+
+ActionView::MissingTemplate (Missing template tournaments/../common/expired in view path app/views):
+  app/helpers/permission_helper.rb:55:in `do_no_permisstion'
+  app/helpers/permission_helper.rb:46:in `handle_permission_result'
+  app/helpers/permission_helper.rb:25:in `org?'
+  app/controllers/tournaments_controller.rb:38:in `edit'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `send'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `do_request'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:15:in `get'
+  (__FORWARDABLE__):3:in `__send__'
+  (__FORWARDABLE__):3:in `get'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `send'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `process_request'
+  webrat (0.7.2) lib/webrat/core/session.rb:119:in `request_page'
+  webrat (0.7.2) lib/webrat/core/session.rb:217:in `visit'
+  webrat (0.7.2) lib/webrat/core/methods.rb:7:in `visit'
+  /test/integration/integration_test_helper.rb:15:in `visit_and_get_deny'
+  test/integration/tournament_test.rb:12:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:11:in `each'
+  test/integration/tournament_test.rb:11:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:9:in `each'
+  test/integration/tournament_test.rb:9:in `test_other_than_admin_shouln_not_edit'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnermediator.rb:46:in `run_suite'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:67:in `start_mediator'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:41:in `start'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnerutilities.rb:29:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:216:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:12:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit.rb:278
+  test/integration/tournament_test.rb:50
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:28:38) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 109) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:28:38) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+
+ActionView::MissingTemplate (Missing template tournaments/../common/expired in view path app/views):
+  app/helpers/permission_helper.rb:55:in `do_no_permisstion'
+  app/helpers/permission_helper.rb:46:in `handle_permission_result'
+  app/helpers/permission_helper.rb:25:in `org?'
+  app/controllers/tournaments_controller.rb:38:in `edit'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `send'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `do_request'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:15:in `get'
+  (__FORWARDABLE__):3:in `__send__'
+  (__FORWARDABLE__):3:in `get'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `send'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `process_request'
+  webrat (0.7.2) lib/webrat/core/session.rb:119:in `request_page'
+  webrat (0.7.2) lib/webrat/core/session.rb:217:in `visit'
+  webrat (0.7.2) lib/webrat/core/methods.rb:7:in `visit'
+  /test/integration/integration_test_helper.rb:15:in `visit_and_get_deny'
+  test/integration/tournament_test.rb:12:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:11:in `each'
+  test/integration/tournament_test.rb:11:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:9:in `each'
+  test/integration/tournament_test.rb:9:in `test_other_than_admin_shouln_not_edit'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnermediator.rb:46:in `run_suite'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:67:in `start_mediator'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:41:in `start'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnerutilities.rb:29:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:216:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:12:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit.rb:278
+  test/integration/tournament_test.rb:50
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.3ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.2ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.5ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:40:54) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 111) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:40:54) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+
+ActionView::MissingTemplate (Missing template tournaments/common/expired.erb in view path app/views):
+  app/helpers/permission_helper.rb:55:in `do_no_permisstion'
+  app/helpers/permission_helper.rb:46:in `handle_permission_result'
+  app/helpers/permission_helper.rb:25:in `org?'
+  app/controllers/tournaments_controller.rb:38:in `edit'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `send'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `do_request'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:15:in `get'
+  (__FORWARDABLE__):3:in `__send__'
+  (__FORWARDABLE__):3:in `get'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `send'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `process_request'
+  webrat (0.7.2) lib/webrat/core/session.rb:119:in `request_page'
+  webrat (0.7.2) lib/webrat/core/session.rb:217:in `visit'
+  webrat (0.7.2) lib/webrat/core/methods.rb:7:in `visit'
+  /test/integration/integration_test_helper.rb:15:in `visit_and_get_deny'
+  test/integration/tournament_test.rb:12:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:11:in `each'
+  test/integration/tournament_test.rb:11:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:9:in `each'
+  test/integration/tournament_test.rb:9:in `test_other_than_admin_shouln_not_edit'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnermediator.rb:46:in `run_suite'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:67:in `start_mediator'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:41:in `start'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnerutilities.rb:29:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:216:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:12:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit.rb:278
+  test/integration/tournament_test.rb:50
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.2ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:43:03) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.4ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.5ms)
+Completed in 20ms (View: 9, DB: 53) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:43:03) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+
+ActionView::MissingTemplate (Missing template tournaments/../common/expired in view path app/views):
+  app/helpers/permission_helper.rb:55:in `do_no_permisstion'
+  app/helpers/permission_helper.rb:46:in `handle_permission_result'
+  app/helpers/permission_helper.rb:25:in `org?'
+  app/controllers/tournaments_controller.rb:38:in `edit'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `send'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:50:in `do_request'
+  webrat (0.7.2) lib/webrat/adapters/rails.rb:15:in `get'
+  (__FORWARDABLE__):3:in `__send__'
+  (__FORWARDABLE__):3:in `get'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `send'
+  webrat (0.7.2) lib/webrat/core/session.rb:280:in `process_request'
+  webrat (0.7.2) lib/webrat/core/session.rb:119:in `request_page'
+  webrat (0.7.2) lib/webrat/core/session.rb:217:in `visit'
+  webrat (0.7.2) lib/webrat/core/methods.rb:7:in `visit'
+  /test/integration/integration_test_helper.rb:15:in `visit_and_get_deny'
+  test/integration/tournament_test.rb:12:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:11:in `each'
+  test/integration/tournament_test.rb:11:in `test_other_than_admin_shouln_not_edit'
+  test/integration/tournament_test.rb:9:in `each'
+  test/integration/tournament_test.rb:9:in `test_other_than_admin_shouln_not_edit'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnermediator.rb:46:in `run_suite'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:67:in `start_mediator'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:41:in `start'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnerutilities.rb:29:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:216:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:12:in `run'
+  /Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit.rb:278
+  test/integration/tournament_test.rb:50
+
+Rendering rescues/layout (internal_server_error)
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:45:07) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.5ms)
+Completed in 19ms (View: 8, DB: 109) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:45:08) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:45:08) [GET]
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:47:15) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 174) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:47:15) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:47:15) [GET]
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;35;1mSQL (21.3ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:47:44) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 134) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:47:44) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:47:44) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.5ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:48:05) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.5ms)
+Completed in 19ms (View: 9, DB: 116) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:48:05) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 4ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:48:05) [GET]
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;35;1mSQL (0.7ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.2ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:49:09) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.5ms)
+Completed in 19ms (View: 8, DB: 52) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:49:09) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:49:09) [GET]
+  [4;36;1mTournament Load (0.5ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 8ms (View: 5, DB: 1) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:51:30) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 8, DB: 107) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:51:30) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:51:30) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:52:22) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 8, DB: 146) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:52:22) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:52:22) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.4ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:53:26) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.5ms)
+Completed in 19ms (View: 9, DB: 119) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:53:26) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.4ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:53:26) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 7ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 8, DB: 112) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 9ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  [4;35;1mTournament Load (0.4ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/242052163/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  Parameters: {"id"=>"242052163"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 242052163) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/242052163/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/242052163/edit", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 16:54:01) [GET]
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`name` = 'Балтийский Берег') LIMIT 1[0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.5ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.2ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:02) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.4ms)
+Completed in 19ms (View: 9, DB: 46) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 17:05:02) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/900602800/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:02) [GET]
+  [4;36;1mTournament Load (1.2ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 8ms (View: 4, DB: 1) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:02) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;35;1mTournament Load (0.5ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;36;1mcities_tournaments Columns (1.5ms)[0m   [0;1mSHOW FIELDS FROM `cities_tournaments`[0m
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 9ms (View: 4, DB: 2) | 200 OK [http://www.example.com/tournaments/900602800]
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.8ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.6ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.5ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.4ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.4ms)[0m   [0;1mSHOW TABLES[0m
+  [4;35;1mSQL (0.5ms)[0m   [0mSHOW TABLES[0m
+  [4;36;1mSQL (0.2ms)[0m   [0;1mSET NAMES 'utf8'[0m
+  [4;35;1mSQL (0.1ms)[0m   [0mSET SQL_AUTO_IS_NULL=0[0m
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`name` = 'Балтийский Берег') LIMIT 1[0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 182837666) [0m
+  [4;36;1mUser Load (0.3ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`id` = 840284801) [0m
+  [4;35;1mUser Load (0.3ms)[0m   [0mSELECT * FROM `users` WHERE (`users`.`id` = 981067212) [0m
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  [4;36;1mUser Load (0.4ms)[0m   [0;1mSELECT * FROM `users` WHERE (`users`.`email` = 'znatoki') LIMIT 1[0m
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.5ms)
+Completed in 19ms (View: 9, DB: 111) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Redirected to http://www.example.com/
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/900602800/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/edit", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 9ms (View: 5, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;35;1mTournament Load (0.4ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;36;1mcities_tournaments Columns (1.4ms)[0m   [0;1mSHOW FIELDS FROM `cities_tournaments`[0m
+  [4;35;1mCity Load (0.8ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 9ms (View: 5, DB: 3) | 200 OK [http://www.example.com/tournaments/900602800]
+REQUESTING PAGE: GET /tournaments/900602800/games with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing GamesController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"tournament_id"=>"900602800"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering games/index
+  [4;35;1mGame Load (0.3ms)[0m   [0mSELECT * FROM `games` WHERE (`games`.tournament_id = 900602800) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 18ms (View: 12, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800/games]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/games", "HTTP_AUTHORIZATION"=>"Basic em5hdG9raTpjaGdr"}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;35;1mCity Load (1.2ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 7ms (View: 3, DB: 2) | 200 OK [http://www.example.com/tournaments/900602800]
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;35;1mTournament Load (0.6ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Redirected to http://www.example.com/
+  [4;36;1mCity Load (0.3ms)[0m   [0;1mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/900602800/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/edit", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 3, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800]
+REQUESTING PAGE: GET /tournaments/900602800/games with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing GamesController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"tournament_id"=>"900602800"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering games/index
+  [4;35;1mGame Load (0.3ms)[0m   [0mSELECT * FROM `games` WHERE (`games`.tournament_id = 900602800) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 11ms (View: 8, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800/games]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/games", "HTTP_AUTHORIZATION"=>"Basic b3JnQGdtYWlsLmNvbTpvcmc="}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.4ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 3, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800]
+REQUESTING PAGE: GET / with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800/edit with {} and HTTP headers {"HTTP_REFERER"=>"/", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#edit (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;35;1mTournament Load (0.4ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Redirected to http://www.example.com/
+  [4;36;1mCity Load (0.3ms)[0m   [0;1mSELECT * FROM `cities` ORDER BY name[0m
+Completed in 3ms (DB: 1) | 302 Found [http://www.example.com/tournaments/900602800/edit]
+REQUESTING PAGE: GET http://www.example.com/ with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/edit", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  [4;35;1mTournament Load (0.3ms)[0m   [0mSELECT * FROM `tournaments` [0m
+Rendering template within layouts/application
+Rendering tournaments/index
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 4, DB: 0) | 200 OK [http://www.example.com/]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"http://www.example.com/", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 6ms (View: 3, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800]
+REQUESTING PAGE: GET /tournaments/900602800/games with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing GamesController#index (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"tournament_id"=>"900602800"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering games/index
+  [4;35;1mGame Load (0.3ms)[0m   [0mSELECT * FROM `games` WHERE (`games`.tournament_id = 900602800) [0m
+  [4;36;1mCACHE (0.0ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+  [4;35;1mCACHE (0.0ms)[0m   [0mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 10ms (View: 8, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800/games]
+REQUESTING PAGE: GET /tournaments/900602800 with {} and HTTP headers {"HTTP_REFERER"=>"/tournaments/900602800/games", "HTTP_AUTHORIZATION"=>"Basic cmVzcEBnbWFpbC5jb206cmVzcA=="}
+
+
+Processing TournamentsController#show (for 127.0.0.1 at 2011-01-15 17:05:29) [GET]
+  Parameters: {"id"=>"900602800"}
+  [4;36;1mTournament Load (0.3ms)[0m   [0;1mSELECT * FROM `tournaments` WHERE (`tournaments`.`id` = 900602800) [0m
+Rendering template within layouts/application
+Rendering tournaments/show
+  [4;35;1mCity Load (0.3ms)[0m   [0mSELECT * FROM `cities` INNER JOIN `cities_tournaments` ON `cities`.id = `cities_tournaments`.city_id WHERE (`cities_tournaments`.tournament_id = 900602800 ) [0m
+Rendered layouts/_menu (0.2ms)
+Completed in 5ms (View: 3, DB: 1) | 200 OK [http://www.example.com/tournaments/900602800]
