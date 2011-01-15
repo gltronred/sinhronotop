@@ -36,12 +36,10 @@
   <%=h @game.submit_results_until %>
 </p>
 
-<%= link_to 'Все регистрации', game_events_path(@game) %>
-<% if @game.registrable %>
-<%= link_to 'Зарегистрироваться', new_game_event_path(@game) %>
-<% end %>
-<%= link_to 'Спорные ответы', game_disputeds_path(@game) %>
-<%= link_to 'Апелляции', game_appeals_path(@game) %>
-<%= link_to 'Результаты', game_results_path(@game) %>
-<%= link_to 'Изменить параметры', edit_tournament_game_path(@game.tournament, @game) %>
+<%= link_to 'Все регистрации', game_events_path(@game) if org?(@game.tournament) %>
+<%= link_to 'Зарегистрироваться', new_game_event_path(@game) if @game.registrable %>
+<%= link_to 'Спорные ответы', game_disputeds_path(@game) if org?(@game.tournament) %>
+<%= link_to 'Апелляции', game_appeals_path(@game) if org?(@game.tournament) %>
+<%= link_to 'Результаты', game_results_path(@game) if org?(@game.tournament) %>
+<%= link_to 'Изменить параметры', edit_tournament_game_path(@game.tournament, @game) if org?(@game.tournament) %>
 <%= link_to 'Все этапы турнира', tournament_games_path(@game.tournament) %>

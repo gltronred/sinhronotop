@@ -1,19 +1,19 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  date: 2010-07-11
-  moderator_name: MyString
-  moderator_email: MyString
-  resp_name: MyString
-  resp_email: MyString
-  city_id: 1
-  game_id: 1
-
-two:
-  date: 2010-07-11
-  moderator_name: MyString
-  moderator_email: MyString
-  resp_name: MyString
-  resp_email: MyString
-  city_id: 1
-  game_id: 1
+bb1_tallinn:
+  date: <%= 25.days.ago.to_s :db %>
+  moderator_name: Иван Иванов
+  moderator_email: ivan@example.org
+  resp_name: Петр Петров
+  resp_email: petr@example.com
+  city: tallinn
+  game: bb1
+  
+bb1_riga:
+    date: <%= 23.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    resp_name: Коля
+    resp_email: kolja@example.com
+    city: riga
+    game: bb1  

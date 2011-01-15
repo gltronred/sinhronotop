@@ -23,10 +23,8 @@
     <td><%=h event.resp_name %></td>
     <td><%=h event.resp_email %></td>
     <td><%= link_to 'Детали', event %></td>
-<% if event.game.registrable %>
-    <td><%= link_to 'Изменить', edit_event_path(event) %></td>
-    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>
-<% end %>
+    <td><%= link_to 'Изменить', edit_event_path(event) if org?(event.game.tournament) %></td>
+    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete if org?(event.game.tournament) %></td>
   </tr>
 <% end %>
 </table>

@@ -1,6 +1,6 @@
-<h1>Изменить параметры этапа / <%=h @game.to_s %></h1>
+<h1>Изменить детали этапа / <%=h @game.to_s %></h1>
 
 <%= render :partial => "input" %>
 
-<%= link_to 'Показать', @game %> |
+<%= link_to 'Детали', @game %> |
 <%= link_to 'Все этапы турнира', tournament_games_path(@game.tournament) %>

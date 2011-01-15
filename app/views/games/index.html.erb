@@ -23,17 +23,14 @@
     <td><%=h game.submit_disp_until %></td>
     <td><%=h game.submit_appeal_until %></td>
     <td><%=h game.submit_results_until %></td>
-<% if game.registrable %>
-	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) %></td>
-<% end %>	
-	<td><%= link_to 'Все регистрации', game_events_path(game) %></td>
+	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable %></td>
+	<td><%= link_to 'Все регистрации', game_events_path(game) if org?(game.tournament) %></td>
     <td><%= link_to 'Детали', game %></td>
-    <td><%= link_to 'Изменить', edit_game_path(game) %></td>
-    <td><%= link_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete %></td>
+    <td><%= link_to 'Изменить', edit_game_path(game) if org?(game.tournament) %></td>
+    <td><%= link_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete if org?(game.tournament) %></td>
   </tr>
 <% end %>
 </table>
 <% end %>
 <br />
-<td><%= link_to 'Новый этап', new_tournament_game_path(@tournament) %></td>
-
+<td><%= link_to 'Новый этап', new_tournament_game_path(@tournament) if org?(@tournament) %></td>

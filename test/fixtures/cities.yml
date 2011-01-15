@@ -1,7 +1,13 @@
 # Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
 
-one:
-  name: MyString
+tallinn:
+  name: Таллинн
 
-two:
-  name: MyString
+riga:
+  name: Рига
+
+fm:
+  name: Франкфурт на Майне
+
+cgn:
+    name: Кельн

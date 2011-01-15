@@ -1,0 +1,341 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <title>Action Controller: Exception caught</title>
+  <style>
+    body { background-color: #fff; color: #333; }
+
+    body, p, ol, ul, td {
+      font-family: verdana, arial, helvetica, sans-serif;
+      font-size:   13px;
+      line-height: 18px;
+    }
+
+    pre {
+      background-color: #eee;
+      padding: 10px;
+      font-size: 11px;
+    }
+
+    a { color: #000; }
+    a:visited { color: #666; }
+    a:hover { color: #fff; background-color:#000; }
+  </style>
+</head>
+<body>
+
+<h1>
+  NoMethodError in
+  Tournaments#create
+</h1>
+
+<p>
+  Showing <i>app/views/tournaments/_input.html.erb</i> where line <b>#22</b> raised:
+  <pre><code>You have a nil object when you didn't expect it!
+You might have expected an instance of Array.
+The error occurred while evaluating nil.each</code></pre>
+</p>
+
+<p>Extracted source (around line <b>#22</b>):
+<pre><code>19:   &lt;/p&gt;
+20:  &lt;p&gt;
+21:     &lt;%= f.label &quot;Города-участники&quot; %&gt;&lt;br /&gt;
+22:       &lt;% for c in @cities -%&gt;
+23:          &lt;%= check_box_tag &quot;tournament[city_ids][]&quot;, c.id, city(c) %&gt;
+24:          &lt;%= c.name -%&gt;
+25:       &lt;% end -%&gt;
+</code></pre></p>
+
+<p>Trace of template inclusion: app/views/tournaments/new.html.erb</p>
+
+
+
+
+<p><code>RAILS_ROOT: /SWE/workspaceRoR/chgk</code></p>
+
+<div id="traces">
+  
+    
+    <a href="#" onclick="document.getElementById('Framework-Trace').style.display='none';document.getElementById('Full-Trace').style.display='none';document.getElementById('Application-Trace').style.display='block';; return false;">Application Trace</a> |
+  
+    
+    <a href="#" onclick="document.getElementById('Application-Trace').style.display='none';document.getElementById('Full-Trace').style.display='none';document.getElementById('Framework-Trace').style.display='block';; return false;">Framework Trace</a> |
+  
+    
+    <a href="#" onclick="document.getElementById('Application-Trace').style.display='none';document.getElementById('Framework-Trace').style.display='none';document.getElementById('Full-Trace').style.display='block';; return false;">Full Trace</a> 
+  
+
+  
+    <div id="Application-Trace" style="display: block;">
+      <pre><code>/SWE/workspaceRoR/chgk/app/views/tournaments/_input.html.erb:22:in `_run_erb_app47views47tournaments47_input46html46erb_locals_input_object'
+/SWE/workspaceRoR/chgk/app/views/tournaments/_input.html.erb:1:in `_run_erb_app47views47tournaments47_input46html46erb_locals_input_object'
+/SWE/workspaceRoR/chgk/app/views/tournaments/new.html.erb:3:in `_run_erb_app47views47tournaments47new46html46erb'
+/SWE/workspaceRoR/chgk/app/controllers/tournaments_controller.rb:50:in `create'
+/SWE/workspaceRoR/chgk/app/controllers/tournaments_controller.rb:46:in `create'</code></pre>
+    </div>
+  
+    <div id="Framework-Trace" style="display: none;">
+      <pre><code>/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/helpers/form_helper.rb:499:in `fields_for'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/helpers/form_helper.rb:282:in `form_for'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:306:in `with_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:30:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/test_case.rb:20:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable_partial.rb:20:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable_partial.rb:19:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/template.rb:205:in `render_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable_partial.rb:44:in `render_partial'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/partials.rb:184:in `render_partial'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:267:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:306:in `with_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:30:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/test_case.rb:20:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/template.rb:205:in `render_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:265:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:348:in `_render_with_layout'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:262:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:1250:in `render_for_file'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:942:in `render_without_benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:135:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:135:in `custom'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:179:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:179:in `respond'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:173:in `each'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:173:in `respond'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:107:in `respond_to'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:1331:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:1331:in `perform_action_without_filters'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/filters.rb:617:in `call_filters'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/flash.rb:151:in `perform_action'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:532:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:532:in `process_without_filters'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/filters.rb:606:in `process'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:391:in `process'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:386:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/routing/route_set.rb:438:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:121:in `_call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:130:in `build_middleware_stack'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:29:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:29:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:9:in `cache'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:28:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/string_coercion.rb:25:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/head.rb:9:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/methodoverride.rb:24:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/params_parser.rb:15:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/session/cookie_store.rb:99:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/failsafe.rb:26:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lock.rb:11:in `synchronize'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:106:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lint.rb:47:in `_call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lint.rb:35:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:316:in `process'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:203:in `post'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:503:in `__send__'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:503:in `post'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/adapters/rails.rb:50:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/adapters/rails.rb:50:in `do_request'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/adapters/rails.rb:19:in `post'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/session.rb:280:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/session.rb:280:in `process_request'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/session.rb:119:in `request_page'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/elements/form.rb:20:in `submit'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/elements/field.rb:193:in `click'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/scope.rb:291:in `click_button'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/methods.rb:7:in `click_button'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/testing/assertions.rb:39:in `assert_difference'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/testing/setup_and_teardown.rb:62:in `__send__'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/testing/setup_and_teardown.rb:62:in `run'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:661:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnermediator.rb:46:in `run_suite'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:67:in `start_mediator'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:41:in `start'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnerutilities.rb:29:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:216:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:12:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit.rb:278</code></pre>
+    </div>
+  
+    <div id="Full-Trace" style="display: none;">
+      <pre><code>/SWE/workspaceRoR/chgk/app/views/tournaments/_input.html.erb:22:in `_run_erb_app47views47tournaments47_input46html46erb_locals_input_object'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/helpers/form_helper.rb:499:in `fields_for'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/helpers/form_helper.rb:282:in `form_for'
+/SWE/workspaceRoR/chgk/app/views/tournaments/_input.html.erb:1:in `_run_erb_app47views47tournaments47_input46html46erb_locals_input_object'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:306:in `with_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:30:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/test_case.rb:20:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable_partial.rb:20:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:26:in `benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable_partial.rb:19:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/template.rb:205:in `render_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable_partial.rb:44:in `render_partial'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/partials.rb:184:in `render_partial'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:267:in `render'
+/SWE/workspaceRoR/chgk/app/views/tournaments/new.html.erb:3:in `_run_erb_app47views47tournaments47new46html46erb'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:34:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:306:in `with_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/renderable.rb:30:in `render_without_template_tracking'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/test_case.rb:20:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/template.rb:205:in `render_template'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:265:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:348:in `_render_with_layout'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_view/base.rb:262:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:1250:in `render_for_file'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:942:in `render_without_benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:51:in `render'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:51:in `render'
+/SWE/workspaceRoR/chgk/app/controllers/tournaments_controller.rb:50:in `create'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:135:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:135:in `custom'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:179:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:179:in `respond'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:173:in `each'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:173:in `respond'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/mime_responds.rb:107:in `respond_to'
+/SWE/workspaceRoR/chgk/app/controllers/tournaments_controller.rb:46:in `create'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:1331:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:1331:in `perform_action_without_filters'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/filters.rb:617:in `call_filters'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/filters.rb:610:in `perform_action_without_benchmark'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/benchmark.rb:308:in `realtime'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/core_ext/benchmark.rb:17:in `ms'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/benchmarking.rb:68:in `perform_action_without_rescue'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/rescue.rb:160:in `perform_action_without_flash'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/flash.rb:151:in `perform_action'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:532:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:532:in `process_without_filters'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/filters.rb:606:in `process'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:391:in `process'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/base.rb:386:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/routing/route_set.rb:438:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:87:in `dispatch'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:121:in `_call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:130:in `build_middleware_stack'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:29:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:29:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/connection_adapters/abstract/query_cache.rb:34:in `cache'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:9:in `cache'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/query_cache.rb:28:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activerecord-2.3.8/lib/active_record/connection_adapters/abstract/connection_pool.rb:361:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/string_coercion.rb:25:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/head.rb:9:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/methodoverride.rb:24:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/params_parser.rb:15:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/session/cookie_store.rb:99:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/failsafe.rb:26:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lock.rb:11:in `synchronize'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lock.rb:11:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/dispatcher.rb:106:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lint.rb:47:in `_call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/rack-1.1.0/lib/rack/lint.rb:35:in `call'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:316:in `process'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:203:in `post'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:503:in `__send__'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:503:in `post'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/adapters/rails.rb:50:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/adapters/rails.rb:50:in `do_request'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/adapters/rails.rb:19:in `post'
+(__FORWARDABLE__):3:in `__send__'
+(__FORWARDABLE__):3:in `post'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/session.rb:280:in `send'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/session.rb:280:in `process_request'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/session.rb:119:in `request_page'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/elements/form.rb:20:in `submit'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/elements/field.rb:193:in `click'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/scope.rb:291:in `click_button'
+(__FORWARDABLE__):3:in `__send__'
+(__FORWARDABLE__):3:in `click_button'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/webrat-0.7.2/lib/webrat/core/methods.rb:7:in `click_button'
+test/integration/admin_test.rb:15:in `test_admin_creates_tournament'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/testing/assertions.rb:39:in `assert_difference'
+test/integration/admin_test.rb:8:in `test_admin_creates_tournament'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/testing/setup_and_teardown.rb:62:in `__send__'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/activesupport-2.3.8/lib/active_support/testing/setup_and_teardown.rb:62:in `run'
+/Users/michaelp/.rvm/gems/ruby-1.8.7-p174/gems/actionpack-2.3.8/lib/action_controller/integration.rb:661:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:34:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `each'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/testsuite.rb:33:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnermediator.rb:46:in `run_suite'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:67:in `start_mediator'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/console/testrunner.rb:41:in `start'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/ui/testrunnerutilities.rb:29:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:216:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit/autorunner.rb:12:in `run'
+/Users/michaelp/.rvm/rubies/ruby-1.8.7-p174/lib/ruby/1.8/test/unit.rb:278
+test/integration/admin_test.rb:7</code></pre>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+<h2 style="margin-top: 30px">Request</h2>
+<p><b>Parameters</b>: <pre>{&quot;commit&quot;=&gt;&quot;Сохранить&quot;,
+ &quot;tournament&quot;=&gt;{&quot;needTeams&quot;=&gt;&quot;1&quot;,
+ &quot;name&quot;=&gt;&quot;&quot;,
+ &quot;org_email&quot;=&gt;&quot;&quot;,
+ &quot;appeal_for_dismiss&quot;=&gt;&quot;1&quot;}}</pre></p>
+
+<p><a href="#" onclick="document.getElementById('session_dump').style.display='block'; return false;">Show session dump</a></p>
+<div id="session_dump" style="display:none"><pre class='debug_dump'>--- 
+</pre></div>
+
+
+<h2 style="margin-top: 30px">Response</h2>
+<p><b>Headers</b>: <pre>{&quot;Content-Type&quot;=&gt;&quot;text/html&quot;,
+ &quot;Cache-Control&quot;=&gt;&quot;no-cache&quot;}</pre></p>
+
+
+
+</body>
+</html>

@@ -20,8 +20,8 @@
  <p>
     <%= f.label "Города-участники" %><br />
       <% for c in @cities -%>
-         <%= check_box_tag "tournament[city_ids][]", "#{c.id}", city(c) %>
-         <%= "#{c.name}" -%>
+         <%= check_box_tag "tournament[city_ids][]", c.id, city(c) %>
+         <%= c.name -%>
       <% end -%>
   </p>
   <p>

@@ -1,13 +1,13 @@
 class ResultitemsController < ApplicationController
   include PermissionHelper
 
-  before_filter :authenticate
+  #before_filter :authenticate
 
   # POST /resultitems
   # POST /resultitems.xml
   def create
     @resultitem = Resultitem.new(params[:resultitem])
-    check_modify(@resultitem.result.event, 'results')    
+    modify_event_results?(@resultitem.result.event, 'results', true)    
     respond_to do |format|
       if @resultitem.save
         format.html { redirect_to(@resultitem, :notice => 'Resultitem was successfully created.') }
@@ -21,7 +21,7 @@ class ResultitemsController < ApplicationController
   # PUT /resultitems/1.xml
   def update
     @resultitem = Resultitem.find(params[:id])
-    check_modify(@resultitem.result.event, 'results')        
+    modify_event_results?(@resultitem.result.event, 'results', true)        
     @resultitem.score =  (params[:checked])
     @resultitem.save
     @result = @resultitem.result
@@ -35,7 +35,7 @@ class ResultitemsController < ApplicationController
   # DELETE /resultitems/1.xml
   def destroy
     @resultitem = Resultitem.find(params[:id])
-    check_modify(@resultitem.result.event, 'results')        
+    modify_event_results?(@resultitem.result.event, 'results', true)        
     @resultitem.destroy
     respond_to do |format|
       format.html { redirect_to(resultitems_url) }

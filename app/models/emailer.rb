@@ -5,10 +5,10 @@ class Emailer < ActionMailer::Base
     subject = "ChGK game registration"
     @event = event
     @action = event.new_record? ? 'создана' : 'изменена' 
-    @update_url = url_for (:controller => edit_event_path(@event))
-    @disputeds_url = url_for (:controller => event_disputeds_path(@event))
-    @appeals_url = url_for (:controller => event_appeals_path(@event))
-    @results_url = url_for (:controller => event_results_path(@event))
+    @update_url = url_for(:controller => edit_event_path(@event))
+    @disputeds_url = url_for(:controller => event_disputeds_path(@event))
+    @appeals_url = url_for(:controller => event_appeals_path(@event))
+    @results_url = url_for(:controller => event_results_path(@event))
 
     recipient =  event.game.tournament.org_email + ", " + event.moderator_email
     if event.moderator_email != event.resp_email

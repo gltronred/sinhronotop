@@ -1,7 +1,7 @@
 class AppealsController < EventSubresourcesController
   include PermissionHelper
 
-  before_filter :authenticate
+  #before_filter :authenticate
   before_filter :load_parents
 
   # GET /appeals
@@ -9,7 +9,6 @@ class AppealsController < EventSubresourcesController
   def index
     @appeal = Appeal.new
     @appeals = @parent.appeals.sort {|x,y| x.question_index <=> y.question_index}
-    check_see(@parent, 'appeal')
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -18,7 +17,7 @@ class AppealsController < EventSubresourcesController
   # GET /appeals/1/edit
   def edit
     @appeal = Appeal.find(params[:id])
-    check_modify(@appeal.event, 'appeal')
+    modify_event_results?(@appeal.event, 'appeal', true)
   end
 
   # POST /appeals
@@ -27,7 +26,7 @@ class AppealsController < EventSubresourcesController
     @appeal = Appeal.new(params[:appeal])
     @event = Event.find_by_id(@appeal.event_id)
     @game = @event.game
-    check_modify(@event, 'appeal')
+    modify_event_results?(@event, 'appeal', true)
     respond_to do |format|
       if @appeal.save
         format.html {
@@ -45,7 +44,7 @@ class AppealsController < EventSubresourcesController
   # PUT /appeals/1.xml
   def update
     @appeal = Appeal.find(params[:id])
-    check_modify(@appeal.event, 'appeal')
+    modify_event_results?(@appeal.event, 'appeal', true)
     respond_to do |format|
       if @appeal.update_attributes(params[:appeal])
         format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция изменена.') }
@@ -59,7 +58,7 @@ class AppealsController < EventSubresourcesController
   # DELETE /appeals/1.xml
   def destroy
     @appeal = Appeal.find(params[:id])
-    check_modify(@appeal.event, 'appeal')
+    modify_event_results?(@appeal.event, 'appeal', true)
     @appeal.destroy
     respond_to do |format|
       format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция удалена.') }

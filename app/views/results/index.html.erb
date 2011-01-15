@@ -6,7 +6,7 @@
     <th>Очков</th>
   </tr>
 
-<% changeable = !@event.nil? && @game.disp_changeable %>
+<% changeable = @event && @event.modifiable?('results') %>
 <% @results.each do |result| %>
   <tr>
     <td><%=h result.team.name %></td>
@@ -23,6 +23,6 @@
 
 <% if changeable %>
 <%= render :partial => "event" %>
-<% elsif !@game.nil? %>
+<% elsif @game %>
 <%= render :partial => "game" %>
 <% end %>

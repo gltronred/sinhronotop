@@ -4,26 +4,26 @@
 <table>
   <tr>
     <th>Название</th>
-    <th>email оргкомитета</th>
+    <th>Email оргкомитета</th>
     <th>Составы?</th>
     <th>Апелляции на снятие?</th>
   </tr>
 
-<% @tournaments.each do |tournament| %>
+<% @tournaments.each do |t| %>
   <tr>
-    <td><%=h tournament.name %></td>
-    <td><%=h tournament.org_email %></td>
-    <td><%=h tournament.needTeams %></td>
-    <td><%=h tournament.appeal_for_dismiss %></td>
-	<td><%= link_to 'Новый этап', new_tournament_game_path(tournament) %></td>
-	<td><%= link_to 'Этапы', tournament_games_path(tournament) %></td>
-    <td><%= link_to 'Детали', tournament %></td>
-    <td><%= link_to 'Изменить параметры', edit_tournament_path(tournament) %></td>
-    <td><%= link_to 'Удалить', tournament, :confirm => 'Вы уверены?', :method => :delete %></td>
+    <td><%=h t.name %></td>
+    <td><%=h t.org_email %></td>
+    <td><%=h t.needTeams %></td>
+    <td><%=h t.appeal_for_dismiss %></td>
+    <td><%= link_to 'Детали', t %></td>
+	<td><%= link_to 'Этапы', tournament_games_path(t) %></td>
+	<td><%= link_to 'Новый этап', new_tournament_game_path(t) if org?(t) %></td>
+    <td><%= link_to 'Изменить параметры', edit_tournament_path(t) if admin? %></td>
+    <td><%= button_to 'Удалить', t, :confirm => 'Вы уверены?', :method => :delete if admin? %></td>
   </tr>
 <% end %>
 </table>
 <% end %>
 <br />
 
-<%= link_to 'Новый турнир', new_tournament_path %>
+<%= link_to 'Новый турнир', new_tournament_path if admin? %>

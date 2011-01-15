@@ -6,14 +6,14 @@
     <th>Ответ</th>
     
   </tr>
-<% changeable = !@event.nil? && @game.disp_changeable %>
+<% changeable = @event && @event.modifiable?('disp') %>
 <% @disputeds.each do |disputed| %>
   <tr>
     <td><%=h disputed.question_index %></td>
     <td><%=h disputed.answer %></td>
     <% if changeable %>
       <td><%= link_to 'Изменить', edit_event_disputed_path(@event, disputed) %></td>
-      <td><%= link_to 'Удалить', disputed, :confirm => 'Вы уверены?', :method => :delete %></td>
+      <td><%= link_to 'Удалить', disputed, :confirm => 'Вы уверены?', :method => :delete%></td>
     <% end %>
   </tr>
 <% end %>

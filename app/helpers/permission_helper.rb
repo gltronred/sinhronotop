@@ -15,49 +15,46 @@ module PermissionHelper
     end
   end
 
-  def check_see(event_or_game, result_type)
-    game = case event_or_game
-    when Event
-      event_or_game.game
-    when Game
-      event_or_game
-    end
-    do_no_permisstion unless eval('game.submit_'<<result_type<<'_until < Date.today()')
+  def resp?(event, do_protect=false)
+    res = (session[:user] && event.resp_email == session[:user].email) || org?(event.game.tournament, false)
+    handle_permission_result(res, do_protect)
   end
 
-  def check_modify(event, result_type)
-    unless admin? || session[:user].email == event.game.tournament.org_email || (session[:user].email == event.pesp_email && eval('event.game.submit_'<<result_type<<'_until >= Date.today()'))
-      do_no_permisstion
-    end
+  def org?(tournament, do_protect=false)
+    res = (session[:user] && tournament.org_email == session[:user].email) || admin?(false)
+    handle_permission_result(res, do_protect)
   end
 
-  def admin?
-    user = session[:user]
-    user && 'admin' === user.role
+  def admin?(do_protect=false)
+    res = session[:user] && 'admin' == session[:user].role
+    handle_permission_result(res, do_protect)
   end
 
-  def check_modify_game(game)
-    do_no_permisstion unless admin? || game.tournament.org_email == session[:user].email
+  def modify_event_results?(event, result_type, do_protect=false)
+    res = resp?(event) && event.modifiable?(result_type)
+    handle_permission_result(res, do_protect)
   end
-
-  def check_modify_tournament(tournament)
-    do_no_permisstion unless admin? || tournament.org_email == session[:user].email
-  end
-
+  
   def check_admin
-    do_no_permisstion unless admin?
+    admin?(true)
+  end
+  
+  private
+
+  def handle_permission_result(res, do_protect)
+    if !res && do_protect
+      do_no_permisstion
+    else
+      res
+    end
   end
 
   def do_no_permisstion
     flash[:error] = "У Вас недостаточно прав для этого действия / просмотра этой страницы"
     #redirect_to home_path
+    render :action => "../common/expired"
   end
 
-  def check_modify_event(event)
-    unless admin? || session[:user].email === [event.game.tournament.org_email, event.pesp_email]
-      do_no_permisstion
-    end
-  end
   def validate_update_by_date(subresource)
     @game = Event.find(subresource.event_id).game
     if !@game.is_sub_changeable(subresource)

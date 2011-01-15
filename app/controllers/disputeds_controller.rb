@@ -1,7 +1,7 @@
 class DisputedsController < EventSubresourcesController
   include PermissionHelper
 
-  before_filter :authenticate
+  #before_filter :authenticate
   before_filter :load_parents
   
   # GET /disputeds
@@ -9,7 +9,6 @@ class DisputedsController < EventSubresourcesController
   def index
     @disputed = Disputed.new
     @disputeds = @parent.disputeds.sort {|x,y| x.question_index <=> y.question_index}
-    check_see(@parent, 'disp')
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -18,14 +17,14 @@ class DisputedsController < EventSubresourcesController
   # GET /disputeds/1/edit
   def edit
     @disputed = Disputed.find(params[:id])
-    check_modify(@disputed.event, 'disp')    
+    modify_event_results?(@disputed.event, 'disp', true)    
   end
 
   # POST /disputeds
   # POST /disputeds.xml
   def create
     @disputed = Disputed.new(params[:disputed])
-    check_modify(Event.find_by_id(@disputed.event_id), 'disp')    
+    modify_event_results?(Event.find_by_id(@disputed.event_id), 'disp', true)    
 
     respond_to do |format|
       if @disputed.save
@@ -40,7 +39,7 @@ class DisputedsController < EventSubresourcesController
   # PUT /disputeds/1.xml
   def update
     @disputed = Disputed.find(params[:id])
-    check_modify(@disputed.event, 'disp')    
+    modify_event_results?(@disputed.event, 'disp', true)    
 
     respond_to do |format|
       if @disputed.update_attributes(params[:disputed])
@@ -55,7 +54,7 @@ class DisputedsController < EventSubresourcesController
   # DELETE /disputeds/1.xml
   def destroy
     @disputed = Disputed.find(params[:id])
-    check_modify(@disputed.event, 'disp')    
+    modify_event_results?(@disputed.event, 'disp', true)    
     
     @disputed.destroy
     respond_to do |format|

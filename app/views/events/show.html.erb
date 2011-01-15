@@ -38,10 +38,8 @@
   <%=h @event.resp_email %>
 </p>
 
-<%= link_to 'Спорные ответы', event_disputeds_path(@event) %>
-<%= link_to 'Апелляции', event_appeals_path(@event) %>
-<%= link_to 'Результаты', event_results_path(@event) %>
-<% if @event.game.registrable %>
-<%= link_to 'Изменить', edit_event_path(@event) %>
-<% end %>
 <%= link_to 'Все игры этапа', game_events_path(@event.game) %>
+<%= link_to 'Спорные ответы', event_disputeds_path(@event) if org?(@event.game.tournament) %>
+<%= link_to 'Апелляции', event_appeals_path(@event) if org?(@event.game.tournament) %>
+<%= link_to 'Результаты', event_results_path(@event) if org?(@event.game.tournament) %>
+<%= link_to 'Изменить', edit_event_path(@event) if org?(@event.game.tournament) %>

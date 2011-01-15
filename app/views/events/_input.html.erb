@@ -1,6 +1,6 @@
 <% form_for(@event) do |f| %>
   <%= f.error_messages %>
-  <%= f.hidden_field :game_id, :value => @game.id %>
+  <%= f.hidden_field :game_id, :value => @event.game.id %>
   <p>
     <%= f.label "Город" %><br />
     <%= collection_select(:event, :city_id, @cities, :id, :name) %> 
@@ -14,7 +14,7 @@
     <%= f.text_field :moderator_name %>
   </p>
   <p>
-    <%= f.label "email ведущего (ровно один)" %><br />
+    <%= f.label "email ведущего (если их несколько - через запятую)" %><br />
     <%= f.text_field :moderator_email %>
   </p>
   <p>
@@ -22,7 +22,7 @@
     <%= f.text_field :resp_name %>
   </p>
   <p>
-    <%= f.label "email ответственного (если их несколько - через запятую)" %><br />
+    <%= f.label "email ответственного" %><br />
     <%= f.text_field :resp_email %>
   </p>
   <p>

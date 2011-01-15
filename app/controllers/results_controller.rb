@@ -1,7 +1,7 @@
 class ResultsController < EventSubresourcesController
   include PermissionHelper
 
-  before_filter :authenticate
+  #before_filter :authenticate
   before_filter :load_parents
 
   # GET /results
@@ -16,7 +16,6 @@ class ResultsController < EventSubresourcesController
     elsif
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
     end
-    check_see(@parent, 'results')
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -27,7 +26,7 @@ class ResultsController < EventSubresourcesController
   def create
     @result = Result.new(params[:result])
     @result.score = 0
-    check_modify(Event.find_by_id(@result.event_id), 'results')
+    modify_event_results?(Event.find_by_id(@result.event_id), 'results', true)
 
     respond_to do |format|
       if @result.save
@@ -55,7 +54,7 @@ class ResultsController < EventSubresourcesController
   # PUT /results/1.xml
   def update
     @result = Result.find(params[:id])
-    check_modify(@result.event, 'results')
+    modify_event_results?(@result.event, 'results', true)
 
     respond_to do |format|
       if @result.update_attributes(params[:result])
@@ -70,7 +69,7 @@ class ResultsController < EventSubresourcesController
   # DELETE /results/1.xml
   def destroy
     @result = Result.find(params[:id])
-    check_modify(@result.event, 'results')
+    modify_event_results?(@result.event, 'results', true)
 
     @result.destroy
     respond_to do |format|

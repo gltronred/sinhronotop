@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   include PermissionHelper
 
-  before_filter :authenticate, :except => [:index, :show]
+  #before_filter :authenticate, :except => [:index, :show]
 
   # GET /games
   # GET /games.xml
@@ -26,7 +26,7 @@ class GamesController < ApplicationController
   # GET /games/new.xml
   def new
     @tournament = TournamentsController.find(params[:tournament_id])
-    check_modify_tournament(@tournament)
+    org?(@tournament, true)
     @game = Game.new
     respond_to do |format|
       format.html # new.html.erb
@@ -37,14 +37,14 @@ class GamesController < ApplicationController
   def edit
     @game = GamesController.find(params[:id])
     @tournament = @game.tournament
-    check_modify_game(@game)
+    org?(@tournament, true)
   end
 
   # POST /games
   # POST /games.xml
   def create
     @game = Game.new(params[:game])
-    check_modify_tournament(@game.tournament)
+    org?(@game.tournament, true)
     respond_to do |format|
       if @game.save
         format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап создан.') }
@@ -58,7 +58,7 @@ class GamesController < ApplicationController
   # PUT /games/1.xml
   def update
     @game = GamesController.find(params[:id])
-    check_modify_game(@game)
+    org?(@game.tournament, true)
     respond_to do |format|
       if @game.update_attributes(params[:game])
         format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
@@ -72,7 +72,7 @@ class GamesController < ApplicationController
   # DELETE /games/1.xml
   def destroy
     @game = GamesController.find(params[:id])
-    check_modify_game @game
+    org?(@game.tournament, true)
     @game.destroy
     respond_to do |format|
       format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап удален.') }

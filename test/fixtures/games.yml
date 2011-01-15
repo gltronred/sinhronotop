@@ -1,15 +1,32 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bb1:
+  tournament: bb
+  name: Этап 1
+  num_tours: 3
+  num_questions: 12
+  begin: <%= 30.days.ago.to_s :db %>
+  end: <%= 20.days.ago.to_s :db %>
+  submit_disp_until: <%= 15.days.ago.to_s :db %>
+  submit_appeal_until: <%= 10.days.ago.to_s :db %>
+  submit_results_until: <%= 5.days.ago.to_s :db %>
 
-one:
-  begin: 2010-07-05
-  end: 2010-07-05
-  submit_disp_until: 2010-07-05
-  submit_appeal_until: 2010-07-05
-  submit_results_until: 2010-07-05
+bb2:
+  tournament: bb
+  name: Этап 2
+  num_tours: 3
+  num_questions: 12
+  begin: <%= 20.days.ago.to_s :db %>
+  end: <%= 10.days.ago.to_s :db %>
+  submit_disp_until: <%= 5.days.ago.to_s :db %>
+  submit_appeal_until: <%= 1.day.ago.to_s :db %>
+  submit_results_until: <%= (Time.now + 4.days).to_s :db %>
 
-two:
-  begin: 2010-07-05
-  end: 2010-07-05
-  submit_disp_until: 2010-07-05
-  submit_appeal_until: 2010-07-05
-  submit_results_until: 2010-07-05
+kg1:
+  tournament: kg
+  name: Этап 1
+  num_tours: 3
+  num_questions: 15
+  begin: <%= (Time.now - 4.days).to_s :db %>
+  end: <%= (Time.now + 4.days).to_s :db %>
+  submit_disp_until: <%= (Time.now + 6.days).to_s :db %>
+  submit_appeal_until: <%= (Time.now + 8.days).to_s :db %>
+  submit_results_until: <%= (Time.now + 10.days).to_s :db %>

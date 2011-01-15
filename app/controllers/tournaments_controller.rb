@@ -1,14 +1,13 @@
 class TournamentsController < ApplicationController
   include PermissionHelper
 
-  before_filter :authenticate
+  #before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy]
   before_filter :check_admin, :only => [:new, :create, :destroy]
 
   # GET /tournaments
   # GET /tournaments.xml
   def index
     @tournaments = Tournament.all
-
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -17,8 +16,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.xml
   def show
-    @tournament = TournamentsController.find(params[:id], :joins => :cities)
-
+    @tournament = TournamentsController.find(params[:id])#, :joins => :cities)
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -37,7 +35,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1/edit
   def edit
     @tournament = TournamentsController.find(params[:id])
-    check_modify_tournament(@tournament)
+    org?(@tournament, true)
     @cities = City.all
   end
 
@@ -47,9 +45,12 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new(params[:tournament])
     respond_to do |format|
       if @tournament.save
-        format.html { redirect_to(@tournament, :notice => 'Турнир создан') }
+        format.html { redirect_to(tournaments_path, :notice => 'Турнир создан') }
       else
-        format.html { render :action => "new" }
+        format.html { 
+          @cities = City.all
+          render :action => "new"
+        }
       end
     end
   end
@@ -58,7 +59,7 @@ class TournamentsController < ApplicationController
   # PUT /tournaments/1.xml
   def update
     @tournament = TournamentsController.find(params[:id])
-    check_modify_tournament(@tournament)
+    org?(@tournament, true)
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
         format.html { redirect_to(@tournament, :notice => 'Данные турнира изменены') }
@@ -72,7 +73,7 @@ class TournamentsController < ApplicationController
   # DELETE /tournaments/1.xml
   def destroy
     @tournament = TournamentsController.find(params[:id])
-    check_modify_tournament(@tournament)
+    org?(@tournament, true)
     @tournament.destroy
     respond_to do |format|
       format.html { redirect_to(tournaments_url, :notice => 'Турнир удален') }

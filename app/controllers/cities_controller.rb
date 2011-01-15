@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
   include PermissionHelper
 
-  before_filter :authenticate
+  #before_filter :authenticate
   before_filter :check_admin
   
   # GET /cities

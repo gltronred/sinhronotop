@@ -1,9 +1,17 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-one:
-  name: MyString
+bb:
+  name: Балтийский Берег
+  needTeams: true
+  org_email: bb@chgk.info
+  appeal_for_dismiss: true
+  
+kupr:
+  name: Кубок Провинций
+  needTeams: true
+  org_email: province@chgk.info
+  appeal_for_dismiss: true
+  
+kg:
+  name: Кубок Германии
   needTeams: false
-
-two:
-  name: MyString
-  needTeams: false
+  org_email: kubger@chgk.info
+  appeal_for_dismiss: false

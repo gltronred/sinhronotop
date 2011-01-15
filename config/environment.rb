@@ -46,3 +46,15 @@ Rails::Initializer.run do |config|
   #config.gem "authlogic"
   #config.gem "declarative_authorization", :source => "http://gemcutter.org"
 end
+
+class TrueClass
+  def to_s
+    "да"
+  end
+end
+
+class FalseClass
+  def to_s
+    "нет"
+  end
+end
