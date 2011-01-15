@@ -1,4 +1,0 @@
-tour = @result.tour_for_question(@resultitem.question_index)
-tour_score = @result.score_for_tour(tour)
-page.replace_html "team#{@result.team.id}", "#{@result.score}"
-page.replace_html "team#{@result.team.id}_tour#{tour}", "#{tour_score}"

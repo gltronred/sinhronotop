@@ -1,7 +1,7 @@
 require 'test_helper'
 require 'integration/integration_test_helper'
 
-class AdminTest < ActionController::IntegrationTest
+class TournamentTest < ActionController::IntegrationTest
   include IntegrationTestHelper
 
   def test_other_than_admin_should_see_but_not_edit
@@ -21,7 +21,8 @@ class AdminTest < ActionController::IntegrationTest
 
   def test_admin_creates_and_edits_tournament
     assert_difference 'Tournament.count', 1 do
-      login_as_admin "/tournaments"
+      login users(:admin)
+      visit "/tournaments"
       click_link 'Новый турнир'
       fill_in 'tournament[name]', :with => 'ОКР'
       fill_in 'tournament[org_email]', :with => 'knop@example.org'
@@ -54,7 +55,8 @@ class AdminTest < ActionController::IntegrationTest
 
   def test_admin_deletes_tournament
     assert_difference 'Tournament.count', -1 do
-      login_as_admin "/tournaments"
+      login users(:admin)
+      visit "/tournaments"
       click_button 'Удалить'
       choose_ok_on_next_confirmation rescue false
       assert_response :ok

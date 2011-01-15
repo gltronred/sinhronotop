@@ -15,7 +15,7 @@ Rails::Initializer.run do |config|
   # config.load_paths += %W( #{RAILS_ROOT}/extras )
 
   config.action_controller.session = {
-    :session_key => '_chgk_session',
+    :key => '_chgk_session',
     :secret      => '4uiz23i45hjkfsjkfjsfkjosdhfjdshfjsdgfwt7izeuebydffdgqwqezwq7364732647326473sdjflisurwezwfe'
   }
   
