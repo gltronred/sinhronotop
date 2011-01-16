@@ -27,7 +27,7 @@
 	<td><%= link_to 'Все регистрации', game_events_path(game) if org?(game.tournament) %></td>
     <td><%= link_to 'Детали', game %></td>
     <td><%= link_to 'Изменить', edit_game_path(game) if org?(game.tournament) %></td>
-    <td><%= button_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete if org?(game.tournament) %></td>
+    <td><%= link_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete if org?(game.tournament) %></td>
   </tr>
 <% end %>
 </table>

@@ -8,12 +8,17 @@ class TournamentTest < ActionController::IntegrationTest
     t = Tournament.find_by_name("Балтийский Берег")
     [users(:znatok), users(:org_bb), users(:resp)].each do |user|
       login(user)
-      ["/tournaments/#{t.id}/edit"].each do |url|
-        visit_and_get_deny url
-      end
+
+      visit_and_get_deny "/tournaments/#{t.id}/edit"
+      visit_and_get_deny "/tournaments/new"
+
+      visit "/tournaments"
+      assert_not_contain_multiple ["Изменить", "Новый турнир", "Удалить"]
+      #assert_select "input[type='submit']", :count => 0
+
       visit "/tournaments/#{t.id}"
       click_link "Этапы"
-      assert_multiple_contain ["Этап 1", "Этап 2"]
+      assert_contain_multiple ["Этап 1", "Этап 2"]
       click_link "турнир Балтийский Берег"
     end
   end
@@ -30,7 +35,7 @@ class TournamentTest < ActionController::IntegrationTest
     check 'tournament[needTeams]'
     check 'tournament[appeal_for_dismiss]'
     click_button 'Сохранить'
-    assert_multiple_contain ["Данные турнира изменены", "Кубок Городов"]
+    assert_contain_multiple ["Данные турнира изменены", "Кубок Городов"]
 
     visit "/tournaments/#{t.id}/edit"
     assert_select "input[checked='checked'][id='tournament_needTeams']", :count => 1
@@ -44,7 +49,7 @@ class TournamentTest < ActionController::IntegrationTest
 
     assert_difference 'Tournament.count', -1 do
       visit "/tournaments"
-      click_button "Удалить Кубок Городов"
+      click_link "Удалить Кубок Городов"
       choose_ok_on_next_confirmation rescue false
       assert_response :ok
       assert_contain "Турнир удален"

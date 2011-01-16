@@ -27,9 +27,9 @@ class TournamentsController < ApplicationController
   def new
     @tournament = Tournament.new
     load_cities
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #end
   end
 
   # GET /tournaments/1/edit

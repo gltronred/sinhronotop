@@ -17,7 +17,13 @@ module IntegrationTestHelper
     select year.to_s, :from => "#{field_prefix}_1i"
   end
 
-  def assert_multiple_contain(arr)
+  def assert_not_contain_multiple(arr)
+    arr.each do |el|
+      assert_not_contain el
+    end
+  end
+
+  def assert_contain_multiple(arr)
     arr.each do |el|
       assert_contain el
     end

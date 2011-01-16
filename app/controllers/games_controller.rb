@@ -26,9 +26,9 @@ class GamesController < ApplicationController
     @tournament = TournamentsController.find(params[:tournament_id])
     org?(@tournament, true)
     @game = Game.new
-    respond_to do |format|
-      format.html # new.html.erb
-    end
+    #respond_to do |format|
+    #  format.html # new.html.erb
+    #end
   end
 
   # GET /games/1/edit

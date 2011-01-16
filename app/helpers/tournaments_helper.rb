@@ -1,9 +1,5 @@
 module TournamentsHelper
-  def city(i)
-    if @tournament
-      @tournament.cities.include?(i)
-    else
-      false
-    end
+  def city(city)
+    @tournament && @tournament.cities.include?(city)
   end
 end
