@@ -6,7 +6,7 @@ class TournamentTest < ActionController::IntegrationTest
 
   def test_other_than_admin_should_see_but_not_edit
     t = Tournament.find_by_name("Балтийский Берег")
-    [users(:visitor), users(:org), users(:resp)].each do |user|
+    [users(:znatok), users(:org_bb), users(:resp)].each do |user|
       login(user)
       ["/tournaments/#{t.id}/edit"].each do |url|
         visit_and_get_deny url

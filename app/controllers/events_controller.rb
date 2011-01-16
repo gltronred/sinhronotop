@@ -1,8 +1,6 @@
 class EventsController < ApplicationController
   include PermissionHelper
-
-  #before_filter :authenticate, :except => [:new, :create, :index, :show]
-
+  
   # GET /events
   # GET /events.xml
   def index

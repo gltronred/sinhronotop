@@ -8,17 +8,17 @@ bb1:
   submit_disp_until: <%= 15.days.ago.to_s :db %>
   submit_appeal_until: <%= 10.days.ago.to_s :db %>
   submit_results_until: <%= 5.days.ago.to_s :db %>
-
+  
 bb2:
   tournament: bb
   name: Этап 2
   num_tours: 3
   num_questions: 12
-  begin: <%= 20.days.ago.to_s :db %>
-  end: <%= 10.days.ago.to_s :db %>
-  submit_disp_until: <%= 5.days.ago.to_s :db %>
-  submit_appeal_until: <%= 1.day.ago.to_s :db %>
-  submit_results_until: <%= (Time.now + 4.days).to_s :db %>
+  begin: <%= (Time.now + 2.days).to_s :db %>
+  end: <%= (Time.now + 4.days).to_s :db %>
+  submit_disp_until: <%= (Time.now + 6.days).to_s :db %>
+  submit_appeal_until: <%= (Time.now + 8.days).to_s :db %>
+  submit_results_until: <%= (Time.now + 10.days).to_s :db %>
 
 kg1:
   tournament: kg

@@ -1,7 +1,6 @@
 class ResultsController < EventSubresourcesController
   include PermissionHelper
 
-  #before_filter :authenticate
   before_filter :load_parents
 
   # GET /results

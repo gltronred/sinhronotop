@@ -1,19 +1,29 @@
 admin:
-  email: ckgkresults@gmail.com
-  password: 34erdfcv
+  email: admin@example.com
+  password: test
   role: admin
  
-org: 
-  email: org@gmail.com
-  password: org
+org_bb: 
+  email: bb@example.com
+  password: test
   role: org
- 
+
+org_kg: 
+    email: kg@example.com
+    password: test
+    role: org
+
+org_kupr: 
+    email: kupr@example.com
+    password: test
+    role: org
+
 resp:
-  email: resp@gmail.com
-  password: resp
+  email: resp@example.com
+  password: test
   role: resp
  
-visitor:
-  email: znatoki
+znatok:
+  email: znatok
   password: chgk
-  role: visitor
+  role: znatok

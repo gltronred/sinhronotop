@@ -1,13 +1,11 @@
 class GamesController < ApplicationController
   include PermissionHelper
 
-  #before_filter :authenticate, :except => [:index, :show]
-
   # GET /games
   # GET /games.xml
   def index
     @tournament = TournamentsController.find(params[:tournament_id])
-    @games = @tournament.games
+    @games = @tournament.games    
     respond_to do |format|
       format.html # index.html.erb
     end
@@ -44,10 +42,11 @@ class GamesController < ApplicationController
   # POST /games.xml
   def create
     @game = Game.new(params[:game])
-    org?(@game.tournament, true)
+    @tournament = @game.tournament
+    org?(@tournament, true)
     respond_to do |format|
       if @game.save
-        format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап создан.') }
+        format.html { redirect_to(tournament_games_url(@tournament), :notice => 'Этап создан.') }
       else
         format.html { render :action => "new" }
       end
@@ -84,7 +83,7 @@ class GamesController < ApplicationController
   def self.find(id, options={})
     game = Game.find(id, options)
     if (!game)
-      flash[:notice] = "Этап с id #{id} не найдена"
+      flash[:notice] = "Этап с id #{id} не найден"
       redirect_to home_path
     end
     game

@@ -1,17 +1,17 @@
 bb:
   name: Балтийский Берег
   needTeams: true
-  org_email: bb@chgk.info
+  org_email: bb@example.com
   appeal_for_dismiss: true
   
 kupr:
   name: Кубок Провинций
   needTeams: true
-  org_email: province@chgk.info
+  org_email: kupr@example.com
   appeal_for_dismiss: true
   
 kg:
   name: Кубок Германии
   needTeams: false
-  org_email: kubger@chgk.info
+  org_email: kg@example.com
   appeal_for_dismiss: false

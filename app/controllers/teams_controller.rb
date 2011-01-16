@@ -1,6 +1,5 @@
 class TeamsController < ApplicationController
-  #include PermissionHeper
-
+  
   # GET /teams
   # GET /teams.xml
   def index

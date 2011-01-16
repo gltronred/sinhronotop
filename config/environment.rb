@@ -58,3 +58,13 @@ class FalseClass
     "нет"
   end
 end
+
+module ActionView::Helpers::DateHelper
+  alias_method :date_select_regular, :date_select
+  
+  def date_select(object_name, method, options = {}, html_options = {}) 
+    options[:order] = [:day, :month, :year]
+    options[:use_month_numbers] = true
+    date_select_regular(object_name, method, options, html_options) 
+  end
+end

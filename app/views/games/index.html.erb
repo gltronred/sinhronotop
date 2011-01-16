@@ -18,11 +18,11 @@
     <td><%=h game.name %></td>
     <td><%=h game.num_tours %></td>	
     <td><%=h game.num_questions %></td>	
-    <td><%=h game.begin %></td>
-    <td><%=h game.end %></td>
-    <td><%=h game.submit_disp_until %></td>
-    <td><%=h game.submit_appeal_until %></td>
-    <td><%=h game.submit_results_until %></td>
+    <td><%=h eu_date(game.begin) %></td>
+    <td><%=h eu_date(game.end) %></td>
+    <td><%=h eu_date(game.submit_disp_until) %></td>
+    <td><%=h eu_date(game.submit_appeal_until) %></td>
+    <td><%=h eu_date(game.submit_results_until) %></td>
 	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable %></td>
 	<td><%= link_to 'Все регистрации', game_events_path(game) if org?(game.tournament) %></td>
     <td><%= link_to 'Детали', game %></td>
