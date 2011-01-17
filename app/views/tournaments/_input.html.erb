@@ -6,8 +6,8 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label "email оргкомитета (ровно один)" %><br />
-    <%= f.text_field :org_email %>
+    <%= f.label "Организатор" %><br />
+    <%= f.select :user_id, @users.collect {|u| [ u.to_s, u.id ] } %>
   </p>
   <p>
     <%= f.label "Нужны ли составы?" %><br />

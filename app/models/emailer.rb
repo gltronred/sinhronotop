@@ -10,9 +10,9 @@ class Emailer < ActionMailer::Base
     @appeals_url = url_for(:controller => event_appeals_path(@event))
     @results_url = url_for(:controller => event_results_path(@event))
 
-    recipient =  event.game.tournament.org_email + ", " + event.moderator_email
-    if event.moderator_email != event.resp_email
-       recipient += ", " + event.resp_email
+    recipient =  event.user.email + ", " + event.moderator_email
+    if event.moderator_email != event.user.email
+       recipient += ", " + event.user.email
      end
     send(recipient, subject, event)    
   end

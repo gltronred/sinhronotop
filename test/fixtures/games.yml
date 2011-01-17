@@ -14,7 +14,7 @@ bb2:
   name: Этап 2
   num_tours: 3
   num_questions: 12
-  begin: <%= (Time.now + 2.days).to_s :db %>
+  begin: <%= (Time.now - 2.days).to_s :db %>
   end: <%= (Time.now + 4.days).to_s :db %>
   submit_disp_until: <%= (Time.now + 6.days).to_s :db %>
   submit_appeal_until: <%= (Time.now + 8.days).to_s :db %>
@@ -25,7 +25,7 @@ kg1:
   name: Этап 1
   num_tours: 3
   num_questions: 15
-  begin: <%= (Time.now - 4.days).to_s :db %>
+  begin: <%= (Time.now + 2.days).to_s :db %>
   end: <%= (Time.now + 4.days).to_s :db %>
   submit_disp_until: <%= (Time.now + 6.days).to_s :db %>
   submit_appeal_until: <%= (Time.now + 8.days).to_s :db %>

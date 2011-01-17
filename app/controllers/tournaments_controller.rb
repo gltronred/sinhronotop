@@ -2,7 +2,9 @@ class TournamentsController < ApplicationController
   include PermissionHelper
 
   #before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy]
-  before_filter :check_admin, :only => [:new, :create, :destroy]
+  before_filter :only => [:new, :create, :destroy] do |controller| 
+    controller.do_with_protection { controller.is_admin? }
+  end
 
   # GET /tournaments
   # GET /tournaments.xml
@@ -27,15 +29,15 @@ class TournamentsController < ApplicationController
   def new
     @tournament = Tournament.new
     load_cities
-    #respond_to do |format|
-    #  format.html # new.html.erb
-    #end
+    load_users
   end
 
   # GET /tournaments/1/edit
   def edit
     @tournament = TournamentsController.find(params[:id])
-    org?(@tournament, true)
+    do_with_protection { is_org?(@tournament) }
+    
+    load_users
     load_cities
   end
 
@@ -59,7 +61,7 @@ class TournamentsController < ApplicationController
   # PUT /tournaments/1.xml
   def update
     @tournament = TournamentsController.find(params[:id])
-    org?(@tournament, true)
+    do_with_protection { is_org?(@tournament) }
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
         format.html { redirect_to(@tournament, :notice => 'Данные турнира изменены') }
@@ -73,7 +75,7 @@ class TournamentsController < ApplicationController
   # DELETE /tournaments/1.xml
   def destroy
     @tournament = TournamentsController.find(params[:id])
-    org?(@tournament, true)
+    do_with_protection { is_org?(@tournament) }
     @tournament.destroy
     respond_to do |format|
       format.html { redirect_to(tournaments_url, :notice => 'Турнир удален') }
@@ -86,6 +88,10 @@ class TournamentsController < ApplicationController
     @cities = City.all(:order => :name)
   end
 
+  def load_users
+    @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
+  end
+  
   def self.find(id, options={})
     tournament = Tournament.find(id, options)
     if (!tournament)

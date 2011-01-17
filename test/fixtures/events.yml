@@ -1,11 +1,8 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-bb1_tallinn:
+bb1_frankfurt:
   date: <%= 25.days.ago.to_s :db %>
   moderator_name: Иван Иванов
   moderator_email: ivan@example.org
-  resp_name: Петр Петров
-  resp_email: petr@example.com
+  user: shojhet
   city: tallinn
   game: bb1
   
@@ -13,7 +10,14 @@ bb1_riga:
     date: <%= 23.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
-    resp_name: Коля
-    resp_email: kolja@example.com
+    user: trodor
     city: riga
-    game: bb1  
+    game: bb1
+    
+bb1_frankfurt:
+  date: <%= 25.days.ago.to_s :db %>
+  moderator_name: Иван Иванов
+  moderator_email: ivan@example.org
+  user: shojhet
+  city: tallinn
+  game: bb2

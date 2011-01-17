@@ -24,18 +24,15 @@ class GamesController < ApplicationController
   # GET /games/new.xml
   def new
     @tournament = TournamentsController.find(params[:tournament_id])
-    org?(@tournament, true)
+    do_with_protection { is_org?(@tournament) }
     @game = Game.new
-    #respond_to do |format|
-    #  format.html # new.html.erb
-    #end
   end
 
   # GET /games/1/edit
   def edit
     @game = GamesController.find(params[:id])
     @tournament = @game.tournament
-    org?(@tournament, true)
+    do_with_protection { is_org?(@tournament) }
   end
 
   # POST /games
@@ -43,7 +40,7 @@ class GamesController < ApplicationController
   def create
     @game = Game.new(params[:game])
     @tournament = @game.tournament
-    org?(@tournament, true)
+    do_with_protection { is_org?(@tournament) }
     respond_to do |format|
       if @game.save
         format.html { redirect_to(tournament_games_url(@tournament), :notice => 'Этап создан.') }
@@ -57,7 +54,7 @@ class GamesController < ApplicationController
   # PUT /games/1.xml
   def update
     @game = GamesController.find(params[:id])
-    org?(@game.tournament, true)
+    do_with_protection { is_org?(@game.tournament) }
     respond_to do |format|
       if @game.update_attributes(params[:game])
         format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
@@ -71,7 +68,7 @@ class GamesController < ApplicationController
   # DELETE /games/1.xml
   def destroy
     @game = GamesController.find(params[:id])
-    org?(@game.tournament, true)
+    do_with_protection { is_org?(@game.tournament) }
     @game.destroy
     respond_to do |format|
       format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап удален.') }

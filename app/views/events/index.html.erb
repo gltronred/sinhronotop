@@ -9,7 +9,6 @@
     <th>Ведущий</th>
     <th>email ведущего</th>
     <th>Ответственный</th>
-    <th>email ответственного</th>
   </tr>
 
 <% @events.each do |event| %>
@@ -20,11 +19,12 @@
     <td><%=h event.date %></td>
     <td><%=h event.moderator_name %></td>
     <td><%=h event.moderator_email %></td>
-    <td><%=h event.resp_name %></td>
-    <td><%=h event.resp_email %></td>
+    <td><%=h event.user %></td>
     <td><%= link_to 'Детали', event %></td>
-    <td><%= link_to 'Изменить', edit_event_path(event) if org?(event.game.tournament) %></td>
-    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete if org?(event.game.tournament) %></td>
+<% if is_org? event.game.tournament %>
+    <td><%= link_to 'Изменить', edit_event_path(event) %></td>
+    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>
+<% end %>
   </tr>
 <% end %>
 </table>

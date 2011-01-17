@@ -4,8 +4,8 @@
   <%=h @tournament.name %>
 </p>
 <p>
-  <b>email оргкомитета:</b>
-  <%=h @tournament.org_email %>
+  <b>Организатор:</b>
+  <%=h @tournament.user -%>
 </p>
 <p>
   <b>Составы нужны?</b>
@@ -19,7 +19,7 @@
   <b>Города-участники:</b>
    <%=h @tournament.cities.sort{|x,y| x.name <=> y.name }.map(&:name).join(', ') %>
  </p>
-<%= link_to 'Новый этап', new_tournament_game_path(@tournament) if org?(@tournament) %>
+<%= link_to 'Новый этап', new_tournament_game_path(@tournament) if is_org? @tournament %>
 <%= link_to 'Этапы', tournament_games_path(@tournament) %>
-<%= link_to 'Изменить', edit_tournament_path(@tournament) if admin? %>
+<%= link_to 'Изменить', edit_tournament_path(@tournament) if is_admin? %>
 <%= link_to 'Все турниры', tournaments_path %>

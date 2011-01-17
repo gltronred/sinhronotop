@@ -19,11 +19,7 @@
   </p>
   <p>
     <%= f.label "Ответственный" %><br />
-    <%= f.text_field :resp_name %>
-  </p>
-  <p>
-    <%= f.label "email ответственного" %><br />
-    <%= f.text_field :resp_email %>
+    <%= f.select :user_id, @users.collect {|u| [ u.to_s, u.id ] } %>
   </p>
   <p>
     <%= f.submit 'Сохранить' %>

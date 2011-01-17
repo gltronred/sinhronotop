@@ -1,17 +1,21 @@
 bb:
   name: Балтийский Берег
   needTeams: true
-  org_email: bb@example.com
   appeal_for_dismiss: true
-  
+  user: marina
+  cities: cologne, riga, tallinn
+
 kupr:
   name: Кубок Провинций
   needTeams: true
-  org_email: kupr@example.com
   appeal_for_dismiss: true
+  user: knop
+  cities: frankfurt, riga, cologne, tallinn
   
 kg:
   name: Кубок Германии
   needTeams: false
-  org_email: kg@example.com
   appeal_for_dismiss: false
+  user: rodionov
+  cities: frankfurt, cologne
+  

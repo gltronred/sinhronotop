@@ -2,4 +2,4 @@
 
 <%= render :partial => "input" %>
 
-<%= link_to 'К списку спорных', event_disputeds_path(@event) if resp?(@event) %>
+<%= link_to 'К списку спорных', event_disputeds_path(@event) if is_resp? @event %>

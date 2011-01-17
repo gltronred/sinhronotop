@@ -4,10 +4,9 @@ class CreateEvents < ActiveRecord::Migration
       t.date :date
       t.string :moderator_name
       t.string :moderator_email
-      t.string :resp_name
-      t.string :resp_email
       t.integer :city_id
       t.integer :game_id
+      t.integer :user_id
 
       t.timestamps
     end

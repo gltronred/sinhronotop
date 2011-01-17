@@ -6,7 +6,7 @@ class GameTest < ActionController::IntegrationTest
 
   def test_org_creates_and_edits_a_game
     kupr = tournaments(:kupr)
-    [users(:org_kupr), users(:admin)].each do |user|
+    [users(:knop), users(:perlin)].each do |user|
       login user
 
       visit "/tournaments/#{kupr.id}"
@@ -46,7 +46,7 @@ class GameTest < ActionController::IntegrationTest
   def test_other_than_original_org_cannot_edit
     bb = tournaments(:bb)
     game = bb.games.first
-    [users(:znatok), users(:org_kupr), users(:resp)].each do |user|
+    [users(:znatok), users(:knop), users(:trodor)].each do |user|
       login user
 
       visit_and_get_deny "/tournaments/#{bb.id}/games/#{game.id}/edit"

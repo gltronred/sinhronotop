@@ -1,8 +1,9 @@
 class CitiesController < ApplicationController
   include PermissionHelper
 
-  #before_filter :authenticate
-  before_filter :check_admin
+  before_filter do |controller| 
+    controller.do_with_protection { controller.is_admin? }
+  end
   
   # GET /cities
   # GET /cities.xml

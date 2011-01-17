@@ -8,3 +8,8 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 require 'tasks/rails'
+
+desc "Drops, recreates and refills the database."
+namespace :db do
+  task :redb => ['db:drop', 'db:create', 'db:migrate', 'db:fixtures:load']
+end

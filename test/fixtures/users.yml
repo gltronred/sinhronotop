@@ -1,29 +1,40 @@
-admin:
+perlin:
+  name: Михаил Перлин
   email: admin@example.com
   password: test
-  role: admin
+  status: admin
  
-org_bb: 
+marina: 
+  name: Марина Ножнина
   email: bb@example.com
   password: test
-  role: org
 
-org_kg: 
+rodionov: 
+    name: Дмитрий Родионов
     email: kg@example.com
     password: test
-    role: org
 
-org_kupr: 
+knop: 
+    name: Константин Кноп
     email: kupr@example.com
     password: test
-    role: org
 
-resp:
-  email: resp@example.com
+trodor:
+  name: Trodor
+  email: riga@example.com
   password: test
-  role: resp
- 
+
+shojhet:
+    name: Борис Шойхет
+    email: frankfurt@example.com
+    password: test
+
+hudjakov:
+    name: Павел Худяков
+    email: cologne@example.com
+    password: test
+
 znatok:
   email: znatok
   password: chgk
-  role: znatok
+  status: znatok 

@@ -25,7 +25,9 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     @game = Game.find(params[:game_id])
+    @event.game = @game
     load_cities(@game.tournament_id)
+    load_users
     respond_to do |format|
       format.html # new.html.erb
     end
@@ -34,8 +36,9 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = EventsController.find(params[:id])
-    resp?(@event, true)
+    do_with_protection { is_resp? @event }
     load_cities(@event.game.tournament_id)
+    load_users
   end
 
   # POST /events
@@ -61,7 +64,7 @@ class EventsController < ApplicationController
   # PUT /events/1.xml
   def update
     @event = EventsController.find(params[:id])
-    resp?(@event, true)
+    do_with_protection { is_resp? @event }
     respond_to do |format|
       if @event.update_attributes(params[:event])
         Emailer.deliver_notify_event(@event)
@@ -79,7 +82,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.xml
   def destroy
     @event = EventsController.find(params[:id])
-    resp?(@event, true)
+    do_with_protection { is_resp? @event }
     @event.destroy
     respond_to do |format|
       format.html { redirect_to(game_events_url(@event.game), :noice => 'Регистрация удалена') }
@@ -87,9 +90,12 @@ class EventsController < ApplicationController
   end
 
   protected
+  def load_users
+    @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
+  end
 
   def load_cities(tournament_id)
-    @cities = City.find(:all, :joins => :tournaments, :order => "name DESC", :conditions => ["cities_tournaments.tournament_id = ?", tournament_id])
+    @cities = City.find(:all, :joins => :tournaments, :order => :name, :conditions => ["cities_tournaments.tournament_id = ?", tournament_id])
   end
 
   def self.find(id, options={})

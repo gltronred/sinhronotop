@@ -6,7 +6,7 @@ class TournamentTest < ActionController::IntegrationTest
 
   def test_other_than_admin_should_see_but_not_edit
     t = Tournament.find_by_name("Балтийский Берег")
-    [users(:znatok), users(:org_bb), users(:resp)].each do |user|
+    [users(:znatok), users(:marina), users(:trodor)].each do |user|
       login(user)
 
       visit_and_get_deny "/tournaments/#{t.id}/edit"
@@ -14,7 +14,6 @@ class TournamentTest < ActionController::IntegrationTest
 
       visit "/tournaments"
       assert_not_contain_multiple ["Изменить", "Новый турнир", "Удалить"]
-      #assert_select "input[type='submit']", :count => 0
 
       visit "/tournaments/#{t.id}"
       click_link "Этапы"
@@ -24,7 +23,7 @@ class TournamentTest < ActionController::IntegrationTest
   end
 
   def test_admin_creates_and_edits_tournament
-    login users(:admin)
+    login users(:perlin)
     create
     t = Tournament.last
 
@@ -61,7 +60,7 @@ class TournamentTest < ActionController::IntegrationTest
       visit "/tournaments"
       click_link 'Новый турнир'
       fill_in 'tournament[name]', :with => 'ОКР'
-      fill_in 'tournament[org_email]', :with => 'knop@example.org'
+      select /Кноп/, :from => "tournament[user_id]"
       click_button 'Сохранить'
       assert_response :ok
       assert_contain "Турнир создан"

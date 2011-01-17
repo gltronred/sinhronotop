@@ -44,10 +44,9 @@ ActiveRecord::Schema.define(:version => 20100724104105) do
     t.date     "date"
     t.string   "moderator_name"
     t.string   "moderator_email"
-    t.string   "resp_name"
-    t.string   "resp_email"
     t.integer  "city_id"
     t.integer  "game_id"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -91,16 +90,17 @@ ActiveRecord::Schema.define(:version => 20100724104105) do
   create_table "tournaments", :force => true do |t|
     t.string   "name"
     t.boolean  "needTeams"
+    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "org_email"
     t.boolean  "appeal_for_dismiss"
   end
 
   create_table "users", :force => true do |t|
+    t.string   "name"
     t.string   "email"
     t.string   "password"
-    t.string   "role"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
