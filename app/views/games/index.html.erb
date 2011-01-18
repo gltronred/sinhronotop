@@ -23,7 +23,7 @@
     <td><%=h eu_date(game.submit_disp_until) %></td>
     <td><%=h eu_date(game.submit_appeal_until) %></td>
     <td><%=h eu_date(game.submit_results_until) %></td>
-	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable %></td>
+	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable && is_registrated? %></td>
     <td><%= link_to 'Детали', game %></td>
 <% if is_org? @tournament %>
 	<td><%= link_to 'Все регистрации', game_events_path(game) %></td>

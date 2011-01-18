@@ -36,7 +36,7 @@
 <%=h @game.submit_results_until %>
 </p>
 
-<%= link_to 'Зарегистрироваться', new_game_event_path(@game) if @game.registrable %>
+<%= link_to 'Зарегистрироваться', new_game_event_path(@game) if @game.registrable && is_registrated? %>
 <% if is_org? @game.tournament %>
 <%= link_to 'Все регистрации', game_events_path(@game) %>
 <%= link_to 'Спорные ответы', game_disputeds_path(@game) %>

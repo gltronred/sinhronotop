@@ -7,8 +7,12 @@ module IntegrationTestHelper
 
   def visit_and_get_deny(url)
     visit url
-    #assert_redirected_to home_path
     assert_contain "недостаточно прав"
+  end
+  
+  def visit_and_get_deny_by_time(url)
+    visit url
+    assert_contain "Изменение невозможно из-за несоблюдения временных рамок"
   end
 
   def select_date(field_prefix, day, month, year)

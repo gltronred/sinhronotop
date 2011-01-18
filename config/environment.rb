@@ -18,7 +18,7 @@ Rails::Initializer.run do |config|
     :key => '_chgk_session',
     :secret      => '4uiz23i45hjkfsjkfjsfkjosdhfjdshfjsdgfwt7izeuebydffdgqwqezwq7364732647326473sdjflisurwezwfe'
   }
-  
+
   # Specify gems that this application depends on and have them installed with rake gems:install
   # config.gem "bj"
   # config.gem "hpricot", :version => '0.6', :source => "http://code.whytheluckystiff.net"
@@ -61,10 +61,41 @@ end
 
 module ActionView::Helpers::DateHelper
   alias_method :date_select_regular, :date_select
-  
-  def date_select(object_name, method, options = {}, html_options = {}) 
+
+  def date_select(object_name, method, options = {}, html_options = {})
     options[:order] = [:day, :month, :year]
     options[:use_month_numbers] = true
-    date_select_regular(object_name, method, options, html_options) 
+    date_select_regular(object_name, method, options, html_options)
+  end
+end
+
+=begin
+module ActionView::Helpers::ActiveRecordHelper
+  alias_method :error_messages_for_regular, :error_messages_for
+
+  def error_messages_for(*params)
+    puts params.inspect
+    params.options<<{:message => "34"}
+    error_messages_for_regular(*params)
+  end
+end
+=end
+
+class ActiveRecord::Base
+  HUMANIZED_ATTRIBUTES = {
+    :name => "Название",
+    :answer => "Ответ",
+    :moderator_name => "Имя/фамилия ведущего",
+    :moderator_email => "Email ведущего",
+    :num_tours => "Количество туров",
+    :num_questions => "Количество вопросов в туре",
+    :question_index => "Номер вопроса",
+    :goal => "Цель",
+    :argument => "Аргументация",
+    :email => "Email",
+  }
+
+  def self.human_attribute_name(attr)
+    HUMANIZED_ATTRIBUTES[attr.to_sym] || attr
   end
 end

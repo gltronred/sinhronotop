@@ -20,8 +20,17 @@ module PermissionHelper
     redirect_to(home_path, :notice => "У Вас недостаточно прав для этого действия или просмотра этой страницы") unless res
   end
   
+  def do_event_changes(event)
+    res = yield
+    redirect_to(event.game, :notice => "Изменение невозможно из-за несоблюдения временных рамок") unless res
+  end
+  
   def is_admin?
     'admin' == session[:user].status
+  end
+  
+  def is_registrated?
+    'znatok' != session[:user].status
   end
   
   def is_resp?(event)
@@ -32,6 +41,11 @@ module PermissionHelper
   def is_org?(tournament)
     user = session[:user]
     user && (tournament.user == user || is_admin?)
+  end
+
+  def is_org_of_any_tournament?
+    user = session[:user]
+    user && (Tournament.all.map(&:user).include?(user) || is_admin?)
   end
 
   def modify_event_results?(event, result_type, do_protect=false)

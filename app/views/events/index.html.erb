@@ -2,8 +2,6 @@
 
 <table>
   <tr>
-    <th>Турнир</th>
-    <th>Игра</th>
     <th>Город</th>
     <th>Дата</th>
     <th>Ведущий</th>
@@ -13,14 +11,11 @@
 
 <% @events.each do |event| %>
   <tr>
-    <td><%=link_to event.game.tournament.name, event.game.tournament %></td>
-    <td><%=link_to event.game.name, event.game %></td>
     <td><%=link_to event.city.name, event.city %></td>
     <td><%=h event.date %></td>
     <td><%=h event.moderator_name %></td>
     <td><%=h event.moderator_email %></td>
     <td><%=h event.user %></td>
-    <td><%= link_to 'Детали', event %></td>
 <% if is_org? event.game.tournament %>
     <td><%= link_to 'Изменить', edit_event_path(event) %></td>
     <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>

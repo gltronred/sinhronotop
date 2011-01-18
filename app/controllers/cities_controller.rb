@@ -1,8 +1,8 @@
 class CitiesController < ApplicationController
   include PermissionHelper
 
-  before_filter do |controller| 
-    controller.do_with_protection { controller.is_admin? }
+  before_filter :only => [:new, :edit, :create, :update, :destroy] do |controller| 
+    controller.do_with_protection { controller.is_org_of_any_tournament? }
   end
   
   # GET /cities

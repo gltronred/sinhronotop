@@ -3,7 +3,7 @@ bb1_frankfurt:
   moderator_name: Иван Иванов
   moderator_email: ivan@example.org
   user: shojhet
-  city: tallinn
+  city: frankfurt
   game: bb1
   
 bb1_riga:
@@ -14,10 +14,3 @@ bb1_riga:
     city: riga
     game: bb1
     
-bb1_frankfurt:
-  date: <%= 25.days.ago.to_s :db %>
-  moderator_name: Иван Иванов
-  moderator_email: ivan@example.org
-  user: shojhet
-  city: tallinn
-  game: bb2
