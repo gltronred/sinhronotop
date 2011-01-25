@@ -13,6 +13,8 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :teams
 
+  map.resources :users
+  
   map.resources :appeals
 
   map.resources :disputeds

@@ -8,8 +8,8 @@
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.submit 'Create' %>
+    <%= f.submit 'Создать' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', teams_path %>
+<%= link_to_function 'Назад', 'history.back()' %>

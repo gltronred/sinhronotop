@@ -1,4 +1,5 @@
 class TeamsController < ApplicationController
+  include PermissionHelper
   
   # GET /teams
   # GET /teams.xml
