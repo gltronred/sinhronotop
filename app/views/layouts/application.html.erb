@@ -4,14 +4,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
-  <title>ЧГК <%= controller.action_name %></title>
+  <title>Синхронотоп - система учета информации для синхронных турниров по спортивному "Что? Где? Когда?"</title>
   <%= stylesheet_link_tag 'scaffold' %>
   <%= stylesheet_link_tag 'chgk' %>
   <%= javascript_include_tag "prototype" %>
 </head>
 <body>
+<%= render :partial => "layouts/mesages" %>
+<%= render :partial => "layouts/user_info" %>
 <%= render :partial => "layouts/menu" %>
-<p style="color: green"><%= notice %></p>
+
 
 <%= yield %>
 

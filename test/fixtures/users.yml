@@ -1,40 +1,50 @@
-perlin:
-  name: Михаил Перлин
-  email: admin@example.com
-  password: test
-  status: admin
- 
-marina: 
-  name: Марина Ножнина
-  email: bb@example.com
-  password: test
+hudjakov:
+    name: Павел Худяков
+    email: cologne@example.com
+    crypted_password: a1e5e2b98585b517f2e972964096834f54277aad
+    salt: d706b45205f86fdecb1265e08a56bb369509843c
 
-rodionov: 
+rodionov:
     name: Дмитрий Родионов
     email: kg@example.com
-    password: test
-
-knop: 
-    name: Константин Кноп
-    email: kupr@example.com
-    password: test
+    crypted_password: b90bc515259b2332d10a5f027fadcf720d6a2f35
+    salt: d11bfe4c4d7a95f29613646d3a43238692b4db5c
 
 trodor:
-  name: Trodor
-  email: riga@example.com
-  password: test
+    name: Trodor
+    email: riga@example.com
+    crypted_password: 37928ac49e7be0a5d128e060b5ef5e9e1d653aa9
+    salt: 75b1541e495415615a8b7ddc5006e953f8502ebc
+
+znatok:
+    name: посетитель
+    email: znatok@chgk.info
+    crypted_password: 4bc1597bbb7ad086183afd8d15cf0cdaf67d6d6b
+    salt: 42f1749b9c9a36ba99b9b19f58b2b2ce510e27b2
+    status: znatok
 
 shojhet:
     name: Борис Шойхет
     email: frankfurt@example.com
-    password: test
+    crypted_password: ee06a5c6ad40c134ea32648fd8b0042407ed0e4f
+    salt: ae2861b548d12ebfc987d2a132e5eb15250e17ca
 
-hudjakov:
-    name: Павел Худяков
-    email: cologne@example.com
-    password: test
+marina:
+    name: Марина Ножнина
+    email: bb@example.com
+    crypted_password: bf7bc7852730d3b0d43a1ab8714ef9271a373b6f
+    salt: 0cde977c032c06b2fd441c04bb02d987ea8213a2
 
-znatok:
-  email: znatok
-  password: chgk
-  status: znatok 
+perlin:
+    name: Михаил Перлин
+    email: admin@example.com
+    crypted_password: b442e6401b6fdaabc5a0108c24e6fdd628482732
+    salt: 98b737b4c69b03cd4b61d9976ac00cea50c8be87
+    status: admin
+
+knop:
+    name: Константин Кноп
+    email: kupr@example.com
+    crypted_password: 9312978161f64e6ef9bac0a789a77606185dbb59
+    salt: fee9b0889a2ed69ddbaf94986001509d452366f6
+

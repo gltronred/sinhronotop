@@ -1,51 +1,41 @@
 module PermissionHelper
-  def authenticate
-    if session[:user].nil?
-      authenticate_or_request_with_http_basic do |email, password|
-        user = User.find_by_email(email)
-        if user.nil? || user.password != password
-          flash[:error] = "Пользователь неизвестен"
-          #redirect_to home_path
-          false
-        else
-          session[:user] = user
-          true
-        end
-      end
-    end
-  end
-  
+
   def do_with_protection
     res = yield
-    redirect_to(home_path, :notice => "У Вас недостаточно прав для этого действия или просмотра этой страницы") unless res
+    unless res
+      flash[:error] = "У Вас недостаточно прав для этого действия или просмотра этой страницы"
+      redirect_to home_path
+    end
+    #redirect_to(home_path, :error => "У Вас недостаточно прав для этого действия или просмотра этой страницы") unless res
   end
   
   def do_event_changes(event)
     res = yield
-    redirect_to(event.game, :notice => "Изменение невозможно из-за несоблюдения временных рамок") unless res
+    unless res
+      flash[:error] = "Невозможно из-за несоблюдения временных рамок"
+      redirect_to(event.game)
+    end
+    #redirect_to(event.game, :error => "Изменение невозможно из-за несоблюдения временных рамок") unless res
   end
   
   def is_admin?
-    'admin' == session[:user].status
+    current_user && 'admin' == current_user.status
   end
   
   def is_registrated?
-    'znatok' != session[:user].status
+    current_user && 'znatok' != current_user.status
   end
   
   def is_resp?(event)
-    user = session[:user]
-    (user && event.user == user) || is_org?(event.game.tournament)
+    (current_user && event.user == current_user) || is_org?(event.game.tournament)
   end
 
   def is_org?(tournament)
-    user = session[:user]
-    user && (tournament.user == user || is_admin?)
+    current_user && (tournament.user == current_user || is_admin?)
   end
 
   def is_org_of_any_tournament?
-    user = session[:user]
-    user && (Tournament.all.map(&:user).include?(user) || is_admin?)
+    current_user && (Tournament.all.map(&:user).include?(current_user) || is_admin?)
   end
 
   def modify_event_results?(event, result_type, do_protect=false)

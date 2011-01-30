@@ -18,7 +18,7 @@
     <td><%= link_to 'Детали', t %></td>
 	<td><%= link_to 'Этапы', tournament_games_path(t) %></td>
 	<td><%= link_to 'Новый этап', new_tournament_game_path(t) if is_org? t %></td>
-    <td><%= link_to 'Изменить параметры', edit_tournament_path(t) if is_admin? %></td>
+    <td><%= link_to 'Изменить параметры', edit_tournament_path(t) if is_org? t %></td>
     <td><%= link_to "Удалить #{t.name}", t, :confirm => 'Вы уверены?', :method => :delete if is_admin? %></td>
   </tr>
 <% end %>

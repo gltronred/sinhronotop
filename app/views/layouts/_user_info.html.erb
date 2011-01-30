@@ -1,0 +1,10 @@
+<% if logged_in? %>
+  <p>Привет, <%=h current_user %></p>
+  <p><%= link_to 'Выход', logout_path %></p>
+<% else %>
+  <p>Вход для зарегистрированных пользователей. Если вы не организатор и не представитель, регистрироваться не надо - используйте email 'znatok@chgk.info' и пароль 'znatok'</p>
+  <p>
+	<%= render :partial => "sessions/login" %>
+    <%= link_to 'Зарегистрироваться', signup_path %>
+  </p>
+<% end %>

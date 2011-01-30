@@ -5,6 +5,19 @@ RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+class RackRailsCookieHeaderHack
+  def initialize(app)
+    @app = app
+  end
+
+  def call(env)
+    status, headers, body = @app.call(env)
+    if headers['Set-Cookie'] && headers['Set-Cookie'].respond_to?(:collect!)
+      headers['Set-Cookie'].collect! { |h| h.strip }
+    end
+    [status, headers, body]
+  end
+end
 
 Rails::Initializer.run do |config|
   # Settings in config/environments/* take precedence over those specified here.
@@ -45,6 +58,10 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
   #config.gem "authlogic"
   #config.gem "declarative_authorization", :source => "http://gemcutter.org"
+  
+  config.after_initialize do
+    ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
+  end
 end
 
 class TrueClass
@@ -68,18 +85,6 @@ module ActionView::Helpers::DateHelper
     date_select_regular(object_name, method, options, html_options)
   end
 end
-
-=begin
-module ActionView::Helpers::ActiveRecordHelper
-  alias_method :error_messages_for_regular, :error_messages_for
-
-  def error_messages_for(*params)
-    puts params.inspect
-    params.options<<{:message => "34"}
-    error_messages_for_regular(*params)
-  end
-end
-=end
 
 class ActiveRecord::Base
   HUMANIZED_ATTRIBUTES = {

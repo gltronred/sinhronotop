@@ -1,4 +1,3 @@
-Здравствуйте <%= session[:user] if 'znatok' != session[:user].status -%> 
-<h1>Синхрон-инфо</h1>
-<%= link_to 'Турниры', tournaments_path %>
-<%= link_to 'Зарегистрироваться', new_user_path if 'znatok' == session[:user].status %>
+<% if logged_in? %>
+	<%= link_to 'Турниры', tournaments_path %>
+<% end %>

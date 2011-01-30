@@ -4,9 +4,9 @@ require 'integration/integration_test_helper'
 class TournamentTest < ActionController::IntegrationTest
   include IntegrationTestHelper
 
-  def test_other_than_admin_should_see_but_not_edit
+  def test_other_than_admin_and_org_should_see_but_not_edit
     t = Tournament.find_by_name("Балтийский Берег")
-    [users(:znatok), users(:marina), users(:trodor)].each do |user|
+    [users(:znatok), users(:trodor)].each do |user|
       login(user)
 
       visit_and_get_deny "/tournaments/#{t.id}/edit"
@@ -19,6 +19,21 @@ class TournamentTest < ActionController::IntegrationTest
       click_link "Этапы"
       assert_contain_multiple ["Этап 1", "Этап 2"]
       click_link "турнир Балтийский Берег"
+      
+      logout
+    end
+  end
+  
+  def test_org_edits
+    t = Tournament.find_by_name("Балтийский Берег")
+    [users(:marina)].each do |user|
+      login(user)
+
+      visit "/tournaments/#{t.id}"
+      click_link "Изменить параметры"
+      click_button "Сохранить"
+      
+      logout
     end
   end
 
@@ -53,6 +68,8 @@ class TournamentTest < ActionController::IntegrationTest
       assert_response :ok
       assert_contain "Турнир удален"
     end
+    
+    logout
   end
 
   def create

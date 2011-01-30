@@ -40,6 +40,8 @@ class GameTest < ActionController::IntegrationTest
       choose_ok_on_next_confirmation rescue false
       assert_contain "Этап удален"
       assert_not_contain "единственный этап"
+      
+      logout
     end
   end
 
@@ -55,6 +57,8 @@ class GameTest < ActionController::IntegrationTest
       visit "/tournaments/#{bb.id}/games/"
       assert_contain_multiple ["Этап 1", "Этап 2"]
       assert_not_contain_multiple ["Новый этап", "Изменить", "Удалить"]
+      
+      logout
     end
   end
 

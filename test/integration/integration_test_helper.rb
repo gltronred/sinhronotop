@@ -1,7 +1,16 @@
 module IntegrationTestHelper
   def login(user)
+    visit home_path
+    fill_in "email", :with => user.email
+    fill_in "password", :with => 'znatok'
+    click_button "Войти"
+    assert_response :ok
+    assert_contain "Добро пожаловать"
+  end
+  
+  def login_basic_auth(user)
     basic_auth(user.email, user.password)
-    visit "/"
+    visit home_path
     assert_response :ok
   end
 
@@ -12,7 +21,7 @@ module IntegrationTestHelper
   
   def visit_and_get_deny_by_time(url)
     visit url
-    assert_contain "Изменение невозможно из-за несоблюдения временных рамок"
+    assert_contain "Невозможно из-за несоблюдения временных рамок"
   end
 
   def select_date(field_prefix, day, month, year)
@@ -31,6 +40,10 @@ module IntegrationTestHelper
     arr.each do |el|
       assert_contain el
     end
+  end
+  
+  def logout
+    post logout_path
   end
 
 

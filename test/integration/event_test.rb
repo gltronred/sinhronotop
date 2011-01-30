@@ -24,6 +24,8 @@ class EventTest < ActionController::IntegrationTest
     click_button "Сохранить"
 
     assert_contain_multiple ["Параметры изменены, ждите подтверждения по email", "Василий Пупкин", "pupkin@vasi.net", "Trodor", "17.10.2011"]
+    
+    logout
   end
   
   def test_znatok_can_only_see_not_register
@@ -33,6 +35,8 @@ class EventTest < ActionController::IntegrationTest
     visit_and_get_deny "/games/#{bb2.id}/events/"
     visit "/games/#{bb2.id}/"
     assert_not_contain "Зарегистрироваться"
+    
+    logout
   end
 
   def test_resp_cannot_register_as_expired
@@ -41,6 +45,8 @@ class EventTest < ActionController::IntegrationTest
     visit "/games/#{bb1.id}"
     assert_not_contain "Зарегистрироваться"
     visit_and_get_deny_by_time "/games/#{bb1.id}/events/new"
+    
+    logout
   end
   
   def test_org_can_see_registrations
@@ -48,7 +54,9 @@ class EventTest < ActionController::IntegrationTest
     login users(:marina)
     visit "/games/#{bb1.id}/events"
     assert_contain_multiple ["Вася", "vasja@example.org", "Trodor", "Trodor", "Рига"]
-    assert_contain_multiple ["Иван Иванов", "ivan@example.org", "Борис Шойхет", "Франкфурт"]    
+    assert_contain_multiple ["Иван Иванов", "ivan@example.org", "Борис Шойхет", "Франкфурт"]
+    
+    logout
   end
 
 
