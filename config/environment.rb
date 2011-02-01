@@ -59,6 +59,9 @@ Rails::Initializer.run do |config|
   #config.gem "authlogic"
   #config.gem "declarative_authorization", :source => "http://gemcutter.org"
   
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  
   config.after_initialize do
     ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
   end
@@ -104,3 +107,12 @@ class ActiveRecord::Base
     HUMANIZED_ATTRIBUTES[attr.to_sym] || attr
   end
 end
+=begin
+ActionMailer::Base.smtp_settings = {
+  :address  => "smtp.someserver.net",
+  :port  => 25,
+  :user_name  => "sinhronotop@googlemail.com",
+  :password  => "nora1901",
+  :authentication  => :login
+}
+=end

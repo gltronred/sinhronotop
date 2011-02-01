@@ -1,4 +1,4 @@
-require 'smtp-tls'
+#require 'smtp-tls'
 
 class Emailer < ActionMailer::Base
   def notify_event(event)

@@ -4,7 +4,7 @@ class ApplicationController < ActionController::Base
   include ApplicationHelper, AuthenticatedSystem
   
 
-  before_filter :mailer_set_url_options
+  #before_filter :mailer_set_url_options
   before_filter do |controller| 
     controller.authenticate unless controller.is_a?SessionsController
   end
