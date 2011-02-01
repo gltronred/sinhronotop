@@ -1,3 +1,7 @@
 .inline {
     display: inline;
 }
+#user_info {
+    float: right; 
+    width: 250px;
+}

@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 
   #before_filter :mailer_set_url_options
   before_filter do |controller| 
-    controller.authenticate unless controller.is_a?SessionsController
+    controller.authenticate unless controller.is_a?(SessionsController) || controller.is_a?(UsersController)
   end
   helper_method :eu_date, :is_admin?, :is_org?, :is_resp?, :is_registrated?
  
