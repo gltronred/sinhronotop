@@ -12,7 +12,7 @@ class EventTest < ActionController::IntegrationTest
     select_date("event_date", 16, 10, 2011)
     fill_in "event_moderator_name", :with => 'Вася Пупкин'
     fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
-    select /Trodor/, :from => "event_user_id"
+    #select /Trodor/, :from => "event_user_id"
     click_button "Сохранить"
 
     assert_contain_multiple ["Регистрация прошла успешно, ждите подтверждения по email", "Вася Пупкин", "pupkin@vasi.net", "Trodor", "16.10.2011"]

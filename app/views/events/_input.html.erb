@@ -14,12 +14,13 @@
     <%= f.text_field :moderator_name %>
   </p>
   <p>
-    <%= f.label "email ведущего (если их несколько - через запятую)" %><br />
+    <%= f.label "email ведущего" %><br />
     <%= f.text_field :moderator_email %>
   </p>
   <p>
     <%= f.label "Ответственный" %><br />
-    <%= f.select :user_id, @users.collect {|u| [ u.to_s, u.id ] } %>
+    <%= f.label current_user.name %><br />
+    <%= f.hidden_field :user_id, :value => current_user.id %>
   </p>
   <p>
     <%= f.submit 'Сохранить' %>

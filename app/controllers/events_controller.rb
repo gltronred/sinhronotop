@@ -27,7 +27,7 @@ class EventsController < ApplicationController
     do_with_protection { is_registrated? }
     do_event_changes(@event){ @game.registrable }
     load_cities(@game.tournament_id)
-    load_users
+    #load_users
   end
 
   # GET /events/1/edit
@@ -35,7 +35,7 @@ class EventsController < ApplicationController
     @event = EventsController.find(params[:id])
     do_with_protection { is_resp? @event }
     load_cities(@event.game.tournament_id)
-    load_users
+    #load_users
   end
 
   # POST /events
@@ -45,13 +45,13 @@ class EventsController < ApplicationController
     do_with_protection { is_registrated? }
     respond_to do |format|
       if @event.save
-        Emailer.deliver_notify_event(@event)
+        #Emailer.deliver_notify_event(@event)
         format.html { redirect_to(@event, :notice => 'Регистрация прошла успешно, ждите подтверждения по email') }
       else
         format.html {
           @game = Game.find(@event.game_id)
           load_cities(@game.tournament_id)
-          load_users
+          #load_users
           render :action => "new"
         }
       end
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
     do_with_protection { is_resp? @event }
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        Emailer.deliver_notify_event(@event)
+        #Emailer.deliver_notify_event(@event)
         format.html { redirect_to(@event, :notice => 'Параметры изменены, ждите подтверждения по email') }
       else
         format.html {
