@@ -62,7 +62,6 @@ Rails::Initializer.run do |config|
   #config.action_mailer.delivery_method = :smtp
   #config.action_mailer.raise_delivery_errors = true
   #config.action_mailer.perform_deliveries = true
-  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
   config.after_initialize do
     ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
@@ -70,17 +69,6 @@ Rails::Initializer.run do |config|
   
   
 end
-=begin
-ActionMailer::Base.smtp_settings = {
-  :tls            => true,
-  :address        => 'smtp.gmail.com',
-  :port           => 587,
-  :domain         => 'example.com',
-  :authentication => :plain,
-  :user_name      => 'sinhronotop@googlemail.com',
-  :password       => 'nora19012'
-}
-=end
 
 class TrueClass
   def to_s
@@ -122,13 +110,3 @@ class ActiveRecord::Base
     HUMANIZED_ATTRIBUTES[attr.to_sym] || attr
   end
 end
-
-=begin
-ActionMailer::Base.smtp_settings = {
-  :address  => "smtp.gmail.com",
-  :port  => 25,
-  :user_name  => "sinhronotop@googlemail.com",
-  :password  => "nora1901",
-  :authentication  => :login
-}
-=end
