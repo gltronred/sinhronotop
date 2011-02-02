@@ -1,14 +1,14 @@
 class CitiesController < ApplicationController
   include PermissionHelper
 
-  before_filter :only => [:new, :edit, :create, :update, :destroy] do |controller| 
+  before_filter do |controller| 
     controller.do_with_protection { controller.is_org_of_any_tournament? }
   end
   
   # GET /cities
   # GET /cities.xml
   def index
-    @cities = City.all
+    @cities = City.all(:order => :name)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -47,7 +47,7 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.save
-        format.html { redirect_to(@city, :notice => 'Город создан.') }
+        format.html { redirect_to(cities_path, :notice => 'Город создан.') }
       else
         format.html { render :action => "new" }
       end
@@ -61,7 +61,7 @@ class CitiesController < ApplicationController
 
     respond_to do |format|
       if @city.update_attributes(params[:city])
-        format.html { redirect_to(@city, :notice => 'Данные сохранены.') }
+        format.html { redirect_to(cities_path, :notice => 'Данные сохранены.') }
       else
         format.html { render :action => "edit" }
       end
