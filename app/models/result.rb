@@ -19,4 +19,16 @@ class Result < ActiveRecord::Base
   def tour_for_question(question_index)
     (question_index-1)/self.event.game.num_questions+1
   end
+  
+  def create_resultitems
+    for i in 1..self.event.game.num_tours*self.event.game.num_questions
+      params =
+      { :result_id      => self.id,
+        :question_index => i,
+      :score          => 0 }
+      resultitem = Resultitem.new(params)
+      resultitem.save
+    end
+  end
+  
 end

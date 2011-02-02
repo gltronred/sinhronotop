@@ -8,7 +8,6 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       format.html # index.html.erb
-      format.xml  { render :xml => @teams }
     end
   end
 
@@ -19,7 +18,6 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       format.html # show.html.erb
-      format.xml  { render :xml => @team }
     end
   end
 
@@ -30,7 +28,6 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       format.html # new.html.erb
-      format.xml  { render :xml => @team }
     end
   end
 
@@ -52,10 +49,10 @@ class TeamsController < ApplicationController
           input_for_result["score"] = 0
           @result = Result.new(input_for_result)
           @result.save
-          format.html { redirect_to(event_results_path(@result.event), :notice => 'Team was successfully created.') }
+          @result.create_resultitems
+          format.html { redirect_to(event_results_path(@result.event), :notice => 'Команда добавлена') }
       else
         format.html { render :action => "new" }
-        format.xml  { render :xml => @team.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -67,11 +64,9 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       if @team.update_attributes(params[:team])
-        format.html { redirect_to(@team, :notice => 'Team was successfully updated.') }
-        format.xml  { head :ok }
+        format.html { redirect_to(@team, :notice => 'Данные команды обновлены') }
       else
         format.html { render :action => "edit" }
-        format.xml  { render :xml => @team.errors, :status => :unprocessable_entity }
       end
     end
   end
@@ -84,7 +79,6 @@ class TeamsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to(teams_url) }
-      format.xml  { head :ok }
     end
   end
 end

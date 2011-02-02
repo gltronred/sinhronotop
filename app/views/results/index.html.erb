@@ -6,7 +6,7 @@
     <th>Очков</th>
   </tr>
 
-<% changeable = @event && @event.modifiable?('results') %>
+<% changeable = @event && @event.is_modifiable?('results') %>
 <% @results.each do |result| %>
   <tr>
     <td><%=h result.team.name %></td>

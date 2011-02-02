@@ -37,9 +37,9 @@ module PermissionHelper
   def is_org_of_any_tournament?
     current_user && (Tournament.all.map(&:user).include?(current_user) || is_admin?)
   end
-
+=begin
   def modify_event_results?(event, result_type, do_protect=false)
-    res = resp?(event) && event.modifiable?(result_type)
+    res = is_resp?(event) && event.is_modifiable?(result_type)
     handle_permission_result(res, do_protect)
   end
 
@@ -51,4 +51,5 @@ module PermissionHelper
       render :action => "common/expired"
     end
   end
+=end  
 end

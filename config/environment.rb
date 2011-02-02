@@ -69,7 +69,7 @@ Rails::Initializer.run do |config|
   
   
 end
-
+=begin
 class TrueClass
   def to_s
     "да"
@@ -81,7 +81,7 @@ class FalseClass
     "нет"
   end
 end
-
+=end
 module ActionView::Helpers::DateHelper
   alias_method :date_select_regular, :date_select
 

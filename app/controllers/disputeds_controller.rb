@@ -16,20 +16,22 @@ class DisputedsController < EventSubresourcesController
   # GET /disputeds/1/edit
   def edit
     @disputed = Disputed.find(params[:id])
-    modify_event_results?(@disputed.event, 'disp', true)    
+    event = Event.find_by_id(@disputed.event_id);
+    do_event_changes(event) {event.is_modifiable? 'disp'}
   end
 
   # POST /disputeds
   # POST /disputeds.xml
   def create
     @disputed = Disputed.new(params[:disputed])
-    modify_event_results?(Event.find_by_id(@disputed.event_id), 'disp', true)    
+    event = Event.find_by_id(@disputed.event_id);
+    do_event_changes(event) {event.is_modifiable? 'disp'}
 
     respond_to do |format|
       if @disputed.save
-        format.html { redirect_to(event_disputeds_url(@disputed.event), :notice => 'Спорный сохранен.') }
+        format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный сохранен.') }
       else
-        format.html { redirect_to(event_disputeds_url(@disputed.event))}
+        format.html { redirect_to(event_disputeds_url(event))}
       end
     end
   end
@@ -38,11 +40,12 @@ class DisputedsController < EventSubresourcesController
   # PUT /disputeds/1.xml
   def update
     @disputed = Disputed.find(params[:id])
-    modify_event_results?(@disputed.event, 'disp', true)    
+    event = Event.find_by_id(@disputed.event_id);
+    do_event_changes(event) {event.is_modifiable? 'disp'}
 
     respond_to do |format|
       if @disputed.update_attributes(params[:disputed])
-        format.html { redirect_to(event_disputeds_url(@disputed.event), :notice => 'Спорный изменен.') }
+        format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный изменен.') }
       else
         format.html { render :action => "edit" }
       end
@@ -53,11 +56,12 @@ class DisputedsController < EventSubresourcesController
   # DELETE /disputeds/1.xml
   def destroy
     @disputed = Disputed.find(params[:id])
-    modify_event_results?(@disputed.event, 'disp', true)    
+    event = Event.find_by_id(@disputed.event_id);
+    do_event_changes(event) {event.is_modifiable? 'disp'}
     
     @disputed.destroy
     respond_to do |format|
-      format.html { redirect_to(event_disputeds_url(@disputed.event), :notice => 'Спорный удален.') }
+      format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный удален.') }
     end
   end
 end

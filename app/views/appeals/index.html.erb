@@ -8,7 +8,7 @@
     <th>Аргументация</th>
   </tr>
 
-<% changeable = @event && @event.modifiable?('appeal') %>
+<% changeable = @event && @event.is_modifiable?('appeal') %>
 <% @appeals.each do |appeal| %>
   <tr>
     <td><%=h appeal.question_index %></td>

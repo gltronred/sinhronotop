@@ -16,7 +16,9 @@ class AppealsController < EventSubresourcesController
   # GET /appeals/1/edit
   def edit
     @appeal = Appeal.find(params[:id])
-    modify_event_results?(@appeal.event, 'appeal', true)
+    event = Event.find_by_id(@appeal.event_id);
+    do_event_changes(event) {event.is_modifiable? 'appeal'}
+    #modify_event_results?(@appeal.event, 'appeal', true)
   end
 
   # POST /appeals
@@ -25,7 +27,8 @@ class AppealsController < EventSubresourcesController
     @appeal = Appeal.new(params[:appeal])
     @event = Event.find_by_id(@appeal.event_id)
     @game = @event.game
-    modify_event_results?(@event, 'appeal', true)
+    do_event_changes(@event) {@event.is_modifiable? 'appeal'}
+    #modify_event_results?(@event, 'appeal', true)
     respond_to do |format|
       if @appeal.save
         format.html {
@@ -43,10 +46,11 @@ class AppealsController < EventSubresourcesController
   # PUT /appeals/1.xml
   def update
     @appeal = Appeal.find(params[:id])
-    modify_event_results?(@appeal.event, 'appeal', true)
+    event = Event.find_by_id(@appeal.event_id)
+    do_event_changes(event) {event.is_modifiable? 'appeal'}
     respond_to do |format|
       if @appeal.update_attributes(params[:appeal])
-        format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция изменена.') }
+        format.html { redirect_to(event_appeals_url(event), :notice => 'Апелляция изменена.') }
       else
         format.html { render :action => "edit" }
       end
@@ -57,7 +61,8 @@ class AppealsController < EventSubresourcesController
   # DELETE /appeals/1.xml
   def destroy
     @appeal = Appeal.find(params[:id])
-    modify_event_results?(@appeal.event, 'appeal', true)
+    event = Event.find_by_id(@appeal.event_id)
+    do_event_changes(event) {event.is_modifiable? 'appeal'}
     @appeal.destroy
     respond_to do |format|
       format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция удалена.') }

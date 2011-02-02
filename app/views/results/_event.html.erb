@@ -2,7 +2,7 @@
 <h3>Тур <%= tour %>
 <table>
   <tr>
-    <th>Команда</th>
+    <th>Команда</th> 
 <% for question_in_tour in 1..@event.game.num_questions %>
 <th><%= (tour-1)*@event.game.num_questions+question_in_tour %></th>
 <% end %>
