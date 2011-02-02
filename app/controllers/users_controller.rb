@@ -14,6 +14,7 @@ class UsersController < ApplicationController
       # protection if visitor resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
       # reset session
+      Emailer.deliver_user_registred @user
       self.current_user = @user # !! now logged in
       redirect_back_or_default(home_path)
       flash[:notice] = "Спасибо за регистрацию! Вы получите email с подтверждением"

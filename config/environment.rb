@@ -59,13 +59,28 @@ Rails::Initializer.run do |config|
   #config.gem "authlogic"
   #config.gem "declarative_authorization", :source => "http://gemcutter.org"
   
-  config.action_mailer.delivery_method = :smtp
-  config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.delivery_method = :smtp
+  #config.action_mailer.raise_delivery_errors = true
+  #config.action_mailer.perform_deliveries = true
+  #config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   
   config.after_initialize do
     ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
   end
+  
+  
 end
+=begin
+ActionMailer::Base.smtp_settings = {
+  :tls            => true,
+  :address        => 'smtp.gmail.com',
+  :port           => 587,
+  :domain         => 'example.com',
+  :authentication => :plain,
+  :user_name      => 'sinhronotop@googlemail.com',
+  :password       => 'nora19012'
+}
+=end
 
 class TrueClass
   def to_s
@@ -93,7 +108,7 @@ class ActiveRecord::Base
   HUMANIZED_ATTRIBUTES = {
     :name => "Название",
     :answer => "Ответ",
-    :moderator_name => "Имя/фамилия ведущего",
+    :moderator_name => "Имя и фамилия ведущего",
     :moderator_email => "Email ведущего",
     :num_tours => "Количество туров",
     :num_questions => "Количество вопросов в туре",
@@ -107,9 +122,10 @@ class ActiveRecord::Base
     HUMANIZED_ATTRIBUTES[attr.to_sym] || attr
   end
 end
+
 =begin
 ActionMailer::Base.smtp_settings = {
-  :address  => "smtp.someserver.net",
+  :address  => "smtp.gmail.com",
   :port  => 25,
   :user_name  => "sinhronotop@googlemail.com",
   :password  => "nora1901",

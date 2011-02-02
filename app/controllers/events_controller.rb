@@ -45,7 +45,7 @@ class EventsController < ApplicationController
     do_with_protection { is_registrated? }
     respond_to do |format|
       if @event.save
-        #Emailer.deliver_notify_event(@event)
+        Emailer.deliver_notify_event(@event)
         format.html { redirect_to(@event, :notice => 'Регистрация прошла успешно, ждите подтверждения по email') }
       else
         format.html {
@@ -66,7 +66,7 @@ class EventsController < ApplicationController
     do_with_protection { is_resp? @event }
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        #Emailer.deliver_notify_event(@event)
+        Emailer.deliver_notify_event(@event)
         format.html { redirect_to(@event, :notice => 'Параметры изменены, ждите подтверждения по email') }
       else
         format.html {
