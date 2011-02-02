@@ -1,41 +1,37 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
-
 module SeedTasks
   def self.create_user(name, email, password, status=nil)
-    user = User.create(:name => name,
-    :email => email,
-    :password => password,
-    :password_confirmation => password)
-    if status
-      user.status = status
-      user.save!
+    user = User.find_by_email email
+    unless user
+      user = User.create(:name => name,
+      :email => email,
+      :password => password,
+      :password_confirmation => password)
+      if status
+        user.status = status
+        user.save!
+      end
+    end
+  end
+  
+  def self.create_city(name)
+    unless City.find_by_name name
+      City.create :name => name
     end
   end
 end
 
-
-City.delete_all
-City.create :name => "Кёльн"
-City.create :name => "Франкфурт"
-City.create :name => "Берлин"
-City.create :name => "Хемниц"
-City.create :name => "Дортмунд"
-City.create :name => "Кобленц"
-City.create :name => "Нюрнберг"
-City.create :name => "Штутгарт"
-City.create :name => "Халле"
-City.create :name => "Дюссельдорф"
-City.create :name => "Мюнхен"
-City.create :name => "Трир"
-City.create :name => "Гамбург"
-
-User.delete_all
+SeedTasks.create_city "Кёльн"
+SeedTasks.create_city "Франкфурт"
+SeedTasks.create_city "Берлин"
+SeedTasks.create_city "Хемниц"
+SeedTasks.create_city "Дортмунд"
+SeedTasks.create_city "Кобленц"
+SeedTasks.create_city "Нюрнберг"
+SeedTasks.create_city "Штутгарт"
+SeedTasks.create_city "Халле"
+SeedTasks.create_city "Дюссельдорф"
+SeedTasks.create_city "Мюнхен"
+SeedTasks.create_city "Трир"
+SeedTasks.create_city "Гамбург"
 SeedTasks.create_user("Михаил Перлин", "sinhronotop@googlemail.com", 'nora1901','admin')
 SeedTasks.create_user("посетитель", "znatok@chgk.info", 'znatok','znatok')
-
