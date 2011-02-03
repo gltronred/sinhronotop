@@ -4,6 +4,7 @@ class CreateTournaments < ActiveRecord::Migration
       t.string :name
       t.boolean :needTeams
       t.integer :user_id
+      t.boolean :appeal_for_dismiss
 
       t.timestamps
     end

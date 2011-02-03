@@ -34,6 +34,18 @@
    <%= f.date_select :submit_results_until %>
  </p>
  <p>
+   <%= f.label "Спорные видны всем" %><br />
+   <%= f.check_box :publish_disp %>
+ </p>
+ <p>
+   <%= f.label "Апелляции видны всем:" %><br />
+   <%= f.check_box :publish_appeal %>
+ </p>
+ <p>
+   <%= f.label "Результаты видны всем:" %><br />
+   <%= f.check_box :publish_results %>
+ </p>
+ <p>
    <%= f.submit 'Сохранить' %>
  </p>
 <% end %>

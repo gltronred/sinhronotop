@@ -10,14 +10,19 @@
   <%= javascript_include_tag "prototype" %>
 </head>
 <body>
+<div id="mesages">
 <%= render :partial => "layouts/mesages" %>
+</div>
 <div id="user_info">
 <%= render :partial => "layouts/user_info" %>
 </div>
+<div id="mesages">
 <%= render :partial => "layouts/menu" %>
+</div>
 
-
+<div id="content">
 <%= yield %>
+</div>
 
 </body>
 </html>

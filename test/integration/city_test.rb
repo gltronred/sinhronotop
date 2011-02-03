@@ -9,9 +9,9 @@ class CityTest < ActionController::IntegrationTest
     [users(:znatok), users(:trodor)].each do |user|
       login user
 
-      visit_and_get_deny "/cities/#{frankfurt.id}/edit"
-      visit_and_get_deny "/cities/#{frankfurt.id}"
-      visit_and_get_deny "/cities/"
+      visit_and_get_deny_by_permission "/cities/#{frankfurt.id}/edit"
+      visit_and_get_deny_by_permission "/cities/#{frankfurt.id}"
+      visit_and_get_deny_by_permission "/cities/"
       
       visit home_path
       assert_not_contain "Города"

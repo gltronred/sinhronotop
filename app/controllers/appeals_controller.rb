@@ -1,7 +1,8 @@
-class AppealsController < EventSubresourcesController
-  include PermissionHelper
+class AppealsController < ApplicationController
 
   before_filter :load_parents
+  before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
+  #before_filter :check_see, :only => :index
 
   # GET /appeals
   # GET /appeals.xml
@@ -16,19 +17,12 @@ class AppealsController < EventSubresourcesController
   # GET /appeals/1/edit
   def edit
     @appeal = Appeal.find(params[:id])
-    event = Event.find_by_id(@appeal.event_id);
-    do_event_changes(event) {event.is_modifiable? 'appeal'}
-    #modify_event_results?(@appeal.event, 'appeal', true)
   end
 
   # POST /appeals
   # POST /appeals.xml
   def create
     @appeal = Appeal.new(params[:appeal])
-    @event = Event.find_by_id(@appeal.event_id)
-    @game = @event.game
-    do_event_changes(@event) {@event.is_modifiable? 'appeal'}
-    #modify_event_results?(@event, 'appeal', true)
     respond_to do |format|
       if @appeal.save
         format.html {
@@ -46,8 +40,6 @@ class AppealsController < EventSubresourcesController
   # PUT /appeals/1.xml
   def update
     @appeal = Appeal.find(params[:id])
-    event = Event.find_by_id(@appeal.event_id)
-    do_event_changes(event) {event.is_modifiable? 'appeal'}
     respond_to do |format|
       if @appeal.update_attributes(params[:appeal])
         format.html { redirect_to(event_appeals_url(event), :notice => 'Апелляция изменена.') }
@@ -61,11 +53,24 @@ class AppealsController < EventSubresourcesController
   # DELETE /appeals/1.xml
   def destroy
     @appeal = Appeal.find(params[:id])
-    event = Event.find_by_id(@appeal.event_id)
-    do_event_changes(event) {event.is_modifiable? 'appeal'}
     @appeal.destroy
     respond_to do |format|
       format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция удалена.') }
     end
   end
+  
+  private 
+  
+  def check_do_changes
+    if @event
+      check_time_constrains(@event) {@event && @event.is_modifiable?('appeal') && is_resp?(@event)}
+    else
+      check_permissions{@game && (@game.publish_appeal || is_org?(@game.tournament) )}
+    end
+  end
+  
+  def check_see
+    check_permissions{@game && (@game.publish_appeal || is_org?(@game.tournament) )}
+  end
+  
 end

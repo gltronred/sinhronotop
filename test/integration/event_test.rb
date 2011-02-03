@@ -12,7 +12,6 @@ class EventTest < ActionController::IntegrationTest
     select_date("event_date", 16, 10, 2011)
     fill_in "event_moderator_name", :with => 'Вася Пупкин'
     fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
-    #select /Trodor/, :from => "event_user_id"
     click_button "Сохранить"
 
     assert_contain_multiple ["Регистрация прошла успешно, ждите подтверждения по email", "Вася Пупкин", "pupkin@vasi.net", "Trodor", "16.10.2011"]
@@ -31,8 +30,8 @@ class EventTest < ActionController::IntegrationTest
   def test_znatok_can_only_see_not_register
     bb2 = games(:bb2)
     login users(:znatok)
-    visit_and_get_deny "/games/#{bb2.id}/events/new"
-    visit_and_get_deny "/games/#{bb2.id}/events/"
+    visit_and_get_deny_by_permission "/games/#{bb2.id}/events/new"
+    visit_and_get_deny_by_permission "/games/#{bb2.id}/events/"
     visit "/games/#{bb2.id}/"
     assert_not_contain "Зарегистрироваться"
     

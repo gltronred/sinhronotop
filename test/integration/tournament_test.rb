@@ -9,8 +9,8 @@ class TournamentTest < ActionController::IntegrationTest
     [users(:znatok), users(:trodor)].each do |user|
       login(user)
 
-      visit_and_get_deny "/tournaments/#{t.id}/edit"
-      visit_and_get_deny "/tournaments/new"
+      visit_and_get_deny_by_permission "/tournaments/#{t.id}/edit"
+      visit_and_get_deny_by_permission "/tournaments/new"
 
       visit "/tournaments"
       assert_not_contain_multiple ["Изменить", "Новый турнир", "Удалить"]

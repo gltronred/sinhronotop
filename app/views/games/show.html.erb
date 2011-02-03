@@ -36,6 +36,25 @@
 <%=h @game.submit_results_until %>
 </p>
 
+<% if is_org? @game.tournament %>
+
+<p>
+<b>Cпорные видны:</b>
+<%=h @game.publish_disp %>
+</p>
+
+<p>
+<b>Апелляции видны:</b>
+<%=h @game.publish_appeal %>
+</p>
+
+<p>
+<b>Результаты видны:</b>
+<%=h @game.publish_results %>
+</p>
+
+<% end %>
+
 <%= link_to 'Зарегистрироваться', new_game_event_path(@game) if @game.registrable && is_registrated? %>
 <% if is_org? @game.tournament %>
 <%= link_to 'Все регистрации', game_events_path(@game) %>

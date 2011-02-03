@@ -1,11 +1,10 @@
 class EventsController < ApplicationController
-  include PermissionHelper
   
   # GET /events
   # GET /events.xml
   def index
     @game = GamesController.find(params[:game_id])
-    do_with_protection { is_org? @game.tournament }
+    check_permissions { is_org? @game.tournament }
     @events = @game.events
   end
 
@@ -13,7 +12,7 @@ class EventsController < ApplicationController
   # GET /events/1.xml
   def show
     @event = EventsController.find(params[:id])
-    do_with_protection { is_resp? @event }
+    check_permissions { is_resp? @event }
     respond_to do |format|
       format.html # show.html.erb
     end
@@ -21,11 +20,11 @@ class EventsController < ApplicationController
 
   # GET /events/new
   # GET /events/new.xml
-  def new
+  def new    
     @event = Event.new
-    @event.game = @game = Game.find(params[:game_id])
-    do_with_protection { is_registrated? }
-    do_event_changes(@event){ @game.registrable }
+    @event.game = @game = GamesController.find(params[:game_id])
+    check_permissions { is_registrated? }
+    check_time_constrains(@event.game){ @game.registrable }
     load_cities(@game.tournament_id)
     #load_users
   end
@@ -33,7 +32,7 @@ class EventsController < ApplicationController
   # GET /events/1/edit
   def edit
     @event = EventsController.find(params[:id])
-    do_with_protection { is_resp? @event }
+    check_permissions { is_resp? @event }
     load_cities(@event.game.tournament_id)
     #load_users
   end
@@ -42,7 +41,7 @@ class EventsController < ApplicationController
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
-    do_with_protection { is_registrated? }
+    check_permissions { is_registrated? }
     respond_to do |format|
       if @event.save
         Emailer.deliver_notify_event(@event)
@@ -63,7 +62,7 @@ class EventsController < ApplicationController
   # PUT /events/1.xml
   def update
     @event = EventsController.find(params[:id])
-    do_with_protection { is_resp? @event }
+    check_permissions { is_resp? @event }
     respond_to do |format|
       if @event.update_attributes(params[:event])
         Emailer.deliver_notify_event(@event)
@@ -81,7 +80,7 @@ class EventsController < ApplicationController
   # DELETE /events/1.xml
   def destroy
     @event = EventsController.find(params[:id])
-    do_with_protection { is_org? @event.game.tournament }
+    check_permissions { is_org? @event.game.tournament }
     @event.destroy
     respond_to do |format|
       format.html { redirect_to(game_events_url(@event.game), :noice => 'Регистрация удалена') }

@@ -1,3 +1,4 @@
+<% org = is_org? @tournament %>
 <h1>Игры / <%= link_to @tournament.to_s, @tournament %></h1>
 
 <% if @games.length > 0 %>
@@ -11,6 +12,11 @@
     <th>Cпорные до</th>
     <th>Апелляции до</th>
     <th>Результаты до</th>
+<% if org %>
+    <th>Cпорные видны</th>
+    <th>Апелляции видны</th>
+    <th>Результаты видны</th>
+<% end %>
   </tr>
 
 <% @games.each do |game| %>
@@ -23,16 +29,25 @@
     <td><%=h eu_date(game.submit_disp_until) %></td>
     <td><%=h eu_date(game.submit_appeal_until) %></td>
     <td><%=h eu_date(game.submit_results_until) %></td>
-	<td><%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable && is_registrated? %></td>
-    <td><%= link_to 'Детали', game %></td>
-<% if is_org? @tournament %>
-	<td><%= link_to 'Все регистрации', game_events_path(game) %></td>
-    <td><%= link_to 'Изменить', edit_game_path(game) %></td>
-    <td><%= link_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete %></td>
+<% if org %>
+    <td><%=h game.publish_disp %></td>
+    <td><%=h game.publish_appeal %></td>
+    <td><%=h game.publish_results %></td>
+<% end %>
+	<td>
+	<%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable && is_registrated? %>
+    <%= link_to 'Детали', game %>
+	</td>
+<% if org %>
+	<td>
+	<%= link_to 'Все регистрации', game_events_path(game) %>
+    <%= link_to 'Изменить', edit_game_path(game) %>
+    <%= link_to 'Удалить', game, :confirm => 'Вы уверены?', :method => :delete %>
+	</td>
 <% end %>
   </tr>
 <% end %>
 </table>
 <% end %>
 <br />
-<td><%= link_to 'Новый этап', new_tournament_game_path(@tournament) if is_org? @tournament %></td>
+<%= link_to 'Новый этап', new_tournament_game_path(@tournament) if is_org? @tournament %>

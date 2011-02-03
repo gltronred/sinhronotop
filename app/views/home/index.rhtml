@@ -1,0 +1,5 @@
+<% if @my_items %>
+<% @my_items.each do |item| %>
+	<p><%= link_to item.to_s, item %></p>
+<% end %>
+<% end %>

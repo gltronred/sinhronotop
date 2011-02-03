@@ -7,12 +7,12 @@
 
   <p>
     <%= f.label "Номер вопроса (сквозной)" %><br />
-    <%= f.select ( :question_index, options_for_select(1.upto(@game.num_questions*@game.num_tours), :selected => @appeal.question_index.to_i)) %>
+    <%= f.select( :question_index, options_for_select(1.upto(@game.num_questions*@game.num_tours), :selected => @appeal.question_index.to_i)) %>
   </p>
 <% if @event.game.tournament.appeal_for_dismiss %>
   <p>
     <%= f.label "Апелляция на" %><br />
-    <%= f.select ( :goal, options_for_select(['зачет', 'снятие'], :selected => @appeal.goal)) %>
+    <%= f.select( :goal, options_for_select(['зачет', 'снятие'], :selected => @appeal.goal)) %>
   </p>
 <% else %>
 	<%= f.hidden_field :goal, :value => 'зачет' %>

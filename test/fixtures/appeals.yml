@@ -1,11 +1,38 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
-
-# This model initially had no columns defined.  If you add columns to the
-# model remove the '{}' from the fixture names and add the columns immediately
-# below each fixture, per the syntax in the comments below
-#
-one: {}
-# column: value
-#
-two: {}
-#  column: value
+kg1_riga_11:
+    question_index: 11
+    answer: обезьяна
+    goal: зачет
+    argument: это мое любимое животное
+    event: bb1_riga
+    
+kg1_riga_25:
+    question_index: 25
+    goal: снятие
+    argument: курица - не птица, как утверждается в вопросе
+    event: bb1_riga
+    
+bb1_riga_11:
+    question_index: 11
+    answer: обезьяна
+    goal: зачет
+    argument: это мое любимое животное
+    event: bb1_riga
+    
+bb1_riga_25:
+    question_index: 25
+    goal: снятие
+    argument: курица - не птица, как утверждается в вопросе
+    event: bb1_riga
+    
+bb2_riga_11:
+    question_index: 11
+    answer: обезьяна
+    goal: зачет
+    argument: это мое любимое животное
+    event: bb2_riga
+    
+bb2_riga_25:
+    question_index: 25
+    goal: снятие
+    argument: курица - не птица, как утверждается в вопросе
+    event: bb2_riga

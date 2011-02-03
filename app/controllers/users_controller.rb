@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+  
   # render new.rhtml
   def new
     @admin = User.find_by_status('admin')

@@ -1,9 +1,7 @@
 class TournamentsController < ApplicationController
-  include PermissionHelper
 
-  #before_filter :authenticate, :only => [:new, :edit, :create, :update, :destroy]
   before_filter :only => [:new, :create, :destroy] do |controller| 
-    controller.do_with_protection { controller.is_admin? }
+    controller.check_permissions { controller.is_admin? }
   end
 
   # GET /tournaments
@@ -35,7 +33,7 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1/edit
   def edit
     @tournament = TournamentsController.find(params[:id])
-    do_with_protection { is_org?(@tournament) }
+    check_permissions { is_org?(@tournament) }
     
     load_users
     load_cities
@@ -61,7 +59,7 @@ class TournamentsController < ApplicationController
   # PUT /tournaments/1.xml
   def update
     @tournament = TournamentsController.find(params[:id])
-    do_with_protection { is_org?(@tournament) }
+    check_permissions { is_org?(@tournament) }
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
         format.html { redirect_to(@tournament, :notice => 'Данные турнира изменены') }
@@ -75,7 +73,7 @@ class TournamentsController < ApplicationController
   # DELETE /tournaments/1.xml
   def destroy
     @tournament = TournamentsController.find(params[:id])
-    do_with_protection { is_org?(@tournament) }
+    check_permissions { is_org?(@tournament) }
     @tournament.destroy
     respond_to do |format|
       format.html { redirect_to(tournaments_url, :notice => 'Турнир удален') }

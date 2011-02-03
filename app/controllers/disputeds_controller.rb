@@ -1,5 +1,4 @@
-class DisputedsController < EventSubresourcesController
-  include PermissionHelper
+class DisputedsController < ApplicationController
 
   before_filter :load_parents
   
@@ -17,7 +16,7 @@ class DisputedsController < EventSubresourcesController
   def edit
     @disputed = Disputed.find(params[:id])
     event = Event.find_by_id(@disputed.event_id);
-    do_event_changes(event) {event.is_modifiable? 'disp'}
+    check_time_constrains(event) {event.is_modifiable? 'disp'}
   end
 
   # POST /disputeds
@@ -25,7 +24,7 @@ class DisputedsController < EventSubresourcesController
   def create
     @disputed = Disputed.new(params[:disputed])
     event = Event.find_by_id(@disputed.event_id);
-    do_event_changes(event) {event.is_modifiable? 'disp'}
+    check_time_constrains(event) {event.is_modifiable? 'disp'}
 
     respond_to do |format|
       if @disputed.save
@@ -41,7 +40,7 @@ class DisputedsController < EventSubresourcesController
   def update
     @disputed = Disputed.find(params[:id])
     event = Event.find_by_id(@disputed.event_id);
-    do_event_changes(event) {event.is_modifiable? 'disp'}
+    check_time_constrains(event) {event.is_modifiable? 'disp'}
 
     respond_to do |format|
       if @disputed.update_attributes(params[:disputed])
@@ -57,7 +56,7 @@ class DisputedsController < EventSubresourcesController
   def destroy
     @disputed = Disputed.find(params[:id])
     event = Event.find_by_id(@disputed.event_id);
-    do_event_changes(event) {event.is_modifiable? 'disp'}
+    check_time_constrains(event) {event.is_modifiable? 'disp'}
     
     @disputed.destroy
     respond_to do |format|

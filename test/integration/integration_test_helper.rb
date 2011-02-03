@@ -14,7 +14,7 @@ module IntegrationTestHelper
     assert_response :ok
   end
 
-  def visit_and_get_deny(url)
+  def visit_and_get_deny_by_permission(url)
     visit url
     assert_contain "недостаточно прав"
   end

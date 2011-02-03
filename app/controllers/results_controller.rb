@@ -1,6 +1,5 @@
-class ResultsController < EventSubresourcesController
-  include PermissionHelper
-
+class ResultsController < ApplicationController
+  
   before_filter :load_parents
 
   # GET /results
@@ -26,7 +25,7 @@ class ResultsController < EventSubresourcesController
     @result = Result.new(params[:result])
     @result.score = 0
     event = Event.find_by_id(@result.event_id);
-    do_event_changes(event) {event.is_modifiable? 'results'}
+    check_time_constrains(event) {event.is_modifiable? 'results'}
     respond_to do |format|
       if @result.save!
         @result.create_resultitems
@@ -43,7 +42,7 @@ class ResultsController < EventSubresourcesController
   # PUT /results/1.xml
   def update
     @result = Result.find(params[:id])
-    do_event_changes(event) {@result.event.is_modifiable? 'results'}
+    check_time_constrains(event) {@result.event.is_modifiable? 'results'}
     respond_to do |format|
       if @result.update_attributes(params[:result])
         format.html { redirect_to(@result, :notice => 'Result was successfully updated.') }
@@ -58,7 +57,7 @@ class ResultsController < EventSubresourcesController
   def destroy
     @result = Result.find(params[:id])
     event = Event.find_by_id(@result.event_id);
-    do_event_changes(event) {event.is_modifiable? 'results'}
+    check_time_constrains(event) {event.is_modifiable? 'results'}
     #modify_event_results?(@result.event, 'results', true)
     @result.destroy
     respond_to do |format|
