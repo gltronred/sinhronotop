@@ -45,6 +45,15 @@ module IntegrationTestHelper
   def logout
     post logout_path
   end
+  
+  def do_with_users(user_array)
+    user_array.each do |user|
+      login users(user)
+      yield
+      logout
+    end
+  end
+    
 
 
 end

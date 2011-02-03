@@ -6,9 +6,7 @@ class GameTest < ActionController::IntegrationTest
 
   def test_org_creates_and_edits_a_game
     kupr = tournaments(:kupr)
-    [users(:knop), users(:perlin)].each do |user|
-      login user
-
+    do_with_users([:knop, :perlin]) {
       visit "/tournaments/#{kupr.id}"
       click_link "Новый этап"
 
@@ -45,26 +43,20 @@ class GameTest < ActionController::IntegrationTest
       choose_ok_on_next_confirmation rescue false
       assert_contain "Этап удален"
       assert_not_contain "единственный этап"
-      
-      logout
-    end
+    }
   end
 
   def test_other_than_original_org_cannot_edit
     bb = tournaments(:bb)
-    game = bb.games.first
-    [users(:znatok), users(:knop), users(:trodor)].each do |user|
-      login user
-
+    game = games(:bb1)
+    do_with_users([:trodor, :knop, :znatok]) {
       visit_and_get_deny_by_permission "/tournaments/#{bb.id}/games/#{game.id}/edit"
       visit_and_get_deny_by_permission "/tournaments/#{bb.id}/games/new"
 
       visit "/tournaments/#{bb.id}/games/"
       assert_contain_multiple ["Этап 1", "Этап 2"]
       assert_not_contain_multiple ["Новый этап", "Изменить", "Удалить"]
-      
-      logout
-    end
+    }
   end
 
 
