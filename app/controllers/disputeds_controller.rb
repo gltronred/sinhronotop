@@ -1,6 +1,7 @@
 class DisputedsController < ApplicationController
 
   before_filter :load_parents
+  before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
   
   # GET /disputeds
   # GET /disputeds.xml
@@ -15,17 +16,12 @@ class DisputedsController < ApplicationController
   # GET /disputeds/1/edit
   def edit
     @disputed = Disputed.find(params[:id])
-    event = Event.find_by_id(@disputed.event_id);
-    check_time_constrains(event) {event.is_modifiable? 'disp'}
   end
 
   # POST /disputeds
   # POST /disputeds.xml
   def create
     @disputed = Disputed.new(params[:disputed])
-    event = Event.find_by_id(@disputed.event_id);
-    check_time_constrains(event) {event.is_modifiable? 'disp'}
-
     respond_to do |format|
       if @disputed.save
         format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный сохранен.') }
@@ -39,9 +35,6 @@ class DisputedsController < ApplicationController
   # PUT /disputeds/1.xml
   def update
     @disputed = Disputed.find(params[:id])
-    event = Event.find_by_id(@disputed.event_id);
-    check_time_constrains(event) {event.is_modifiable? 'disp'}
-
     respond_to do |format|
       if @disputed.update_attributes(params[:disputed])
         format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный изменен.') }
@@ -55,12 +48,19 @@ class DisputedsController < ApplicationController
   # DELETE /disputeds/1.xml
   def destroy
     @disputed = Disputed.find(params[:id])
-    event = Event.find_by_id(@disputed.event_id);
-    check_time_constrains(event) {event.is_modifiable? 'disp'}
-    
     @disputed.destroy
     respond_to do |format|
       format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный удален.') }
+    end
+  end
+  
+  private 
+  
+  def check_do_changes
+    if @event
+      check_time_constrains(@event) {can_submit_disp? @event}
+    else
+      check_permissions{can_see_disp? @game}
     end
   end
 end

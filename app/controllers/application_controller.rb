@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter do |controller| 
     controller.authenticate unless controller.is_a?(SessionsController) || controller.is_a?(UsersController)
   end
-  helper_method :eu_date, :is_admin?, :is_org?, :is_resp?, :is_registrated?, :is_org_of_any_tournament?
+  helper_method :all#:eu_date, :is_admin?, :is_org?, :is_resp?, :is_registrated?, :is_org_of_any_tournament?, :can_register?, :can_submit_disp?, :can_submit_appeal?, :can_submit_results?
  
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details

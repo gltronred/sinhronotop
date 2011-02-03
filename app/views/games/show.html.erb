@@ -55,7 +55,7 @@
 
 <% end %>
 
-<%= link_to 'Зарегистрироваться', new_game_event_path(@game) if @game.registrable && is_registrated? %>
+<%= link_to 'Зарегистрироваться', new_game_event_path(@game) if can_register? @game %>
 <% if is_org? @game.tournament %>
 <%= link_to 'Все регистрации', game_events_path(@game) %>
 <%= link_to 'Спорные ответы', game_disputeds_path(@game) %>

@@ -23,10 +23,9 @@ class EventsController < ApplicationController
   def new    
     @event = Event.new
     @event.game = @game = GamesController.find(params[:game_id])
-    check_permissions { is_registrated? }
-    check_time_constrains(@event.game){ @game.registrable }
-    load_cities(@game.tournament_id)
-    #load_users
+    if check_permissions { is_registrated? } && check_time_constrains(@game){ can_register? @game }
+      load_cities(@game.tournament_id)
+    end
   end
 
   # GET /events/1/edit
@@ -34,7 +33,6 @@ class EventsController < ApplicationController
     @event = EventsController.find(params[:id])
     check_permissions { is_resp? @event }
     load_cities(@event.game.tournament_id)
-    #load_users
   end
 
   # POST /events

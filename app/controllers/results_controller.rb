@@ -1,6 +1,7 @@
 class ResultsController < ApplicationController
   
   before_filter :load_parents
+  before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
 
   # GET /results
   # GET /results.xml
@@ -24,8 +25,6 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(params[:result])
     @result.score = 0
-    event = Event.find_by_id(@result.event_id);
-    check_time_constrains(event) {event.is_modifiable? 'results'}
     respond_to do |format|
       if @result.save!
         @result.create_resultitems
@@ -36,13 +35,10 @@ class ResultsController < ApplicationController
     end
   end
 
-  private
-
   # PUT /results/1
   # PUT /results/1.xml
   def update
     @result = Result.find(params[:id])
-    check_time_constrains(event) {@result.event.is_modifiable? 'results'}
     respond_to do |format|
       if @result.update_attributes(params[:result])
         format.html { redirect_to(@result, :notice => 'Result was successfully updated.') }
@@ -56,12 +52,20 @@ class ResultsController < ApplicationController
   # DELETE /results/1.xml
   def destroy
     @result = Result.find(params[:id])
-    event = Event.find_by_id(@result.event_id);
-    check_time_constrains(event) {event.is_modifiable? 'results'}
-    #modify_event_results?(@result.event, 'results', true)
     @result.destroy
     respond_to do |format|
       format.html { redirect_to(event_results_path(@result.event)) }
     end
   end
+  
+  private
+  
+  def check_do_changes
+    if @event
+      check_time_constrains(@event) {can_submit_results? @event}
+    else
+      check_permissions{can_see_results? @game}
+    end
+  end
+  
 end

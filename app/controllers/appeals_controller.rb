@@ -2,7 +2,6 @@ class AppealsController < ApplicationController
 
   before_filter :load_parents
   before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
-  #before_filter :check_see, :only => :index
 
   # GET /appeals
   # GET /appeals.xml
@@ -63,14 +62,10 @@ class AppealsController < ApplicationController
   
   def check_do_changes
     if @event
-      check_time_constrains(@event) {@event && @event.is_modifiable?('appeal') && is_resp?(@event)}
+      check_time_constrains(@event) {can_submit_appeal? @event}
     else
-      check_permissions{@game && (@game.publish_appeal || is_org?(@game.tournament) )}
+      check_permissions{can_see_appeal? @game}
     end
-  end
-  
-  def check_see
-    check_permissions{@game && (@game.publish_appeal || is_org?(@game.tournament) )}
   end
   
 end

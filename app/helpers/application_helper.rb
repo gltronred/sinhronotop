@@ -11,6 +11,7 @@ module ApplicationHelper
     [:appeal, :disputed, :result].each do |first_key|
       event_id ||= params[first_key][:event_id] if !event_id && params.has_key?(first_key)
     end
+    event_id ||= params[:resultitem][:result][:event_id] if !event_id && params[:resultitem] && params[:resultitem][:result]
     if event_id
       @parent = @event = Event.find(event_id)
       @game = @event.game

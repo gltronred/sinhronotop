@@ -12,9 +12,5 @@ class Event < ActiveRecord::Base
   def to_s
     "игра в городе #{self.city.name}, #{self.game.name} турнира #{self.game.tournament.name}"
   end
-  
-  def is_modifiable?(result_type)
-    eval("self.game.submit_#{result_type}_until >= Date.today()")
-  end
 
 end

@@ -6,7 +6,7 @@
     <th>Ответ</th>
     
   </tr>
-<% changeable = @event && @event.is_modifiable?('disp') %>
+<% changeable = can_submit_disp? @event %>
 <% @disputeds.each do |disputed| %>
   <tr>
     <td><%=h disputed.question_index %></td>

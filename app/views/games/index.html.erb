@@ -35,7 +35,7 @@
     <td><%=h game.publish_results %></td>
 <% end %>
 	<td>
-	<%= link_to 'Зарегистрироваться', new_game_event_path(game) if game.registrable && is_registrated? %>
+	<%= link_to 'Зарегистрироваться', new_game_event_path(game) if can_register? game %>
     <%= link_to 'Детали', game %>
 	</td>
 <% if org %>
