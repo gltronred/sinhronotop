@@ -1,3 +1,10 @@
+bb1_frankfurt_20:
+    question_index: 20
+    answer: Купидон
+    goal: зачет
+    argument: другое имя бога Эрота
+    event: bb1_frankfurt
+        
 bb1_riga_11:
     question_index: 11
     answer: обезьяна
@@ -10,7 +17,14 @@ bb1_riga_25:
     goal: снятие
     argument: курица - не птица, как утверждается в вопросе
     event: bb1_riga
-    
+
+bb2_frankfurt_20:
+    question_index: 20
+    answer: Купидон
+    goal: зачет
+    argument: другое имя бога Эрота
+    event: bb2_frankfurt
+        
 bb2_riga_11:
     question_index: 11
     answer: обезьяна

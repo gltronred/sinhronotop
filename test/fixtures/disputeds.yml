@@ -1,3 +1,8 @@
+bb1_frankfurt_31:
+    question_index: 31
+    answer: гиппопотам
+    event: bb1_frankfurt
+    
 bb1_riga_12:
     question_index: 12
     answer: крокодил
@@ -7,7 +12,12 @@ bb1_riga_25:
     question_index: 25
     answer: бегемот
     event: bb1_riga
-    
+
+bb2_frankfurt_31:
+    question_index: 31
+    answer: гиппопотам
+    event: bb2_frankfurt
+
 bb2_riga_12:
     question_index: 12
     answer: крокодил

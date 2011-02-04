@@ -8,6 +8,8 @@ class AppealTest < ActionController::IntegrationTest
     event = events(:bb2_riga)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/appeals"
+      assert_contain_multiple ["обезьяна", "это мое любимое животное", "курица - не птица, как утверждается в вопросе"] #see my already submitted stuff 
+      assert_not_contain_multiple ["Купидон", "другое имя бога Эрота"] #cannot see submitments from other events
       submit_appeal(2, 'зачет', "зеленый змий", "потому что зеленый")
       click_link "Изменить"
       submit_appeal(2, 'зачет', "красный богатырь", "потому что красный")
@@ -23,7 +25,7 @@ class AppealTest < ActionController::IntegrationTest
     game = games(:bb2)
     do_with_users([:marina]) {
       visit "/games/#{game.id}/appeals"
-      assert_contain_multiple ["11", "обезьяна", "зачет", "это мое любимое животное", "25", "снятие", "курица - не птица, как утверждается в вопросе"]
+      assert_contain_multiple ["зачет", "Купидон", "другое имя бога Эрота", "обезьяна", "зачет", "это мое любимое животное", "снятие", "курица - не птица, как утверждается в вопросе"]
     }
   end
 
@@ -46,7 +48,7 @@ class AppealTest < ActionController::IntegrationTest
     game = games(:bb1)
     do_with_users([:znatok, :knop, :trodor, :marina]) {
       visit "/games/#{game.id}/appeals"
-      assert_contain_multiple ["11", "обезьяна", "зачет", "это мое любимое животное", "25", "снятие", "курица - не птица, как утверждается в вопросе"]
+      assert_contain_multiple ["зачет", "Купидон", "другое имя бога Эрота", "обезьяна", "зачет", "это мое любимое животное", "снятие", "курица - не птица, как утверждается в вопросе"]
     }
   end
 

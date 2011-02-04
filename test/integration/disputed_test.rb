@@ -8,6 +8,8 @@ class DisputedTest < ActionController::IntegrationTest
     event = events(:bb2_riga)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/disputeds"
+      assert_contain_multiple ["крокодил", "бегемот"] #see my already submitted stuff 
+      assert_not_contain "гиппопотам" #cannot see submitments from other events
       submit_disputed(2, "шестой элемент")
       click_link "Изменить"
       submit_disputed(2, "уголь")
@@ -23,11 +25,11 @@ class DisputedTest < ActionController::IntegrationTest
     game = games(:bb2)
     do_with_users([:marina]) {
       visit "/games/#{game.id}/disputeds"
-      assert_contain_multiple ["12", "крокодил", "25", "бегемот"]
+      assert_contain_multiple ["крокодил", "бегемот", "гиппопотам"]
     }
   end
 
-  def test_org_cannot_submit_as_expired
+  def test_resp_cannot_submit_as_expired
     game = games(:bb1)
     do_with_users([:trodor]) {
       visit "/games/#{game.id}/disputeds"
@@ -46,7 +48,7 @@ class DisputedTest < ActionController::IntegrationTest
     game = games(:bb1)
     do_with_users([:znatok, :knop, :trodor, :marina]) {
       visit "/games/#{game.id}/disputeds"
-      assert_contain_multiple ["12", "крокодил", "25", "бегемот"]
+      assert_contain_multiple ["12", "крокодил", "бегемот", "гиппопотам"]
     }
   end
 
