@@ -1,7 +1,8 @@
 class AppealsController < ApplicationController
 
-  before_filter :load_parents
-  before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
+  before_filter :load_appeal_with_parents, :only => [:edit, :update, :destroy]
+  before_filter :load_parents, :only => [:create, :index]
+  before_filter :check_do_changes
 
   # GET /appeals
   # GET /appeals.xml
@@ -15,7 +16,6 @@ class AppealsController < ApplicationController
 
   # GET /appeals/1/edit
   def edit
-    @appeal = Appeal.find(params[:id])
   end
 
   # POST /appeals
@@ -23,22 +23,19 @@ class AppealsController < ApplicationController
   def create
     @appeal = Appeal.new(params[:appeal])
     respond_to do |format|
-      if @appeal.save
-        format.html {
-          @appeals = @event.appeals
+      format.html {
+        if @appeal.save
           redirect_to(event_appeals_url(@event), :notice => 'Апелляция сохранена.')
-        }
-      else
-        @appeals = @event.appeals
-        format.html { render :action => "index" }
-      end
+        else
+          format.html { render :action => "index" }
+        end
+      }
     end
   end
 
   # PUT /appeals/1
   # PUT /appeals/1.xml
   def update
-    @appeal = Appeal.find(params[:id])
     respond_to do |format|
       if @appeal.update_attributes(params[:appeal])
         format.html { redirect_to(event_appeals_url(@event), :notice => 'Апелляция изменена.') }
@@ -51,15 +48,20 @@ class AppealsController < ApplicationController
   # DELETE /appeals/1
   # DELETE /appeals/1.xml
   def destroy
-    @appeal = Appeal.find(params[:id])
     @appeal.destroy
     respond_to do |format|
       format.html { redirect_to(event_appeals_url(@appeal.event), :notice => 'Апелляция удалена.') }
     end
   end
+
+  private
   
-  private 
-  
+  def load_appeal_with_parents
+    @appeal = Appeal.find(params[:id])
+    @event = @appeal.event
+    @game = @event.game
+  end
+
   def check_do_changes
     if @event
       check_time_constrains(@event) {can_submit_appeal? @event}
@@ -67,5 +69,5 @@ class AppealsController < ApplicationController
       check_permissions{can_see_appeal? @game}
     end
   end
-  
+
 end

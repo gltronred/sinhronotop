@@ -24,9 +24,9 @@ class DisputedsController < ApplicationController
     @disputed = Disputed.new(params[:disputed])
     respond_to do |format|
       if @disputed.save
-        format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный сохранен.') }
+        format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный сохранен.') }
       else
-        format.html { redirect_to(event_disputeds_url(event))}
+        format.html { redirect_to(event_disputeds_url(@event))}
       end
     end
   end
@@ -37,7 +37,7 @@ class DisputedsController < ApplicationController
     @disputed = Disputed.find(params[:id])
     respond_to do |format|
       if @disputed.update_attributes(params[:disputed])
-        format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный изменен.') }
+        format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный изменен.') }
       else
         format.html { render :action => "edit" }
       end
@@ -50,7 +50,7 @@ class DisputedsController < ApplicationController
     @disputed = Disputed.find(params[:id])
     @disputed.destroy
     respond_to do |format|
-      format.html { redirect_to(event_disputeds_url(event), :notice => 'Спорный удален.') }
+      format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный удален.') }
     end
   end
   
