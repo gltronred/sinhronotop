@@ -41,7 +41,7 @@ class AppealsController < ApplicationController
     @appeal = Appeal.find(params[:id])
     respond_to do |format|
       if @appeal.update_attributes(params[:appeal])
-        format.html { redirect_to(event_appeals_url(event), :notice => 'Апелляция изменена.') }
+        format.html { redirect_to(event_appeals_url(@event), :notice => 'Апелляция изменена.') }
       else
         format.html { render :action => "edit" }
       end

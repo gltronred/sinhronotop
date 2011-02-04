@@ -8,7 +8,10 @@ class AppealTest < ActionController::IntegrationTest
     event = events(:bb2_riga)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/appeals"
-      submit_appeal(14, 'зачет', "зеленый змий", "потому что зеленый")
+      submit_appeal(2, 'зачет', "зеленый змий", "потому что зеленый")
+      click_link "Изменить"
+      submit_appeal(2, 'зачет', "красный богатырь", "потому что красный")
+      assert_not_contain_multiple ["зеленый змий", "потому что зеленый"]
       submit_appeal(34, 'снятие', "", "потому что не самолет")
     }
   end
@@ -21,6 +24,14 @@ class AppealTest < ActionController::IntegrationTest
     }
   end
 
+  def test_org_cannot_submit_as_expired
+    game = games(:bb1)
+    do_with_users([:trodor]) {
+      visit "/games/#{game.id}/appeals"
+      assert_have_no_selector_multiple ['form input#appeal_question_index', 'form input#appeal_goal', 'form input#appeal_answer', 'form input#appeal_argument', 'form input#appeal_submit']      
+    }
+  end
+  
   def test_not_org_cannot_submit_or_see_as_not_published
     game = games(:bb2)
     do_with_users([:znatok, :knop, :trodor]) {

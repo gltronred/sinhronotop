@@ -1,16 +1,3 @@
-kg1_riga_11:
-    question_index: 11
-    answer: обезьяна
-    goal: зачет
-    argument: это мое любимое животное
-    event: bb1_riga
-    
-kg1_riga_25:
-    question_index: 25
-    goal: снятие
-    argument: курица - не птица, как утверждается в вопросе
-    event: bb1_riga
-    
 bb1_riga_11:
     question_index: 11
     answer: обезьяна

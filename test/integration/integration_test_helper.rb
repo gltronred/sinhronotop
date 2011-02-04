@@ -35,6 +35,12 @@ module IntegrationTestHelper
       assert_not_contain el
     end
   end
+  
+  def assert_have_no_selector_multiple(arr)
+      arr.each do |el|
+        assert_have_no_selector el
+      end
+    end
 
   def assert_contain_multiple(arr)
     arr.each do |el|
