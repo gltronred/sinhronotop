@@ -1,6 +1,6 @@
 class Game < ActiveRecord::Base
   belongs_to :tournament
-  has_many :events
+  has_many :events, :dependent => :delete_all
   has_many :disputeds, :through => :events
   has_many :appeals, :through => :events
   has_many :results, :through => :events

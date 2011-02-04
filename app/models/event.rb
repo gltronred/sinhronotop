@@ -1,9 +1,9 @@
 class Event < ActiveRecord::Base
   belongs_to :game
   belongs_to :city
-  has_many :disputeds
-  has_many :appeals
-  has_many :results
+  has_many :disputeds, :dependent => :delete_all
+  has_many :appeals, :dependent => :delete_all
+  has_many :results, :dependent => :delete_all
   belongs_to :user
     
   validates_presence_of :city_id, :moderator_name, :moderator_email, :user_id, :date, :message => ": поле не заполнено"
