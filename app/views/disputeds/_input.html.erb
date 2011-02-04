@@ -7,7 +7,7 @@
 
   <p>
     <%= f.label "Номер вопроса (сквозной)" %><br />
-    <%= f.select ( :question_index, options_for_select(1.upto(@game.num_questions*@game.num_tours), :selected => @disputed.question_index.to_i)) %>
+    <%= f.select( :question_index, options_for_select(1.upto(@game.num_questions*@game.num_tours), :selected => @disputed.question_index.to_i)) %>
   </p>
   <p>
     <%= f.label "Ответ" %><br />

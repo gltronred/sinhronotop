@@ -1,7 +1,8 @@
 class DisputedsController < ApplicationController
 
-  before_filter :load_parents
-  before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
+  before_filter :load_disp_with_parents, :only => [:edit, :update, :destroy]
+  before_filter :load_parents, :only => [:create, :index]
+  before_filter :check_do_changes
   
   # GET /disputeds
   # GET /disputeds.xml
@@ -15,7 +16,6 @@ class DisputedsController < ApplicationController
 
   # GET /disputeds/1/edit
   def edit
-    @disputed = Disputed.find(params[:id])
   end
 
   # POST /disputeds
@@ -34,7 +34,6 @@ class DisputedsController < ApplicationController
   # PUT /disputeds/1
   # PUT /disputeds/1.xml
   def update
-    @disputed = Disputed.find(params[:id])
     respond_to do |format|
       if @disputed.update_attributes(params[:disputed])
         format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный изменен.') }
@@ -47,14 +46,19 @@ class DisputedsController < ApplicationController
   # DELETE /disputeds/1
   # DELETE /disputeds/1.xml
   def destroy
-    @disputed = Disputed.find(params[:id])
     @disputed.destroy
     respond_to do |format|
       format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный удален.') }
     end
   end
   
-  private 
+  private
+
+  def load_disp_with_parents
+    @disputed = Disputed.find(params[:id])
+    @event = @disputed.event
+    @game = @event.game
+  end
   
   def check_do_changes
     if @event

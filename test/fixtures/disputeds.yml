@@ -1,5 +1,5 @@
-bb1_riga_1:
-    question_index: 1
+bb1_riga_12:
+    question_index: 12
     answer: крокодил
     event: bb1_riga
     
@@ -7,3 +7,13 @@ bb1_riga_25:
     question_index: 25
     answer: бегемот
     event: bb1_riga
+    
+bb2_riga_12:
+    question_index: 12
+    answer: крокодил
+    event: bb2_riga
+    
+bb2_riga_25:
+    question_index: 25
+    answer: бегемот
+    event: bb2_riga
