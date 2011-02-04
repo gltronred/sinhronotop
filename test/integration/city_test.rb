@@ -29,8 +29,7 @@ class CityTest < ActionController::IntegrationTest
       fill_in "city_name", :with => "Абиджан"
       click_button "Сохранить"
       assert_contain_multiple ["Абиджан", "Франкфурт-на-Майне", "Таллинн", "Рига", "Кельн"]
-      click_link "Удалить"
-      choose_ok_on_next_confirmation rescue false
+      click_remove_and_confirm
       assert_not_contain /Абиджан/
     }
   end

@@ -1,7 +1,11 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+pv:
+  name: Против ветра
 
-one:
-  name: Зайчики
+oki:
+  name: Оки-доки
 
-two:
-  name: Кролики
+ka:
+  name: Крейзер Аврора
+
+sp:
+  name: 7 пядей

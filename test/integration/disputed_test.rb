@@ -14,8 +14,7 @@ class DisputedTest < ActionController::IntegrationTest
       click_link "Изменить"
       submit_disputed(2, "уголь")
       assert_not_contain "шестой элемент"
-      click_link "Удалить"
-      choose_ok_on_next_confirmation rescue false
+      click_remove_and_confirm
       assert_not_contain "уголь"
       submit_disputed(34, "кулинария")
     }

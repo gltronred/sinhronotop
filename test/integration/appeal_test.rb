@@ -14,8 +14,7 @@ class AppealTest < ActionController::IntegrationTest
       click_link "Изменить"
       submit_appeal(2, 'зачет', "красный богатырь", "потому что красный")
       assert_not_contain_multiple ["зеленый змий", "потому что зеленый"]
-      click_link "Удалить"
-      choose_ok_on_next_confirmation rescue false
+      click_remove_and_confirm
       assert_not_contain_multiple ["красный богатырь", "потому что красный"]
       submit_appeal(34, 'снятие', "", "потому что не самолет")
     }

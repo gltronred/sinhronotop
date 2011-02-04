@@ -1,4 +1,5 @@
 <% if logged_in? %>
+	<%= link_to 'Домой', home_path %>
 	<%= link_to 'Турниры', tournaments_path %>
 	<%= link_to 'Города', cities_path if is_org_of_any_tournament? %>
 <% end %>

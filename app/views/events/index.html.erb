@@ -18,8 +18,8 @@
     <td><%=h event.user %></td>
     <td><%= link_to 'Детали', event_path(event) %></td>
 <% if is_org? event.game.tournament %>
-    <td><%= link_to 'Изменить', edit_event_path(event) %></td>
-    <td><%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>
+    <td><%= link_to 'Изменить', edit_event_path(event) %>
+    <%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>
 <% end %>
   </tr>
 <% end %>

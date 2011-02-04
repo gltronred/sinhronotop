@@ -4,16 +4,16 @@ class Result < ActiveRecord::Base
   has_many :resultitems, :dependent => :delete_all
   
   def calculate_and_save
-    self.score = self.resultitems.select{|item| item.score == 1}.length
+    self.score = get_score self.resultitems
     self.save
   end
   
-  def items_for_tour(tour) 
-    self.resultitems.find_all{|item| (item.question_index-1) / self.event.game.num_questions == tour-1 }
+  def items_for_tour_sorted(tour) 
+     items_for_tour(tour).sort{|x,y| x.question_index <=> y.question_index}
   end
   
   def score_for_tour(tour)
-    items_for_tour(tour).select{|item| item.score == 1}.length
+    get_score items_for_tour(tour)
   end
   
   def tour_for_question(question_index)
@@ -25,10 +25,20 @@ class Result < ActiveRecord::Base
       params =
       { :result_id      => self.id,
         :question_index => i,
-      :score          => 0 }
+        :score          => 0 }
       resultitem = Resultitem.new(params)
       resultitem.save
     end
   end
   
+  private
+  
+  def get_score(items)
+    items.map(&:score).count(1)
+  end
+  
+  def items_for_tour(tour) 
+    self.resultitems.select{|item| (item.question_index-1) / self.event.game.num_questions == tour-1 }
+  end
+    
 end

@@ -1,7 +1,19 @@
-# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+bb1_frankfurt_pv:
+  score: 10
+  event: bb1_frankfurt
+  team: pv
 
-one:
-  score: 1
+bb1_riga_oki:
+  score: 8
+  event: bb1_riga
+  team: oki
+  
+bb2_frankfurt_pv:
+  score: 10
+  event: bb2_frankfurt
+  team: pv
 
-two:
-  score: 1
+bb2_riga_oki:
+  score: 8
+  event: bb2_riga
+  team: oki

@@ -60,6 +60,10 @@ module IntegrationTestHelper
     end
   end
     
-
+  def click_remove_and_confirm
+    click_link "Удалить"
+    choose_ok_on_next_confirmation rescue false
+  end
+    
 
 end

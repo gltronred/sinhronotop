@@ -38,4 +38,4 @@ kg1:
   submit_results_until: <%= (Time.now - 2.days).to_s :db %>
   publish_disp: true
   publish_appeal: true
-  publish_results: false  
+  publish_results: true  

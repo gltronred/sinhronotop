@@ -39,8 +39,7 @@ class GameTest < ActionController::IntegrationTest
 
       visit "/tournaments/#{kupr.id}"
       click_link "Этапы"
-      click_link "Удалить"
-      choose_ok_on_next_confirmation rescue false
+      click_remove_and_confirm
       assert_contain "Этап удален"
       assert_not_contain "единственный этап"
     }

@@ -37,11 +37,11 @@ class TournamentTest < ActionController::IntegrationTest
       visit "/tournaments/#{t.id}/edit"
       assert_select "input[checked='checked']", :count => 0
 
-      fill_in 'tournament[name]', :with => 'Кубок Городов'
+      fill_in 'tournament[name]', :with => 'ААА Кубок Городов'
       check 'tournament[needTeams]'
       check 'tournament[appeal_for_dismiss]'
       click_button 'Сохранить'
-      assert_contain_multiple ["Данные турнира изменены", "Кубок Городов"]
+      assert_contain_multiple ["Данные турнира изменены", "ААА Кубок Городов"]
 
       visit "/tournaments/#{t.id}/edit"
       assert_select "input[checked='checked'][id='tournament_needTeams']", :count => 1
@@ -55,8 +55,7 @@ class TournamentTest < ActionController::IntegrationTest
 
       assert_difference 'Tournament.count', -1 do
         visit "/tournaments"
-        click_link "Удалить Кубок Городов"
-        choose_ok_on_next_confirmation rescue false
+        click_remove_and_confirm
         assert_response :ok
         assert_contain "Турнир удален"
       end

@@ -1,7 +1,8 @@
 class ResultsController < ApplicationController
   
-  before_filter :load_parents
-  before_filter :check_do_changes, :only => [:index, :edit, :create, :update, :destroy]
+  before_filter :load_result_with_parents, :only => :destroy
+  before_filter :load_parents, :only => [:create, :index]
+  before_filter :check_do_changes
 
   # GET /results
   # GET /results.xml
@@ -11,7 +12,7 @@ class ResultsController < ApplicationController
       @results = @parent.results
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
-      @teams = Team.find(:all, :order => "name ASC")-@results.map(&:team)
+      @teams = Team.find(:all, :order => "name ASC") - @results.map(&:team)
     elsif
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
     end
@@ -28,22 +29,9 @@ class ResultsController < ApplicationController
     respond_to do |format|
       if @result.save!
         @result.create_resultitems
-        format.html { redirect_to(event_results_path(event), :notice => 'Команда добавлена') }
+        format.html { redirect_to(event_results_path(@event), :notice => 'Команда добавлена') }
       else
-        format.html { render :action => "new" }
-      end
-    end
-  end
-
-  # PUT /results/1
-  # PUT /results/1.xml
-  def update
-    @result = Result.find(params[:id])
-    respond_to do |format|
-      if @result.update_attributes(params[:result])
-        format.html { redirect_to(@result, :notice => 'Result was successfully updated.') }
-      else
-        format.html { render :action => "edit" }
+        format.html { render :action => "index" }
       end
     end
   end
@@ -51,14 +39,19 @@ class ResultsController < ApplicationController
   # DELETE /results/1
   # DELETE /results/1.xml
   def destroy
-    @result = Result.find(params[:id])
     @result.destroy
     respond_to do |format|
-      format.html { redirect_to(event_results_path(@result.event)) }
+      format.html { redirect_to(event_results_path(@event)) }
     end
   end
   
   private
+  
+  def load_result_with_parents
+    @result = Result.find(params[:id])
+    @event = @result.event
+    @game = @event.game
+  end
   
   def check_do_changes
     if @event

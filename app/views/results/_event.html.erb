@@ -1,5 +1,5 @@
 <% for tour in 1..@event.game.num_tours %>
-<h3>Тур <%= tour %>
+<h3>Тур <%= tour %></h3>
 <table>
   <tr>
     <th>Команда</th> 
@@ -12,7 +12,7 @@
 <% @results.each do |result| %>
   <tr>
     <td><%= result.team.name %></td>
-<% for item in result.items_for_tour(tour) %>
+<% for item in result.items_for_tour_sorted(tour) %>
     <td>
 <% field_id = "team#{result.team.id}_tour#{tour}_question#{item.question_index}" %>
 <%= check_box_tag field_id, 1, item.score==1 %>

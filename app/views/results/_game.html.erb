@@ -1,5 +1,5 @@
 <% for tour in 1..@game.num_tours %>
-<h3>Тур <%= tour %>
+<h3>Тур <%= tour %></h3>
 <table>
   <tr>
     <th>Команда</th>
@@ -12,7 +12,7 @@
 <% @results.each do |result| %>
   <tr>
     <td><%= result.team.name %></td>
-<% for item in result.items_for_tour(tour) %>
+<% for item in result.items_for_tour_sorted(tour) %>
     <td><%= item.score %></td>
 <% end %>
 	<td><%= result.score_for_tour(tour) %></td>
