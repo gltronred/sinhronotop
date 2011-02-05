@@ -1,0 +1,6 @@
+<%= error_messages_for :user %>
+<h3>Послать на мой адрес код для восстановления пароля</h3>
+<% form_for :user do |f| -%>
+Email:<%= f.text_field :email %>
+<%= submit_tag 'Послать' %>
+<% end -%>

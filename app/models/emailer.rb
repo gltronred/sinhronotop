@@ -10,24 +10,52 @@ class Emailer < ActionMailer::Base
     @results_url = url_for(:controller => event_results_path(@event))
     recipient =  event.user.email + ", " + event.moderator_email
     if event.moderator_email != event.user.email
-       recipient += ", " + event.user.email
-     end
-    send(recipient, subject, event)    
+      recipient += ", " + event.user.email
+    end
+    send(recipient, subject)
   end
 
   def user_registred(user)
     @user = user
-    send(user.email, "New user registration", user)    
+    send(user.email, "New user registration")
+  end
+=begin
+  def signup_notification(user)
+    setup_email(user)
+    @subject    += 'Please activate your new account'
+    @body[:url]  = "http://www.mysite.com/activate/#{user.activation_code}"
+  end
+  def activation(user)
+    setup_email(user)
+    @subject    += 'Your account has been activated!'
+    @body[:url]  = "http://www.mysite.com"
+  end
+=end
+  def reset_notification(user)
+    #setup_email(user)
+    @subject    = 'Link to reset your password'
+    @body[:url]  = "#{url_for(:controller => home_path)}reset/#{user.reset_code}"
+    @body[:user] = user
+    send(user.email, 'Link to reset your password')
   end
 
-  def send(recipient, subject, message, sent_at = Time.now)
+  protected
+=begin  
+  def setup_email(user)
+    @recipients  = "#{user.email}"
+    @from        = "support@mysite.com"
+    @subject     = "[mysite] "
+    @sent_on     = Time.now
+    @body[:user] = user
+  end
+=end
+  def send(recipient, subject, sent_at = Time.now)
     @subject = subject
     @recipients = recipient
     @from = 'ChGK Sinhronotop'
     @sent_on = sent_at
     @body["title"] = subject
     @body["email"] = 'sinhronotop@googlemail.com'
-    @body["message"] = message
     @headers = {}
-  end  
+  end
 end

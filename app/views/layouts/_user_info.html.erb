@@ -5,6 +5,7 @@
   <p>Вход для зарегистрированных пользователей. Если вы не организатор и не представитель, регистрироваться не надо - используйте email 'znatok@chgk.info' и пароль 'znatok'</p>
   <p>
 	<%= render :partial => "sessions/login" %>
-    <%= link_to 'Зарегистрироваться', signup_path %>
   </p>
+<p>  <%= link_to 'Зарегистрироваться', signup_path %></p>
+<p> <%= link_to 'Я забыл(а) пароль', forgot_path %></p>
 <% end %>
