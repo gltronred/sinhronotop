@@ -1,4 +1,4 @@
-<h1>Игра</h1>
+<h1><%=h @game.name %> / <%= link_to @game.tournament.name, tournament_path(@game.tournament) %></h1>
 <p>
 <b>Название:</b>
 <%=h @game.name %>
@@ -61,6 +61,5 @@
 <%= link_to 'Спорные ответы', game_disputeds_path(@game) %>
 <%= link_to 'Апелляции', game_appeals_path(@game) %>
 <%= link_to 'Результаты', game_results_path(@game) %>
-<%= link_to 'Изменить параметры', edit_tournament_game_path(@game.tournament, @game) %>
+<%= link_to 'Изменить', edit_tournament_game_path(@game.tournament, @game) %>
 <% end %>
-<%= link_to 'Все этапы турнира', tournament_games_path(@game.tournament) %>

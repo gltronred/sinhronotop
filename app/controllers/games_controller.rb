@@ -1,15 +1,5 @@
 class GamesController < ApplicationController
 
-  # GET /games
-  # GET /games.xml
-  def index
-    @tournament = TournamentsController.find(params[:tournament_id])
-    @games = @tournament.games    
-    respond_to do |format|
-      format.html # index.html.erb
-    end
-  end
-
   # GET /games/1
   # GET /games/1.xml
   def show
@@ -42,7 +32,7 @@ class GamesController < ApplicationController
     check_permissions { is_org?(@tournament) }
     respond_to do |format|
       if @game.save
-        format.html { redirect_to(tournament_games_url(@tournament), :notice => 'Этап создан.') }
+        format.html { redirect_to(tournament_url(@tournament), :notice => 'Этап создан.') }
       else
         format.html { render :action => "new" }
       end
@@ -56,7 +46,7 @@ class GamesController < ApplicationController
     check_permissions { is_org?(@game.tournament) }
     respond_to do |format|
       if @game.update_attributes(params[:game])
-        format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
+        format.html { redirect_to(tournament_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
       else
         format.html { render :action => "edit" }
       end
@@ -70,7 +60,7 @@ class GamesController < ApplicationController
     check_permissions { is_org?(@game.tournament) }
     @game.destroy
     respond_to do |format|
-      format.html { redirect_to(tournament_games_url(@game.tournament), :notice => 'Этап удален.') }
+      format.html { redirect_to(tournament_url(@game.tournament), :notice => 'Этап удален.') }
     end
   end
   

@@ -5,7 +5,7 @@ class TournamentTest < ActionController::IntegrationTest
   include IntegrationTestHelper
 
   def test_other_than_admin_and_org_should_see_but_not_edit
-    t = Tournament.find_by_name("Балтийский Берег")
+    t = tournaments(:bb)
     do_with_users([:znatok, :trodor]) {
       visit_and_get_deny_by_permission "/tournaments/#{t.id}/edit"
       visit_and_get_deny_by_permission "/tournaments/new"
@@ -14,17 +14,15 @@ class TournamentTest < ActionController::IntegrationTest
       assert_not_contain_multiple ["Изменить", "Новый турнир", "Удалить"]
 
       visit "/tournaments/#{t.id}"
-      click_link "Этапы"
       assert_contain_multiple ["Этап 1", "Этап 2"]
-      click_link "турнир Балтийский Берег"
     }
   end
 
   def test_org_edits
-    t = Tournament.find_by_name("Балтийский Берег")
+    t = tournaments(:bb)
     do_with_users([:marina]) {
       visit "/tournaments/#{t.id}"
-      click_link "Изменить параметры"
+      click_link "Изменить"
       click_button "Сохранить"
     }
   end

@@ -21,9 +21,9 @@ class GameTest < ActionController::IntegrationTest
       click_button "Сохранить"
 
       assert_contain_multiple ["Этап создан", "1 этап", "3", "14", "1.10.2013", "10.10.2013", "15.10.2013", "20.10.2013", "25.10.2013", "false"]
-      assert_not_contain 'true'
+      #assert_not_contain 'true'
 
-      click_link "Изменить"
+      click_link_within("#table_games", "Изменить")
 
       fill_in "game_name", :with => "единственный этап"
       select_date("game_end", 11, 10, 2013)
@@ -38,7 +38,6 @@ class GameTest < ActionController::IntegrationTest
       assert_not_contain 'false'
 
       visit "/tournaments/#{kupr.id}"
-      click_link "Этапы"
       click_remove_and_confirm
       assert_contain "Этап удален"
       assert_not_contain "единственный этап"
@@ -52,7 +51,7 @@ class GameTest < ActionController::IntegrationTest
       visit_and_get_deny_by_permission "/tournaments/#{bb.id}/games/#{game.id}/edit"
       visit_and_get_deny_by_permission "/tournaments/#{bb.id}/games/new"
 
-      visit "/tournaments/#{bb.id}/games/"
+      visit "/tournaments/#{bb.id}"
       assert_contain_multiple ["Этап 1", "Этап 2"]
       assert_not_contain_multiple ["Новый этап", "Изменить", "Удалить"]
     }

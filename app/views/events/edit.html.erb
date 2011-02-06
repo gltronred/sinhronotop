@@ -1,6 +1,3 @@
-<h1>Изменить регистрацию на <%= @event.game.name %> турнира  <%= @event.game.tournament.name%></h1>
+<h1>Изменить регистрацию на <%= link_to @event.game.name, @event.game %> турнира  <%= @event.game.tournament.name%></h1>
 
 <%= render :partial => "input" %>
-
-<%= link_to 'Детали', @event %>
-<%= link_to 'Все игры этапа', game_events_path(@event.game) %>

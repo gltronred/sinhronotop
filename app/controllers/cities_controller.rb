@@ -14,16 +14,6 @@ class CitiesController < ApplicationController
     end
   end
 
-  # GET /cities/1
-  # GET /cities/1.xml
-  def show
-    @city = CitiesController.find(params[:id])
-
-    respond_to do |format|
-      format.html # show.html.erb
-    end
-  end
-
   # GET /cities/new
   # GET /cities/new.xml
   def new

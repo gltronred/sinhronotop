@@ -5,23 +5,21 @@
   <tr>
     <th>Название</th>
     <th>Организатор</th>
-    <th>Составы?</th>
-    <th>Апелляции на снятие?</th>
+    <th>Этапы</th>
   </tr>
 
 <% @tournaments.each do |t| %>
   <tr>
-    <td><%=h t.name %></td>
+    <td><%= link_to t.name, t %></td>
     <td><%=h t.user %></td>
-    <td><%=h t.needTeams %></td>
-    <td><%=h t.appeal_for_dismiss %></td>
     <td>
-		<%= link_to 'Детали', t %>
-		<%= link_to 'Этапы', tournament_games_path(t) %>
+		<% t.games.sort{|x,y|x.begin <=> y.begin}.each do |game| %>
+			<%= link_to game.name, game_path(game) %>
+		<% end %>
 	</td>
 	<td>
 		<%= link_to 'Новый этап', new_tournament_game_path(t) if is_org? t %>
-    	<%= link_to 'Изменить параметры', edit_tournament_path(t) if is_org? t %>
+    	<%= link_to 'Изменить', edit_tournament_path(t) if is_org? t %>
     	<%= link_to "Удалить", t, :confirm => 'Вы уверены?', :method => :delete if is_admin? %>
 	</td>
   </tr>

@@ -1,8 +1,8 @@
 <% org = is_org? @tournament %>
-<h1>Игры / <%= link_to @tournament.to_s, @tournament %></h1>
+<h3>Этапы</h3> <%= link_to 'Новый этап', new_tournament_game_path(@tournament) if is_org? @tournament %>
 
-<% if @games.length > 0 %>
-<table>
+<% if @tournament.games.length > 0 %>
+<table id="table_games">
   <tr>
 	<th>Название</th>
     <th>Туров</th>
@@ -19,9 +19,9 @@
 <% end %>
   </tr>
 
-<% @games.each do |game| %>
+<% @tournament.games.sort{|x,y|x.begin <=> y.begin}.each do |game| %>
   <tr>
-    <td><%=h game.name %></td>
+    <td><%= link_to game.name, game %></td>
     <td><%=h game.num_tours %></td>	
     <td><%=h game.num_questions %></td>	
     <td><%=h eu_date(game.begin) %></td>
@@ -36,7 +36,6 @@
 <% end %>
 	<td>
 	<%= link_to 'Зарегистрироваться', new_game_event_path(game) if can_register? game %>
-    <%= link_to 'Детали', game %>
 	</td>
 <% if org %>
 	<td>
@@ -49,5 +48,3 @@
 <% end %>
 </table>
 <% end %>
-<br />
-<%= link_to 'Новый этап', new_tournament_game_path(@tournament) if is_org? @tournament %>
