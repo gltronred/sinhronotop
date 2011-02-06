@@ -38,7 +38,7 @@ class UserTest < ActionController::IntegrationTest
     #follow_redirect!
     #login_form('cologne@example.com', "palatka")
   end
-  
+
   def test_forwarded_to_wish_page_after_login
     game = games(:bb1)
     url = "/tournaments/#{game.tournament.id}/games/#{game.id}"
@@ -47,6 +47,26 @@ class UserTest < ActionController::IntegrationTest
     fill_in "password", :with => "znatok"
     click_button "Войти"
     assert current_url.include?(url), "url=#{url}, current_url=#{current_url}"
+  end
+
+  def test_submit_error
+    [users(:znatok), users(:knop)].each do |user|
+      login user
+      znatok = 'znatok' == user.status
+      visit home_path
+      click_link "Сообщить об ошибке"
+      fill_in "name", :with => "Конечно Вася" if znatok
+      fill_in "email", :with => "vasja@pupkin.info" if znatok
+      fill_in "text", :with => "Не нравится мне тут все у вас"
+      click_button "Отправить"
+      assert_contain "Сообщение послано администратору, спасибо"
+      if znatok
+        check_email("sinhronotop@googlemail.com", ["Конечно Вася", "vasja@pupkin.info", "Не нравится мне тут все у вас"])
+      else
+        check_email("sinhronotop@googlemail.com", ["Константин Кноп", "kupr@example.com", "Не нравится мне тут все у вас"])
+      end
+      logout
+    end
   end
 
 end

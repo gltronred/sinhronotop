@@ -1,5 +1,8 @@
 ActionController::Routing::Routes.draw do |map|
   map.home '', :controller => 'home', :action => 'index'
+
+  map.new_error '/new_error', :controller => 'home', :action => 'new_error'
+  map.create_error '/create_error', :controller => 'home', :action => 'create_error'
     
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'

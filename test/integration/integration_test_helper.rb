@@ -74,7 +74,7 @@ module IntegrationTestHelper
     mail = ActionMailer::Base.deliveries.last
     assert mail.to.include?(to)
     arr_content.each do |content|
-      assert mail.body.include?(content)
+      assert mail.body.include?(content), "phrase '#{content}' not found in #{mail.body}"
     end
   end
   
