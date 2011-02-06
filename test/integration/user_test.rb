@@ -38,5 +38,15 @@ class UserTest < ActionController::IntegrationTest
     #follow_redirect!
     #login_form('cologne@example.com', "palatka")
   end
+  
+  def test_forwarded_to_wish_page_after_login
+    game = games(:bb1)
+    url = "/tournaments/#{game.tournament.id}/games/#{game.id}"
+    visit url
+    fill_in "email", :with => "znatok@chgk.info"
+    fill_in "password", :with => "znatok"
+    click_button "Войти"
+    assert current_url.include?(url), "url=#{url}, current_url=#{current_url}"
+  end
 
 end
