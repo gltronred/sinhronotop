@@ -6,5 +6,7 @@ class Tournament < ActiveRecord::Base
   def to_s
     "турнир #{self.name}"
   end
-
+  def get_parent
+    nil
+  end
 end

@@ -10,12 +10,14 @@ class DisputedsController < ApplicationController
     @disputed = Disputed.new
     @disputeds = @parent.disputeds.sort {|x,y| x.question_index <=> y.question_index}
     respond_to do |format|
+      @context_array = @parent.parents_top_down(:with_me) << "спорные ответы"
       format.html # index.html.erb
     end
   end
 
   # GET /disputeds/1/edit
   def edit
+    @context_array = @disputed.parents_top_down << "изменить спорный"
   end
 
   # POST /disputeds

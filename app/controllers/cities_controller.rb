@@ -1,15 +1,15 @@
 class CitiesController < ApplicationController
 
-  before_filter do |controller| 
+  before_filter do |controller|
     controller.check_permissions { controller.is_org_of_any_tournament? }
   end
-  
+
   # GET /cities
   # GET /cities.xml
   def index
     @cities = City.all(:order => :name)
-
     respond_to do |format|
+      @context_array = ["Все города"]
       format.html # index.html.erb
     end
   end
@@ -18,8 +18,8 @@ class CitiesController < ApplicationController
   # GET /cities/new.xml
   def new
     @city = City.new
-
     respond_to do |format|
+      @context_array = ["Добавить город"]
       format.html # new.html.erb
     end
   end
@@ -27,6 +27,7 @@ class CitiesController < ApplicationController
   # GET /cities/1/edit
   def edit
     @city = CitiesController.find(params[:id])
+    @context_array = [@city, "изменить"]
   end
 
   # POST /cities
@@ -67,7 +68,7 @@ class CitiesController < ApplicationController
       format.html { redirect_to(cities_url) }
     end
   end
-  
+
   protected
 
   def self.find(id, options={})
@@ -78,5 +79,5 @@ class CitiesController < ApplicationController
     end
     city
   end
-  
+
 end

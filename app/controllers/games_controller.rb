@@ -5,6 +5,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find(params[:id])
     respond_to do |format|
+      @context_array = @game.parents_top_down(:with_me)      
       format.html # show.html.erb
     end
   end
@@ -15,6 +16,7 @@ class GamesController < ApplicationController
     @tournament = TournamentsController.find(params[:tournament_id])
     check_permissions { is_org?(@tournament) }
     @game = Game.new
+    @context_array = @tournament.parents_top_down(:with_me) << "новый этап"
   end
 
   # GET /games/1/edit
@@ -22,6 +24,7 @@ class GamesController < ApplicationController
     @game = GamesController.find(params[:id])
     @tournament = @game.tournament
     check_permissions { is_org?(@tournament) }
+    @context_array = @game.parents_top_down(:with_me) << "изменить детали"
   end
 
   # POST /games

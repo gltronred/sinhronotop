@@ -1,7 +1,25 @@
 .inline {
     display: inline;
 }
+
 #user_info {
     float: right; 
     width: 250px;
+    color: #588C8C;
+}
+
+#context {
+    color: #011C26;
+}
+
+.message {
+    color: #D9042B;
+}
+
+.error {
+    color: #D9042B;
+}
+
+#menu {
+    color: #6B0C22;
 }

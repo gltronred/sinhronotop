@@ -8,14 +8,16 @@ class AppealsController < ApplicationController
   # GET /appeals.xml
   def index
     @appeal = Appeal.new
-    @appeals = @parent.appeals.sort {|x,y| x.question_index <=> y.question_index}
+    @appeals = @parent.appeals.sort{|x,y| x.question_index <=> y.question_index}
     respond_to do |format|
+      @context_array = @parent.parents_top_down(:with_me) << "апелляции"
       format.html # index.html.erb
     end
   end
 
   # GET /appeals/1/edit
   def edit
+    @context_array = @appeal.parents_top_down << "изменить апелляцию"
   end
 
   # POST /appeals

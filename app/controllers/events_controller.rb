@@ -6,6 +6,7 @@ class EventsController < ApplicationController
     @game = GamesController.find(params[:game_id])
     check_permissions { is_org? @game.tournament }
     @events = @game.events
+    @context_array = @game.parents_top_down(:with_me) << "все регистрации"    
   end
 
   # GET /events/1
@@ -14,6 +15,7 @@ class EventsController < ApplicationController
     @event = EventsController.find(params[:id])
     check_permissions { is_resp? @event }
     respond_to do |format|
+      @context_array = @event.parents_top_down(:with_me)    
       format.html # show.html.erb
     end
   end
@@ -25,6 +27,7 @@ class EventsController < ApplicationController
     @event.game = @game = GamesController.find(params[:game_id])
     if check_permissions { is_registrated? } && check_time_constrains(@game){ can_register? @game }
       load_cities(@game.tournament_id)
+      @context_array = @game.parents_top_down(:with_me) << "зарегистрироваться"
     end
   end
 
@@ -33,6 +36,7 @@ class EventsController < ApplicationController
     @event = EventsController.find(params[:id])
     check_permissions { is_resp? @event }
     load_cities(@event.game.tournament_id)
+    @context_array = @event.parents_top_down(:with_me) << "изменить регистрацию"
   end
 
   # POST /events

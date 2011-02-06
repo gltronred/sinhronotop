@@ -9,6 +9,7 @@ class TournamentsController < ApplicationController
   def index
     @tournaments = Tournament.all
     respond_to do |format|
+      @context_array = ["Все турниры"]
       format.html # index.html.erb
     end
   end
@@ -18,6 +19,7 @@ class TournamentsController < ApplicationController
   def show
     @tournament = TournamentsController.find(params[:id])#, :joins => :cities)
     respond_to do |format|
+      @context_array = [@tournament]
       format.html # show.html.erb
     end
   end
@@ -28,6 +30,7 @@ class TournamentsController < ApplicationController
     @tournament = Tournament.new
     load_cities
     load_users
+    @context_array = ["Новый турнир"]
   end
 
   # GET /tournaments/1/edit
@@ -37,6 +40,7 @@ class TournamentsController < ApplicationController
     
     load_users
     load_cities
+    @context_array = [@tournament, "изменить настройки"]
   end
 
   # POST /tournaments
@@ -62,7 +66,7 @@ class TournamentsController < ApplicationController
     check_permissions { is_org?(@tournament) }
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
-        format.html { redirect_to(@tournament, :notice => 'Данные турнира изменены') }
+        format.html { redirect_to(@tournament, :notice => 'Настройки турнира изменены') }
       else
         format.html { render :action => "edit" }
       end

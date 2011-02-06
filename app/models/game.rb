@@ -9,7 +9,11 @@ class Game < ActiveRecord::Base
   validates_numericality_of :num_tours, :num_questions, :integer_only => true, :message => ": значение должно быть численным"
 
   def to_s
-    "этап #{self.name} турнира #{self.tournament.name}"
+    "этап #{self.name}"
+  end
+  
+  def get_parent
+    self.tournament
   end
 
 end

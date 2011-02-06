@@ -73,6 +73,14 @@ Rails::Initializer.run do |config|
   
   
 end
+
+class ActiveRecord::Base
+  def parents_top_down(with_me=false)
+    ret = self.get_parent ? self.get_parent.parents_top_down(true) : []
+    ret<<self if with_me
+    ret
+  end
+end
 =begin
 class TrueClass
   def to_s

@@ -40,5 +40,9 @@ class Result < ActiveRecord::Base
   def items_for_tour(tour) 
     self.resultitems.select{|item| (item.question_index-1) / self.event.game.num_questions == tour-1 }
   end
+  
+  def get_parent
+    self.event
+  end
     
 end

@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   def new
     @admin = User.find_by_status('admin')
     @user = User.new
+    @context_array = ["Новый пользователь"]
   end
 
   def create

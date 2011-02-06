@@ -5,19 +5,23 @@
 <head>
   <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
   <title>Синхронотоп - система учета информации для синхронных турниров по спортивному "Что? Где? Когда?"</title>
+  <!--<%= stylesheet_link_tag 'reset' %>-->
   <%= stylesheet_link_tag 'scaffold' %>
   <%= stylesheet_link_tag 'chgk' %>
   <%= javascript_include_tag "prototype" %>
 </head>
 <body>
-<div id="mesages">
-<%= render :partial => "layouts/mesages" %>
-</div>
 <div id="user_info">
 <%= render :partial => "layouts/user_info" %>
 </div>
 <div id="mesages">
+<%= render :partial => "layouts/mesages" %>
+</div>
+<div id="menu">
 <%= render :partial => "layouts/menu" %>
+</div>
+<div id="context">
+<%= render :partial => "layouts/context" %>
 </div>
 
 <div id="content">
