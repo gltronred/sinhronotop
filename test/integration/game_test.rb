@@ -20,7 +20,7 @@ class GameTest < ActionController::IntegrationTest
       select_date("game_submit_results_until", 25, 10, 2013)
       click_button "Сохранить"
 
-      assert_contain_multiple ["Этап создан", "1 этап", "3", "14", "1.10.2013", "10.10.2013", "15.10.2013", "20.10.2013", "25.10.2013", "false"]
+      assert_contain_multiple ["Этап создан", "1 этап", "3", "14", "1.10.2013", "10.10.2013", "15.10.2013", "20.10.2013", "25.10.2013", "нет"]
       #assert_not_contain 'true'
 
       click_link_within("#table_games", "Изменить")
@@ -34,8 +34,8 @@ class GameTest < ActionController::IntegrationTest
       check "game_publish_results"
       click_button "Сохранить"
 
-      assert_contain_multiple ["единственный этап", "3", "14", "1.10.2013", "11.10.2013", "16.10.2013", "21.10.2013", "25.10.2013", "true"]
-      assert_not_contain 'false'
+      assert_contain_multiple ["единственный этап", "3", "14", "1.10.2013", "11.10.2013", "16.10.2013", "21.10.2013", "25.10.2013", "да"]
+      assert_not_contain 'нет'
 
       visit "/tournaments/#{kupr.id}"
       click_remove_and_confirm

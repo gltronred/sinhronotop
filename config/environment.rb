@@ -81,19 +81,25 @@ class ActiveRecord::Base
     ret
   end
 end
-=begin
+
 class TrueClass
-  def to_s
+  def loc
     "да"
   end
 end
 
 class FalseClass
-  def to_s
+  def loc
     "нет"
   end
 end
-=end
+
+class Date
+  def loc
+    self.strftime('%d.%m.%Y')
+  end
+end
+
 module ActionView::Helpers::DateHelper
   alias_method :date_select_regular, :date_select
 

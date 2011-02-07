@@ -6,9 +6,7 @@ module ApplicationHelper
       render "home/index"
     end
   end
-  def eu_date(date)
-    date.strftime('%d.%m.%Y')
-  end
+
   def load_parents
     event_id = params[:event_id]
     [:appeal, :disputed, :result].each do |first_key|

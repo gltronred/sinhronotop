@@ -14,7 +14,8 @@ class EventTest < ActionController::IntegrationTest
       fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
       click_button "Сохранить"
 
-      assert_contain_multiple ["Регистрация прошла успешно, ждите подтверждения по email", "Вася Пупкин", "pupkin@vasi.net", "Trodor", "16.10.2011"]
+      assert_contain_multiple ["Регистрация прошла успешно, ждите подтверждения по email", "Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"]
+      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"])
 
       click_link "Изменить"
 
@@ -22,7 +23,8 @@ class EventTest < ActionController::IntegrationTest
       select_date("event_date", 17, 10, 2011)
       click_button "Сохранить"
 
-      assert_contain_multiple ["Параметры изменены, ждите подтверждения по email", "Василий Пупкин", "pupkin@vasi.net", "Trodor", "17.10.2011"]
+      assert_contain_multiple ["Параметры изменены, ждите подтверждения по email", "Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011"]
+      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011"])
     }
   end
 
@@ -49,7 +51,7 @@ class EventTest < ActionController::IntegrationTest
     bb1 = games(:bb1)
     do_with_users([:marina]) {
       visit "/games/#{bb1.id}/events"
-      assert_contain_multiple ["Вася", "vasja@example.org", "Trodor", "Trodor", "Рига"]
+      assert_contain_multiple ["Вася", "vasja@example.org", "Дмитрий Бочаров", "Рига"]
       assert_contain_multiple ["Иван Иванов", "ivan@example.org", "Борис Шойхет", "Франкфурт"]
     }
   end

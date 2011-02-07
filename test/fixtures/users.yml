@@ -11,7 +11,7 @@ rodionov:
     salt: d11bfe4c4d7a95f29613646d3a43238692b4db5c
 
 trodor:
-    name: Trodor
+    name: Дмитрий Бочаров
     email: riga@example.com
     crypted_password: 37928ac49e7be0a5d128e060b5ef5e9e1d653aa9
     salt: 75b1541e495415615a8b7ddc5006e953f8502ebc

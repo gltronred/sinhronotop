@@ -24,15 +24,15 @@
     <td><%= link_to game.name, game %></td>
     <td><%=h game.num_tours %></td>	
     <td><%=h game.num_questions %></td>	
-    <td><%=h eu_date(game.begin) %></td>
-    <td><%=h eu_date(game.end) %></td>
-    <td><%=h eu_date(game.submit_disp_until) %></td>
-    <td><%=h eu_date(game.submit_appeal_until) %></td>
-    <td><%=h eu_date(game.submit_results_until) %></td>
+    <td><%=h game.begin.loc %></td>
+    <td><%=h game.end.loc %></td>
+    <td><%=h game.submit_disp_until.loc %></td>
+    <td><%=h game.submit_appeal_until.loc %></td>
+    <td><%=h game.submit_results_until.loc %></td>
 <% if org %>
-    <td><%=h game.publish_disp %></td>
-    <td><%=h game.publish_appeal %></td>
-    <td><%=h game.publish_results %></td>
+    <td><%=h game.publish_disp.loc %></td>
+    <td><%=h game.publish_appeal.loc %></td>
+    <td><%=h game.publish_results.loc %></td>
 <% end %>
 	<td>
 	<%= link_to 'Зарегистрироваться', new_game_event_path(game) if can_register? game %>

@@ -10,7 +10,7 @@
 <% @events.each do |event| %>
   <tr>
     <td><%= link_to event.city.name, event_path(event) %></td>
-    <td><%=h event.date %></td>
+    <td><%=h event.date.loc %></td>
     <td><%=h event.moderator_name %></td>
     <td><%=h event.moderator_email %></td>
     <td><%=h event.user %></td>
