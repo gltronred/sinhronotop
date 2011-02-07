@@ -1,12 +1,13 @@
-<% form_for(@city) do |f| %>
+<% form_for(@team) do |f| %>
   <%= f.error_messages %>
 
   <p>
-    <%= f.label "Название" %><br />
+    <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
   <p>
     <%= f.submit 'Сохранить' %>
   </p>
 <% end %>
+
 <%= link_to_function 'Назад', 'history.back()' %>

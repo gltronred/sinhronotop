@@ -21,6 +21,7 @@
 
 <% if changeable %>
 <%= render :partial => "event" %>
+<%= link_to 'Готово, все результаты введены', home_path %>
 <% elsif @game %>
 <%= render :partial => "game" %>
 <% end %>

@@ -1,13 +1,1 @@
-<% form_for(@team) do |f| %>
-  <%= f.error_messages %>
-
-  <p>
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </p>
-  <p>
-    <%= f.submit 'Создать' %>
-  </p>
-<% end %>
-
-<%= link_to_function 'Назад', 'history.back()' %>
+<%= render :partial => "input" %>
