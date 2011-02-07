@@ -7,7 +7,7 @@
   <tr>
     <td><%=h city.name %></td>
     <td><%= link_to 'Изменить', edit_city_path(city) %></td>
-    <td><%= link_to 'Удалить', city, :confirm => 'Вы уверены?', :method => :delete %></td>
+    <td><%= link_to 'Удалить', city, :confirm => 'Вы уверены?', :method => :delete if is_admin? %></td>
   </tr>
 <% end %>
 </table>
