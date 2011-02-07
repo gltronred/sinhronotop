@@ -2,6 +2,7 @@ class HomeController < ApplicationController
 
   def index
     @my_items = current_user.events + current_user.tournaments
+    @context_array = ["Мероприятия, где вы организатор или представитель"]  unless @my_items.empty?
     render :action => 'index'
   end
 

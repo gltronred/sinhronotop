@@ -10,7 +10,7 @@ class Event < ActiveRecord::Base
   validates_format_of :moderator_email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :message=> ": формат неверен"
     
   def to_s
-    "игра в городе #{self.city.name}"
+    "игра в городе #{self.city.name} #{self.date.loc}"
   end
 
   def get_parent

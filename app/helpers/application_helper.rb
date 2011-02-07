@@ -23,4 +23,8 @@ module ApplicationHelper
       end
     end
   end
+  
+  def context_array(arr)
+    arr.map{|element| element.is_a?(String) ? element : link_to(element.to_s, element)}.join(' >> ')
+  end
 end

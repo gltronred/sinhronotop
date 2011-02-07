@@ -22,7 +22,8 @@
       <% for c in @cities -%>
          <%= check_box_tag "tournament[city_ids][]", c.id, city(c) %>
          <%= c.name -%>
-      <% end -%>
+      <% end -%><br />
+Если список потенциальных городов-участников неполон, вы можете дополнить его <%= link_to 'здесь', cities_path %>
   </p>
   <p>
     <%= f.submit 'Сохранить' %>
