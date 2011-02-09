@@ -29,14 +29,27 @@ class ResultTest < ActionController::IntegrationTest
     sp = teams(:sp)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      select sp.name, :from => "result_team_id"
-      click_button "result_submit"
-      check_team_listed sp.name
+      add_team sp
       check "team#{sp.id}_tour1_question8"
       check "team#{sp.id}_tour3_question29"
       uncheck "team#{sp.id}_tour2_question13"
-      click_remove_and_confirm
-      check_team_listed(sp.name, false)
+      remove_team sp
+    }
+  end
+  
+  def test_resp_imports_table
+    event = events(:bb2_riga)
+    sp = teams(:sp)
+    ka = teams(:ka)
+    do_with_users([:trodor]) {
+      visit "/events/#{event.id}/results"
+      add_team sp
+      add_team ka
+      click_link "Импорт тура из Excel"
+      fill_in "excel_input", :with => "+\t\t+\t\t+\t\t+\t+\t+\t\t\t\r\n1\t\t\t\t\t\t\t\t\t\t\t1"
+      click_link "Импортировать"
+      remove_team sp
+      remove_team ka
     }
   end
 
@@ -100,6 +113,17 @@ class ResultTest < ActionController::IntegrationTest
     fill_in "disputed_answer", :with => answer
     click_button "Сохранить"
     assert_contain_multiple [question_index.to_s, answer]
+  end
+  
+  def add_team(team)
+    select team.name, :from => "result_team_id"
+    click_button "result_submit"
+    check_team_listed team.name
+  end
+  
+  def remove_team(team)
+    click_remove_and_confirm
+    check_team_listed(team.name, false)
   end
 
   def check_score(score)

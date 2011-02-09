@@ -23,3 +23,11 @@
 #menu {
     color: #6B0C22;
 }
+#how_to_import {
+    float: right; 
+    position: relative;
+    width: 250px;
+}
+#how_to_import_ul {
+    display:none;
+}

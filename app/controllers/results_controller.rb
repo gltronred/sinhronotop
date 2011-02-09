@@ -9,7 +9,7 @@ class ResultsController < ApplicationController
   def index
     if @event
       @result = Result.new
-      @results = @parent.results
+      @results = @parent.results.sort{|x,y| x.team.name <=> y.team.name}
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
       @teams = Team.find(:all, :order => "name ASC") - @results.map(&:team)

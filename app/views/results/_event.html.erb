@@ -1,3 +1,5 @@
+<%= render :partial => "how_to_import" %>
+
 <% for tour in 1..@event.game.num_tours %>
 <h3>Тур <%= tour %></h3>
 <table>
@@ -24,8 +26,20 @@
   </tr>
 <% end %>
 </table>
+<a href="#dialog" name="modal" num_questions=<%= @event.game.num_questions %> tour="<%= tour %>" teams="<%= @results.map{|result| result.team.id.to_s}.join(',') %>">Импорт тура из Excel</a>
 
 <% end %>
+
+<!--http://www.queness.com/post/77/simple-jquery-modal-window-tutorial-->
+<div id="boxes">
+<div id="dialog" class="window">Импорт тура из Excel | 
+<a href="#" class="import">Импортировать</a>
+<a href="#" class="close">Закрыть</a>
+<textarea id='excel_input'></textarea>
+</div>
+  <div id="mask"></div>
+</div>
+
 
 <%= render :partial => "newteam" %>
 <%= render :partial => "listedteams" %>
