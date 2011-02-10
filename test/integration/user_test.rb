@@ -43,7 +43,7 @@ class UserTest < ActionController::IntegrationTest
     game = games(:bb1)
     url = "/tournaments/#{game.tournament.id}/games/#{game.id}"
     visit url
-    fill_in "email", :with => "znatok@chgk.info"
+    fill_in "email", :with => "znatok@example.com"
     fill_in "password", :with => "znatok"
     click_button "Войти"
     assert current_url.include?(url), "url=#{url}, current_url=#{current_url}"

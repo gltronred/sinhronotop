@@ -18,7 +18,7 @@ trodor:
 
 znatok:
     name: посетитель
-    email: znatok@chgk.info
+    email: znatok@example.com
     crypted_password: 4bc1597bbb7ad086183afd8d15cf0cdaf67d6d6b
     salt: 42f1749b9c9a36ba99b9b19f58b2b2ce510e27b2
     status: znatok

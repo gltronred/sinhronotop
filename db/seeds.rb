@@ -33,5 +33,5 @@ SeedTasks.create_city "Дюссельдорф"
 SeedTasks.create_city "Мюнхен"
 SeedTasks.create_city "Трир"
 SeedTasks.create_city "Гамбург"
-SeedTasks.create_user("Михаил Перлин", "sinhronotop@googlemail.com", 'nora1901','admin')
-SeedTasks.create_user("посетитель", "znatok@chgk.info", 'znatok','znatok')
+SeedTasks.create_user("Михаил Перлин", ENV['GMAIL_SMTP_USER'], ENV['GMAIL_SMTP_PASSWORD'], 'admin')
+SeedTasks.create_user("посетитель", "znatok@example.com", 'znatok','znatok')
