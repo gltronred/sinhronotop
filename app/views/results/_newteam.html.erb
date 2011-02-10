@@ -4,6 +4,7 @@
 <% form_for @team, :html => { :class => "inline" } do |f|  %>
   <%= f.error_messages %>
   <%= f.hidden_field :event_id, :value => @event.id %>
+  <%= f.hidden_field :city_id, :value => @event.city.id %>
   <p>
     <%= f.label "Название" %><br />
     <%= f.text_field :name %>

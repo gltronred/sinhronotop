@@ -37,14 +37,14 @@ class TeamsController < ApplicationController
   # POST /teams
   # POST /teams.xml
   def create
-    input_for_team = params[:team].except("event_id")
+    input_for_team = params[:team].except(:event_id)
     @team = Team.new(input_for_team)
 
     respond_to do |format|
       if @team.save
-          input_for_result = params[:team].except("name")
-          input_for_result["team_id"] = @team.id
-          input_for_result["score"] = 0
+          input_for_result = params[:team].except(:name, :city_id)
+          input_for_result[:team_id] = @team.id
+          input_for_result[:score] = 0
           @result = Result.new(input_for_result)
           @result.save
           @result.create_resultitems

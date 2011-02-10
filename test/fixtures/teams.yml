@@ -1,11 +1,20 @@
 pv:
   name: Против ветра
-
+  city: cologne
+  rating_id: 330
+  
 oki:
   name: Оки-доки
-
+  city: riga
+  rating_id: 2694
+  
 ka:
   name: Крейзер Аврора
-
+  city: cologne
+  rating_id: 201
+  
 sp:
   name: 7 пядей
+  city: cologne
+  rating_id: 2377
+  

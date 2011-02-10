@@ -12,7 +12,7 @@ class ResultsController < ApplicationController
       @results = @parent.results.sort{|x,y| x.team.name <=> y.team.name}
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
-      @teams = Team.find(:all, :order => "name ASC") - @results.map(&:team)
+      @teams = Team.find(:all, :joins => :city, :order => "name ASC") - @results.map(&:team)
     elsif
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
     end

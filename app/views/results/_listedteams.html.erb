@@ -1,11 +1,11 @@
 <% if !@event.nil? %>
 <h3>Добавить команду из списка</h3>
-
+(для упрощения поиска нажмите в списке первую букву названия)
 <% form_for(@result) do |f| %>
   <%= f.error_messages %>
   <%= f.hidden_field :event_id, :value => @event.id %>
   <p>
-    <%= collection_select(:result, :team_id, @teams, :id, :name) %> 
+    <%= collection_select(:result, :team_id, @teams, :id, :to_s) %> 
   </p>
   <p>
     <%= f.submit 'Добавить' %>

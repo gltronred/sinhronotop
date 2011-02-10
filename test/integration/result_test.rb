@@ -116,7 +116,7 @@ class ResultTest < ActionController::IntegrationTest
   end
   
   def add_team(team)
-    select team.name, :from => "result_team_id"
+    select "#{team.name} (#{team.city.name})", :from => "result_team_id"
     click_button "result_submit"
     check_team_listed team.name
   end
