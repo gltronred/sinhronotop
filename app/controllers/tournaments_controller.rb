@@ -1,8 +1,8 @@
 class TournamentsController < ApplicationController
 
-  before_filter :only => [:new, :create, :destroy] do |controller| 
-    controller.check_permissions { controller.is_admin? }
-  end
+  before_filter :check_create_or_destroy, :only => [:new, :create, :destroy]
+  before_filter :find, :only => [:update, :edit, :destroy, :results, :show ]
+  before_filter :check_update, :only => [:edit, :update]
 
   # GET /tournaments
   # GET /tournaments.xml
@@ -17,7 +17,6 @@ class TournamentsController < ApplicationController
   # GET /tournaments/1
   # GET /tournaments/1.xml
   def show
-    @tournament = TournamentsController.find(params[:id])#, :joins => :cities)
     respond_to do |format|
       @context_array = [@tournament]
       format.html # show.html.erb
@@ -35,9 +34,6 @@ class TournamentsController < ApplicationController
 
   # GET /tournaments/1/edit
   def edit
-    @tournament = TournamentsController.find(params[:id])
-    check_permissions { is_org?(@tournament) }
-    
     load_users
     load_cities
     @context_array = [@tournament, "изменить настройки"]
@@ -51,7 +47,7 @@ class TournamentsController < ApplicationController
       if @tournament.save
         format.html { redirect_to(@tournament, :notice => 'Турнир создан') }
       else
-        format.html { 
+        format.html {
           load_cities
           render :action => "new"
         }
@@ -62,8 +58,6 @@ class TournamentsController < ApplicationController
   # PUT /tournaments/1
   # PUT /tournaments/1.xml
   def update
-    @tournament = TournamentsController.find(params[:id])
-    check_permissions { is_org?(@tournament) }
     respond_to do |format|
       if @tournament.update_attributes(params[:tournament])
         format.html { redirect_to(@tournament, :notice => 'Настройки турнира изменены') }
@@ -76,31 +70,36 @@ class TournamentsController < ApplicationController
   # DELETE /tournaments/1
   # DELETE /tournaments/1.xml
   def destroy
-    @tournament = TournamentsController.find(params[:id])
-    check_permissions { is_org?(@tournament) }
     @tournament.destroy
     respond_to do |format|
       format.html { redirect_to(tournaments_url, :notice => 'Турнир удален') }
     end
   end
 
+  def results
+
+  end
+
   protected
-  
+
   def load_cities
     @cities = City.all(:order => :name)
   end
 
-  def load_users
-    @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
-  end
-  
-  def self.find(id, options={})
-    tournament = Tournament.find(id, options)
-    if (!tournament)
+  def find
+    @tournament = Tournament.find params[:id]
+    unless @tournament
       flash[:notice] = "Турнир с id #{id} не найден"
       redirect_to home_path
     end
-    tournament
+  end
+
+  def check_create_or_destroy
+    check_permissions { is_admin? }
+  end
+  
+  def check_update
+    check_permissions { is_org?(@tournament) }
   end
 
 end

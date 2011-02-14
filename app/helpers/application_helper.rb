@@ -24,6 +24,10 @@ module ApplicationHelper
     end
   end
   
+  def load_users
+    @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
+  end
+  
   def context_array(arr)
     arr.map{|element| element.is_a?(String) ? element : link_to(element.to_s, element)}.join(' >> ')
   end

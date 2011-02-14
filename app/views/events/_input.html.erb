@@ -1,6 +1,6 @@
 <% form_for(@event) do |f| %>
   <%= f.error_messages %>
-  <%= f.hidden_field :game_id, :value => @event.game.id %>
+  <%= f.hidden_field :game_id, :value => @game.id %>
   <p>
     <%= f.label "Город" %><br />
     <%= collection_select(:event, :city_id, @cities, :id, :name) %> 

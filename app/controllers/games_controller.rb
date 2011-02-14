@@ -1,11 +1,12 @@
 class GamesController < ApplicationController
 
-  # GET /games/1
-  # GET /games/1.xml
+  before_filter :find, :only => [:update, :edit, :destroy, :show ]
+  before_filter :find_tournament, :only => [:new, :create ]
+  before_filter :check_do_change, :only => [:edit, :update, :destroy, :new, :create]
+
   def show
-    @game = Game.find(params[:id])
     respond_to do |format|
-      @context_array = @game.parents_top_down(:with_me)      
+      @context_array = @game.parents_top_down(:with_me)
       format.html # show.html.erb
     end
   end
@@ -13,17 +14,12 @@ class GamesController < ApplicationController
   # GET /games/new
   # GET /games/new.xml
   def new
-    @tournament = TournamentsController.find(params[:tournament_id])
-    check_permissions { is_org?(@tournament) }
     @game = Game.new
     @context_array = @tournament.parents_top_down(:with_me) << "новый этап"
   end
 
   # GET /games/1/edit
   def edit
-    @game = GamesController.find(params[:id])
-    @tournament = @game.tournament
-    check_permissions { is_org?(@tournament) }
     @context_array = @game.parents_top_down(:with_me) << "изменить детали"
   end
 
@@ -31,8 +27,6 @@ class GamesController < ApplicationController
   # POST /games.xml
   def create
     @game = Game.new(params[:game])
-    @tournament = @game.tournament
-    check_permissions { is_org?(@tournament) }
     respond_to do |format|
       if @game.save
         format.html { redirect_to(tournament_url(@tournament), :notice => 'Этап создан.') }
@@ -45,8 +39,6 @@ class GamesController < ApplicationController
   # PUT /games/1
   # PUT /games/1.xml
   def update
-    @game = GamesController.find(params[:id])
-    check_permissions { is_org?(@game.tournament) }
     respond_to do |format|
       if @game.update_attributes(params[:game])
         format.html { redirect_to(tournament_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
@@ -59,23 +51,38 @@ class GamesController < ApplicationController
   # DELETE /games/1
   # DELETE /games/1.xml
   def destroy
-    @game = GamesController.find(params[:id])
-    check_permissions { is_org?(@game.tournament) }
     @game.destroy
     respond_to do |format|
       format.html { redirect_to(tournament_url(@game.tournament), :notice => 'Этап удален.') }
     end
   end
-  
+
   protected
-  
-  def self.find(id, options={})
-    game = Game.find(id, options)
-    if (!game)
+
+  def find
+    @game = Game.find params[:id] if params[:id]
+    if @game
+      @tournament = @game.tournament
+    else
       flash[:notice] = "Этап с id #{id} не найден"
       redirect_to home_path
     end
-    game
+  end
+
+  def find_tournament
+    if params[:tournament_id]
+      @tournament = Tournament.find params[:tournament_id]
+    elsif params[:game] && params[:game][:tournament_id]
+      @tournament = Tournament.find params[:game][:tournament_id]
+    end
+    unless @tournament
+      flash[:notice] = "Этап не найден"
+      redirect_to home_path
+    end
   end
   
+  def check_do_change
+    check_permissions { is_org? @tournament }
+  end
+
 end
