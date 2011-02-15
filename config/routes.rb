@@ -16,7 +16,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resource :session
 
   #map.resources :sessions
-  map.home '', :controller => 'tournaments', :action => 'index'
+  #map.home '', :controller => 'tournaments', :action => 'index'
   #map.login 'login', :controller => 'sessions', :action => 'new'
   #map.logout 'logout', :controller => 'sessions', :action => 'destroy'
   
@@ -56,6 +56,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tournaments do |t| 
     t.resources :games
   end
+  map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
   
   map.resources :cities
 

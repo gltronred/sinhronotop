@@ -12,6 +12,10 @@ class Game < ActiveRecord::Base
     "этап #{self.name}"
   end
   
+  def result_for(team)
+    self.results.detect{|r|r.team == team}
+  end
+  
   def get_parent
     self.tournament
   end

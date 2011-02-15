@@ -28,6 +28,15 @@ module SeedTasks
     end
     team
   end
+  
+  def self.create_calс_system(short_name, name)
+    cs = CalcSystem.find_by_short_name short_name
+    unless cs
+      cs = CalcSystem.create(:short_name => short_name, :name => name)
+    end
+    cs
+  end
+  
 end
 
 
@@ -39,6 +48,11 @@ File.open(File.join(Rails.root, 'db', "teams.txt"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city)
   end
 end
+
+SeedTasks.create_calс_system("mm", "микроматчи")
+SeedTasks.create_calс_system("nn", "не знаю пока")
+SeedTasks.create_calс_system("one_game", "турнир одноэтапный, считать не надо")
+
 =begin
 SeedTasks.create_city "Кёльн"
 SeedTasks.create_city "Франкфурт"

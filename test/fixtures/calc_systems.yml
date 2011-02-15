@@ -1,0 +1,12 @@
+mm:
+    short_name: mm
+    name: микроматчи
+
+nn:
+    short_name: nn
+    name: не знаю пока
+    
+one_game:
+    short_name: one_game
+    name: турнир одноэтапный, считать не надо
+

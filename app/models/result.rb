@@ -31,6 +31,10 @@ class Result < ActiveRecord::Base
     end
   end
   
+  def to_s
+    self.score
+  end
+  
   private
   
   def get_score(items)

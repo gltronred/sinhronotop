@@ -1,0 +1,18 @@
+<table>
+<thead>
+<th>Команда</th>
+<% @games.each do |game| %>
+<th><%= game.name %></th>
+<% end%>
+</thead>
+<tbody>
+<% @teams.each do |team| %>
+<tr>
+<td><%= team.name %></td>
+<% @games.each do |game| %>
+<% result = game.result_for team %>
+<td><%= result ? result.score : "X" %></td>
+<% end %>
+</tr>
+<% end %>
+</tbody>

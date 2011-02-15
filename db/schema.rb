@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110210081548) do
+ActiveRecord::Schema.define(:version => 20110215100240) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -19,6 +19,11 @@ ActiveRecord::Schema.define(:version => 20110210081548) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "calc_systems", :force => true do |t|
+    t.string "short_name"
+    t.string "name"
   end
 
   create_table "cities", :force => true do |t|
@@ -94,6 +99,12 @@ ActiveRecord::Schema.define(:version => 20110210081548) do
 
   add_index "teams", ["rating_id"], :name => "index_teams_on_rating_id"
 
+  create_table "tournament_results", :force => true do |t|
+    t.float   "place",         :default => 0.0
+    t.integer "tournament_id"
+    t.integer "team_id"
+  end
+
   create_table "tournaments", :force => true do |t|
     t.string   "name"
     t.boolean  "needTeams"
@@ -101,6 +112,7 @@ ActiveRecord::Schema.define(:version => 20110210081548) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "appeal_for_dismiss"
+    t.integer  "calc_system_id"
   end
 
   create_table "users", :force => true do |t|

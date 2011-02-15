@@ -38,6 +38,7 @@ class TournamentTest < ActionController::IntegrationTest
       fill_in 'tournament[name]', :with => 'ААА Кубок Городов'
       check 'tournament[needTeams]'
       check 'tournament[appeal_for_dismiss]'
+      select "турнир одноэтапный, считать не надо", :from => "tournament[calc_system_id]"
       click_button 'Сохранить'
       assert_contain_multiple ["Настройки турнира изменены", "ААА Кубок Городов"]
 
@@ -50,6 +51,7 @@ class TournamentTest < ActionController::IntegrationTest
       click_button 'Сохранить'
       assert_contain "Настройки турнира изменены"
       assert_contain "Кельн"
+      assert_contain "турнир одноэтапный, считать не надо"
 
       assert_difference 'Tournament.count', -1 do
         visit "/tournaments"
@@ -66,6 +68,7 @@ class TournamentTest < ActionController::IntegrationTest
       click_link 'Новый турнир'
       fill_in 'tournament[name]', :with => 'ОКР'
       select /Кноп/, :from => "tournament[user_id]"
+      select "не знаю пока", :from => "tournament[calc_system_id]"
       click_button 'Сохранить'
       assert_response :ok
       assert_contain "Турнир создан"

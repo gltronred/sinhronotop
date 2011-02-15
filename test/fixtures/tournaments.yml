@@ -4,6 +4,7 @@ bb:
   appeal_for_dismiss: true
   user: marina
   cities: cologne, riga, tallinn
+  calc_system: mm
 
 kupr:
   name: Кубок Провинций
@@ -11,6 +12,7 @@ kupr:
   appeal_for_dismiss: true
   user: knop
   cities: frankfurt, riga, cologne, tallinn
+  calc_system: one_game
   
 kg:
   name: Кубок Германии
@@ -18,4 +20,5 @@ kg:
   appeal_for_dismiss: false
   user: rodionov
   cities: frankfurt, cologne
+  calc_system: mm
   

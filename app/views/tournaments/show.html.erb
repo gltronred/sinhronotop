@@ -18,5 +18,10 @@
   <b>Города-участники:</b>
    <%=h @tournament.cities.sort{|x,y| x.name <=> y.name }.map(&:name).join(', ') %>
  </p>
+<p>
+	<b>Система подсчета результатов</b>
+	  <%=h @tournament.calc_system %>
+</p>	
 <%= link_to 'Изменить', edit_tournament_path(@tournament) if is_org? @tournament %>
 <%= render :partial => 'games/index'%>
+<p><%= link_to "поэтапные результаты", tournament_results_path(@tournament) %></p>

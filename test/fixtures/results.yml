@@ -17,3 +17,8 @@ bb2_riga_oki:
   score: 8
   event: bb2_riga
   team: oki
+  
+bb2_frankfurt_sp:
+  score: 9
+  event: bb2_frankfurt
+  team: sp  

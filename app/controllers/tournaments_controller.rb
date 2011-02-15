@@ -77,7 +77,9 @@ class TournamentsController < ApplicationController
   end
 
   def results
-
+    @context_array = [@tournament, "поэтапные результаты"]
+    @teams = @tournament.get_teams
+    @games = @tournament.games.sort{|x,y|x.end <=> y.end}
   end
 
   protected
