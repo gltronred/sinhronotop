@@ -1,0 +1,6 @@
+<%= cyr @context_array.join(' >> ') %>
+
+<%= cyr "Номер вопроса;Ответ" %>
+<% @disputeds.each do |disp| -%>
+<%= disp.question_index -%>;<%= cyr disp.answer -%>
+<% end -%>

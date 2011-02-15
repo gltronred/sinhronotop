@@ -1,5 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
+  
   def authenticate
     unless logged_in?
       store_location
@@ -26,6 +27,11 @@ module ApplicationHelper
   
   def load_users
     @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
+  end
+  
+  def cyr(str)
+    @conv = Iconv.new('iso-8859-5', 'utf-8') unless @conv
+    str ? @conv.iconv(str) : ""
   end
   
   def context_array(arr)

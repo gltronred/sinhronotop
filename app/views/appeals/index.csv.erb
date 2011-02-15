@@ -1,0 +1,6 @@
+<%= cyr @context_array.join(' >> ') %>
+
+<%= cyr "Номер вопроса;Ответ;Апелляция на;Аргументация" %>
+<% @appeals.each do |appeal| -%>
+<%= appeal.question_index -%>;<%= cyr appeal.answer -%>;<%= cyr appeal.goal -%>;<%= cyr appeal.argument %>
+<% end -%>

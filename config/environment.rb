@@ -5,6 +5,7 @@ RAILS_GEM_VERSION = '2.3.8' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
+require 'iconv'
 class RackRailsCookieHeaderHack
   def initialize(app)
     @app = app
@@ -70,8 +71,6 @@ Rails::Initializer.run do |config|
   end
   
   config.active_record.observers = :user_observer
-  
-  
 end
 
 class ActiveRecord::Base

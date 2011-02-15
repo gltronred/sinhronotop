@@ -12,6 +12,7 @@ class DisputedsController < ApplicationController
     respond_to do |format|
       @context_array = @parent.parents_top_down(:with_me) << "спорные ответы"
       format.html # index.html.erb
+      format.csv
     end
   end
 
