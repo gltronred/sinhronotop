@@ -38,6 +38,11 @@
 <% if is_org? @game.tournament %>
 
 <p>
+<b>Ссылка для регистрации для рассылки потенциальным участникам:</b>
+<input type="text" id="registration_link" size="100" value="<%=h url_for(:action => 'new', :controller => game_events_path(@game), :only_path => false)  %>" />
+</p>
+
+<p>
 <b>Cпорные видны:</b>
 <%=h @game.publish_disp.loc %>
 </p>
