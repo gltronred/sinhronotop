@@ -79,7 +79,7 @@ class TournamentsController < ApplicationController
   def results
     @context_array = [@tournament, "поэтапные результаты"]
     @teams = @tournament.get_teams
-    @games = @tournament.games.sort{|x,y|x.end <=> y.end}
+    @games = @tournament.games.reject{|game|!game.publish_results}.sort{|x,y|x.end <=> y.end}
   end
 
   protected
