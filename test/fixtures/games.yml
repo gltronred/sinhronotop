@@ -27,15 +27,29 @@ bb2:
   publish_results: false
   
 kg1:
+    tournament: kg
+    name: Этап 1
+    num_tours: 3
+    num_questions: 15
+    begin: <%= (Time.now - 12.days).to_s :db %>
+    end: <%= (Time.now - 10.days).to_s :db %>
+    submit_disp_until: <%= (Time.now - 6.days).to_s :db %>
+    submit_appeal_until: <%= (Time.now - 4.days).to_s :db %>
+    submit_results_until: <%= (Time.now - 2.days).to_s :db %>
+    publish_disp: true
+    publish_appeal: true
+    publish_results: true
+    
+kg2:
   tournament: kg
-  name: Этап 1
+  name: Этап 2
   num_tours: 3
-  num_questions: 15
-  begin: <%= (Time.now - 12.days).to_s :db %>
-  end: <%= (Time.now - 10.days).to_s :db %>
-  submit_disp_until: <%= (Time.now - 6.days).to_s :db %>
-  submit_appeal_until: <%= (Time.now - 4.days).to_s :db %>
-  submit_results_until: <%= (Time.now - 2.days).to_s :db %>
-  publish_disp: true
-  publish_appeal: true
-  publish_results: true  
+  num_questions: 14
+  begin: <%= (Time.now - 2.days).to_s :db %>
+  end: <%= (Time.now + 10.days).to_s :db %>
+  submit_disp_until: <%= (Time.now + 16.days).to_s :db %>
+  submit_appeal_until: <%= (Time.now + 18.days).to_s :db %>
+  submit_results_until: <%= (Time.now + 20.days).to_s :db %>
+  publish_disp: false
+  publish_appeal: false
+  publish_results: false  

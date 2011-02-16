@@ -3,7 +3,7 @@ bb:
   needTeams: true
   appeal_for_dismiss: true
   user: marina
-  cities: cologne, riga, tallinn
+  every_city: true
   calc_system: mm
 
 kupr:
@@ -11,7 +11,7 @@ kupr:
   needTeams: true
   appeal_for_dismiss: true
   user: knop
-  cities: frankfurt, riga, cologne, tallinn
+  every_city: true
   calc_system: one_game
   
 kg:

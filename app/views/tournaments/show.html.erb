@@ -15,11 +15,11 @@
   <%=h @tournament.appeal_for_dismiss.loc %>
 </p>
 <p>
-  <b>Города-участники:</b>
-   <%=h @tournament.cities.sort{|x,y| x.name <=> y.name }.map(&:name).join(', ') %>
+  <b>Возможные города-участники:</b>
+   <%=h @tournament.every_city ? 'все' : @tournament.cities.map(&:name).sort.join(', ') %>
  </p>
 <p>
-	<b>Система подсчета результатов</b>
+	<b>Система подсчета результатов:</b>
 	  <%=h @tournament.calc_system %>
 </p>	
 <%= link_to 'Изменить', edit_tournament_path(@tournament) if is_org? @tournament %>

@@ -21,10 +21,12 @@
     <%= f.label "Система подсчета результатов" %><br />
     <%= collection_select(:tournament, :calc_system_id, CalcSystem.all, :id, :name) %> 
   </p>
- <p>
-    <%= f.label "Города-участники" %><br />
+ <p>Возможные города-участники<br />
+    <%= f.label "Все" %>
+    <%= f.check_box :every_city, {:id => "every_city"} %>
+  	<%= observe_field("every_city", :function => "var boxes = jQuery('.city_checkbox'); boxes.attr('checked', false); var checked = jQuery('#every_city').attr('checked'); boxes.attr('disabled', checked)") %><br />
       <% for c in @cities -%>
-         <%= check_box_tag "tournament[city_ids][]", c.id, city(c) %>
+         <%= check_box_tag "tournament[city_ids][]", c.id, city(c), :class => 'city_checkbox' %>
          <%= c.name -%>
       <% end -%><br />
 Если список потенциальных городов-участников неполон, вы можете дополнить его <%= link_to 'здесь', cities_path %>

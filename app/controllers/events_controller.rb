@@ -82,7 +82,8 @@ class EventsController < ApplicationController
   protected
 
   def load_cities(tournament_id)
-    @cities = City.find(:all, :joins => :tournaments, :order => :name, :conditions => ["cities_tournaments.tournament_id = ?", tournament_id])
+    conditions = @game.tournament.every_city ? nil : ["cities_tournaments.tournament_id = ?", tournament_id]
+    @cities = City.find(:all, :joins => :tournaments, :order => :name, :conditions => conditions).uniq
   end
 
   def find

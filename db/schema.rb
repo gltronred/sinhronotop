@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215100240) do
+ActiveRecord::Schema.define(:version => 20110215233948) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -113,6 +113,7 @@ ActiveRecord::Schema.define(:version => 20110215100240) do
     t.datetime "updated_at"
     t.boolean  "appeal_for_dismiss"
     t.integer  "calc_system_id"
+    t.boolean  "every_city"
   end
 
   create_table "users", :force => true do |t|

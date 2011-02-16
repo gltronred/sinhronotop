@@ -59,6 +59,7 @@ class TournamentsController < ApplicationController
   # PUT /tournaments/1.xml
   def update
     respond_to do |format|
+      params[:tournament][:city_ids] ||= []
       if @tournament.update_attributes(params[:tournament])
         format.html { redirect_to(@tournament, :notice => 'Настройки турнира изменены') }
       else

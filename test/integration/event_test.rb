@@ -38,6 +38,16 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
+  def test_only_some_cities_can_register
+    kg2 = games(:kg2)
+    do_with_users([:hudjakov]) {
+      visit "/games/#{kg2.id}"
+      click_link "Зарегистрироваться"
+      assert_contain_multiple ["Кельн", "Франкфурт"]
+      assert_not_contain_multiple ["Рига", "Таллинн"]
+    }
+  end
+
   def test_resp_cannot_register_as_expired
     bb1 = games(:bb1)
     do_with_users([:trodor]) {
