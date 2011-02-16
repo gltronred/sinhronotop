@@ -1,0 +1,11 @@
+new:
+    short_name: new
+    name: новая
+
+approved:
+    short_name: approved
+    name: принята
+    
+denied:
+    short_name: denied
+    name: отклонена

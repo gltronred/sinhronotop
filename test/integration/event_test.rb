@@ -15,7 +15,7 @@ class EventTest < ActionController::IntegrationTest
       click_button "Сохранить"
 
       assert_contain_multiple ["Регистрация прошла успешно, ждите подтверждения по email", "Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"]
-      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"])
+      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011", "новая"])
 
       click_link "Изменить"
 
@@ -24,7 +24,7 @@ class EventTest < ActionController::IntegrationTest
       click_button "Сохранить"
 
       assert_contain_multiple ["Параметры изменены, ждите подтверждения по email", "Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011"]
-      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011"])
+      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011", "изменены"])
     }
   end
 
@@ -63,6 +63,34 @@ class EventTest < ActionController::IntegrationTest
       visit "/games/#{bb1.id}/events"
       assert_contain_multiple ["Вася", "vasja@example.org", "Дмитрий Бочаров", "Рига"]
       assert_contain_multiple ["Иван Иванов", "ivan@example.org", "Борис Шойхет", "Франкфурт"]
+    }
+  end
+  
+  def test_org_can_see_and_change_status
+    kg2 = games(:kg2)
+    kg2_frankfurt = events(:kg2_frankfurt)
+    kg2_riga = events(:kg2_riga)
+    do_with_users([:rodionov]) {
+      visit "/games/#{kg2.id}/events"
+      assert_contain_multiple ["новая", "отклонена"]
+      select "принята", :from => "change_event_status_#{kg2_frankfurt.id}"      
+      #Cannot test Ajax with Webrat/Rails
+      #check_email('frankfurt@example.com', ["Иван Иванов", "принята"])
+      select "принята", :from => "change_event_status_#{kg2_riga.id}"
+      #check_email('riga@example.com', ["Вася", "принята"])
+      #visit "/games/#{kg1.id}/events/#{kg1_frankfurt.id}"
+      #assert_contain "принята"
+      #visit "/games/#{kg1.id}/events/#{kg1_riga.id}"
+      #assert_contain "принята"
+    }
+  end
+  
+  def test_not_org_cannot_change_status
+    kg1 = games(:kg1)
+    kg1_frankfurt = events(:kg1_frankfurt)
+    do_with_users([:shojhet]) {
+      visit "/games/#{kg1.id}/events/#{kg1_frankfurt.id}"
+      assert_not_contain "Изменить статус"
     }
   end
 

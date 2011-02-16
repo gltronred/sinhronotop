@@ -37,6 +37,14 @@ module SeedTasks
     cs
   end
   
+  def self.create_event_status(short_name, name)
+    es = EventStatus.find_by_short_name short_name
+    unless es
+      es = EventStatus.create(:short_name => short_name, :name => name)
+    end
+    es
+  end
+  
 end
 
 
@@ -48,6 +56,10 @@ File.open(File.join(Rails.root, 'db', "teams.txt"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city)
   end
 end
+
+SeedTasks.create_event_status("new", "новая")
+SeedTasks.create_event_status("approved", "принята")
+SeedTasks.create_event_status("denied", "отклонена")
 
 SeedTasks.create_calс_system("mm", "микроматчи")
 SeedTasks.create_calс_system("nn", "не знаю пока")

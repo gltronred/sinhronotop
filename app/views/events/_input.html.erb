@@ -22,8 +22,15 @@
     <%= f.label current_user.name %><br />
     <%= f.hidden_field :user_id, :value => current_user.id %>
   </p>
+	<% unless @event.new_record? %>
+  <p>
+    <%= f.label "Статус заявки" %><br />
+	<span id='event_status_<%= @event.id %>'><%= f.label @event.event_status.name %></span><br />
+  </p>
+	<% end %>
   <p>
     <%= f.submit 'Сохранить' %>
   </p>
 <% end %>
+<%= render :partial => "change_status", :locals => { :event => @event } %>
 <%= link_to_function 'Назад', 'history.back()' %>

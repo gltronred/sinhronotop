@@ -1,9 +1,10 @@
 #require 'smtp-tls'
 
 class Emailer < ActionMailer::Base
-  def notify_event(event)
+  def notify_event(event, action)
     subject = "ChGK game registration"
     @event = event
+    @action = action
     @update_url = url_for(:controller => edit_event_path(@event))
     @disputeds_url = url_for(:controller => event_disputeds_path(@event))
     @appeals_url = url_for(:controller => event_appeals_path(@event))

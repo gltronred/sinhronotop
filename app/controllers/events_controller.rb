@@ -1,11 +1,21 @@
 class EventsController < ApplicationController
 
-  before_filter :find, :only => [:edit, :update, :destroy, :show]
+  before_filter :find, :only => [:edit, :update, :destroy, :show, :change_status]
   before_filter :find_game, :only => [:index, :new, :create]
 
-  before_filter :check_see_events, :only => :index
+  before_filter :do_org_actions, :only => [:index, :change_status]
   before_filter :check_change_event, :only => [:edit, :update, :destroy, :show]
   before_filter :check_create_event, :only => [:new, :create]
+
+  def change_status
+    @event.event_status = EventStatus.find_by_id(params[:new_status_id])
+    if @event.save
+      Emailer.deliver_notify_event(@event, "статус заявки изменен")
+      respond_to do |format|
+        format.js
+      end
+    end
+  end
 
   def index
     @events = @game.events
@@ -39,9 +49,10 @@ class EventsController < ApplicationController
   # POST /events.xml
   def create
     @event = Event.new(params[:event])
+    @event.event_status = EventStatus.find_by_short_name("new")
     respond_to do |format|
       if @event.save
-        Emailer.deliver_notify_event(@event)
+        Emailer.deliver_notify_event(@event, "заявка принята")
         format.html { redirect_to(@event, :notice => 'Регистрация прошла успешно, ждите подтверждения по email') }
       else
         format.html {
@@ -59,7 +70,7 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update_attributes(params[:event])
-        Emailer.deliver_notify_event(@event)
+        Emailer.deliver_notify_event(@event, "данные заявки изменены")
         format.html { redirect_to(@event, :notice => 'Параметры изменены, ждите подтверждения по email') }
       else
         format.html {
@@ -108,7 +119,7 @@ class EventsController < ApplicationController
     end
   end
 
-  def check_see_events
+  def do_org_actions
     check_permissions { is_org? @game.tournament }
   end
 

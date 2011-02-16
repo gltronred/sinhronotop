@@ -1,10 +1,11 @@
-Регистрация на синхронный турнир
+Регистрация на синхронный турнир: <%= @action %>
 
 Город: <%=h @event.city.name %> 
 На игру <%= @event.game.name %> турнира <%= @event.game.tournament.name %>.
 Дата игры: <%=h @event.date.loc %>
 Ведущий: <%=h @event.moderator_name %> (<%=h @event.moderator_email %>)
 Ответственный: <%=h @event.user %>
+Статус заявки: <%=h @event.event_status.name %>
 
 Изменить данные регистрации можно по адресу:  <%= @update_url %>
 Спорные ответы принимаются до <%=h @event.game.submit_disp_until.loc %> по адресу:  <%= @disputeds_url %>

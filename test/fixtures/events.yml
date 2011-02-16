@@ -5,6 +5,7 @@ kg1_frankfurt:
   user: shojhet
   city: frankfurt
   game: kg1
+  event_status: new
   
 kg1_riga:
     date: <%= 23.days.ago.to_s :db %>
@@ -13,6 +14,25 @@ kg1_riga:
     user: trodor
     city: riga
     game: kg1
+    event_status: denied
+    
+kg2_frankfurt:
+  date: <%= 5.days.ago.to_s :db %>
+  moderator_name: Иван Иванов
+  moderator_email: ivan@example.org
+  user: shojhet
+  city: frankfurt
+  game: kg2
+  event_status: new
+  
+kg2_riga:
+    date: <%= 3.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: trodor
+    city: riga
+    game: kg2
+    event_status: denied
 
 bb1_frankfurt:
   date: <%= 25.days.ago.to_s :db %>
@@ -21,6 +41,7 @@ bb1_frankfurt:
   user: shojhet
   city: frankfurt
   game: bb1
+  event_status: approved
   
 bb1_riga:
     date: <%= 23.days.ago.to_s :db %>
@@ -29,6 +50,7 @@ bb1_riga:
     user: trodor
     city: riga
     game: bb1
+    event_status: approved
 
 bb2_frankfurt:
   date: <%= 5.days.ago.to_s :db %>
@@ -37,6 +59,7 @@ bb2_frankfurt:
   user: shojhet
   city: frankfurt
   game: bb2
+  event_status: approved
   
 bb2_riga:
     date: <%= 3.days.ago.to_s :db %>
@@ -45,4 +68,5 @@ bb2_riga:
     user: trodor
     city: riga
     game: bb2
+    event_status: approved
     

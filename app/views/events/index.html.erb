@@ -5,6 +5,7 @@
     <th>Ведущий</th>
     <th>email ведущего</th>
     <th>Ответственный</th>
+	<th>Статус заявки</th>
   </tr>
 
 <% @events.each do |event| %>
@@ -14,9 +15,13 @@
     <td><%=h event.moderator_name %></td>
     <td><%=h event.moderator_email %></td>
     <td><%=h event.user %></td>
+	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span></td>
 <% if is_org? event.game.tournament %>
-    <td><%= link_to 'Изменить', edit_event_path(event) %>
-    <%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %></td>
+    <td>
+	<%= render :partial => "change_status", :locals => { :event => event } %>
+	<%= link_to 'Изменить данные', edit_event_path(event) %>
+    <%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %>
+	</td>
 <% end %>
   </tr>
 <% end %>

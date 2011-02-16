@@ -1,0 +1,1 @@
+page.replace "event_status_#{@event.id}", "<span id='event_status_#{@event.id}'><FONT COLOR='red'>#{@event.event_status.name}</FONT></span>"

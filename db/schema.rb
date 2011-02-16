@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110215233948) do
+ActiveRecord::Schema.define(:version => 20110216113021) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -45,6 +45,11 @@ ActiveRecord::Schema.define(:version => 20110215233948) do
     t.datetime "updated_at"
   end
 
+  create_table "event_statuses", :force => true do |t|
+    t.string "short_name"
+    t.string "name"
+  end
+
   create_table "events", :force => true do |t|
     t.date     "date"
     t.string   "moderator_name"
@@ -54,6 +59,7 @@ ActiveRecord::Schema.define(:version => 20110215233948) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "event_status_id"
   end
 
   create_table "games", :force => true do |t|

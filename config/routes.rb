@@ -41,6 +41,7 @@ ActionController::Routing::Routes.draw do |map|
     e.resources :appeals
     e.resources :results
   end
+  map.change_status "events/:id/change_status", :controller => 'events', :action => "change_status"
   
   map.resources :games
   map.resources :games do |g| 

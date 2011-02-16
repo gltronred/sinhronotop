@@ -1,0 +1,6 @@
+<% if !event.new_record? && is_org?(event.game.tournament) %>
+<% field_id = "change_event_status_#{event.id}"%>
+Изменить статус на
+<%= collection_select( :event, :event_status, EventStatus.all, :id, :name, {}, {:id => field_id, :selected => event.event_status.id }) %>
+<%= observe_field field_id, :url => "../../events/change_status/#{event.id}", :with => "new_status_id"  %>
+<% end %>
