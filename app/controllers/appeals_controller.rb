@@ -2,7 +2,7 @@ class AppealsController < ApplicationController
 
   before_filter :load_appeal_with_parents, :only => [:edit, :update, :destroy]
   before_filter :load_parents, :only => [:create, :index]
-  before_filter :check_do_changes
+  before_filter :check_do_changes  
 
   # GET /appeals
   # GET /appeals.xml

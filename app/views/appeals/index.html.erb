@@ -20,7 +20,7 @@
   </tr>
 <% end %>
 </table>
-
+<p><%= link_to "Экспортировать в CSV", formatted_game_appeals_path(@game, "csv") %></p>
 <br />
 <% if changeable %>
 <%= render :partial => "input" %>

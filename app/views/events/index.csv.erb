@@ -1,0 +1,7 @@
+<%= @context_array.join(' >> ') %>
+
+Город;Дата;Ведущий;Email ведущего;Представитель;Email представителя;Статус заявки
+
+<% @events.each do |event| -%>
+<%= event.city.name -%>;<%= event.date.loc -%>;<%= event.moderator_name -%>;<%= event.moderator_email -%>;<%= event.user.name -%>;<%= event.user.email -%>;<%= event.event_status.name %>
+<% end -%>

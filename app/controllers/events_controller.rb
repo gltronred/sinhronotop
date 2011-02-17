@@ -20,6 +20,10 @@ class EventsController < ApplicationController
   def index
     @events = @game.events
     @context_array = @game.parents_top_down(:with_me) << "все заявки"
+    respond_to do |format|
+      format.html
+      format.csv
+    end
   end
 
   # GET /events/1

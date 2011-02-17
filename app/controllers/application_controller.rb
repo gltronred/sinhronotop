@@ -6,9 +6,16 @@ class ApplicationController < ActionController::Base
   before_filter do |controller| 
     controller.authenticate unless controller.is_a?(SessionsController) || controller.is_a?(UsersController)
   end
+  after_filter { |c| if "text/csv" == c.response.headers['Content-Type'] then c.response.body = c.to_cyrillic(c.response.body) end  }
+  
   helper_method :all
   helper :all # include all helpers, all the time
   protect_from_forgery # See ActionController::RequestForgeryProtection for details
+  
+  def to_cyrillic(str)
+    @conv = Iconv.new('iso-8859-5', 'utf-8') unless @conv
+    str ? @conv.iconv(str) : ""
+  end
   
   protected
   
@@ -16,6 +23,7 @@ class ApplicationController < ActionController::Base
   def mailer_set_url_options
      ActionMailer::Base.default_url_options[:host] = request.host_with_port
   end
+  
   # Scrub sensitive parameters from your log
   filter_parameter_logging :password
 end

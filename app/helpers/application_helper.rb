@@ -29,11 +29,6 @@ module ApplicationHelper
     @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
   end
   
-  def cyr(str)
-    @conv = Iconv.new('iso-8859-5', 'utf-8') unless @conv
-    str ? @conv.iconv(str) : ""
-  end
-  
   def context_array(arr)
     arr.map{|element| element.is_a?(String) ? element : link_to(element.to_s, element)}.join(' >> ')
   end
