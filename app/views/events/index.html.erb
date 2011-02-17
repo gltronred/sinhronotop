@@ -3,8 +3,9 @@
     <th>Город</th>
     <th>Дата</th>
     <th>Ведущий</th>
-    <th>email ведущего</th>
-    <th>Ответственный</th>
+    <th>Email ведущего</th>
+    <th>Предсавитель</th>
+    <th>Email представителя</th>
 	<th>Статус заявки</th>
   </tr>
 
@@ -14,7 +15,8 @@
     <td><%=h event.date.loc %></td>
     <td><%=h event.moderator_name %></td>
     <td><%=h event.moderator_email %></td>
-    <td><%=h event.user %></td>
+    <td><%=h event.user.name %></td>
+    <td><%=h event.user.email %></td>
 	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span></td>
 <% if is_org? event.game.tournament %>
     <td>

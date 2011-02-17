@@ -19,7 +19,7 @@ class EventsController < ApplicationController
 
   def index
     @events = @game.events
-    @context_array = @game.parents_top_down(:with_me) << "все регистрации"
+    @context_array = @game.parents_top_down(:with_me) << "все заявки"
   end
 
   # GET /events/1
@@ -36,13 +36,13 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     load_cities(@game.tournament_id)
-    @context_array = @game.parents_top_down(:with_me) << "зарегистрироваться"
+    @context_array = @game.parents_top_down(:with_me) << "регистрация"
   end
 
   # GET /events/1/edit
   def edit
     load_cities(@event.game.tournament_id)
-    @context_array = @event.parents_top_down(:with_me) << "изменить регистрацию"
+    @context_array = @event.parents_top_down(:with_me) << "изменить данные регистрации"
   end
 
   # POST /events
@@ -53,7 +53,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.save
         Emailer.deliver_notify_event(@event, "заявка принята")
-        format.html { redirect_to(@event, :notice => 'Регистрация прошла успешно, ждите подтверждения по email') }
+        format.html { redirect_to(@event, :notice => 'Спасибо, заявка получена и будет рассмотрена') }
       else
         format.html {
           @game = Game.find(@event.game_id)
@@ -71,7 +71,7 @@ class EventsController < ApplicationController
     respond_to do |format|
       if @event.update_attributes(params[:event])
         Emailer.deliver_notify_event(@event, "данные заявки изменены")
-        format.html { redirect_to(@event, :notice => 'Параметры изменены, ждите подтверждения по email') }
+        format.html { redirect_to(@event, :notice => 'Параметры заявки изменены') }
       else
         format.html {
           load_cities(@event.game.tournament_id)
@@ -86,7 +86,7 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to(game_events_url(@event.game), :noice => 'Регистрация удалена') }
+      format.html { redirect_to(game_events_url(@event.game), :noice => 'Заявка удалена') }
     end
   end
 

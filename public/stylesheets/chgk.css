@@ -1,3 +1,11 @@
+TABLE {
+  border-collapse: collapse;
+}
+
+TABLE TD {
+  padding: 4px;
+}
+
 .inline {
     display: inline;
 }

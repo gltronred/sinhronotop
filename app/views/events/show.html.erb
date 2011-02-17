@@ -23,13 +23,18 @@
 </p>
 
 <p>
-<b>email ведущего:</b>
+<b>Email ведущего:</b>
 <%=h @event.moderator_email %>
 </p>
 
 <p>
-<b>Ответственный:</b>
-<%=h @event.user %>
+<b>Представитель:</b>
+<%=h @event.user.name %>
+</p>
+
+<p>
+<b>Email представителя:</b>
+<%=h @event.user.email %>
 </p>
 
 <p>
