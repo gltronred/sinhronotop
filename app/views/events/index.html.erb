@@ -28,4 +28,4 @@
   </tr>
 <% end %>
 </table>
-<p><%= link_to "Экспортировать в CSV", formatted_game_events_path(@game, "csv") %></p>
+<p><%= link_to "Экспортировать в CSV", game_events_path(@game, :format => :csv) %></p>

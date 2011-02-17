@@ -16,7 +16,7 @@
   </tr>
 <% end %>
 </table>
-<p><%= link_to "Экспортировать в CSV", formatted_game_disputeds_path(@game, "csv") %></p>
+<p><%= link_to "Экспортировать в CSV", game_disputeds_path(@game, :format => :csv) %></p>
 
 <br />
 <% if changeable %>

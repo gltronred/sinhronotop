@@ -18,9 +18,10 @@
     <%= f.text_field :moderator_email %>
   </p>
   <p>
+	<% user = @event.user || current_user %>
     <%= f.label "Представитель" %><br />
-    <%= f.label current_user.name %> (<%= f.label current_user.email %>)<br />
-    <%= f.hidden_field :user_id, :value => current_user.id %>
+    <%= f.label user.name %> (<%= f.label user.email %>)<br />
+    <%= f.hidden_field :user_id, :value => user.id %>
   </p>
 	<% unless @event.new_record? %>
   <p>
