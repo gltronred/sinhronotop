@@ -98,7 +98,7 @@ class EventsController < ApplicationController
 
   def load_cities(tournament_id)
     if @game.tournament.every_city
-      @cities = City.all
+      @cities = City.all(:order => :name)
     else
       @cities = City.find(:all, :joins => :tournaments, :order => :name, :conditions => ["cities_tournaments.tournament_id = ?", tournament_id]).uniq
     end
