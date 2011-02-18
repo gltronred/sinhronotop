@@ -3,7 +3,7 @@
   <%= f.hidden_field :game_id, :value => @game.id %>
   <p>
     <%= f.label "Город" %><br />
-    <%= collection_select(:event, :city_id, @cities, :id, :name) %> 
+    <%= collection_select(:event, :city_id, @cities, :id, :to_s) %> 
   </p>
   <p>
     <%= f.label "Дата игры" %><br />

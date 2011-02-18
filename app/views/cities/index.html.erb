@@ -1,14 +1,24 @@
 <table>
   <tr>
     <th>Название</th>
+    <th>Страна</th>
+    <th>Регион/штат/провинция</th>
+    <th>Разница с Гринвичем</th>
+    <th>Временная зона</th>
+    <th>ID в рейтинге</th>
   </tr>
 
 <% @cities.each do |city| %>
   <tr>
     <td><%=h city.name %></td>
+    <td><%=h city.country %></td>
+    <td><%=h city.province %></td>
+    <td><%=h city.time_shift %></td>
+    <td><%=h city.time_zone %></td>
+    <td><%=h city.rating_id %></td>
     <td><%= link_to 'Изменить', edit_city_path(city) %></td>
-    <td><%= link_to 'Удалить', city, :confirm => 'Вы уверены?', :method => :delete if is_admin? %></td>
+    <td><%= link_to 'Удалить', city, :confirm => 'Вы уверены?', :method => :delete %></td>
   </tr>
 <% end %>
 </table>
-<%= link_to 'Добавить город', new_city_path if is_org_of_any_tournament? %>
+<%= link_to 'Добавить город', new_city_path %>

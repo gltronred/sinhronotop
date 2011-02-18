@@ -6,7 +6,7 @@ class City < ActiveRecord::Base
   validates_presence_of :name, :message => ": поле не заполнено"
 
   def to_s
-    "город #{self.name}" 
+    "#{self.name} (#{self.country})" 
   end
 
 end

@@ -4,9 +4,9 @@ require 'integration/integration_test_helper'
 class CityTest < ActionController::IntegrationTest
   include IntegrationTestHelper
 
-  def test_no_org_or_admin_has_to_see_and_edit
+  def test_not_admin_cannot_see_and_edit
     frankfurt = City.find_by_name 'Франкфурт-на-Майне'
-    do_with_users([:znatok, :trodor]) {
+    do_with_users([:znatok, :trodor, :knop]) {
       visit_and_get_deny_by_permission "/cities/#{frankfurt.id}/edit"
       visit_and_get_deny_by_permission "/cities/#{frankfurt.id}"
       visit_and_get_deny_by_permission "/cities/"
@@ -16,8 +16,8 @@ class CityTest < ActionController::IntegrationTest
     }
   end
 
-  def test_org_or_admin_can_see_and_edit
-    do_with_users([:perlin, :knop]) {
+  def test_admin_can_see_and_edit
+    do_with_users([:perlin]) {
       visit home_path
       click_link "Города"
       assert_contain_multiple ["Франкфурт-на-Майне", "Таллинн", "Рига", "Кельн"]

@@ -13,10 +13,12 @@ module SeedTasks
     end
   end
   
-  def self.create_city(name)
+  def self.create_city(rating_id, name, province, country, time_shift, time_zone)
     city = City.find_by_name name
     unless city
-      city = City.create :name => name
+      city = City.create(:rating_id => rating_id, :name => name, :province => province, :country => country, :time_shift => time_shift, :time_zone => time_zone)
+    else
+      city.update_attributes(:rating_id => rating_id, :name => name, :province => province, :country => country, :time_shift => time_shift, :time_zone => time_zone)
     end
     city
   end
@@ -47,8 +49,16 @@ module SeedTasks
   
 end
 
+File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
+  file.each_line do |line|
+    atributes = line.split(';')
+    rating_id, city_name, province, country, time_shift, time_zone = atributes[0], atributes[1], atributes[2], atributes[3], atributes[4], atributes[5]
+    city = SeedTasks.create_city(rating_id, city_name, province, country, time_shift, time_zone)
+  end
+end
 
-File.open(File.join(Rails.root, 'db', "teams.txt"), 'r') do |file|
+=begin
+File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
     rating_id, team_name, city_name = atributes[0], atributes[1], atributes[2]
@@ -56,6 +66,7 @@ File.open(File.join(Rails.root, 'db', "teams.txt"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city)
   end
 end
+=end
 
 SeedTasks.create_event_status("new", "новая")
 SeedTasks.create_event_status("approved", "принята")
@@ -65,20 +76,5 @@ SeedTasks.create_calс_system("mm", "микроматчи")
 SeedTasks.create_calс_system("nn", "не знаю пока")
 SeedTasks.create_calс_system("one_game", "турнир одноэтапный, считать не надо")
 
-=begin
-SeedTasks.create_city "Кёльн"
-SeedTasks.create_city "Франкфурт"
-SeedTasks.create_city "Берлин"
-SeedTasks.create_city "Хемниц"
-SeedTasks.create_city "Дортмунд"
-SeedTasks.create_city "Кобленц"
-SeedTasks.create_city "Нюрнберг"
-SeedTasks.create_city "Штутгарт"
-SeedTasks.create_city "Халле"
-SeedTasks.create_city "Дюссельдорф"
-SeedTasks.create_city "Мюнхен"
-SeedTasks.create_city "Трир"
-SeedTasks.create_city "Гамбург"
-=end
 SeedTasks.create_user("Михаил Перлин", ENV['GMAIL_SMTP_USER'], ENV['GMAIL_SMTP_PASSWORD'], 'admin')
 SeedTasks.create_user("посетитель", "znatok@example.com", 'znatok','znatok')

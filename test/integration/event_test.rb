@@ -12,10 +12,11 @@ class EventTest < ActionController::IntegrationTest
       select_date("event_date", 16, 10, 2011)
       fill_in "event_moderator_name", :with => 'Вася Пупкин'
       fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
+      select 'Рига (Латвия)', :from => "event_city_id"
       click_button "Сохранить"
 
-      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"]
-      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011", "новая"])
+      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"]
+      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", "16.10.2011", "новая"])
 
       click_link "Изменить"
 
@@ -23,8 +24,8 @@ class EventTest < ActionController::IntegrationTest
       select_date("event_date", 17, 10, 2011)
       click_button "Сохранить"
 
-      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011"]
-      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "17.10.2011", "изменены"])
+      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Латвия", "Дмитрий Бочаров", "17.10.2011"]
+      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Латвия", "Рига", "17.10.2011", "изменены"])
     }
   end
 

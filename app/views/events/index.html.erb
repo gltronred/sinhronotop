@@ -1,6 +1,7 @@
 <table>
   <tr>
     <th>Город</th>
+    <th>Страна</th>
     <th>Дата</th>
     <th>Ведущий</th>
     <th>Email ведущего</th>
@@ -12,11 +13,12 @@
 <% @events.each do |event| %>
   <tr>
     <td><%= link_to event.city.name, event_path(event) %></td>
-    <td><%=h event.date.loc %></td>
-    <td><%=h event.moderator_name %></td>
-    <td><%=h event.moderator_email %></td>
-    <td><%=h event.user.name %></td>
-    <td><%=h event.user.email %></td>
+    <td><%= event.city.country %></td>
+    <td><%= event.date.loc %></td>
+    <td><%= event.moderator_name %></td>
+    <td><%= event.moderator_email %></td>
+    <td><%= event.user.name %></td>
+    <td><%= event.user.email %></td>
 	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span></td>
     <td>
 	<%= render :partial => "change_status", :locals => { :event => event } %>

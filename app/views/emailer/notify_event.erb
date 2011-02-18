@@ -1,10 +1,13 @@
 Регистрация на синхронный турнир: <%= @action %>
 
 Город: <%=h @event.city.name %> 
+Страна: <%=h @event.city.country %> 
 На игру <%= @event.game.name %> турнира <%= @event.game.tournament.name %>.
 Дата игры: <%=h @event.date.loc %>
-Ведущий: <%=h @event.moderator_name %> (<%=h @event.moderator_email %>)
-Представитель: <%=h @event.user.name %> <%=h @event.user.email %>
+Ведущий: <%=h @event.moderator_name %>
+Email ведущего: <%=h @event.moderator_email %>
+Представитель: <%=h @event.user.name %> 
+Email представителя: <%=h @event.user.email %>
 
 Статус заявки: <%=h @event.event_status.name %>
 

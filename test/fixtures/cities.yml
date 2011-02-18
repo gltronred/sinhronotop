@@ -2,12 +2,19 @@
 
 tallinn:
   name: Таллинн
+  country: Эстония
 
 riga:
   name: Рига
+  country: Латвия
 
 frankfurt:
   name: Франкфурт-на-Майне
+  province: Гессен
+  country: Германия
 
 cologne:
     name: Кельн
+    country: Германия
+    province: Северный Рейн - Вестфалия
+    

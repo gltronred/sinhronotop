@@ -1,7 +1,7 @@
 class CitiesController < ApplicationController
 
   before_filter do |controller|
-    controller.check_permissions { controller.is_org_of_any_tournament? }
+    controller.check_permissions { controller.is_admin? }
   end
 
   # GET /cities
