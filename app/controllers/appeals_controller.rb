@@ -13,6 +13,7 @@ class AppealsController < ApplicationController
       @context_array = @parent.parents_top_down(:with_me) << "апелляции"
       format.html # index.html.erb
       format.csv
+      format.txt
     end
   end
 

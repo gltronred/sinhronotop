@@ -1,0 +1,10 @@
+<%= @context_array.join(' >> ') %>
+
+<% @appeals.each do |appeal| %>
+Номер вопроса: <%= appeal.question_index %>
+Ответ команды: <%= appeal.answer %>
+Желаемый вердикт: <%= appeal.goal %>
+Аргументация: <%= appeal.argument %>
+Вердикт АЖ: 
+Обоснование: 
+<% end %>
