@@ -121,6 +121,7 @@ class ActiveRecord::Base
     :goal => "Цель",
     :argument => "Аргументация",
     :email => "Email",
+    :cap_name => "Имя и фамилия капитана"
   }
 
   def self.human_attribute_name(attr)

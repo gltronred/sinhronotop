@@ -1,4 +1,4 @@
-<% if !@event.nil? %>
+<% if @event %>
 <h3>Добавить новую команду</h3>
 
 <% form_for @team, :html => { :class => "inline" } do |f|  %>
@@ -9,6 +9,12 @@
     <%= f.label "Название" %><br />
     <%= f.text_field :name %>
   </p>
+<% if @event.game.tournament.cap_name_required %>
+  <p>
+    <%= label_tag "Имя и фамилия капитана" %><br />
+    <%= text_field_tag("cap_name", "", :size => 30) %>
+  </p>
+<% end %>
   <p>
     <%= f.submit 'Добавить', :confirm => 'Вы уверены что этой команды нет в списке?' %>
   </p>

@@ -2,10 +2,16 @@ class Result < ActiveRecord::Base
   belongs_to :team
   belongs_to :event
   has_many :resultitems, :dependent => :delete_all
+  validates_presence_of :cap_name, :if => :should_validate_cap_name?
+  
   
   def calculate_and_save
     self.score = get_score self.resultitems
     self.save
+  end
+  
+  def should_validate_cap_name?
+    self.event.game.tournament.cap_name_required
   end
   
   def items_for_tour_sorted(tour) 
@@ -14,6 +20,14 @@ class Result < ActiveRecord::Base
   
   def score_for_tour(tour)
     get_score items_for_tour(tour)
+  end
+  
+  def place_to_s
+    if self.place_begin && self.place_end
+      self.place_begin == self.place_end ? self.place_begin : "#{self.place_begin}-#{self.place_end}"
+    else
+      ""
+    end
   end
   
   def tour_for_question(question_index)

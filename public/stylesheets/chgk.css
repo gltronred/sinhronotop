@@ -39,3 +39,21 @@ TABLE TD {
 #how_to_import_ul {
     display:none;
 }
+#add_team {
+    width: 810px;
+    float: left;
+}
+#add_team_new {
+    position:relative; 
+    float: left;
+    top:10px; 
+    width:300px; 
+    z-index:1
+}
+#add_team_listed {
+    position:relative;
+    top:10px; 
+    width:500px; 
+    float: right; 
+    z-index:1
+}

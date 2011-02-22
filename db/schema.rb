@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110218090658) do
+ActiveRecord::Schema.define(:version => 20110221160239) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -98,6 +98,9 @@ ActiveRecord::Schema.define(:version => 20110218090658) do
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "place_begin"
+    t.integer  "place_end"
+    t.string   "cap_name"
   end
 
   create_table "teams", :force => true do |t|
@@ -125,6 +128,7 @@ ActiveRecord::Schema.define(:version => 20110218090658) do
     t.boolean  "appeal_for_dismiss"
     t.integer  "calc_system_id"
     t.boolean  "every_city"
+    t.boolean  "cap_name_required"
   end
 
   create_table "users", :force => true do |t|

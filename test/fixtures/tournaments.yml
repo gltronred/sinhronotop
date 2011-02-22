@@ -5,6 +5,7 @@ bb:
   user: marina
   every_city: true
   calc_system: mm
+  cap_name_required: true
 
 kupr:
   name: Кубок Провинций
@@ -13,6 +14,7 @@ kupr:
   user: knop
   every_city: true
   calc_system: one_game
+  cap_name_required: true
   
 kg:
   name: Кубок Германии
@@ -21,4 +23,5 @@ kg:
   user: rodionov
   cities: frankfurt, cologne
   calc_system: mm
+  cap_name_required: false
   

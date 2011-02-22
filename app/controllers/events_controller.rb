@@ -4,7 +4,7 @@ class EventsController < ApplicationController
   before_filter :find_game, :only => [:index, :new, :create]
 
   before_filter :do_org_actions, :only => [:index, :change_status]
-  before_filter :check_change_event, :only => [:edit, :update, :destroy, :show]
+  before_filter :check_change_event, :only => [:edit, :update, :destroy]
   before_filter :check_create_event, :only => [:new, :create]
 
   def change_status

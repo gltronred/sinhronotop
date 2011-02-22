@@ -40,6 +40,7 @@ class TournamentTest < ActionController::IntegrationTest
       check "tournament_city_ids_"
       check 'tournament[needTeams]'
       check 'tournament[appeal_for_dismiss]'
+      check 'tournament[cap_name_required]'
       select "турнир одноэтапный, считать не надо", :from => "tournament[calc_system_id]"
       click_button 'Сохранить'
       

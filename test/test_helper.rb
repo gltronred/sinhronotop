@@ -37,6 +37,15 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 end
 
+def assert_valid_markup(markup=@response.body)
+  require 'net/http'
+  response = Net::HTTP.start('validator.w3.org') do |w3c|
+    query = 'fragment=' + CGI.escape(markup) + '&output=xml'
+    w3c.post2('/check', query)
+  end
+  assert_equal 'Valid', response['x-w3c-validator-status']
+end
+
 Webrat.configure do |config|
   config.mode = :rails
 end

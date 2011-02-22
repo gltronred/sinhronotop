@@ -18,6 +18,10 @@
     <%= f.check_box :appeal_for_dismiss %>
   </p>
   <p>
+    <%= f.label "Требуется ли фамилия капитана при внесении результатов?" %><br />
+    <%= f.check_box :cap_name_required %>
+  </p>
+  <p>
     <%= f.label "Система подсчета результатов" %><br />
     <%= collection_select(:tournament, :calc_system_id, CalcSystem.all, :id, :name) %> 
   </p>

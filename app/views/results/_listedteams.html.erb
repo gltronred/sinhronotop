@@ -1,4 +1,4 @@
-<% if !@event.nil? %>
+<% if @event %>
 <h3>Добавить команду из списка</h3>
 (для упрощения поиска нажмите в списке первую букву названия)
 <% form_for(@result) do |f| %>
@@ -7,6 +7,12 @@
   <p>
     <%= collection_select(:result, :team_id, @teams, :id, :to_s) %> 
   </p>
+<% if @event.game.tournament.cap_name_required %>
+  <p>
+    <%= f.label "Имя и фамилия капитана" %><br />
+    <%= f.text_field :cap_name %>
+  </p>
+<% end %>
   <p>
     <%= f.submit 'Добавить' %>
   </p>

@@ -15,6 +15,10 @@
   <%=h @tournament.appeal_for_dismiss.loc %>
 </p>
 <p>
+  <b>Требуется ли фамилия капитана при внесении результатов?</b>
+  <%=h @tournament.cap_name_required.loc %>
+</p>
+<p>
   <b>Возможные города-участники:</b>
    <%=h @tournament.every_city ? 'все' : @tournament.cities.map(&:name).sort.join(', ') %>
  </p>
