@@ -44,8 +44,12 @@ class ResultTest < ActionController::IntegrationTest
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
       add_team_listed(true, sp)
-      add_team_new(true, "Rolling Stones")
-      add_team_new(true, "Beatles")      
+      add_team_new(true, "Rolling Stones", event.city)
+      click_link "Изменить данные команды"
+      fill_in "team_name", :with => "Scorpions"
+      click_button "Сохранить"
+      assert_contain_multiple ["Рига", "Scorpions"]
+      add_team_new(true, "Beatles", event.city, cities(:tallinn))      
     }
   end
 
@@ -66,15 +70,21 @@ class ResultTest < ActionController::IntegrationTest
   end
 
   def test_resp_adds_team_new
-    event = events(:bb2_riga)
+    event = events(:bb2_tallinn)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      add_team_new(false, "Абвгдейка")
-      add_team_new(true, "Абвгдейка", "Татьяна Кирилловна")
-      add_team_new(true, "Утренняя почта", "Юрий Николаев")      
-      assert_select("input[type='checkbox']", :count => 108)
+      add_team_new(false, "Абвгдейка", event.city)
+      add_team_new(true, "Абвгдейка", event.city, nil, "Татьяна Кирилловна")
+      click_link "Изменить данные команды"
+      fill_in "team_name", :with => "АБВГДейка"
+      fill_in "result_cap_name", :with => "Левушкин"
+      select "Кельн (Германия)", :from => "city_id"
+      click_button "Сохранить"
+      assert_contain_multiple ["АБВГДейка", "Левушкин", "Кельн"]
+      add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")      
+      assert_select("input[type='checkbox']", :count => 72)
       click_remove_and_confirm
-      check_td("Абвгдейка", false)
+      check_td("АБВГДейка", false)
     }
   end
 
@@ -143,11 +153,13 @@ class ResultTest < ActionController::IntegrationTest
     check_td(team.name, false)
   end
 
-  def add_team_new(should_be_added, name, cap_name=nil)
+  def add_team_new(should_be_added, name, event_city, team_city=nil, cap_name=nil)
     fill_in "team_name", :with => name
+    select team_city.to_s, :from => "team_city_id" if team_city
     fill_in "cap_name", :with => cap_name if cap_name
     click_button "team_submit"
     choose_ok_on_next_confirmation rescue false
+    check_td((team_city || event_city).to_s, should_be_added)
     check_td(name, should_be_added)
     check_td(cap_name, should_be_added) if cap_name
   end

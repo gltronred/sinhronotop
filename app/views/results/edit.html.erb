@@ -1,0 +1,23 @@
+<% form_for @result, :html => { :class => "inline" } do |f|  %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :event_id, :value => @event.id %>
+  <%= hidden_field_tag :team_id, @team.id %>
+  <p>
+    <%= f.label "Город" %><br />
+    <%= select_tag :city_id, options_from_collection_for_select(@cities, :id, :to_s, @team.city.id) %> 
+  </p>
+  <p>
+    <%= f.label "Название" %><br />
+    <%= text_field_tag :team_name, @team.name %>
+  </p>
+<% if @event.game.tournament.cap_name_required %>
+  <p>
+    <%= f.label "Имя и фамилия капитана" %><br />
+    <%= f.text_field :cap_name %>
+  </p>
+<% end %>
+  <p>
+    <%= f.submit 'Сохранить' %>
+  </p>
+<% end %>
+<%= link_to_function 'Назад', 'history.back()' %>

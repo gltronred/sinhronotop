@@ -85,10 +85,6 @@ class TournamentsController < ApplicationController
 
   protected
 
-  def load_cities
-    @cities = City.all(:order => :name)
-  end
-
   def find
     @tournament = Tournament.find params[:id]
     unless @tournament

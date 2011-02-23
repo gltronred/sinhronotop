@@ -1,8 +1,9 @@
 class ResultsController < ApplicationController
 
-  before_filter :load_result_with_parents, :only => :destroy
+  before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
   before_filter :load_parents, :only => [:create, :index]
   before_filter :check_do_changes
+  before_filter :check_edit_team, :only => [:edit, :update]
 
   # GET /results
   # GET /results.xml
@@ -13,6 +14,7 @@ class ResultsController < ApplicationController
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
       @teams = Team.find(:all, :joins => :city, :order => "name ASC") - @results.map(&:team)
+      load_cities
     elsif
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
       calculate_places(@results)
@@ -46,13 +48,38 @@ class ResultsController < ApplicationController
       format.html { redirect_to(event_results_path(@event)) }
     end
   end
+  
+  def edit
+    load_cities
+  end
 
+  def update
+    respond_to do |format|
+      @team = Team.find(params[:team_id])
+      @team.name = params[:team_name]
+      @team.city_id = params[:city_id]      
+      if @team.save && @result.update_attributes(params[:result])
+        format.html { redirect_to(event_results_path(@event), :notice => 'Данные команды обновлены') }
+      else
+        format.html { 
+          load_cities
+          render :action => "edit" 
+          }
+      end
+    end
+  end
+  
   private
 
+  def check_edit_team
+    check_permissions { @team.editable? }
+  end
+  
   def load_result_with_parents
     @result = Result.find(params[:id])
     @event = @result.event
     @game = @event.game
+    @team = @result.team
   end
 
   def check_do_changes

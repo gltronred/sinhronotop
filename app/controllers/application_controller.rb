@@ -17,6 +17,10 @@ class ApplicationController < ActionController::Base
     str ? @conv.iconv(str) : ""
   end
   
+  def load_cities
+    @cities = City.all(:order => :name)
+  end
+  
   protected
   
   private

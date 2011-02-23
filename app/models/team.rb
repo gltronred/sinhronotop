@@ -4,6 +4,10 @@ class Team < ActiveRecord::Base
   validates_presence_of :name
   validates_uniqueness_of :rating_id
   
+  def editable?
+    self.rating_id < 0
+  end
+  
   def to_s
     "#{self.name} (#{self.city.name if self.city})" 
   end

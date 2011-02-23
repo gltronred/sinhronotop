@@ -69,4 +69,21 @@ bb2_riga:
     city: riga
     game: bb2
     event_status: approved
-    
+      
+bb2_tallinn:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: trodor
+    city: tallinn
+    game: bb2
+    event_status: approved
+
+bb2_cologne:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: cologne
+    game: bb2
+    event_status: approved    
