@@ -38,7 +38,7 @@ class TeamsController < ApplicationController
   # POST /teams.xml
   def create
     input_for_team = params[:team].except(:event_id)
-    input_for_team[:rating_id] = -1
+    input_for_team[:rating_id] = Team.minimum(:rating_id) - 2
     @team = Team.new(input_for_team)
 
     @result = Result.new
@@ -53,7 +53,7 @@ class TeamsController < ApplicationController
         @result.create_resultitems
         format.html { redirect_to(event_results_path(@result.event), :notice => 'Команда добавлена') }
       else
-        format.html { redirect_to(event_results_path(@result.event)) }
+        format.html { redirect_to(event_results_path(@result.event), :notice => @team.e_to_s + " <br/> " + @result.e_to_s) }
       end
     end
   end

@@ -79,6 +79,10 @@ class ActiveRecord::Base
     ret<<self if with_me
     ret
   end
+  
+  def e_to_s
+    self.errors.full_messages.join(', ')
+  end
 end
 
 class TrueClass

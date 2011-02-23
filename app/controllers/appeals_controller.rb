@@ -31,7 +31,7 @@ class AppealsController < ApplicationController
         if @appeal.save
           redirect_to(event_appeals_url(@event), :notice => 'Апелляция сохранена.')
         else
-          format.html { render :action => "index" }
+          redirect_to(event_appeals_url(@event), :notice => @appeal.e_to_s)
         end
       }
     end
@@ -44,7 +44,7 @@ class AppealsController < ApplicationController
       if @appeal.update_attributes(params[:appeal])
         format.html { redirect_to(event_appeals_url(@event), :notice => 'Апелляция изменена.') }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(event_appeals_url(@event), :notice => @appeal.e_to_s) }
       end
     end
   end

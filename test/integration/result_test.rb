@@ -45,6 +45,7 @@ class ResultTest < ActionController::IntegrationTest
       visit "/events/#{event.id}/results"
       add_team_listed(true, sp)
       add_team_new(true, "Rolling Stones")
+      add_team_new(true, "Beatles")      
     }
   end
 
@@ -70,7 +71,8 @@ class ResultTest < ActionController::IntegrationTest
       visit "/events/#{event.id}/results"
       add_team_new(false, "Абвгдейка")
       add_team_new(true, "Абвгдейка", "Татьяна Кирилловна")
-      assert_select("input[type='checkbox']", :count => 72)
+      add_team_new(true, "Утренняя почта", "Юрий Николаев")      
+      assert_select("input[type='checkbox']", :count => 108)
       click_remove_and_confirm
       check_td("Абвгдейка", false)
     }

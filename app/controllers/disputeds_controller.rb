@@ -29,7 +29,7 @@ class DisputedsController < ApplicationController
       if @disputed.save
         format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный сохранен.') }
       else
-        format.html { redirect_to(event_disputeds_url(@event))}
+        format.html { redirect_to(event_disputeds_url(@event), :notice => @disputed.e_to_s)}
       end
     end
   end
@@ -41,7 +41,7 @@ class DisputedsController < ApplicationController
       if @disputed.update_attributes(params[:disputed])
         format.html { redirect_to(event_disputeds_url(@event), :notice => 'Спорный изменен.') }
       else
-        format.html { render :action => "edit" }
+        format.html { redirect_to(event_disputeds_url(@event), :notice => @disputed.e_to_s)}
       end
     end
   end
