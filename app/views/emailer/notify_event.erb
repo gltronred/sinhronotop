@@ -12,10 +12,11 @@ Email представителя: <%=h @event.user.email %>
 Статус заявки: <%=h @event.event_status.name %>
 
 Изменить данные заявки можно по адресу:  <%= @update_url %>
+<% if 'approved' == @event.event_status.name %>
 Спорные ответы принимаются до <%=h @event.game.submit_disp_until.loc %> по адресу:  <%= @disputeds_url %>
 Апелляции принимаются до <%=h @event.game.submit_appeal_until.loc %> по адресу: <%= @appeals_url %>
 Результаты принимаются до <%=h @event.game.submit_results_until.loc %> по адресу:  <%= @results_url %>
-
+<% end %>
 По всем вопросам обращайтесь в оргкомитет турнира: <%= @event.game.tournament.user.email %>
 
 Всего наилучшего,

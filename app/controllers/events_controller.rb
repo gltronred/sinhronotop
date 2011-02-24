@@ -56,7 +56,7 @@ class EventsController < ApplicationController
     @event.event_status = EventStatus.find_by_short_name("new")
     respond_to do |format|
       if @event.save
-        Emailer.deliver_notify_event(@event, "заявка принята")
+        Emailer.deliver_notify_event(@event, "заявка получена и будет рассмотрена")
         format.html { redirect_to(@event, :notice => 'Спасибо, заявка получена и будет рассмотрена') }
       else
         format.html {

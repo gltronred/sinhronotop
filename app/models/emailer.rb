@@ -15,6 +15,16 @@ class Emailer < ActionMailer::Base
     end
     send(recipient, subject)
   end
+  
+  def create_event(event)
+    subject = "ChGK game registration"
+    @event = event
+    recipient =  event.user.email + ", " + event.moderator_email
+    if event.moderator_email != event.user.email
+      recipient += ", " + event.user.email
+    end
+    send(recipient, subject)
+  end
 
   def user_registred(user)
     @user = user

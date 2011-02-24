@@ -69,12 +69,15 @@ module IntegrationTestHelper
     choose_ok_on_next_confirmation rescue false
   end
 
-  def check_email(to, arr_content)
+  def check_email(to, arr_contains, arr_not_contains=[])
     assert !ActionMailer::Base.deliveries.empty?
     mail = ActionMailer::Base.deliveries.last
     assert mail.to.include?(to)
-    arr_content.each do |content|
-      assert mail.body.include?(content), "phrase '#{content}' not found in #{mail.body}"
+    arr_contains.each do |cont|
+      assert mail.body.include?(cont), "phrase '#{cont}' not found in #{mail.body}"
+    end
+    arr_not_contains.each do |ncont|
+      assert !mail.body.include?(ncont), "phrase '#{ncont}' found in #{mail.body}"
     end
   end
   

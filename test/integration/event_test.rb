@@ -17,7 +17,9 @@ class EventTest < ActionController::IntegrationTest
       click_button "Сохранить"
 
       assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc]
-      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", Date.today.loc, "новая"])
+      check_email('riga@example.com', 
+        ["Вася Пупкин", "заявка получена и будет рассмотрена", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", Date.today.loc, "новая"],
+        ["принимаются"])
 
       click_link "Изменить"
 
