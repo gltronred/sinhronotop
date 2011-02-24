@@ -40,6 +40,11 @@ class GamesController < ApplicationController
   # PUT /games/1.xml
   def update
     respond_to do |format|
+      [:begin, :end, :game_begin, :game_end, :submit_disp_until, :submit_appeal_until, :submit_results_until].each{|prefix|
+        ["(1i)", "(2i)", "(3i)"].each{|suffix|
+          params[:game]["#{prefix}#{suffix}"] ||= ""
+        }
+      }
       if @game.update_attributes(params[:game])
         format.html { redirect_to(tournament_url(@game.tournament), :notice => 'Параметры этапа изменены.') }
       else
@@ -80,7 +85,7 @@ class GamesController < ApplicationController
       redirect_to home_path
     end
   end
-  
+
   def check_do_change
     check_permissions { is_org? @tournament }
   end

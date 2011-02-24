@@ -12,10 +12,7 @@ class Event < ActiveRecord::Base
   
   def validate
      unless self.game.can_play_at?(self.date)
-       message = ""
-       message = message.concat "самая ранняя возможная дата игры: #{self.game.game_begin.loc}" if self.game.game_begin
-       message = message.concat " самая поздняя возможная дата игры: #{self.game.game_end.loc}" if self.game.game_end
-       errors.add_to_base message
+       errors.add_to_base game.game_dates_to_s
      end
   end
     

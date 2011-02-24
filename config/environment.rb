@@ -73,6 +73,12 @@ Rails::Initializer.run do |config|
   config.active_record.observers = :user_observer
 end
 
+class String
+  def opt_brackets
+    self.length > 0 ? "(#{self})" : self
+  end
+end
+
 class Array
   def sort_by_nilable(attribute)
     self.sort{|a,b|( a.send(attribute) and b.send(attribute) ) ? a.send(attribute) <=> b.send(attribute) : ( a.send(attribute) ? 1 : -1 ) }

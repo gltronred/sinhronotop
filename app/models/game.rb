@@ -11,6 +11,13 @@ class Game < ActiveRecord::Base
   def to_s
     "этап #{self.name}"
   end
+  
+  def game_dates_to_s
+    ret = []
+    ret << "не раньше #{self.game_begin.loc}" if self.game_begin
+    ret << "не позже #{self.game_end.loc}" if self.game_end
+    ret.join ', '
+  end
 
   def result_for(team)
     self.results.detect{|r|r.team == team}

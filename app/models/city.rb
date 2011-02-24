@@ -6,7 +6,7 @@ class City < ActiveRecord::Base
   validates_presence_of :name
 
   def to_s
-    "#{self.name} (#{self.country})" 
+    "#{self.name} #{self.country ? self.country.opt_brackets : ""}" 
   end
 
 end

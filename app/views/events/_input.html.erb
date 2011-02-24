@@ -6,7 +6,7 @@
     <%= collection_select(:event, :city_id, @cities, :id, :to_s) %> 
   </p>
   <p>
-    <%= f.label "Дата игры" %><br />
+    <%= f.label "Дата игры #{@game.game_dates_to_s.opt_brackets}" %><br />
     <%= f.date_select :date %>
   </p>
   <p>
