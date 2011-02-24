@@ -8,24 +8,26 @@ class EventTest < ActionController::IntegrationTest
     bb2 = games(:bb2)
     do_with_users([:trodor]) {
       visit "/games/#{bb2.id}"
+      date = Date.today
       click_link "Зарегистрироваться"
-      select_date("event_date", 16, 10, 2011)
+      select_date("event_date", date.day, date.month, date.year)
       fill_in "event_moderator_name", :with => 'Вася Пупкин'
       fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
       select 'Рига (Латвия)', :from => "event_city_id"
       click_button "Сохранить"
 
-      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", "16.10.2011"]
-      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", "16.10.2011", "новая"])
+      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc]
+      check_email('riga@example.com', ["Вася Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", Date.today.loc, "новая"])
 
       click_link "Изменить"
 
+      date = Date.today + 1.day
       fill_in "event_moderator_name", :with => 'Василий Пупкин'
-      select_date("event_date", 17, 10, 2011)
+      select_date("event_date", date.day, date.month, date.year)
       click_button "Сохранить"
 
-      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Латвия", "Дмитрий Бочаров", "17.10.2011"]
-      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Латвия", "Рига", "17.10.2011", "изменены"])
+      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Латвия", "Дмитрий Бочаров", (Date.today + 1.day).loc]
+      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Латвия", "Рига", (Date.today + 1.day).loc, "изменены"])
     }
   end
 

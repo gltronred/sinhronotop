@@ -39,19 +39,19 @@ module PermissionHelper
   end
   
   def can_register?(game)
-    is_registrated? && game && game.end >= Date.today && game.begin <= Date.today
+    is_registrated? && game && game.can_register?
   end
 
   def can_submit_disp?(event)
-    event && is_resp?(event) && event.game.submit_disp_until >= Date.today && event.game.begin <= Date.today
+    event && is_resp?(event) && event.game.can_submit_disp?
   end
 
   def can_submit_appeal?(event)
-    event && is_resp?(event) && event.game.submit_appeal_until >= Date.today && event.game.begin <= Date.today
+    event && is_resp?(event) && event.game.can_submit_appeal?
   end
 
   def can_submit_results?(event)
-    event && is_resp?(event) && event.game.submit_results_until >= Date.today && event.game.begin <= Date.today
+    event && is_resp?(event) && event.game.can_submit_results?
   end
   
   def can_see_appeal?(game)

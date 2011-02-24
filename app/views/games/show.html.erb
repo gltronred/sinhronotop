@@ -12,27 +12,35 @@
 </p>
 <p>
 <b>Регистрация с:</b>
-<%=h @game.begin.loc %>
+<%=h @game.begin.loc if @game.begin %>
 </p>
 
 <p>
 <b>Регистрация до:</b>
-<%=h @game.end.loc %>
+<%=h @game.end.loc if @game.end %>
+</p>
+<p>
+<b>Первый возможный день игры:</b>
+<%=h @game.game_begin.loc if @game.game_begin %>
 </p>
 
 <p>
+<b>Последний возможный день игры:</b>
+<%=h @game.game_end.loc if @game.game_end %>
+</p>
+<p>
 <b>Прием спорных до:</b>
-<%=h @game.submit_disp_until.loc %>
+<%=h @game.submit_disp_until.loc if @game.submit_disp_until %>
 </p>
 
 <p>
 <b>Прием апелляций до:</b>
-<%=h @game.submit_appeal_until.loc %>
+<%=h @game.submit_appeal_until.loc if @game.submit_appeal_until %>
 </p>
 
 <p>
 <b>Прием результатов до:</b>
-<%=h @game.submit_results_until.loc %>
+<%=h @game.submit_results_until.loc if @game.submit_results_until %>
 </p>
 
 <% if is_org? @game.tournament %>

@@ -11,7 +11,7 @@
     <td><%= link_to t.name, t %></td>
     <td><%=h t.user %></td>
     <td>
-		<% t.games.sort{|x,y|x.begin <=> y.begin}.each do |game| %>
+		<% t.games.sort_by_nilable(:begin).each do |game| %>
 			<%= link_to game.name, game_path(game) %>
 		<% end %>
 	</td>

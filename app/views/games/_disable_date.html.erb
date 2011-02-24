@@ -1,0 +1,9 @@
+<%= label_tag "Пока не знаю / неважно" -%>
+<input id="<%=field_id%>_dont_know" type="checkbox" onclick="jQuery.disable_date('<%= field_id %>')">
+<script type="text/javascript">
+var disable = jQuery('#<%=field_id%>_1i').attr('value') == ''
+jQuery('#<%=field_id%>_dont_know').attr('checked', disable)
+if (disable) {
+	jQuery.disable_date('<%= field_id %>')
+}
+</script>

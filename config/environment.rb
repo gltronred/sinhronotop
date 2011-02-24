@@ -73,6 +73,12 @@ Rails::Initializer.run do |config|
   config.active_record.observers = :user_observer
 end
 
+class Array
+  def sort_by_nilable(attribute)
+    self.sort{|a,b|( a.send(attribute) and b.send(attribute) ) ? a.send(attribute) <=> b.send(attribute) : ( a.send(attribute) ? 1 : -1 ) }
+  end
+end
+
 class ActiveRecord::Base
   def parents_top_down(with_me=false)
     ret = self.get_parent ? self.get_parent.parents_top_down(true) : []

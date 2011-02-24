@@ -15,23 +15,38 @@
  </p>
  <p>
    <%= f.label "Начало регистрации" %><br />
-   <%= f.date_select :begin %>
+   <%= f.date_select :begin, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_begin'} %>
  </p>
  <p>
    <%= f.label "Конец регистрации" %><br />
-   <%= f.date_select :end %>
+   <%= f.date_select :end, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_end'} %>
+ </p>
+ <p>
+   <%= f.label "Первый возможный день игры" %><br />
+   <%= f.date_select :game_begin, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_game_begin'} %>
+ </p>
+ <p>
+   <%= f.label "Последний возможный день игры" %><br />
+   <%= f.date_select :game_end, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_game_end'} %>
  </p>
  <p>
    <%= f.label "Прием спорных до" %><br />
-   <%= f.date_select :submit_disp_until %>
+   <%= f.date_select :submit_disp_until, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_disp_until'} %>
  </p>
  <p>
    <%= f.label "Прием апелляций до:" %><br />
-   <%= f.date_select :submit_appeal_until %>
+   <%= f.date_select :submit_appeal_until, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_appeal_until'} %>
  </p>
  <p>
    <%= f.label "Прием результатов до до:" %><br />
-   <%= f.date_select :submit_results_until %>
+   <%= f.date_select :submit_results_until, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_results_until'} %>
  </p>
 <p>Следующие три настройки означают, что спорные/апелляции/результаты видны <b>любому</b>, пользователю системы. Подумайте, когда их имеет смысл активировать. Возможно пакет пока нельзя светить и поэтому нельзя показывать спорные-апелляции? Возможно не все еще сыграли и поэтому нельзя светить результаты?</p>
  <p>

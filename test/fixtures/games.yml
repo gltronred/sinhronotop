@@ -5,6 +5,8 @@ bb1:
   num_questions: 12
   begin: <%= 30.days.ago.to_s :db %>
   end: <%= 20.days.ago.to_s :db %>
+  game_begin: <%= 18.days.ago.to_s :db %>
+  game_end: <%= 17.days.ago.to_s :db %>
   submit_disp_until: <%= 15.days.ago.to_s :db %>
   submit_appeal_until: <%= 10.days.ago.to_s :db %>
   submit_results_until: <%= 5.days.ago.to_s :db %>
@@ -19,6 +21,8 @@ bb2:
   num_questions: 12
   begin: <%= (Time.now - 2.days).to_s :db %>
   end: <%= (Time.now + 4.days).to_s :db %>
+  game_begin: <%= (Time.now - 2.days).to_s :db %>
+  game_end: <%= (Time.now + 5.days).to_s :db %>
   submit_disp_until: <%= (Time.now + 6.days).to_s :db %>
   submit_appeal_until: <%= (Time.now + 8.days).to_s :db %>
   submit_results_until: <%= (Time.now + 10.days).to_s :db %>
@@ -45,11 +49,6 @@ kg2:
   name: Этап 2
   num_tours: 3
   num_questions: 14
-  begin: <%= (Time.now - 2.days).to_s :db %>
-  end: <%= (Time.now + 10.days).to_s :db %>
-  submit_disp_until: <%= (Time.now + 16.days).to_s :db %>
-  submit_appeal_until: <%= (Time.now + 18.days).to_s :db %>
-  submit_results_until: <%= (Time.now + 20.days).to_s :db %>
   publish_disp: false
   publish_appeal: false
   publish_results: false  

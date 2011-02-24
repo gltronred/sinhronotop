@@ -7,8 +7,10 @@
 	<th>Название</th>
     <th>Туров</th>
     <th>Вопросов в туре</th>
-    <th>Регистрация с</th>
-    <th>Регистрация до</th>
+    <th>Регистр. с</th>
+    <th>Регистр. до</th>
+    <th>Игра с</th>
+    <th>Игра до</th>
     <th>Cпорные до</th>
     <th>Апелляции до</th>
     <th>Результаты до</th>
@@ -19,16 +21,18 @@
 <% end %>
   </tr>
 
-<% @tournament.games.sort{|x,y|x.begin <=> y.begin}.each do |game| %>
+<% @tournament.games.sort_by_nilable(:game_begin).each do |game| %>
   <tr>
     <td><%= link_to game.name, game %></td>
     <td><%=h game.num_tours %></td>	
     <td><%=h game.num_questions %></td>	
-    <td><%=h game.begin.loc %></td>
-    <td><%=h game.end.loc %></td>
-    <td><%=h game.submit_disp_until.loc %></td>
-    <td><%=h game.submit_appeal_until.loc %></td>
-    <td><%=h game.submit_results_until.loc %></td>
+    <td><%=h game.begin.loc if game.begin %></td>
+    <td><%=h game.end.loc if game.end %></td>
+    <td><%=h game.game_begin.loc if game.game_begin%></td>
+    <td><%=h game.game_end.loc if game.game_end %></td>
+    <td><%=h game.submit_disp_until.loc if game.submit_disp_until%></td>
+    <td><%=h game.submit_appeal_until.loc if game.submit_appeal_until %></td>
+    <td><%=h game.submit_results_until.loc if game.submit_results_until %></td>
 <% if org %>
     <td><%=h game.publish_disp.loc %></td>
     <td><%=h game.publish_appeal.loc %></td>
