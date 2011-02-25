@@ -9,16 +9,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110223155528) do
+ActiveRecord::Schema.define(:version => 20110225113607) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
     t.string   "answer"
     t.string   "goal"
-    t.string   "argument"
     t.integer  "event_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "argument",       :limit => 20000
   end
 
   create_table "calc_systems", :force => true do |t|

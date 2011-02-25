@@ -4,6 +4,14 @@ require 'integration/integration_test_helper'
 class AppealTest < ActionController::IntegrationTest
   include IntegrationTestHelper
 
+  def xtest_submit_long_appeal
+    event = events(:bb2_riga)
+    do_with_users([:trodor]) {
+      visit "/events/#{event.id}/appeals"
+      submit_appeal(32, 'зачет', "адамово яблоко", File.open("test/fixtures/appeal.txt",'r').read, ["Давая такой ответ", "http://www.autoforum.nnov.ru/forum/showthread.php?t=112753", "Яблоко само по себе, а его вкус сам по себе. Оригинально."])
+    }
+  end
+
   def test_resp_submits
     event = events(:bb2_riga)
     do_with_users([:trodor]) {
@@ -53,13 +61,14 @@ class AppealTest < ActionController::IntegrationTest
 
   private
 
-  def submit_appeal(question_index, goal, answer, argument)
+  def submit_appeal(question_index, goal, answer, argument, should_contain_strings=nil)
     select question_index, :from => "appeal_question_index"
     select goal, :from => "appeal_goal"
     fill_in "appeal_answer", :with => answer
     fill_in "appeal_argument", :with => argument
     click_button "Сохранить"
-    assert_contain_multiple [question_index.to_s, goal, answer, argument]
+    should_contain_strings ||= [question_index.to_s, goal, answer, argument]
+    assert_contain_multiple should_contain_strings
   end
 
 end

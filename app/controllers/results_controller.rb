@@ -22,6 +22,7 @@ class ResultsController < ApplicationController
     @context_array = @parent.parents_top_down(:with_me) << "результаты"
     respond_to do |format|
       format.html # index.html.erb
+      format.csv # index.html.erb
     end
   end
 

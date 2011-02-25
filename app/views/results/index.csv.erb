@@ -1,0 +1,7 @@
+<%= @context_array.join(' >> ') %>
+
+Место;Команда<%= ";Капитан" if @game.tournament.cap_name_required -%>;Город<% for i in 1..@game.num_tours -%>;<%="Тур#{i}"-%><% end -%>;Сумма
+<% @results.each do |result| %>
+<%=h result.place_to_s -%>;<%=h result.team.name -%>;<%=h result.cap_name if @game.tournament.cap_name_required -%>;<%=h result.team.city -%>
+<% for tour in 1..@game.num_tours -%><%= ";#{result.score_for_tour(tour)}" -%><% end -%>;<%=h result.score -%>
+<% end %>

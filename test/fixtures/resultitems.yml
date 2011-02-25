@@ -27,8 +27,8 @@
 <% end %>
 
 <% for i in 1..36 %>
-<%= "bb1_frankfurt_sp#{i}:" %>
+<%= "bb2_frankfurt_sp#{i}:" %>
   question_index: <%= i %>
   score: <%= [2,3,4,5,6,7,17,26,35].include?(i) ? 1 : 0 %> 
-  result: bb1_frankfurt_sp
+  result: bb2_frankfurt_sp
 <% end %>

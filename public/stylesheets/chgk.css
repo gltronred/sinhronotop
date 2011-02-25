@@ -57,3 +57,6 @@ TABLE TD {
     float: right; 
     z-index:1
 }
+.much_text {
+    white-space: nowrap;
+}

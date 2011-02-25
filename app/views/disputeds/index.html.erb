@@ -16,9 +16,12 @@
   </tr>
 <% end %>
 </table>
-<p><%= link_to "Экспортировать в CSV", game_disputeds_path(@game, :format => :csv) %></p>
 
 <br />
 <% if changeable %>
 <%= render :partial => "input" %>
 <% end %>
+
+<% unless @event %>
+<p><%= link_to "Экспортировать в CSV", game_disputeds_path(@game, :format => :csv) %></p>
+<%end%>

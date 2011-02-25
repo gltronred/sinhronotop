@@ -1,28 +1,23 @@
-<table>
-  <tr>
-    <th>Номер вопроса</th>
-    <th>Ответ</th>
-    <th>Апелляция на</th>
-    <th>Аргументация</th>
-  </tr>
-
 <% changeable = can_submit_appeal? @event %>
+
 <% @appeals.each do |appeal| %>
-  <tr>
-    <td><%=h appeal.question_index %></td>
-    <td><%=h appeal.answer %></td>
-    <td><%=h appeal.goal %></td>
-    <td><%=h appeal.argument %></td>
-	<% if changeable %>
-    <td><%= link_to 'Изменить', edit_event_appeal_path(appeal.event, appeal) %>
-    <%= link_to 'Удалить', appeal, :confirm => 'Вы уверены?', :method => :delete %></td>
-	<% end %>
-  </tr>
+<p><b>Номер вопроса:</b> <%= appeal.question_index %><br/>
+<b>Ответ команды:</b> <%= appeal.answer %><br/>
+<b>Желаемый вердикт:</b> <%= appeal.goal %><br/>
+<b>Аргументация:</b><%= (h appeal.argument).gsub("\n", '<br/>'.html_safe) if appeal.argument %></textarea><br/>
+<% if changeable %>
+<%= link_to 'Изменить', edit_event_appeal_path(appeal.event, appeal) %>
+<%= link_to 'Удалить', appeal, :confirm => 'Вы уверены?', :method => :delete %>
 <% end %>
-</table>
-<p><%= link_to "Экспортировать в CSV", game_appeals_path(@game, :format => :csv) %></p>
-<p><%= link_to "Экспортировать как текст", game_appeals_path(@game, :format => :txt) %></p>
+</p>
+<% end %>
+
 <br />
 <% if changeable %>
 <%= render :partial => "input" %>
+<% end %>
+
+<% unless @event %>
+<p><%= link_to "Экспортировать в CSV", game_appeals_path(@game, :format => :csv) %></p>
+<p><%= link_to "Экспортировать как текст", game_appeals_path(@game, :format => :txt) %></p>
 <% end %>

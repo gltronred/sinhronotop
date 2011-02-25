@@ -9,6 +9,7 @@ class Event < ActiveRecord::Base
     
   validates_presence_of :city_id, :moderator_name, :moderator_email, :user_id, :date
   validates_format_of :moderator_email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
+  validates_length_of :moderator_email, :moderator_name, :maximum => 255
   
   def validate
      unless self.game.can_play_at?(self.date)

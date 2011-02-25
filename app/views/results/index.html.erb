@@ -39,7 +39,9 @@
 </table>
 
 <br />
-
+<% unless @event %>
+<p><%= link_to "Экспортировать в CSV", game_results_path(@game, :format => :csv) %></p>
+<% end %>
 
 <% if changeable %>
 <%= render :partial => "event" %>
