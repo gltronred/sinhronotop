@@ -9,6 +9,12 @@
     <%= f.label "Дата игры #{@game.game_dates_to_s.opt_brackets}" %><br />
     <%= f.date_select :date %>
   </p>
+<% if @game.tournament.time_required %>
+  <p>
+    <%= f.label "Время начала игры (местное!)" %><br />
+    <%= f.select(:game_time, options_for_select(["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"])) %> 
+  </p>
+<% end %>
   <p>
     <%= f.label "Ведущий" %><br />
     <%= f.text_field :moderator_name %>
@@ -23,12 +29,20 @@
     <%= f.label user.name %> (<%= f.label user.email %>)<br />
     <%= f.hidden_field :user_id, :value => user.id %>
   </p>
+  <p>
+    <%= f.label "Количество команд (примерное)" %><br />
+    <%= f.text_field :num_teams %>
+  </p>
 	<% unless @event.new_record? %>
   <p>
     <%= f.label "Статус заявки" %><br />
 	<span id='event_status_<%= @event.id %>'><%= f.label @event.event_status.name %></span><br />
   </p>
 	<% end %>
+  <p>
+    <%= f.label "Дополнительная информация" %><br />
+    <%= f.text_area :more_info %>
+  </p>
   <p>
     <%= f.submit 'Сохранить' %>
   </p>

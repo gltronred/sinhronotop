@@ -13,23 +13,28 @@ class EventTest < ActionController::IntegrationTest
       select_date("event_date", date.day, date.month, date.year)
       fill_in "event_moderator_name", :with => 'Вася Пупкин'
       fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
+      fill_in "event_more_info", :with => 'Будем играть голыми'
+      fill_in "event_game_time", :with => '12:00'
+      fill_in "event_num_teams", :with => '19'
       select 'Рига (Латвия)', :from => "event_city_id"
       click_button "Сохранить"
 
-      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc]
+      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc, "Будем играть голыми", '12:00', "19"]
       check_email('riga@example.com', 
-        ["Вася Пупкин", "заявка получена и будет рассмотрена", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", Date.today.loc, "новая"],
+        ["Вася Пупкин", "заявка получена и будет рассмотрена", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", Date.today.loc, "новая", "Будем играть голыми", '12:00', "19"],
         ["принимаются"])
 
       click_link "Изменить"
 
       date = Date.today + 1.day
       fill_in "event_moderator_name", :with => 'Василий Пупкин'
+      fill_in "event_more_info", :with => 'Будем играть в темноте'
       select_date("event_date", date.day, date.month, date.year)
+      fill_in "event_game_time", :with => '12:30'
       click_button "Сохранить"
 
-      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Латвия", "Дмитрий Бочаров", (Date.today + 1.day).loc]
-      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Латвия", "Рига", (Date.today + 1.day).loc, "изменены"])
+      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Латвия", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
+      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Латвия", "Рига", (Date.today + 1.day).loc, "изменены", 'Будем играть в темноте', '12:30', "19"])
     }
   end
 

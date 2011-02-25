@@ -22,6 +22,10 @@
     <%= f.check_box :cap_name_required %>
   </p>
   <p>
+    <%= f.label "Требуется ли время начала игры?" %><br />
+    <%= f.check_box :time_required %>
+  </p>
+  <p>
     <%= f.label "Система подсчета результатов" %><br />
     <%= collection_select(:tournament, :calc_system_id, CalcSystem.all, :id, :name) %> 
   </p>

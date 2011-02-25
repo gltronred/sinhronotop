@@ -3,10 +3,15 @@
     <th>Город</th>
     <th>Страна</th>
     <th>Дата</th>
+<% if @game.tournament.time_required -%>
+	<th>Дата</th>
+<% end %>
     <th>Ведущий</th>
     <th>Email ведущего</th>
     <th>Представитель</th>
     <th>Email представителя</th>
+	<th>Команд</th>
+	<th>Дополнительная информация</th>
 	<th>Статус заявки</th>
   </tr>
 
@@ -15,10 +20,15 @@
     <td><%= link_to event.city.name, event_path(event) %></td>
     <td><%= event.city.country %></td>
     <td><%= event.date.loc %></td>
+<% if @game.tournament.time_required -%>
+	<td><%= event.game_time %></td>
+<% end %>
     <td><%= event.moderator_name %></td>
     <td><%= event.moderator_email %></td>
     <td><%= event.user.name %></td>
     <td><%= event.user.email %></td>
+    <td><%= event.num_teams %></td>
+    <td><%= event.more_info %></td>
 	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span></td>
     <td>
 	<%= render :partial => "change_status", :locals => { :event => event } %>

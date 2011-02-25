@@ -19,6 +19,10 @@
   <%=h @tournament.cap_name_required.loc %>
 </p>
 <p>
+  <b>Требуется ли время начала игры?</b>
+  <%=h @tournament.time_required.loc %>
+</p>
+<p>
   <b>Возможные города-участники:</b>
    <%=h @tournament.every_city ? 'все' : @tournament.cities.map(&:name).sort.join(', ') %>
  </p>

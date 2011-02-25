@@ -10,6 +10,8 @@ class Event < ActiveRecord::Base
   validates_presence_of :city_id, :moderator_name, :moderator_email, :user_id, :date
   validates_format_of :moderator_email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i
   validates_length_of :moderator_email, :moderator_name, :maximum => 255
+  validates_length_of :more_info, :maximum => 1023
+  validates_presence_of :game_time, :if => :should_validate_game_time?
   
   def validate
      unless self.game.can_play_at?(self.date)
@@ -23,5 +25,9 @@ class Event < ActiveRecord::Base
 
   def get_parent
     self.game
+  end
+  
+  def should_validate_game_time?
+    self.game.tournament.time_required
   end
 end

@@ -33,6 +33,7 @@ kg2_riga:
     city: riga
     game: kg2
     event_status: denied
+    more_info: Мы будем играть после обеда
 
 bb1_frankfurt:
   date: <%= 25.days.ago.to_s :db %>
@@ -51,6 +52,7 @@ bb1_riga:
     city: riga
     game: bb1
     event_status: approved
+    more_info: Мы будем играть в Риге
 
 bb2_frankfurt:
   date: <%= 5.days.ago.to_s :db %>

@@ -4,10 +4,15 @@
 Страна: <%=h @event.city.country %> 
 На игру <%= @event.game.name %> турнира <%= @event.game.tournament.name %>.
 Дата игры: <%=h @event.date.loc %>
+<% if @event.game.tournament.time_required -%>
+Время игры (местное): <%=h @event.game_time %>
+<% end -%>
 Ведущий: <%=h @event.moderator_name %>
 Email ведущего: <%=h @event.moderator_email %>
 Представитель: <%=h @event.user.name %> 
 Email представителя: <%=h @event.user.email %>
+Количество команд: <%=h @event.num_teams %>
+Дополнительная информация: <%=h @event.more_info %>
 
 Статус заявки: <%=h @event.event_status.name %>
 

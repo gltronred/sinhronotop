@@ -19,7 +19,10 @@
 <b>Дата:</b>
 <%=h @event.date.loc %>
 </p>
-
+<p>
+<b>Время:</b>
+<%=h @event.game_time %>
+</p>
 <p>
 <b>Ведущий:</b>
 <%=h @event.moderator_name %>
@@ -39,13 +42,20 @@
 <b>Email представителя:</b>
 <%=h @event.user.email %>
 </p>
-
+<p>
+<b>Дополнительная информация:</b>
+<%=h @event.more_info %>
+</p>
+<p>
+<b> Команд:</b>
+<%=h @event.num_teams %>
+</p>
 <p>
 <b>Статус заявки:</b>
 <%=h @event.event_status %>
 </p>
 
-<%= link_to 'Все игры этапа', game_events_path(@event.game) %>
+<%= link_to 'Все заявки', game_events_path(@event.game) %>
 <%= link_to 'Изменить данные', edit_event_path(@event) if is_resp? @event %>
 <% if is_resp? @event %>
 <%= link_to 'Спорные ответы', event_disputeds_path(@event) %>

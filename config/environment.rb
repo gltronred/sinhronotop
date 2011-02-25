@@ -127,17 +127,20 @@ end
 
 class ActiveRecord::Base
   HUMANIZED_ATTRIBUTES = {
-    :name => "Название",
-    :answer => "Ответ",
-    :moderator_name => "Имя и фамилия ведущего",
-    :moderator_email => "Email ведущего",
-    :num_tours => "Количество туров",
-    :num_questions => "Количество вопросов в туре",
-    :question_index => "Номер вопроса",
-    :goal => "Цель",
-    :argument => "Аргументация",
-    :email => "Email",
-    :cap_name => "Имя и фамилия капитана"
+    :name => "название",
+    :answer => "ответ",
+    :moderator_name => "имя и фамилия ведущего",
+    :moderator_email => "email ведущего",
+    :num_tours => "количество туров",
+    :num_questions => "количество вопросов в туре",
+    :question_index => "номер вопроса",
+    :goal => "цель",
+    :argument => "аргументация",
+    :email => "email",
+    :cap_name => "имя и фамилия капитана",
+    :num_teams => "количество команд",
+    :more_info => "дополнительна информация",
+    :game_time => "время начала игры"
   }
 
   def self.human_attribute_name(attr)
