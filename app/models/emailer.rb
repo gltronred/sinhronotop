@@ -1,6 +1,20 @@
 #require 'smtp-tls'
 
 class Emailer < ActionMailer::Base
+  
+  def signup_notification(user)
+    #@user = user
+    @body[:url]  = "#{url_for(:controller => home_path)}activate/#{user.activation_code}"
+    @body[:user] = user
+    send(user.email, "New user registration")
+  end
+=begin  
+  def activation(user)
+    setup_email(user)
+    @subject    += 'Your account has been activated!'
+    @body[:url]  = url_for(:controller => home_path)
+  end
+=end
   def notify_event(event, action)
     subject = "ChGK game registration"
     @event = event
@@ -25,12 +39,12 @@ class Emailer < ActionMailer::Base
     end
     send(recipient, subject)
   end
-
+=begin
   def user_registred(user)
     @user = user
     send(user.email, "New user registration")
   end
-
+=end
   def error_notification(name, email, text)
     @body[:name] = name
     @body[:submitter_email] = email

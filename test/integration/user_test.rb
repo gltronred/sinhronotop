@@ -12,11 +12,16 @@ class UserTest < ActionController::IntegrationTest
     fill_in "user_password", :with => "ferrari"
     fill_in "user_password_confirmation", :with => "ferrari"
     click_button "Зарегистрироваться"
-    assert_contain "Привет, Михаэль Шумахер"
+    assert_contain "Чтобы завершить регистрацию"
+    assert_not_contain_multiple ["Добро пожаловать", "Привет"]
     check_email("schumacher@formel1.com", ["Михаэль Шумахер", "schumacher@formel1.com", "ferrari"])
+    login_form("schumacher@formel1.com", "ferrari", false)
+    url = get_url_from_last_email
+    visit url
+    assert_contain_multiple ["регистрация закончена", "Привет, Михаэль Шумахер"]
     click_link "Выход"
     assert_not_contain "Привет, Михаэль Шумахер"
-    login_form("schumacher@formel1.com", "ferrari")
+    login_form("schumacher@formel1.com", "ferrari", true, true)
     click_link "Выход"
   end
 

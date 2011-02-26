@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110225135212) do
+ActiveRecord::Schema.define(:version => 20110226134607) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -148,6 +148,7 @@ ActiveRecord::Schema.define(:version => 20110225135212) do
     t.datetime "remember_token_expires_at"
     t.string   "status"
     t.string   "reset_code"
+    t.string   "activation_code"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

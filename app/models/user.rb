@@ -34,7 +34,7 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
     return nil if email.blank? || password.blank?
     u = find_by_email(email.downcase) # need to get the salt
-    u && u.authenticated?(password) ? u : nil
+    u && u.authenticated?(password) && !u.activation_code ? u : nil
   end
 
   def email=(value)
@@ -43,19 +43,33 @@ class User < ActiveRecord::Base
 
   def create_reset_code
     @reset = true
-    #self.attributes = {:reset_code => Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join ) }
     self.reset_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
+    save(false)
+  end
+
+  def recently_activated?
+    @activated
+  end
+
+  def create_activation_code
+    @activated
+    self.activation_code = Digest::SHA1.hexdigest( Time.now.to_s.split(//).sort_by {rand}.join )
     save(false)
   end
 
   def recently_reset?
     @reset
   end
+  
   def delete_reset_code
     self.attributes = {:reset_code => nil}
     save(false)
   end
 
+  def delete_activation_code
+    self.activation_code = nil
+    save(false)
+  end
 
   def to_s
     "#{self.name} (#{self.email})"

@@ -3,13 +3,18 @@ module IntegrationTestHelper
     login_form(user.email, 'znatok')
   end
 
-  def login_form(email, password)
+  def login_form(email, password, success=true, with_redirection=false)
     visit home_path
     fill_in "email", :with => email
     fill_in "password", :with => password
     click_button "Войти"
-    assert_response :ok
-    assert_contain "Добро пожаловать"
+    follow_redirect! if with_redirection
+    if success
+      assert_response :ok
+      assert_contain "Добро пожаловать"
+    else
+      assert_contain "не удалось"
+    end
   end
 
   def login_basic_auth(user)

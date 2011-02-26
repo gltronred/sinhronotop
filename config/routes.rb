@@ -3,14 +3,17 @@ ActionController::Routing::Routes.draw do |map|
 
   map.new_error '/new_error', :controller => 'home', :action => 'new_error'
   map.create_error '/create_error', :controller => 'home', :action => 'create_error'
-    
+
   map.logout '/logout', :controller => 'sessions', :action => 'destroy'
   map.login '/login', :controller => 'sessions', :action => 'new'
   map.register '/register', :controller => 'users', :action => 'create'
   map.signup '/signup', :controller => 'users', :action => 'new'
   map.forgot    '/forgot',                    :controller => 'users',     :action => 'forgot'
-  map.reset     'reset/:reset_code',          :controller => 'users',     :action => 'reset'
-      
+  map.reset     '/reset/:reset_code',          :controller => 'users',     :action => 'reset'
+  map.activate '/activate/:activation_code', :controller => 'users', :action => 'activate'
+  map.account '/account', :controller => 'users', :action => 'account'
+  map.change_password '/change_password', :controller => 'users', :action => 'change_password'
+
   map.resources :users
 
   map.resource :session
@@ -19,32 +22,32 @@ ActionController::Routing::Routes.draw do |map|
   #map.home '', :controller => 'tournaments', :action => 'index'
   #map.login 'login', :controller => 'sessions', :action => 'new'
   #map.logout 'logout', :controller => 'sessions', :action => 'destroy'
-  
+
   map.resources :resultitems
 
   map.resources :results
   map.resources :results do |r|
     r.resources :resultitems
-  end 
+  end
 
   map.resources :teams
 
   map.resources :users
-  
+
   map.resources :appeals
 
   map.resources :disputeds
 
   map.resources :events
-  map.resources :events do |e| 
+  map.resources :events do |e|
     e.resources :disputeds
     e.resources :appeals
     e.resources :results
   end
   map.change_status "events/:id/change_status", :controller => 'events', :action => "change_status"
-  
+
   map.resources :games
-  map.resources :games do |g| 
+  map.resources :games do |g|
     g.resources :events
     g.resources :disputeds
     g.resources :appeals
@@ -54,11 +57,11 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :cities
 
   map.resources :tournaments
-  map.resources :tournaments do |t| 
+  map.resources :tournaments do |t|
     t.resources :games
   end
   map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
-  
+
   map.resources :cities
 
   map.root :controller => 'tournaments'
@@ -81,7 +84,7 @@ ActionController::Routing::Routes.draw do |map|
 
   # Sample resource route with sub-resources:
   #   map.resources :products, :has_many => [ :comments, :sales ], :has_one => :seller
-  
+
   # Sample resource route with more complex sub-resources
   #   map.resources :products do |products|
   #     products.resources :comments
