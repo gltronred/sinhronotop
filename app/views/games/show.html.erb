@@ -46,9 +46,9 @@
 <% if is_org? @game.tournament %>
 
 <p>
-<b>Ссылка для регистрации для рассылки потенциальным участникам:</b>
+<b>Ссылка на страницу подачи заявки для потенциальных участников:</b>
 <% url = url_for(:action => 'new', :controller => game_events_path(@game), :only_path => false) %>
-<input type="text" id="registration_link" size="<%= url.length %>" value="<%=h url  %>" />
+<input type="text" id="registration_link" size="<%= url.length + 15 %>" value="<%=h url  %>" />
 </p>
 
 <p>
