@@ -16,13 +16,14 @@ class EventTest < ActionController::IntegrationTest
       fill_in "event_more_info", :with => 'Будем играть голыми'
       fill_in "event_game_time", :with => '12:00'
       fill_in "event_num_teams", :with => '19'
-      select 'Рига (Латвия)', :from => "event_city_id"
+      select 'Рига', :from => "event_city_id"
       click_button "Сохранить"
 
-      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "Латвия", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc, "Будем играть голыми", '12:00', "19"]
+      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc, "Будем играть голыми", '12:00', "19"]
+      assert_not_contain "Латвия"
       check_email('riga@example.com', 
-        ["Вася Пупкин", "заявка получена и будет рассмотрена", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", "Латвия", Date.today.loc, "новая", "Будем играть голыми", '12:00', "19"],
-        ["принимаются"])
+        ["Вася Пупкин", "заявка получена и будет рассмотрена", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", Date.today.loc, "новая", "Будем играть голыми", '12:00', "19"],
+        ["принимаются", "Латвия"])
 
       click_link "Изменить"
 
@@ -33,8 +34,9 @@ class EventTest < ActionController::IntegrationTest
       fill_in "event_game_time", :with => '12:30'
       click_button "Сохранить"
 
-      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Латвия", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
-      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Латвия", "Рига", (Date.today + 1.day).loc, "изменены", 'Будем играть в темноте', '12:30', "19"])
+      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
+      assert_not_contain "Латвия"
+      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", (Date.today + 1.day).loc, "изменены", 'Будем играть в темноте', '12:30', "19"], ["Латвия"])
     }
   end
 

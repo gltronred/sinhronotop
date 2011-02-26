@@ -78,7 +78,7 @@ class ResultTest < ActionController::IntegrationTest
       click_link "Изменить данные команды"
       fill_in "team_name", :with => "АБВГДейка"
       fill_in "result_cap_name", :with => "Левушкин"
-      select "Кельн (Германия)", :from => "city_id"
+      select "Кельн", :from => "city_id"
       click_button "Сохранить"
       assert_contain_multiple ["АБВГДейка", "Левушкин", "Кельн"]
       add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")      

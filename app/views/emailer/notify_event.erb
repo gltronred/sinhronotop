@@ -1,7 +1,6 @@
 Регистрация на синхронный турнир: <%= @action %>
 
 Город: <%=h @event.city.name %> 
-Страна: <%=h @event.city.country %> 
 На игру <%= @event.game.name %> турнира <%= @event.game.tournament.name %>.
 Дата игры: <%=h @event.date.loc %>
 <% if @event.game.tournament.time_required -%>
