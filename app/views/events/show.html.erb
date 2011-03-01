@@ -39,16 +39,16 @@
 <%=h @event.user.email %>
 </p>
 <p>
-<b>Дополнительная информация:</b>
-<%=h @event.more_info %>
-</p>
-<p>
 <b> Команд:</b>
 <%=h @event.num_teams %>
 </p>
 <p>
+<b>Дополнительная информация:</b>
+<%=h @event.more_info %>
+</p>
+<p>
 <b>Статус заявки:</b>
-<%=h @event.event_status %>
+<span id='event_status_<%= @event.id %>'><%=h @event.event_status.name -%></span>
 </p>
 
 <%= link_to 'Все заявки', game_events_path(@event.game) %>
@@ -58,3 +58,4 @@
 <%= link_to 'Апелляции', event_appeals_path(@event) %>
 <%= link_to 'Результаты', event_results_path(@event) %>
 <% end %>
+<%= render :partial => "change_status", :locals => { :event => @event } %>

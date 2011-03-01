@@ -3,8 +3,8 @@ class Appeal < ActiveRecord::Base
 
   validates_presence_of :question_index, :goal
   validates_numericality_of :question_index, :integer_only => true
-  validates_length_of :answer, :maximum => 255
-  validates_length_of :argument, :maximum => 20000
+  validates_length_of :answer, :maximum => 255, :allow_nil => true
+  validates_length_of :argument, :maximum => 20000, :allow_nil => true
 
   def to_s
     "Апелляция"

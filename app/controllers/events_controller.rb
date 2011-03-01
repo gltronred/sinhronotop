@@ -9,7 +9,7 @@ class EventsController < ApplicationController
 
   def change_status
     @event.event_status = EventStatus.find_by_id(params[:new_status_id])
-    if @event.save
+    if @event.save!
       Emailer.deliver_notify_event(@event, "статус заявки изменен")
       respond_to do |format|
         format.js
