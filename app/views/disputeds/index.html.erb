@@ -2,13 +2,14 @@
   <tr>
     <th>Номер вопроса</th>
     <th>Ответ</th>
-    
+    <th>Из какого города</th>
   </tr>
 <% changeable = can_submit_disp? @event %>
 <% @disputeds.each do |disputed| %>
   <tr>
     <td><%=h disputed.question_index %></td>
     <td><%=h disputed.answer %></td>
+	<td><%=h link_to disputed.event.city.name, event_path(disputed.event) %></td>
     <% if changeable %>
       <td><%= link_to 'Изменить', edit_event_disputed_path(@event, disputed) %></td>
       <td><%= link_to 'Удалить', disputed, :confirm => 'Вы уверены?', :method => :delete%></td>

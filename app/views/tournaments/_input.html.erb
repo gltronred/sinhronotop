@@ -10,19 +10,19 @@
     <%= f.select :user_id, @users.collect {|u| [ u.to_s, u.id ] } %>
   </p>
   <p>
-    <%= f.label "Нужны ли составы?" %><br />
+    <%= f.label "Составы нужны" %><br />
     <%= f.check_box :needTeams %>
   </p>
   <p>
-    <%= f.label "Принимаются ли апелляции на снятие?" %><br />
+    <%= f.label "Апелляции на снятие разрешены" %><br />
     <%= f.check_box :appeal_for_dismiss %>
   </p>
   <p>
-    <%= f.label "Требуется ли фамилия капитана при внесении результатов?" %><br />
+    <%= f.label "При внесении результатов требуется фамилия капитана" %><br />
     <%= f.check_box :cap_name_required %>
   </p>
   <p>
-    <%= f.label "Требуется ли время начала игры?" %><br />
+    <%= f.label "В заявке требуется время начала игры" %><br />
     <%= f.check_box :time_required %>
   </p>
   <p>

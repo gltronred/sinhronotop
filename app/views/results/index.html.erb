@@ -7,7 +7,8 @@
 <% if @game.tournament.cap_name_required %>
 	<th>Капитан</th>
 <% end %>
-	<th>Город</th>
+	<th>Город (команды)</th>
+	<th>Город (где играли)</th>
 <% for i in 1..@game.num_tours %>
 	<th>Тур <%= i %></th>
 <% end %>
@@ -25,6 +26,7 @@
 	<td><%=h result.cap_name %></td>
 <% end %>
 	<td><%=h result.team.city %></td>
+    <td><%=h link_to result.event.city.name, event_path(result.event) %></td>
 <% for tour in 1..@game.num_tours %>
 	<%= render :partial => "tour_result", :locals => {:result => result, :tour => tour, :suffix => 'summary'} %>
 <% end %>

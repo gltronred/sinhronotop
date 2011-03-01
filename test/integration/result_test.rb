@@ -12,8 +12,10 @@ class ResultTest < ActionController::IntegrationTest
       visit "/events/#{event.id}/results"
 
       #see my earlier submitmets, don't see submitments from other events
-      check_td oki.name
-      check_td(pv.name, false)
+      search_in_result_table oki.name
+      search_in_result_table oki.city.name
+      search_in_result_table "Рига"
+      search_in_result_table(pv.name, false)
       check_score 8
 
       #edit
@@ -29,8 +31,8 @@ class ResultTest < ActionController::IntegrationTest
     sp = teams(:sp)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      add_team_listed(false, sp)
-      add_team_listed(true, sp, "Марк Ленивкер")
+      add_team_listed(false, sp, event)
+      add_team_listed(true, sp, event, "Марк Ленивкер")
       check "team#{sp.id}_tour1_question8"
       check "team#{sp.id}_tour3_question29"
       uncheck "team#{sp.id}_tour2_question13"
@@ -43,13 +45,13 @@ class ResultTest < ActionController::IntegrationTest
     sp = teams(:sp)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      add_team_listed(true, sp)
+      add_team_listed(true, sp, event)
       add_team_new(true, "Rolling Stones", event.city)
       click_link "Изменить данные команды"
       fill_in "team_name", :with => "Scorpions"
       click_button "Сохранить"
       assert_contain_multiple ["Рига", "Scorpions"]
-      add_team_new(true, "Beatles", event.city, cities(:tallinn))      
+      add_team_new(true, "Beatles", event.city, cities(:tallinn))
     }
   end
 
@@ -59,8 +61,8 @@ class ResultTest < ActionController::IntegrationTest
     ka = teams(:ka)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      add_team_listed(true, sp, "Марк Ленивкер")
-      add_team_listed(true, ka, "Максим Ли")
+      add_team_listed(true, sp, event, "Марк Ленивкер")
+      add_team_listed(true, ka, event, "Максим Ли")
       click_link "Импорт тура из Excel"
       fill_in "excel_input", :with => "+\t\t+\t\t+\t\t+\t+\t+\t\t\t\r\n1\t\t\t\t\t\t\t\t\t\t\t1"
       click_link "Импортировать"
@@ -81,10 +83,10 @@ class ResultTest < ActionController::IntegrationTest
       select "Кельн", :from => "city_id"
       click_button "Сохранить"
       assert_contain_multiple ["АБВГДейка", "Левушкин", "Кельн"]
-      add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")      
+      add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")
       assert_select("input[type='checkbox']", :count => 72)
       click_remove_and_confirm
-      check_td("АБВГДейка", false)
+      search_in_result_table("АБВГДейка", false)
     }
   end
 
@@ -122,11 +124,11 @@ class ResultTest < ActionController::IntegrationTest
 
   private
 
-  def check_td(string_to_search, should_be_listed=true)
+  def search_in_result_table(string_to_search, should_be_listed=true)
     within '#result_table' do |scope|
-      element = scope.field_by_xpath("//td[text()='#{string_to_search}']")
+      element = scope.field_by_xpath("//td[text()='#{string_to_search}']") || scope.field_by_xpath("//a[text()='#{string_to_search}']")
       if should_be_listed
-        assert element
+        assert element, " #{string_to_search} not found in #{scope.dom}"
       else
         assert_nil element
       end
@@ -140,17 +142,19 @@ class ResultTest < ActionController::IntegrationTest
     assert_contain_multiple [question_index.to_s, answer]
   end
 
-  def add_team_listed(should_be_added, team, cap_name=nil)
+  def add_team_listed(should_be_added, team, event, cap_name=nil)
     select "#{team.name} (#{team.city.name})", :from => "result_team_id"
     fill_in "result_cap_name", :with => cap_name if cap_name
     click_button "result_submit"
-    check_td(team.name, should_be_added)
-    check_td(cap_name, should_be_added) if cap_name
+    search_in_result_table(event.city.name, should_be_added) if should_be_added
+    search_in_result_table(team.city.name, should_be_added) if should_be_added
+    search_in_result_table(team.name, should_be_added)
+    search_in_result_table(cap_name, should_be_added) if cap_name && should_be_added
   end
 
   def remove_team(team)
     click_remove_and_confirm
-    check_td(team.name, false)
+    search_in_result_table(team.name, false)
   end
 
   def add_team_new(should_be_added, name, event_city, team_city=nil, cap_name=nil)
@@ -159,15 +163,14 @@ class ResultTest < ActionController::IntegrationTest
     fill_in "cap_name", :with => cap_name if cap_name
     click_button "team_submit"
     choose_ok_on_next_confirmation rescue false
-    check_td((team_city || event_city).to_s, should_be_added)
-    check_td(name, should_be_added)
-    check_td(cap_name, should_be_added) if cap_name
+    search_in_result_table(event_city.to_s, should_be_added) if should_be_added
+    search_in_result_table(team_city.to_s, should_be_added) if team_city
+    search_in_result_table(name, should_be_added)
+    search_in_result_table(cap_name, should_be_added) if cap_name
   end
 
   def check_score(score)
-    within '#result_table' do |scope|
-      assert_not_nil scope.field_by_xpath("//td[text()='#{score}']")
-    end
+    search_in_result_table(score.to_s)
     assert_select("input[type='checkbox'][checked='checked']", :count => score)
   end
 

@@ -1,10 +1,11 @@
 <% changeable = can_submit_appeal? @event %>
 
 <% @appeals.each do |appeal| %>
-<p><b>Номер вопроса:</b> <%= appeal.question_index %><br/>
-<b>Ответ команды:</b> <%= appeal.answer %><br/>
-<b>Желаемый вердикт:</b> <%= appeal.goal %><br/>
-<b>Аргументация:</b><%= (h appeal.argument).gsub("\n", '<br/>'.html_safe) if appeal.argument %></textarea><br/>
+<p><b>Номер вопроса: </b> <%= appeal.question_index %><br/>
+<b>Из какого города: </b> <%=h link_to appeal.event.city.name, event_path(appeal.event) %><br/>
+<b>Ответ команды: </b> <%= appeal.answer %><br/>
+<b>Желаемый вердикт: </b> <%= appeal.goal %><br/>
+<b>Аргументация: </b><%= (h appeal.argument).gsub("\n", '<br/>'.html_safe) if appeal.argument %></textarea><br/>
 <% if changeable %>
 <%= link_to 'Изменить', edit_event_appeal_path(appeal.event, appeal) %>
 <%= link_to 'Удалить', appeal, :confirm => 'Вы уверены?', :method => :delete %>

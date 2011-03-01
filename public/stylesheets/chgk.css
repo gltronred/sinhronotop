@@ -54,7 +54,7 @@ TABLE TD {
     position:relative;
     top:10px; 
     width:500px; 
-    float: right; 
+    float: left;
     z-index:1
 }
 .much_text {

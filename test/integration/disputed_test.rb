@@ -24,7 +24,7 @@ class DisputedTest < ActionController::IntegrationTest
     game = games(:bb2)
     do_with_users([:marina]) {
       visit "/games/#{game.id}/disputeds"
-      assert_contain_multiple ["крокодил", "бегемот", "гиппопотам"]
+      assert_contain_multiple ["Франкфурт-на-Майне", "Рига", "крокодил", "бегемот", "гиппопотам"]
     }
   end
 
