@@ -19,6 +19,6 @@
 <% end %>
 
 <% unless @event %>
-<p><%= link_to "Экспортировать в CSV", game_appeals_path(@game, :format => :csv) %></p>
+<%= render :partial => "common/csv", :locals => {:path => game_appeals_path(@game, :format => :csv) } %>
 <p><%= link_to "Экспортировать как текст", game_appeals_path(@game, :format => :txt) %></p>
 <% end %>

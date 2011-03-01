@@ -40,4 +40,4 @@
   </tr>
 <% end %>
 </table>
-<p><%= link_to "Экспортировать в CSV", game_events_path(@game, :format => :csv) %></p>
+<%= render :partial => "common/csv", :locals => {:path => game_events_path(@game, :format => :csv) } %>

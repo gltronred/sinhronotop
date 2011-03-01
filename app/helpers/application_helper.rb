@@ -1,6 +1,6 @@
 # Methods added to this helper will be available to all templates in the application.
 module ApplicationHelper
-  
+
   def authenticate
     unless logged_in?
       store_location
@@ -24,12 +24,23 @@ module ApplicationHelper
       end
     end
   end
-  
+
   def load_users
     @users = User.all(:order => :name).select{|u| 'znatok' != u.status}
   end
-  
+
   def context_array(arr)
     arr.map{|element| element.is_a?(String) ? element : link_to(element.to_s, element)}.join(' >> ')
   end
+
+  @@converters = {
+    'ISO-8859-5' => Iconv.new('ISO-8859-5', 'UTF-8'),
+    'UTF-8' => Iconv.new('UTF-8', 'UTF-8'),
+    'KOI8-R' => Iconv.new('KOI8-R', 'UTF-8')
+  }
+
+  def get_converters_array
+    @@converters.keys
+  end
+
 end
