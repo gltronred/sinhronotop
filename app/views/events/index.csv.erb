@@ -3,5 +3,5 @@
 Город;Страна;Дата<%=";Время" if @game.tournament.time_required -%>;Ведущий;Email ведущего;Представитель;Email представителя;Команд;Дополнительная информация;Статус заявки
 
 <% @events.each do |event| -%>
-<%= event.city.name -%>;<%= event.city.country -%>;<%= event.date.loc -%><%=";#{event.game_time}" if @game.tournament.time_required -%>;<%= event.moderator_name -%>;<%= event.moderator_email -%>;<%= event.user.name -%>;<%= event.user.email -%>;<%= event.num_teams %>;<%= event.more_info %>;<%= event.event_status.name %>
+<%= event.city.name -%>;<%= event.city.country -%>;<%= event.date.loc -%><%=";#{event.game_time}" if @game.tournament.time_required -%>;<%= event.get_moderator_name -%>;<%= event.get_moderator_email -%>;<%= event.user.name -%>;<%= event.user.email -%>;<%= event.num_teams %>;<%= event.more_info %>;<%= event.event_status.name %>
 <% end -%>

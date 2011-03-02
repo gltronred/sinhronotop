@@ -14,7 +14,7 @@ class UserTest < ActionController::IntegrationTest
     click_button "Зарегистрироваться"
     assert_contain "Чтобы завершить регистрацию"
     assert_not_contain_multiple ["Добро пожаловать", "Привет"]
-    check_email("schumacher@formel1.com", ["Михаэль Шумахер", "schumacher@formel1.com", "ferrari"])
+    check_email(["schumacher@formel1.com"], ["Михаэль Шумахер", "schumacher@formel1.com", "ferrari"])
     login_form("schumacher@formel1.com", "ferrari", false)
     url = get_url_from_last_email
     visit url
@@ -30,7 +30,7 @@ class UserTest < ActionController::IntegrationTest
     click_link "Я забыл(а) пароль"
     fill_in "user_email", :with => 'cologne@example.com'
     click_button "Послать"
-    check_email("cologne@example.com", ["Чтобы восстановить пароль к email cologne@example.com, посетите страницу"])
+    check_email(["cologne@example.com"], ["Чтобы восстановить пароль к email cologne@example.com, посетите страницу"])
     url = get_url_from_last_email
     visit url
     fill_in "user_password", :with => "palatka"
@@ -66,9 +66,9 @@ class UserTest < ActionController::IntegrationTest
       click_button "Отправить"
       assert_contain "Сообщение послано администратору, спасибо"
       if znatok
-        check_email("sinhronotop@googlemail.com", ["Конечно Вася", "vasja@pupkin.info", "Не нравится мне тут все у вас"])
+        check_email(["sinhronotop@googlemail.com"], ["Конечно Вася", "vasja@pupkin.info", "Не нравится мне тут все у вас"])
       else
-        check_email("sinhronotop@googlemail.com", ["Константин Кноп", "kupr@example.com", "Не нравится мне тут все у вас"])
+        check_email(["sinhronotop@googlemail.com"], ["Константин Кноп", "kupr@example.com", "Не нравится мне тут все у вас"])
       end
       logout
     end

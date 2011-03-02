@@ -11,6 +11,7 @@ class EventTest < ActionController::IntegrationTest
       date = Date.today
       click_link "Зарегистрироваться"
       select_date("event_date", date.day, date.month, date.year)
+      choose "moderator_other"
       fill_in "event_moderator_name", :with => 'Вася Пупкин'
       fill_in "event_moderator_email", :with => 'pupkin@vasi.net'
       fill_in "event_more_info", :with => 'Будем играть голыми'
@@ -21,7 +22,7 @@ class EventTest < ActionController::IntegrationTest
 
       assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc, "Будем играть голыми", '12:00', "19"]
       assert_not_contain "Латвия"
-      check_email('riga@example.com', 
+      check_email(['riga@example.com', 'pupkin@vasi.net'], 
         ["Вася Пупкин", "заявка получена и будет рассмотрена", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", Date.today.loc, "новая", "Будем играть голыми", '12:00', "19"],
         ["принимаются", "Латвия"])
 
@@ -36,7 +37,25 @@ class EventTest < ActionController::IntegrationTest
 
       assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
       assert_not_contain "Латвия"
-      check_email('riga@example.com', ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", (Date.today + 1.day).loc, "изменены", 'Будем играть в темноте', '12:30', "19"], ["Латвия"])
+      check_email(['riga@example.com', 'pupkin@vasi.net'], 
+      ["Василий Пупкин", "pupkin@vasi.net", "Дмитрий Бочаров", "Рига", (Date.today + 1.day).loc, "изменены", 'Будем играть в темноте', '12:30', "19"], 
+      ["Латвия"])
+=begin
+      click_link "Изменить"
+      choose "moderator_self"
+      click_button "Сохранить"
+      check_email(['riga@example.com'], 
+      ["Дмитрий Бочаров", "Рига"], 
+      ["Василий Пупкин", 'pupkin@vasi.net'])
+      
+      click_link "Изменить"
+      choose "moderator_from_list"
+      select "Константин Кноп", :from => "moderator_list"
+      click_button "Сохранить"
+      check_email(['riga@example.com', "kupr@example.com"], 
+      ["Дмитрий Бочаров", "Рига", "Константин Кноп", "kupr@example.com"], 
+      ["Василий Пупкин", 'pupkin@vasi.net'])
+=end      
     }
   end
 
@@ -87,7 +106,7 @@ class EventTest < ActionController::IntegrationTest
       assert_contain_multiple ["новая", "отклонена"]
       select "принята", :from => "change_event_status_#{kg2_frankfurt.id}"      
       #Cannot test Ajax with Webrat/Rails
-      #check_email('frankfurt@example.com', ["Иван Иванов", "принята"])
+      #check_email(['frankfurt@example.com'], ["Иван Иванов", "принята"])
       select "принята", :from => "change_event_status_#{kg2_riga.id}"
       #check_email('riga@example.com', ["Вася", "принята"])
       #visit "/games/#{kg1.id}/events/#{kg1_frankfurt.id}"

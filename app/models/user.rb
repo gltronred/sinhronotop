@@ -3,6 +3,7 @@ require 'digest/sha1'
 class User < ActiveRecord::Base
   has_many :tournaments
   has_many :events
+  has_many :moderations
 
   include Authentication
   include Authentication::ByPassword

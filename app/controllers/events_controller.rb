@@ -40,12 +40,14 @@ class EventsController < ApplicationController
   def new
     @event = Event.new
     load_cities(@game.tournament_id)
+    load_users
     @context_array = @game.parents_top_down(:with_me) << "регистрация"
   end
 
   # GET /events/1/edit
   def edit
     load_cities(@event.game.tournament_id)
+    load_users
     @context_array = @event.parents_top_down(:with_me) << "изменить данные регистрации"
   end
 
@@ -73,12 +75,19 @@ class EventsController < ApplicationController
   # PUT /events/1.xml
   def update
     respond_to do |format|
+      if params[:event][:moderation_id]
+        @event.moderator_name = nil
+        @event.moderator_email = nil
+      else
+        @event.moderation_id = nil
+      end
       if @event.update_attributes(params[:event])
         Emailer.deliver_notify_event(@event, "данные заявки изменены")
         format.html { redirect_to(@event, :notice => 'Параметры заявки изменены') }
       else
         format.html {
           load_cities(@event.game.tournament_id)
+          load_users
           render :action => "edit"
         }
       end
