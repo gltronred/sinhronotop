@@ -9,8 +9,8 @@ class EventsController < ApplicationController
 
   def change_status
     @event.event_status = EventStatus.find_by_id(params[:new_status_id])
+    @event.last_change = "статус заявки изменен"
     if @event.save!
-      Emailer.deliver_notify_event(@event, "статус заявки изменен")
       respond_to do |format|
         format.js
       end
@@ -54,11 +54,12 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
+    puts "create #{Rails.env}"
     @event = Event.new(params[:event])
     @event.event_status = EventStatus.find_by_short_name("new")
+    @event.last_change = "заявка получена и будет рассмотрена"
     respond_to do |format|
-      if @event.save
-        Emailer.deliver_notify_event(@event, "заявка получена и будет рассмотрена")
+      if @event.save        
         format.html { redirect_to(@event, :notice => 'Спасибо, заявка получена и будет рассмотрена') }
       else
         format.html {
@@ -74,6 +75,7 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
+    puts "update #{Rails.env}"
     respond_to do |format|
       if params[:event][:moderation_id]
         @event.moderator_name = nil
@@ -81,8 +83,8 @@ class EventsController < ApplicationController
       else
         @event.moderation_id = nil
       end
+      @event.last_change = "данные заявки изменены"
       if @event.update_attributes(params[:event])
-        Emailer.deliver_notify_event(@event, "данные заявки изменены")
         format.html { redirect_to(@event, :notice => 'Параметры заявки изменены') }
       else
         format.html {

@@ -31,5 +31,6 @@
 	  <%=h @tournament.calc_system %>
 </p>	
 <%= link_to 'Изменить', edit_tournament_path(@tournament) if is_org? @tournament %>
+<%= link_to "Удалить", @tournament, :confirm => 'Вы уверены?', :method => :delete if is_admin? %>
 <%= render :partial => 'games/index'%>
 <p><%= link_to "поэтапные результаты", tournament_results_path(@tournament) %></p>

@@ -1,20 +1,40 @@
+require 'rubygems'
+require 'capybara'
+require 'capybara/dsl'
+require 'rake'
+
+#require 'akephalos'
+#Capybara.javascript_driver = :akephalos
+#Capybara.default_driver = :akephalos
+
+Capybara.default_driver = :selenium
+Capybara.app_host = 'http://localhost:3000'
+
 module IntegrationTestHelper
+  include Capybara
+  
   def login(user)
     login_form(user.email, 'znatok')
   end
 
-  def login_form(email, password, success=true, with_redirection=false)
+  def login_form(email, password, success=true)
     visit home_path
     fill_in "email", :with => email
     fill_in "password", :with => password
     click_button "Войти"
-    follow_redirect! if with_redirection
     if success
-      assert_response :ok
       assert_contain "Добро пожаловать"
     else
       assert_contain "не удалось"
     end
+  end
+  
+  def assert_contain(str)
+    assert page.has_content?(str), "#{str} not found in #{page.body.gsub(/<[a-zA-Z\/][^>]*>/, ' ').gsub(/\n\n/, ' ')}"
+  end
+  
+  def assert_not_contain(str)
+    assert !page.has_content?(str), "#{str} found in #{page.body.gsub(/<[a-zA-Z\/][^>]*>/, ' ').gsub(/\n\n/, ' ')}"
   end
 
   def login_basic_auth(user)
@@ -46,8 +66,9 @@ module IntegrationTestHelper
   end
 
   def assert_have_no_selector_multiple(arr)
-    arr.each do |el|
-      assert_have_no_selector el
+    arr.each do |el|      
+      assert !has_selector?(el), "found #{el}"
+      #assert_have_no_selector el
     end
   end
 
@@ -58,7 +79,9 @@ module IntegrationTestHelper
   end
 
   def logout
-    post logout_path
+    click_link "Выход"
+    assert_contain "До свидания"
+    #post logout_path
   end
 
   def do_with_users(user_array)
@@ -69,29 +92,13 @@ module IntegrationTestHelper
     end
   end
 
-  def click_remove_and_confirm
-    click_link "Удалить"
-    choose_ok_on_next_confirmation rescue false
+  def confirm_alert
+    page.evaluate_script('window.confirm = function() { return true; }')
   end
 
-  def check_email(to_arr, arr_contains, arr_not_contains=[])
-    assert !ActionMailer::Base.deliveries.empty?
-    mail = ActionMailer::Base.deliveries.last
-    to_arr.each {|to|assert mail.to.include?(to)}
-    arr_contains.each do |cont|
-      assert mail.body.include?(cont), "phrase '#{cont}' not found in #{mail.body}"
-    end
-    arr_not_contains.each do |ncont|
-      assert !mail.body.include?(ncont), "phrase '#{ncont}' found in #{mail.body}"
-    end
+  def click_remove_and_confirm
+    page.evaluate_script('window.confirm = function() { return true; }')
+    click_link "Удалить"
   end
-  
-  URL_REGEXP = /https?:\/\/[\S]+/
-  
-  def get_url_from_last_email
-    assert !ActionMailer::Base.deliveries.empty?
-    mail = ActionMailer::Base.deliveries.last
-    urls = mail.body.scan URL_REGEXP
-    urls.empty? ? nil : urls.first
-  end
+
 end

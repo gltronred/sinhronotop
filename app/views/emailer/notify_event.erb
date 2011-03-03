@@ -6,8 +6,8 @@
 <% if @event.game.tournament.time_required -%>
 Время игры (местное): <%=h @event.game_time %>
 <% end -%>
-Ведущий: <%=h @event.moderator_name %>
-Email ведущего: <%=h @event.moderator_email %>
+Ведущий: <%=h @event.get_moderator_name %>
+Email ведущего: <%=h @event.get_moderator_email %>
 Представитель: <%=h @event.user.name %> 
 Email представителя: <%=h @event.user.email %>
 Количество команд: <%=h @event.num_teams %>
@@ -16,7 +16,7 @@ Email представителя: <%=h @event.user.email %>
 Статус заявки: <%=h @event.event_status.name %>
 
 Изменить данные заявки можно по адресу:  <%= @update_url %>
-<% if 'approved' == @event.event_status.name %>
+<% if 'approved' == @event.event_status.short_name %>
 Спорные ответы принимаются до <%=h @event.game.submit_disp_until.loc %> по адресу:  <%= @disputeds_url %>
 Апелляции принимаются до <%=h @event.game.submit_appeal_until.loc %> по адресу: <%= @appeals_url %>
 Результаты принимаются до <%=h @event.game.submit_results_until.loc %> по адресу:  <%= @results_url %>

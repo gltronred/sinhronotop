@@ -15,6 +15,7 @@ class AppealTest < ActionController::IntegrationTest
   def test_resp_submits
     event = events(:bb2_riga)
     do_with_users([:trodor]) {
+      
       visit "/events/#{event.id}/appeals"
       assert_contain_multiple ["обезьяна", "это мое любимое животное", "курица - не птица, как утверждается в вопросе"] #see my already submitted stuff 
       assert_not_contain_multiple ["Купидон", "другое имя бога Эрота"] #cannot see submitments from other events
@@ -62,7 +63,7 @@ class AppealTest < ActionController::IntegrationTest
   private
 
   def submit_appeal(question_index, goal, answer, argument, should_contain_strings=nil)
-    select question_index, :from => "appeal_question_index"
+    select question_index.to_s, :from => "appeal_question_index"
     select goal, :from => "appeal_goal"
     fill_in "appeal_answer", :with => answer
     fill_in "appeal_argument", :with => argument

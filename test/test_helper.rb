@@ -1,6 +1,7 @@
 ENV["RAILS_ENV"] = "test"
 require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
 require 'test_help'
+require 'database_cleaner'
 
 class ActiveSupport::TestCase
   # Transactional fixtures accelerate your tests by wrapping each test method
@@ -19,7 +20,7 @@ class ActiveSupport::TestCase
   # The only drawback to using transactional fixtures is when you actually
   # need to test transactions.  Since your test is bracketed by a transaction,
   # any transactions started in your code will be automatically rolled back.
-  self.use_transactional_fixtures = false
+  self.use_transactional_fixtures = true
 
   # Instantiated fixtures are slow, but give you @david where otherwise you
   # would need people(:david).  If you don't want to migrate your existing
@@ -46,6 +47,8 @@ def assert_valid_markup(markup=@response.body)
   assert_equal 'Valid', response['x-w3c-validator-status']
 end
 
+=begin
 Webrat.configure do |config|
   config.mode = :rails
 end
+=end

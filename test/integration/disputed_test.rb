@@ -54,7 +54,7 @@ class DisputedTest < ActionController::IntegrationTest
   private
 
   def submit_disputed(question_index, answer)
-    select question_index, :from => "disputed_question_index"
+    select question_index.to_s, :from => "disputed_question_index"
     fill_in "disputed_answer", :with => answer
     click_button "Сохранить"
     assert_contain_multiple [question_index.to_s, answer]

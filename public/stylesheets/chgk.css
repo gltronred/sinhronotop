@@ -4,6 +4,11 @@ TABLE {
 
 TABLE TD {
   padding: 4px;
+  min-width: 15px;
+}
+TABLE TH {
+  /*padding: 4px;*/
+  min-width: 15px;
 }
 
 .inline {

@@ -61,7 +61,7 @@ Rails::Initializer.run do |config|
   #config.gem "declarative_authorization", :source => "http://gemcutter.org"
   
   #config.action_mailer.delivery_method = :smtp
-  #config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
   
@@ -70,7 +70,7 @@ Rails::Initializer.run do |config|
     ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
   end
   
-  config.active_record.observers = :user_observer
+  config.active_record.observers = :user_observer, :event_observer
 end
 
 class String

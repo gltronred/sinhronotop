@@ -7,10 +7,10 @@ class Emailer < ActionMailer::Base
     send(user.email, "New user registration")
   end
 
-  def notify_event(event, action)
+  def notify_event(event)
     subject = "ChGK game registration"
     @event = event
-    @action = action
+    @action = @event.last_change
     @update_url = url_for(:controller => edit_event_path(@event))
     @disputeds_url = url_for(:controller => event_disputeds_path(@event))
     @appeals_url = url_for(:controller => event_appeals_path(@event))

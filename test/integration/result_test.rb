@@ -84,7 +84,7 @@ class ResultTest < ActionController::IntegrationTest
       click_button "Сохранить"
       assert_contain_multiple ["АБВГДейка", "Левушкин", "Кельн"]
       add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")
-      assert_select("input[type='checkbox']", :count => 72)
+      assert page.has_xpath?("//input[@type='checkbox']", :count => 72)
       click_remove_and_confirm
       search_in_result_table("АБВГДейка", false)
     }
@@ -95,7 +95,7 @@ class ResultTest < ActionController::IntegrationTest
     do_with_users([:marina]) {
       visit "/games/#{game.id}/results"
       assert_contain_multiple ["Против ветра", "10", "Оки-доки", "8"]
-      assert_select("input", :count => 0)
+      assert !page.has_xpath?("//input")
     }
   end
 
@@ -103,7 +103,7 @@ class ResultTest < ActionController::IntegrationTest
     game = games(:bb1)
     do_with_users([:trodor]) {
       visit "/games/#{game.id}/results"
-      assert_select("input", :count => 0)
+      assert !page.has_xpath?("//input")
     }
   end
 
@@ -125,12 +125,14 @@ class ResultTest < ActionController::IntegrationTest
   private
 
   def search_in_result_table(string_to_search, should_be_listed=true)
-    within '#result_table' do |scope|
-      element = scope.field_by_xpath("//td[text()='#{string_to_search}']") || scope.field_by_xpath("//a[text()='#{string_to_search}']")
+    within(:xpath, "//table[@id='result_table']") do
+      expression = "//td[text()='#{string_to_search}']"
+      el1 = page.has_xpath? "//td[text()='#{string_to_search}']"
+      el2 = page.has_xpath? "//a[text()='#{string_to_search}']"
       if should_be_listed
-        assert element, " #{string_to_search} not found in #{scope.dom}"
+        assert el1 || el2, " #{string_to_search} not found"
       else
-        assert_nil element
+        assert !el1 && !el2, " #{string_to_search} found"
       end
     end
   end
@@ -161,8 +163,8 @@ class ResultTest < ActionController::IntegrationTest
     fill_in "team_name", :with => name
     select team_city.to_s, :from => "team_city_id" if team_city
     fill_in "cap_name", :with => cap_name if cap_name
+    confirm_alert
     click_button "team_submit"
-    choose_ok_on_next_confirmation rescue false
     search_in_result_table(event_city.to_s, should_be_added) if should_be_added
     search_in_result_table(team_city.to_s, should_be_added) if team_city
     search_in_result_table(name, should_be_added)
@@ -171,7 +173,7 @@ class ResultTest < ActionController::IntegrationTest
 
   def check_score(score)
     search_in_result_table(score.to_s)
-    assert_select("input[type='checkbox'][checked='checked']", :count => score)
+    assert page.has_xpath?("//input[@type='checkbox'][@checked='checked']", :count => score)
   end
 
 end

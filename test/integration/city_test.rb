@@ -16,7 +16,7 @@ class CityTest < ActionController::IntegrationTest
     }
   end
 
-  def test_admin_can_see_and_edit
+  def xtest_admin_can_see_and_edit
     do_with_users([:perlin]) {
       visit home_path
       click_link "Города"

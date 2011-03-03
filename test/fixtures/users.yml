@@ -1,9 +1,23 @@
+milja:
+    name: Эмилия Хильц
+    email: milja@example.com
+    crypted_password: a1e5e2b98585b517f2e972964096834f54277aad
+    salt: d706b45205f86fdecb1265e08a56bb369509843c
+    activation_code: 234553ert
+    
 hudjakov:
     name: Павел Худяков
     email: cologne@example.com
     crypted_password: a1e5e2b98585b517f2e972964096834f54277aad
     salt: d706b45205f86fdecb1265e08a56bb369509843c
 
+morgunov:
+    name: Илья Моргунов
+    email: aachen@example.com
+    crypted_password: a1e5e2b98585b517f2e972964096834f54277aad
+    salt: d706b45205f86fdecb1265e08a56bb369509843c
+    reset_code: 2a1b2c8d5e0f6
+        
 rodionov:
     name: Дмитрий Родионов
     email: kg@example.com

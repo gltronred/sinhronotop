@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110301163128) do
+ActiveRecord::Schema.define(:version => 20110303120629) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -69,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20110301163128) do
     t.string   "more_info",       :limit => 1023
     t.string   "num_teams"
     t.integer  "moderation_id"
+    t.string   "last_change"
   end
 
   create_table "games", :force => true do |t|

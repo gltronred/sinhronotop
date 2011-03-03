@@ -14,34 +14,37 @@ class UserTest < ActionController::IntegrationTest
     click_button "Зарегистрироваться"
     assert_contain "Чтобы завершить регистрацию"
     assert_not_contain_multiple ["Добро пожаловать", "Привет"]
-    check_email(["schumacher@formel1.com"], ["Михаэль Шумахер", "schumacher@formel1.com", "ferrari"])
-    login_form("schumacher@formel1.com", "ferrari", false)
-    url = get_url_from_last_email
+  end
+  
+  def test_accomplish_registration
+    login_form("milja@example.com", "znatok", false)
+    url = "#{home_path}activate/234553ert"
     visit url
-    assert_contain_multiple ["регистрация закончена", "Привет, Михаэль Шумахер"]
-    click_link "Выход"
-    assert_not_contain "Привет, Михаэль Шумахер"
-    login_form("schumacher@formel1.com", "ferrari", true, true)
-    click_link "Выход"
+    assert_contain_multiple ["регистрация закончена", "Привет, Эмилия Хильц"]
+    logout
+    assert_not_contain "Привет, Эмилия Хильц"
+    login_form("milja@example.com", "znatok", true)
+    logout
   end
 
-  def test_reset_password
+  def test_reset_password_reqiure
     visit home_path
     click_link "Я забыл(а) пароль"
     fill_in "user_email", :with => 'cologne@example.com'
     click_button "Послать"
-    check_email(["cologne@example.com"], ["Чтобы восстановить пароль к email cologne@example.com, посетите страницу"])
-    url = get_url_from_last_email
+    assert_contain "Код для восстановления послан на адрес cologne@example.com"
+  end
+    
+  def test_reset_password_do  
+    url = "#{home_path}reset/2a1b2c8d5e0f6"
     visit url
     fill_in "user_password", :with => "palatka"
     fill_in "user_password_confirmation", :with => "palatka"
     click_button "Сохранить"
-    follow_redirect!
-    assert_contain "Привет, Павел Худяков"
-    click_link "Выход"
-    #commented this as doesn't pass test but really works. To analize!
-    #follow_redirect!
-    #login_form('cologne@example.com', "palatka")
+    assert_contain "Привет, Илья Моргунов"
+    logout
+    login_form('aachen@example.com', "palatka")
+    logout
   end
 
   def test_forwarded_to_wish_page_after_login
@@ -52,6 +55,7 @@ class UserTest < ActionController::IntegrationTest
     fill_in "password", :with => "znatok"
     click_button "Войти"
     assert current_url.include?(url), "url=#{url}, current_url=#{current_url}"
+    logout
   end
 
   def test_submit_error
@@ -65,11 +69,6 @@ class UserTest < ActionController::IntegrationTest
       fill_in "text", :with => "Не нравится мне тут все у вас"
       click_button "Отправить"
       assert_contain "Сообщение послано администратору, спасибо"
-      if znatok
-        check_email(["sinhronotop@googlemail.com"], ["Конечно Вася", "vasja@pupkin.info", "Не нравится мне тут все у вас"])
-      else
-        check_email(["sinhronotop@googlemail.com"], ["Константин Кноп", "kupr@example.com", "Не нравится мне тут все у вас"])
-      end
       logout
     end
   end

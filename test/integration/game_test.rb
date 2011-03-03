@@ -3,7 +3,7 @@ require 'integration/integration_test_helper'
 
 class GameTest < ActionController::IntegrationTest
   include IntegrationTestHelper
-  
+
   def test_dont_know_inputs
     kupr = tournaments(:kupr)
     do_with_users([:knop]) {
@@ -12,6 +12,9 @@ class GameTest < ActionController::IntegrationTest
       fill_in "game_name", :with => "главный этап"
       fill_in "game_num_tours", :with =>"3"
       fill_in "game_num_questions", :with => "14"
+      uncheck "game_begin_dont_know"
+      uncheck "game_game_begin_dont_know"
+      uncheck "game_submit_disp_until_dont_know"
       select_date("game_begin", 1, 10, 2014)
       select_date("game_game_begin", 12, 10, 2014)
       select_date("game_submit_disp_until", 15, 10, 2014)
@@ -20,21 +23,16 @@ class GameTest < ActionController::IntegrationTest
       check "game_submit_appeal_until_dont_know"
       check "game_submit_results_until_dont_know"
       click_button "Сохранить"
-
-      new_game = Game.last
-      assert_equal Date.new(2014,10,1), new_game.begin
-      assert_equal Date.new(2014,10,12), new_game.game_begin
-      assert_equal Date.new(2014,10,15), new_game.submit_disp_until
-      assert_nil new_game.end
-      assert_nil new_game.game_end
-      assert_nil new_game.submit_appeal_until
-      assert_nil new_game.submit_results_until
       
-      visit "/tournaments/#{kupr.id}"
-      click_link "Новый этап"
-      fill_in "game_name", :with => "главный этап"
-      fill_in "game_num_tours", :with =>"3"
-      fill_in "game_num_questions", :with => "14"
+      assert_contain_multiple ["1.10.2014", "12.10.2014", "15.10.2014"]
+      
+      within(:xpath, "//table[@id='table_games']") do
+        click_link "Изменить"
+      end
+      uncheck "game_end_dont_know"
+      uncheck "game_game_end_dont_know"
+      uncheck "game_submit_appeal_until_dont_know"
+      uncheck "game_submit_results_until_dont_know"
       check "game_begin_dont_know"
       check "game_game_begin_dont_know"
       check "game_submit_disp_until_dont_know"
@@ -43,15 +41,13 @@ class GameTest < ActionController::IntegrationTest
       select_date("game_submit_appeal_until", 20, 10, 2015)
       select_date("game_submit_results_until", 25, 10, 2015)
       click_button "Сохранить"
-      
-      new_game = Game.last
-      assert_equal Date.new(2015,10,10), new_game.end
-      assert_equal Date.new(2015,10,13), new_game.game_end
-      assert_equal Date.new(2015,10,20), new_game.submit_appeal_until
-      assert_equal Date.new(2015,10,25), new_game.submit_results_until
-      assert_nil new_game.begin
-      assert_nil new_game.game_begin
-      assert_nil new_game.submit_disp_until
+
+      assert_not_contain_multiple ["1.10.2014", "12.10.2014", "15.10.2014"]
+      assert_contain_multiple ["10.10.2015", "13.10.2015", "20.10.2015", "25.10.2015"]
+
+      within(:xpath, "//table[@id='table_games']") do
+        click_remove_and_confirm
+      end
     }
   end
 
@@ -60,6 +56,14 @@ class GameTest < ActionController::IntegrationTest
     do_with_users([:knop, :perlin]) {
       visit "/tournaments/#{kupr.id}"
       click_link "Новый этап"
+
+      uncheck "game_begin_dont_know"
+      uncheck "game_game_begin_dont_know"
+      uncheck "game_submit_disp_until_dont_know"
+      uncheck "game_end_dont_know"
+      uncheck "game_game_end_dont_know"
+      uncheck "game_submit_appeal_until_dont_know"
+      uncheck "game_submit_results_until_dont_know"
 
       fill_in "game_name", :with => "1 этап"
       fill_in "game_num_tours", :with =>"3"
@@ -74,9 +78,10 @@ class GameTest < ActionController::IntegrationTest
       click_button "Сохранить"
 
       assert_contain_multiple ["Этап создан", "1 этап", "3", "14", "1.10.2013", "10.10.2013", "12.10.2013", "13.10.2013", "15.10.2013", "20.10.2013", "25.10.2013", "нет"]
-      #assert_not_contain 'true'
 
-      click_link_within("#table_games", "Изменить")
+      within(:xpath, "//table[@id='table_games']") do
+        click_link "Изменить"
+      end
 
       fill_in "game_name", :with => "единственный этап"
       select_date("game_end", 11, 10, 2013)
@@ -91,7 +96,9 @@ class GameTest < ActionController::IntegrationTest
       assert_not_contain 'нет'
 
       visit "/tournaments/#{kupr.id}"
-      click_remove_and_confirm
+      within(:xpath, "//table[@id='table_games']") do
+        click_remove_and_confirm
+      end
       assert_contain "Этап удален"
       assert_not_contain "единственный этап"
     }
