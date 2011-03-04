@@ -11,6 +11,7 @@
     <th>Представитель</th>
     <th>Email представителя</th>
 	<th>Команд</th>
+	<th>IP</th>
 	<th>Дополнительная информация</th>
 	<th>Статус заявки</th>
   </tr>
@@ -28,6 +29,7 @@
     <td><%= event.user.name %></td>
     <td><%= event.user.email %></td>
     <td><%= event.num_teams %></td>
+    <td><%= event.ips %></td>
     <td><%= event.more_info %></td>
 	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span></td>
     <td>

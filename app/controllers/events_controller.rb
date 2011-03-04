@@ -54,10 +54,9 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    puts "create #{Rails.env}"
     @event = Event.new(params[:event])
+    params[:event].merge!({:last_change => "заявка получена и будет рассмотрена", :ips => "#{@event.ips}#{',' if @event.ips} #{request.remote_ip}"})
     @event.event_status = EventStatus.find_by_short_name("new")
-    @event.last_change = "заявка получена и будет рассмотрена"
     respond_to do |format|
       if @event.save        
         format.html { redirect_to(@event, :notice => 'Спасибо, заявка получена и будет рассмотрена') }
@@ -75,15 +74,9 @@ class EventsController < ApplicationController
   # PUT /events/1
   # PUT /events/1.xml
   def update
-    puts "update #{Rails.env}"
     respond_to do |format|
-      if params[:event][:moderation_id]
-        @event.moderator_name = nil
-        @event.moderator_email = nil
-      else
-        @event.moderation_id = nil
-      end
-      @event.last_change = "данные заявки изменены"
+      @event.update_moderator_id params[:event][:moderation_id]
+      params[:event].merge!({:last_change => "данные заявки изменены", :ips => "#{@event.ips}#{',' if @event.ips} #{request.remote_ip}"})
       if @event.update_attributes(params[:event])
         format.html { redirect_to(@event, :notice => 'Параметры заявки изменены') }
       else

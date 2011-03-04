@@ -15,10 +15,12 @@
 <b>Дата:</b>
 <%=h @event.date.loc %>
 </p>
+<% if @event.game.tournament.time_required -%>
 <p>
 <b>Время:</b>
 <%=h @event.game_time %>
 </p>
+<% end %>
 <p>
 <b>Ведущий:</b>
 <%=h @event.get_moderator_name %>
@@ -42,6 +44,12 @@
 <b> Команд:</b>
 <%=h @event.num_teams %>
 </p>
+<% if is_org? @event.game.tournament %>
+<p>
+<b> IP, с которых была подана (и изменна) заявка:</b>
+<%=h @event.ips %>
+</p>
+<% end %>
 <p>
 <b>Дополнительная информация:</b>
 <%=h @event.more_info %>

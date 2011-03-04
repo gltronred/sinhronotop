@@ -19,6 +19,15 @@ class Event < ActiveRecord::Base
     end
   end
 
+  def update_moderator_id(id)
+    if id
+      self.moderator_name = nil
+      self.moderator_email = nil
+    else
+      self.moderation_id = nil
+    end
+  end
+
   def to_s
     "игра в городе #{self.city.name} #{self.date.loc}"
   end

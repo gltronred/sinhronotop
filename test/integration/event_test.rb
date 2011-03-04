@@ -44,6 +44,12 @@ class EventTest < ActionController::IntegrationTest
       assert_not_contain_multiple ["Василий Пупкин", "pupkin@vasi.net"]
       assert_contain_multiple ["Константин Кноп", "kupr@example.com"]
     }
+
+    do_with_users([:marina]) {
+      visit "/games/#{bb2.id}"
+      click_link "Все заявки"
+      assert_contain "127.0.0.1, 127.0.0.1, 127.0.0.1"
+    }
   end
 
   def xtest_znatok_can_only_see_not_register
