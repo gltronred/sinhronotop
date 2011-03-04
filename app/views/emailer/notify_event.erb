@@ -17,9 +17,15 @@ Email представителя: <%=h @event.user.email %>
 
 Изменить данные заявки можно по адресу:  <%= @update_url %>
 <% if 'approved' == @event.event_status.short_name %>
+<% if @event.game.submit_disp_until %>
 Спорные ответы принимаются до <%=h @event.game.submit_disp_until.loc %> по адресу:  <%= @disputeds_url %>
+<% end %>
+<% if @event.game.submit_appeal_until %>
 Апелляции принимаются до <%=h @event.game.submit_appeal_until.loc %> по адресу: <%= @appeals_url %>
+<% end %>
+<% if @event.game.submit_results_until %>
 Результаты принимаются до <%=h @event.game.submit_results_until.loc %> по адресу:  <%= @results_url %>
+<% end %>
 <% end %>
 По всем вопросам обращайтесь в оргкомитет турнира: <%= @event.game.tournament.user.email %>
 
