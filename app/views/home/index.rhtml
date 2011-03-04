@@ -1,4 +1,3 @@
-<h1>САЙТ ВРЕМЕННО НЕДОСТУПЕН, ВЕДУТСЯ РЕМОНТНЫЕ РАБОТЫ. БУДЬТЕ ДОБРЫ, ЗАЙДИТЕ ЧЕРЕЗ 24 ЧАСА</h1>
 <% if @my_items && !@my_items.empty? %>
 <% @my_items.each do |item| %>
 	<p><%= context_array(item.parents_top_down(:with_me)) %></p>
