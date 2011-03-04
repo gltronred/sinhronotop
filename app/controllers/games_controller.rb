@@ -1,8 +1,20 @@
 class GamesController < ApplicationController
 
-  before_filter :find, :only => [:update, :edit, :destroy, :show ]
+  before_filter :find, :only => [:update, :edit, :destroy, :show, :get_approved_moderator_emails, :get_approved_resp_emails ]
   before_filter :find_tournament, :only => [:new, :create ]
   before_filter :check_do_change, :only => [:edit, :update, :destroy, :new, :create]
+
+  def get_approved_moderator_emails
+    respond_to do |format|
+      format.js
+    end
+  end
+  
+  def get_approved_resp_emails
+    respond_to do |format|
+      format.js
+    end
+  end
 
   def show
     respond_to do |format|

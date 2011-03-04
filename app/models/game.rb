@@ -23,6 +23,14 @@ class Game < ActiveRecord::Base
   def result_for(team)
     self.results.detect{|r|r.team == team}
   end
+  
+  def get_approved_moderator_emails
+    self.events.select{|e| 'approved' == e.event_status.short_name}.map(&:get_moderator_email).uniq.join(',')
+  end
+
+  def get_approved_resp_emails
+    self.events.select{|e| 'approved' == e.event_status.short_name}.map(&:user).map(&:email).uniq.join(',')
+  end
 
   def get_parent
     self.tournament

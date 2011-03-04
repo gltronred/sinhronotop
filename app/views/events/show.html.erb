@@ -46,7 +46,7 @@
 </p>
 <% if is_org? @event.game.tournament %>
 <p>
-<b> IP, с которых была подана (и изменна) заявка:</b>
+<b> IP, с которых была подана (и изменена) заявка:</b>
 <%=h @event.ips %>
 </p>
 <% end %>
@@ -60,7 +60,7 @@
 </p>
 
 <%= link_to 'Все заявки', game_events_path(@event.game) %>
-<%= link_to 'Изменить данные', edit_event_path(@event) if is_resp? @event %>
+<%= link_to 'Изменить', edit_event_path(@event) if is_resp? @event %>
 <% if is_resp? @event %>
 <%= link_to 'Спорные ответы', event_disputeds_path(@event) %>
 <%= link_to 'Апелляции', event_appeals_path(@event) %>

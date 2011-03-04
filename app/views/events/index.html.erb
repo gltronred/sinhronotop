@@ -4,7 +4,7 @@
     <th>Страна</th>
     <th>Дата</th>
 <% if @game.tournament.time_required -%>
-	<th>Дата</th>
+	<th>Время</th>
 <% end %>
     <th>Ведущий</th>
     <th>Email ведущего</th>
@@ -13,7 +13,7 @@
 	<th>Команд</th>
 	<th>IP</th>
 	<th>Дополнительная информация</th>
-	<th>Статус заявки</th>
+	<th>Статус заявки/изменить</th>
   </tr>
 
 <% @events.each do |event| %>
@@ -31,15 +31,17 @@
     <td><%= event.num_teams %></td>
     <td><%= event.ips %></td>
     <td><%= event.more_info %></td>
-	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span></td>
-    <td>
-	<%= render :partial => "change_status", :locals => { :event => event } %>
+	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span><%= render :partial => "change_status", :locals => { :event => event } %>
 	</td>
 	<td>
-	<%= link_to 'Изменить данные', edit_event_path(event) %>
+	<%= link_to 'Изменить', edit_event_path(event) -%>
     <%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %>
 	</td>
   </tr>
 <% end %>
 </table>
 <%= render :partial => "common/csv", :locals => {:path => game_events_path(@game, :format => :csv) } %>
+<p><%= link_to_remote( "Адреса всех ведущих, чьи заявки приняты", :url =>{ :controller => :games, :action => :get_approved_moderator_emails, :id => @game.id}) %><br/>
+<span id='moderator_emails'></span></p>
+<p><%= link_to_remote( "Адреса всех представителей, чьи заявки приняты", :url =>{ :controller => :games, :action => :get_approved_resp_emails, :id => @game.id}) %><br/>
+<span id='resp_emails'></span></p>

@@ -10,7 +10,7 @@ class EventsController < ApplicationController
   def change_status
     @event.event_status = EventStatus.find_by_id(params[:new_status_id])
     @event.last_change = "статус заявки изменен"
-    if @event.save!
+    if @event.save(false)
       respond_to do |format|
         format.js
       end
