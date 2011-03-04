@@ -57,7 +57,6 @@ File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
   end
 end
 
-=begin
 File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
@@ -66,7 +65,6 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city)
   end
 end
-=end
 
 SeedTasks.create_event_status("new", "новая")
 SeedTasks.create_event_status("approved", "принята")
