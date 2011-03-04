@@ -63,6 +63,7 @@ class EventsController < ApplicationController
       else
         format.html {
           @game = Game.find(@event.game_id)
+          load_users
           load_cities(@game.tournament_id)
           render :action => "new"
         }
