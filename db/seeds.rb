@@ -61,7 +61,7 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
     rating_id, team_name, city_name = atributes[0], atributes[1], atributes[2]
-    city = SeedTasks.create_city city_name
+    #city = SeedTasks.create_city(city_name
     SeedTasks.create_team(rating_id, team_name, city)
   end
 end
