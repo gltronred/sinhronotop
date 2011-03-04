@@ -48,7 +48,7 @@ class EventTest < ActionController::IntegrationTest
     do_with_users([:marina]) {
       visit "/games/#{bb2.id}"
       click_link "Все заявки"
-      assert_contain "127.0.0.1, 127.0.0.1, 127.0.0.1"
+      assert_contain "127.0.0.1, 127.0.0.1, 127.0.0.1, 127.0.0.1"
     }
   end
 

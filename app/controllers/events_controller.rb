@@ -54,8 +54,8 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
+    params[:event].merge!({:last_change => "заявка получена и будет рассмотрена", :ips => request.remote_ip})
     @event = Event.new(params[:event])
-    params[:event].merge!({:last_change => "заявка получена и будет рассмотрена", :ips => "#{@event.ips}#{',' if @event.ips} #{request.remote_ip}"})
     @event.event_status = EventStatus.find_by_short_name("new")
     respond_to do |format|
       if @event.save        
