@@ -10,6 +10,9 @@ require "net/http"
 require 'uri'
 require 'tasks/rails'
 
+require "heroku_backup_task/tasks"
+task :cron => :heroku_backup
+
 namespace :db do
   desc "Drops, recreates and refills the database."
   task :redb => ['db:drop', 'db:create', 'db:migrate', 'db:fixtures:load']
