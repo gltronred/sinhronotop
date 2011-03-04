@@ -18,8 +18,12 @@
 <p>
 	<% user = @event.user || current_user %>
   <%= f.label "Представитель" %><br />
+<%if is_org? @game.tournament %>
+<%= f.select :user_id, @users.collect {|u| [ u.to_s, u.id ] } %>
+<% else %>
   <%= f.label user.name %> (<%= f.label user.email %>)<br />
   <%= f.hidden_field :user_id, :value => user.id %>
+<% end %>
 </p>
 
   <p>

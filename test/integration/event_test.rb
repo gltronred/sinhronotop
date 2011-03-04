@@ -51,8 +51,25 @@ class EventTest < ActionController::IntegrationTest
       assert_contain "127.0.0.1, 127.0.0.1, 127.0.0.1, 127.0.0.1"
     }
   end
+  
+  def org_can_change_resp
+    event = events(:kg2_frankfurt)
+    do_with_users([:rodionov]) {
+      visit "/games/#{event.id}/edit"
+      select "Константин Кноп (kupr@example.com)", :from => "event_user_id"
+      click_button "Сохранить"
+      assert_contain_multiple ["Константин Кноп", "kupr@example.com"]
+      assert_not_contain "Борис Шойхет"
+      
+      visit "/games/#{event.id}/edit"
+      select "Борис Шойхет (frankfurt@example.com)", :from => "event_user_id"
+      click_button "Сохранить"
+      assert_not_contain_multiple ["Константин Кноп", "kupr@example.com"]
+      assert_contain_multiple ["Борис Шойхет", "frankfurt@example.com"]
+    }
+  end
 
-  def xtest_znatok_can_only_see_not_register
+  def test_znatok_can_only_see_not_register
     bb2 = games(:bb2)
     do_with_users([:znatok]) {
       visit_and_get_deny_by_permission "/games/#{bb2.id}/events/new"
@@ -62,7 +79,7 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
-  def xtest_only_some_cities_can_register
+  def test_only_some_cities_can_register
     kg2 = games(:kg2)
     do_with_users([:hudjakov]) {
       visit "/games/#{kg2.id}"
@@ -72,7 +89,7 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
-  def xtest_resp_cannot_register_as_expired
+  def test_resp_cannot_register_as_expired
     bb1 = games(:bb1)
     do_with_users([:trodor]) {
       visit "/games/#{bb1.id}"
@@ -81,7 +98,7 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
-  def xtest_org_can_see_registrations
+  def test_org_can_see_registrations
     bb1 = games(:bb1)
     do_with_users([:marina]) {
       visit "/games/#{bb1.id}/events"
@@ -90,7 +107,7 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
-  def xtest_org_can_see_and_change_status
+  def test_org_can_see_and_change_status
     kg2 = games(:kg2)
     kg2_frankfurt = events(:kg2_frankfurt)
     kg2_riga = events(:kg2_riga)
@@ -109,7 +126,7 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
-  def xtest_not_org_cannot_change_status
+  def test_not_org_cannot_change_status
     kg1 = games(:kg1)
     kg1_frankfurt = events(:kg1_frankfurt)
     do_with_users([:shojhet]) {
