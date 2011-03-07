@@ -68,6 +68,10 @@
 
 <% end %>
 
+<% @game.events.select{|e|e.user == current_user}.each do |event| %>
+<p><%= link_to event, event_path(event) %></p>
+<% end %>
+
 <%= link_to 'Зарегистрироваться', new_game_event_path(@game) if can_register? @game %>
 <% if is_org? @game.tournament %>
 <%= link_to 'Все заявки', game_events_path(@game) %>

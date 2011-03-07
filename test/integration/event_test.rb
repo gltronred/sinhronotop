@@ -48,6 +48,10 @@ class EventTest < ActionController::IntegrationTest
       choose "moderator_no"
       click_button "Сохранить"
       assert_contain_multiple ["Параметры заявки изменены", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
+      
+      click_link "этап Этап 2"
+      click_link "игра в городе Рига #{(Date.today + 1.day).loc}"
+      assert_contain_multiple ["Рига", "Дмитрий Бочаров", 'Будем играть в темноте']
     }
 
     do_with_users([:marina]) {
