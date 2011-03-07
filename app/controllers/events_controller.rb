@@ -18,8 +18,8 @@ class EventsController < ApplicationController
   end
 
   def index
-    @events = @game.events
-    @context_array = @game.parents_top_down(:with_me) << "все заявки"
+    @events = @game.events.sort{|x,y|x.city.name <=> y.city.name}
+    @context_array = @game.parents_top_down(:with_me) << "все заявки (#{@events.size})"
     respond_to do |format|
       format.html
       format.csv
