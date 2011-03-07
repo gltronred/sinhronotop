@@ -5,8 +5,8 @@ class Team < ActiveRecord::Base
   validates_uniqueness_of :rating_id
   validates_length_of :name, :maximum => 255
   
-  def editable?
-    self.rating_id < 0
+  def from_rating?
+    self.rating_id >= 0
   end
   
   def to_s

@@ -3,7 +3,6 @@ class ResultsController < ApplicationController
   before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
   before_filter :load_parents, :only => [:create, :index]
   before_filter :check_do_changes
-  before_filter :check_edit_team, :only => [:edit, :update]
 
   # GET /results
   # GET /results.xml
@@ -13,7 +12,7 @@ class ResultsController < ApplicationController
       @results = @parent.results.sort{|x,y| x.team.name <=> y.team.name}
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
-      @teams = Team.find(:all, :joins => :city, :order => "name ASC") - @results.map(&:team)
+      load_teams
       load_cities
     elsif
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
@@ -49,33 +48,37 @@ class ResultsController < ApplicationController
       format.html { redirect_to(event_results_path(@event)) }
     end
   end
-  
+
   def edit
-    load_cities
+    @context_array = @event.parents_top_down(:with_me) << "изменить данные команды '#{@team.name}'"
+    @team.from_rating? ? load_teams : load_cities
   end
 
   def update
     respond_to do |format|
       @team = Team.find(params[:team_id])
-      @team.name = params[:team_name]
-      @team.city_id = params[:city_id]      
-      if @team.save && @result.update_attributes(params[:result])
-        format.html { redirect_to(event_results_path(@event), :notice => 'Данные команды обновлены') }
-      else
-        format.html { 
-          load_cities
-          render :action => "edit" 
-          }
+      unless @team.from_rating?
+        @team.name = params[:team_name]
+        @team.city_id = params[:city_id]
       end
+      format.html {
+        if @team.save && @result.update_attributes(params[:result])
+          redirect_to(event_results_path(@event), :notice => 'Данные команды обновлены')
+        else
+          #@team.from_rating? ? load_teams : load_cities
+          redirect_to(edit_result_path(@result), :notice => "#{@team.e_to_s} #{@result.e_to_s}")
+        end
+      }
     end
   end
-  
+
   private
 
-  def check_edit_team
-    check_permissions { @team.editable? }
+  def load_teams
+    @teams = Team.find(:all, :joins => :city, :order => "name ASC")
+    @teams = @teams - @results.map(&:team) if @results
   end
-  
+
   def load_result_with_parents
     @result = Result.find(params[:id])
     @event = @result.event

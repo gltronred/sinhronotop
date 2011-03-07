@@ -29,14 +29,24 @@ class ResultTest < ActionController::IntegrationTest
   def test_resp_adds_team_listed
     event = events(:bb2_riga)
     sp = teams(:sp)
+    ka = teams(:ka)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
       add_team_listed(false, sp, event)
-      add_team_listed(true, sp, event, "Марк Ленивкер")
-      check "team#{sp.id}_tour1_question8"
-      check "team#{sp.id}_tour3_question29"
-      uncheck "team#{sp.id}_tour2_question13"
-      remove_team sp
+      add_team_listed(true, sp, event, "Марк Ленивкер")      
+      click_link "Изменить данные команды"
+      add_team_listed(true, ka, event, "Леонид К")
+      click_link "Изменить данные команды"
+      fill_in "result_cap_name", :with => "Леонид Кандыба"
+      click_button "Сохранить"
+      assert_contain_multiple ["Крейзер Аврора", "Леонид Кандыба"]
+      search_in_result_table("Марк Ленивкер", false)
+      search_in_result_table("7 пядей", false)
+            
+      check "team#{ka.id}_tour1_question8"
+      check "team#{ka.id}_tour3_question29"
+      uncheck "team#{ka.id}_tour2_question13"
+      remove_team ka
     }
   end
 
@@ -45,11 +55,11 @@ class ResultTest < ActionController::IntegrationTest
     sp = teams(:sp)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      add_team_listed(true, sp, event)
       add_team_new(true, "Rolling Stones", event.city)
       click_link "Изменить данные команды"
       fill_in "team_name", :with => "Scorpions"
       click_button "Сохранить"
+      add_team_listed(true, sp, event)
       assert_contain_multiple ["Рига", "Scorpions"]
       add_team_new(true, "Beatles", event.city, cities(:tallinn))
     }

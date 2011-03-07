@@ -33,7 +33,7 @@
     <td id='team<%=result.team.id%>'><%=h result.score %></td>
 <% if changeable %>
     <td><%= link_to 'Удалить', result, :confirm => 'Вы уверены?', :method => :delete %>
-	<%= link_to 'Изменить данные команды', edit_result_path(result) if result.team.editable? %>
+	<%= link_to 'Изменить данные команды', edit_result_path(result) %>
 	</td>
 <% end %>
   </tr>
