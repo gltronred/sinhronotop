@@ -62,6 +62,14 @@ TABLE TH {
     float: left;
     z-index:1
 }
-.much_text {
+.nowrap {
     white-space: nowrap;
+}
+.event_new {
+    background-color: yellow;
+}
+.event_approved {
+}
+.event_denied {
+    background-color: red;
 }

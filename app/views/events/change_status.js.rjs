@@ -1,1 +1,4 @@
-page.replace "event_status_#{@event.id}", "<span id='event_status_#{@event.id}'><FONT COLOR='red'>#{@event.event_status.name}</FONT></span>"
+EventStatus.all.each do |es|
+  page[@event.id.to_s].remove_class_name("event_#{es.short_name}")
+end
+page[@event.id.to_s].add_class_name("event_#{@event.reload.event_status.short_name}")

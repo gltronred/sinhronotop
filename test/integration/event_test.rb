@@ -43,15 +43,20 @@ class EventTest < ActionController::IntegrationTest
       click_button "Сохранить"
       assert_not_contain_multiple ["Василий Пупкин", "pupkin@vasi.net"]
       assert_contain_multiple ["Константин Кноп", "kupr@example.com"]
+
+      click_link "Изменить"
+      choose "moderator_no"
+      click_button "Сохранить"
+      assert_contain_multiple ["Параметры заявки изменены", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
     }
 
     do_with_users([:marina]) {
       visit "/games/#{bb2.id}"
       click_link "Все заявки"
-      assert_contain "127.0.0.1, 127.0.0.1, 127.0.0.1, 127.0.0.1"
+      assert_contain_multiple ["127.0.0.1...", "все заявки (5)", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем']
     }
   end
-  
+
   def org_can_change_resp
     event = events(:kg2_frankfurt)
     do_with_users([:rodionov]) {
@@ -60,7 +65,7 @@ class EventTest < ActionController::IntegrationTest
       click_button "Сохранить"
       assert_contain_multiple ["Константин Кноп", "kupr@example.com"]
       assert_not_contain "Борис Шойхет"
-      
+
       visit "/games/#{event.id}/edit"
       select "Борис Шойхет (frankfurt@example.com)", :from => "event_user_id"
       click_button "Сохранить"
@@ -79,7 +84,7 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
-  def test_only_some_cities_can_register
+  def test_only_selected_cities_can_register
     kg2 = games(:kg2)
     do_with_users([:hudjakov]) {
       visit "/games/#{kg2.id}"

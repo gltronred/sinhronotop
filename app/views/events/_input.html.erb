@@ -12,7 +12,7 @@
 <% if @game.tournament.time_required %>
   <p>
     <%= f.label "Время начала игры (местное!)" %><br />
-    <%= f.select(:game_time, options_for_select(["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"])) %> 
+    <%= f.select(:game_time, options_for_select(["7:00", "7:30", "8:00", "8:30", "9:00", "9:30", "10:00", "10:30", "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", "21:00", "21:30", "22:00", "22:30", "23:00", "23:30"], @event.game_time)) %> 
   </p>
 <% end %>
 <p>
@@ -27,14 +27,15 @@
 </p>
 
   <p>
-	<% self_active, from_list_active, other_active = (@event.moderation_id == user.id), (@event.moderation_id && @event.moderation_id != user.id), (!@event.moderation_id) %>
+	<% self_active, from_list_active, other_active, no = (@event.moderation_id == user.id), (@event.moderation_id && @event.moderation_id != user.id), (!@event.moderation_id && @event.moderator_name), (!@event.moderation_id && !@event.moderator_name)  %>
 	  <%= f.label "Ведущий" %><br />
 	  <%= f.hidden_field :moderation_id, :value => @event.moderation_id %>	
 	<%=radio_button_tag("moderator", "self", self_active)%><%= f.label "Сам представитель" %><br/>
 	<%=radio_button_tag("moderator", "from_list", from_list_active)%><%= f.label "Зарегистрированный пользователь" -%>
     <%= select_tag :moderator_list, options_from_collection_for_select_with_include_blank(@users, :id, :name, @event.moderation_id, true) %><br/>
 	<%=radio_button_tag("moderator", "other", other_active)%><%= f.label "Другой человек" %><br />
-	<%= f.label "Имя и фамилия:" %><%= f.text_field :moderator_name %><br /><%= f.label "Email:" %><%= f.text_field :moderator_email %>
+	<%= f.label "Имя и фамилия:" %><%= f.text_field :moderator_name %><br /><%= f.label "Email:" %><%= f.text_field :moderator_email %><br/>
+	<%=radio_button_tag("moderator", "no", no)%><%= f.label "Пока не определились, добавим в заявку позже" %>
   </p>
 <script type="text/javascript">
 	jQuery.activate_self = function() {
@@ -53,6 +54,11 @@
 		jQuery("#event_moderator_name, #event_moderator_email").attr('disabled', false)
 		jQuery("#moderator_list").attr('disabled', true)		
 	};	
+	jQuery.activate_no = function() {
+		jQuery("#event_moderation_id").attr('value', '')
+		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email").attr('value', '')
+		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email").attr('disabled', true)
+	};
 	jQuery("#moderator_self").click(function(e) {
 		jQuery.activate_self()
 	});
@@ -62,6 +68,9 @@
 	jQuery("#moderator_other").click(function() {
 		jQuery.activate_other()
 	});
+	jQuery("#moderator_no").click(function() {
+		jQuery.activate_no()
+	});
 	jQuery("#moderator_list").change(function() {
 		var val = jQuery("#moderator_list").attr('value')
 		jQuery("#event_moderation_id").attr('value', val )
@@ -70,8 +79,10 @@
 		jQuery.activate_self()
 	} else if (jQuery("#moderator_from_list").attr('checked')) {
 		jQuery.activate_from_list()
-	} else {
+	} else if (jQuery("#moderator_other").attr('checked')) {
 		jQuery.activate_other()
+	} else if (jQuery("#moderator_no").attr('checked')) {
+		jQuery.activate_no()
 	}
 </script>
 

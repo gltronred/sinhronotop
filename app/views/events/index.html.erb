@@ -12,34 +12,34 @@
     <th>Email представителя</th>
 	<th>Команд</th>
 	<th>IP</th>
-	<th>Дополнительная информация</th>
-	<th>Статус заявки/изменить</th>
+	<th>Доп. инф.</th>
+	<th>Действия</th>
   </tr>
 
 <% @events.each do |event| %>
-  <tr>
-    <td><%= link_to event.city.name, event_path(event) %></td>
-    <td><%= event.city.country %></td>
-    <td><%= event.date.loc %></td>
+  <tr id="<%=event.id%>" class="event_<%=event.event_status.short_name%>">
+    <td class="nowrap"><%= link_to event.city.name, event_path(event) %></td>
+    <td class="nowrap"><%= event.city.country %></td>
+    <td class="nowrap"><%= event.date.loc %></td>
 <% if @game.tournament.time_required -%>
-	<td><%= event.game_time %></td>
+	<td class="nowrap"><%= event.game_time %></td>
 <% end %>
-    <td><%= event.get_moderator_name %></td>
-    <td><%= event.get_moderator_email %></td>
-    <td><%= event.user.name %></td>
-    <td><%= event.user.email %></td>
-    <td><%= event.num_teams %></td>
-    <td><%= event.ips %></td>
-    <td><%= event.more_info %></td>
-	<td><span id='event_status_<%= event.id %>'><%=h event.event_status.name -%></span><%= render :partial => "change_status", :locals => { :event => event } %>
-	</td>
-	<td>
+    <td class="nowrap"><%= event.get_moderator_name %></td>
+    <td class="nowrap"><%= event.get_moderator_email %></td>
+    <td class="nowrap"><%= event.user.name %></td>
+    <td class="nowrap"><%= event.user.email %></td>
+    <td class="nowrap"><%= event.num_teams %></td>
+    <td class="nowrap" title="<%= event.ips %>"><%= cut_by_sign(event.ips, ',') %></td>
+    <td class="nowrap" title="<%= event.more_info %>"><%= cut_by_count(event.more_info, 12) %></td>
+	<td class="nowrap">
+	<%= render :partial => "change_status", :locals => { :event => event } -%>
 	<%= link_to 'Изменить', edit_event_path(event) -%>
-    <%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete %>
+    <%= link_to 'Удалить', event, :confirm => 'Вы уверены?', :method => :delete -%>
 	</td>
   </tr>
 <% end %>
 </table>
+<p><%= link_to "Экспортировать в XLS", game_events_path(@game, :format => :xls) %></p>
 <%= render :partial => "common/csv", :locals => {:path => game_events_path(@game, :format => :csv) } %>
 <p><%= link_to_remote( "Адреса всех ведущих, чьи заявки приняты", :url =>{ :controller => :games, :action => :get_approved_moderator_emails, :id => @game.id}) %><br/>
 <span id='moderator_emails'></span></p>

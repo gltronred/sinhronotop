@@ -8,6 +8,20 @@ module ApplicationHelper
     end
   end
 
+  def cut_by_sign(str, sign)
+    if str
+      index = str.index(sign)
+      index ? "#{str[0..index-1]}#{"..." if str.length>index}" : "#{str}"
+    else
+      nil
+    end
+  end
+
+  def cut_by_count(str, count)
+    str ? "#{str[0..count-1]}#{"..." if str.length>count}" : nil
+  end
+
+
   def load_parents
     event_id = params[:event_id]
     [:appeal, :disputed, :result].each do |first_key|
