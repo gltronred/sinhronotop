@@ -1,0 +1,11 @@
+<% longtexts.each do |text| %>
+<% if text.new_page %>
+<p><%= link_to text.title, longtext_path(text) %></p>
+<% else %>
+<%= render :partial => "common/longtext", :locals => {:title => text.title, :value => text.value} %>
+<% end %>
+<% if is_org? @tournament %>
+<%= link_to 'Изменить текст', edit_longtext_path(text) %>
+<%= link_to 'Удалить текст', text, :confirm => 'Вы уверены?', :method => :delete %>
+<% end %>
+<% end %>

@@ -1,0 +1,9 @@
+<p>
+<% if title -%>
+<b><%= title-%></b>
+<% end -%>
+<br/>
+<% if value -%>
+<%= (h value).gsub("\n", '<br/>'.html_safe) %>
+<% end -%>
+</p>

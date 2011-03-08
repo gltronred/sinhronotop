@@ -1,0 +1,25 @@
+<% form_for(@longtext) do |f| %>
+<% if @game %>
+<%= f.hidden_field :game_id, :value => @game.id %>
+<% elsif @tournament %>
+<%= f.hidden_field :tournament_id, :value => @tournament.id %>
+<% end %>
+
+  <%= f.error_messages %>
+  <p>
+    <%= f.label "Показывать как отдельную страницу" %><br />
+    <%= f.check_box :new_page %>
+  </p>
+  <p>
+    <%= f.label "Заголовок" %><br />
+    <%= f.text_field :title %>
+  </p>
+  <p>
+    <%= f.label "Текст" %><br />
+    <%= f.text_area :value, {:rows => 40, :cols => 80} %>
+  </p>
+  <p>
+    <%= f.submit 'Сохранить' %>
+  </p>
+<% end %>
+<%= link_to_function 'Назад', 'history.back()' %>

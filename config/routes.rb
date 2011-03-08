@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :longtexts
+
   map.home '', :controller => 'home', :action => 'index'
 
   map.new_error '/new_error', :controller => 'home', :action => 'new_error'
@@ -52,6 +54,7 @@ ActionController::Routing::Routes.draw do |map|
     g.resources :disputeds
     g.resources :appeals
     g.resources :results
+    g.resources :longtexts
   end
 
   map.resources :cities
@@ -59,6 +62,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tournaments
   map.resources :tournaments do |t|
     t.resources :games
+    t.resources :longtexts
   end
   map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
 

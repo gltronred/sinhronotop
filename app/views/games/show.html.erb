@@ -72,6 +72,10 @@
 <p><%= link_to event, event_path(event) %></p>
 <% end %>
 
+<%= render :partial => "common/longtexts", :locals => {:longtexts => @game.longtexts} %>
+
+
+
 <%= link_to 'Зарегистрироваться', new_game_event_path(@game) if can_register? @game %>
 <% if is_org? @game.tournament %>
 <%= link_to 'Все заявки', game_events_path(@game) %>
@@ -79,4 +83,5 @@
 <%= link_to 'Апелляции', game_appeals_path(@game) %>
 <%= link_to 'Результаты', game_results_path(@game) %>
 <%= link_to 'Изменить', edit_tournament_game_path(@game.tournament, @game) %>
+<%= link_to 'Добавить текст', new_game_longtext_path(@game) %>
 <% end %>

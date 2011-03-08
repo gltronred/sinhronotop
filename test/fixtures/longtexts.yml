@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+info_bb:
+  title: Информация о турнире
+  value: "'Балтийский Берег' — международный синхронный турнир по 'Что? Где? Когда?', проводимый с 2006 года Рижским клубом знатоков."
+  tournament: bb
+  new_page: false
+
+info_bb1:
+  title: Синхрон
+  value: "Игра поводилась на вопросах синхронного турнира 'Кубок Антарктиды'"
+  game: bb1
+  new_page: true

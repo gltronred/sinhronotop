@@ -29,7 +29,10 @@
 <p>
 	<b>Система подсчета результатов:</b>
 	  <%=h @tournament.calc_system %>
-</p>	
+</p>
+<%= render :partial => "common/longtexts", :locals => {:longtexts => @tournament.longtexts} %>
+
+<%= link_to 'Добавить текст', new_tournament_longtext_path(@tournament) if is_org? @tournament %>
 <%= link_to 'Изменить', edit_tournament_path(@tournament) if is_org? @tournament %>
 <%= link_to "Удалить", @tournament, :confirm => 'Вы уверены?', :method => :delete if is_admin? %>
 <%= render :partial => 'games/index'%>

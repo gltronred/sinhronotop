@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110304082309) do
+ActiveRecord::Schema.define(:version => 20110308154346) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -90,6 +90,16 @@ ActiveRecord::Schema.define(:version => 20110304082309) do
     t.boolean  "publish_results",      :default => false
     t.date     "game_begin"
     t.date     "game_end"
+  end
+
+  create_table "longtexts", :force => true do |t|
+    t.string   "title"
+    t.string   "value",         :limit => 20000
+    t.boolean  "new_page"
+    t.integer  "game_id"
+    t.integer  "tournament_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "resultitems", :force => true do |t|

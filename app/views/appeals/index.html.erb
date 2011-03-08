@@ -5,7 +5,7 @@
 <b>Из какого города: </b> <%=h link_to appeal.event.city.name, event_path(appeal.event) %><br/>
 <b>Ответ команды: </b> <%= appeal.answer %><br/>
 <b>Желаемый вердикт: </b> <%= appeal.goal %><br/>
-<b>Аргументация: </b><%= (h appeal.argument).gsub("\n", '<br/>'.html_safe) if appeal.argument %></textarea><br/>
+<%= render :partial => "common/longtext", :locals => {:title => "Аргументация", :value => appeal.argument} %>
 <% if changeable %>
 <%= link_to 'Изменить', edit_event_appeal_path(appeal.event, appeal) %>
 <%= link_to 'Удалить', appeal, :confirm => 'Вы уверены?', :method => :delete %>

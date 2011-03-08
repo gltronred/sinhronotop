@@ -1,5 +1,4 @@
 <% if !@disputed.nil? %>
-<h3>Добавить спорный</h3>
 <% form_for(@disputed) do |f| %>
 <%= f.hidden_field :event_id, :value => @event.id %>
 

@@ -1,5 +1,4 @@
 <% if @appeal %>
-<h3>Добавить апелляцию</h3>
 <% form_for(@appeal) do |f| %>
 <%= f.hidden_field :event_id, :value => @event.id %>
 
