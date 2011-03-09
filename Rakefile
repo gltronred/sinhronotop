@@ -72,8 +72,6 @@ def url_unescape(string)
 end
 
 #http://trevorturk.com/2010/04/14/automated-heroku-backups/
-#http://groups.google.com/group/heroku/browse_thread/thread/39f34dbc4ab632d5 (API deplrecated, use next link!)
-#https://github.com/RISCfuture/dropbox
 namespace :heroku do
   desc "PostgreSQL database backups from Heroku to Dropbox"
   task :backup => :environment do
