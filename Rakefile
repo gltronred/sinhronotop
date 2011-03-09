@@ -77,16 +77,21 @@ namespace :heroku do
   desc "PostgreSQL database backups from Heroku to Dropbox"
   task :backup => :environment do
     begin
-      require 'dropbox'      
+      require "dropbox"
       puts "[#{Time.now}] heroku:backup started"
       name = "#{ENV['APP_NAME']}-#{Time.now.strftime('%Y-%m-%d-%H%M%S')}.dump"
+      #d = DropBox.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"]) 
       db = ENV['DATABASE_URL'].match(/postgres:\/\/([^:]+):([^@]+)@([^\/]+)\/(.+)/)
       system "PGPASSWORD=#{db[2]} pg_dump -Fc --username=#{db[1]} --host=#{db[3]} #{db[4]} > tmp/#{name}"
       #s3 = RightAws::S3.new(ENV['s3_access_key_id'], ENV['s3_secret_access_key'])
       #bucket = s3.bucket("#{ENV['APP_NAME']}-heroku-backups", true, 'private')
       #bucket.put(name, open("tmp/#{name}"))
-      d = DropBox.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"]) 
-      d.create("tmp/#{name}", "/#{ENV["APP_NAME"]}/cron_backup/")      
+      #d = DropBox.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"]) 
+      #d.create("tmp/#{name}", "/#{ENV["APP_NAME"]}/cron_backup/")      
+      session = Dropbox::Session.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"])
+      session.mode = :sandbox
+      session.authorize
+      session.upload("tmp/#{name}", '/backups/')
       system "rm tmp/#{name}"
       puts "[#{Time.now}] heroku:backup complete"
     # rescue Exception => e
