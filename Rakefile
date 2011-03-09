@@ -72,32 +72,33 @@ def url_unescape(string)
 end
 
 #http://trevorturk.com/2010/04/14/automated-heroku-backups/
-#http://groups.google.com/group/heroku/browse_thread/thread/39f34dbc4ab632d5
+#http://groups.google.com/group/heroku/browse_thread/thread/39f34dbc4ab632d5 (API deplrecated, use next link!)
+#https://github.com/RISCfuture/dropbox
 namespace :heroku do
   desc "PostgreSQL database backups from Heroku to Dropbox"
   task :backup => :environment do
     begin
-      require "dropbox"
+      require 'right_aws'
       puts "[#{Time.now}] heroku:backup started"
       name = "#{ENV['APP_NAME']}-#{Time.now.strftime('%Y-%m-%d-%H%M%S')}.dump"
-      #d = DropBox.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"]) 
       db = ENV['DATABASE_URL'].match(/postgres:\/\/([^:]+):([^@]+)@([^\/]+)\/(.+)/)
       system "PGPASSWORD=#{db[2]} pg_dump -Fc --username=#{db[1]} --host=#{db[3]} #{db[4]} > tmp/#{name}"
-      #s3 = RightAws::S3.new(ENV['s3_access_key_id'], ENV['s3_secret_access_key'])
-      #bucket = s3.bucket("#{ENV['APP_NAME']}-heroku-backups", true, 'private')
-      #bucket.put(name, open("tmp/#{name}"))
-      #d = DropBox.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"]) 
-      #d.create("tmp/#{name}", "/#{ENV["APP_NAME"]}/cron_backup/")      
-      session = Dropbox::Session.new(ENV["DROPBOX_USER"], ENV["DROPBOX_PWD"])
-      session.mode = :sandbox
-      session.authorize
-      session.upload("tmp/#{name}", '/backups/')
+      s3 = RightAws::S3.new(ENV['s3_access_key_id'], ENV['s3_secret_access_key'])
+      bucket = s3.bucket("#{ENV['APP_NAME']}-heroku-backups", true, 'private')
+      bucket.put(name, open("tmp/#{name}"))
       system "rm tmp/#{name}"
       puts "[#{Time.now}] heroku:backup complete"
-    # rescue Exception => e
-    #   require 'toadhopper'
-    #   Toadhopper(ENV['hoptoad_key']).post!(e)
     end
+  end
+end
+
+task :backup_dummy => :environment do
+  begin
+    require "right_aws"
+    puts "[#{Time.now}] dropbox_dummy started, log in with #{ENV['s3_access_key_id']}, #{ENV['s3_secret_access_key']}"
+    s3 = RightAws::S3.new(ENV['s3_access_key_id'], ENV['s3_secret_access_key'])
+    bucket = s3.bucket("sinhronotop-test", true, 'private')
+    bucket.put("Nora_hi-res_049.jpg", open("/Users/michaelp/shared/Nora_hi-res_049.jpg"))
   end
 end
 
