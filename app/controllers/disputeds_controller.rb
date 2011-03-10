@@ -10,7 +10,7 @@ class DisputedsController < ApplicationController
     @disputed = Disputed.new
     @disputeds = @parent.disputeds.sort {|x,y| x.question_index <=> y.question_index}
     respond_to do |format|
-      @context_array = @parent.parents_top_down(:with_me) << "спорные ответы"
+      @context_array = @parent.parents_top_down(:with_me) << "спорные ответы (#{@disputeds.size})"
       format.html # index.html.erb
       format.csv
     end

@@ -12,11 +12,8 @@ class ResultTest < ActionController::IntegrationTest
       visit "/events/#{event.id}/results"
 
       #see my earlier submitmets, don't see submitments from other events
-      search_in_result_table oki.name
-      search_in_result_table oki.city.name
-      search_in_result_table "Рига"
+      search_multiple_text_in_result_table ["Оки-доки", "Рига", 10]
       search_in_result_table(pv.name, false)
-      check_score 8
 
       #edit
       check "team#{oki.id}_tour3_question28"
@@ -33,16 +30,16 @@ class ResultTest < ActionController::IntegrationTest
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
       add_team_listed(false, sp, event)
-      add_team_listed(true, sp, event, "Марк Ленивкер")      
+      add_team_listed(true, sp, event, "Марк Ленивкер")
       click_link "Изменить данные команды"
       add_team_listed(true, ka, event, "Леонид К")
       click_link "Изменить данные команды"
       fill_in "result_cap_name", :with => "Леонид Кандыба"
       click_button "Сохранить"
-      assert_contain_multiple ["Крейзер Аврора", "Леонид Кандыба"]
+      search_multiple_text_in_result_table ["Крейзер Аврора", "Леонид Кандыба"]
       search_in_result_table("Марк Ленивкер", false)
       search_in_result_table("7 пядей", false)
-            
+
       check "team#{ka.id}_tour1_question8"
       check "team#{ka.id}_tour3_question29"
       uncheck "team#{ka.id}_tour2_question13"
@@ -60,7 +57,7 @@ class ResultTest < ActionController::IntegrationTest
       fill_in "team_name", :with => "Scorpions"
       click_button "Сохранить"
       add_team_listed(true, sp, event)
-      assert_contain_multiple ["Рига", "Scorpions"]
+      search_multiple_text_in_result_table ["Рига", "Scorpions"]
       add_team_new(true, "Beatles", event.city, cities(:tallinn))
     }
   end
@@ -92,7 +89,7 @@ class ResultTest < ActionController::IntegrationTest
       fill_in "result_cap_name", :with => "Левушкин"
       select "Кельн", :from => "city_id"
       click_button "Сохранить"
-      assert_contain_multiple ["АБВГДейка", "Левушкин", "Кельн"]
+      search_multiple_text_in_result_table ["АБВГДейка", "Левушкин", "Кельн"]
       add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")
       assert page.has_xpath?("//input[@type='checkbox']", :count => 72)
       click_remove_and_confirm
@@ -100,11 +97,19 @@ class ResultTest < ActionController::IntegrationTest
     }
   end
 
-  def test_org_can_see
+  def test_org_navigates_game_results
     game = games(:bb2)
     do_with_users([:marina]) {
       visit "/games/#{game.id}/results"
-      assert_contain_multiple ["Против ветра", "10", "Оки-доки", "8"]
+      search_multiple_text_in_result_table ["Против ветра", 14, "Оки-доки", 10, "7 пядей", 12]
+      click_link "Тур 1"
+      search_multiple_text_in_result_table ["Против ветра", 8, "Оки-доки", 4, "7 пядей", 5]
+      click_link "Тур 2"
+      search_multiple_text_in_result_table ["Против ветра", 2, "Оки-доки", 3, "7 пядей", 5]
+      click_link "Тур 3"
+      search_multiple_text_in_result_table ["Против ветра", 4, "Оки-доки", 3, "7 пядей", 2]
+      click_link "Общие результаты"
+      search_multiple_text_in_result_table ["Против ветра", 14, "Оки-доки", 10, "7 пядей", 12]
       assert !page.has_xpath?("//input")
     }
   end
@@ -128,30 +133,36 @@ class ResultTest < ActionController::IntegrationTest
     game = games(:bb1)
     do_with_users([:znatok, :knop, :trodor, :marina]) {
       visit "/games/#{game.id}/results"
-      assert_contain_multiple ["Против ветра", "10", "Оки-доки", "8"]
+      search_multiple_text_in_result_table ["Против ветра", 10, "Оки-доки", 8]
+      click_link "Тур 1"
+      click_link "Тур 2"
+      click_link "Тур 3"
+      click_link "Общие результаты"
     }
   end
 
   private
 
-  def search_in_result_table(string_to_search, should_be_listed=true)
-    within(:xpath, "//table[@id='result_table']") do
-      expression = "//td[text()='#{string_to_search}']"
-      el1 = page.has_xpath? "//td[text()='#{string_to_search}']"
-      el2 = page.has_xpath? "//a[text()='#{string_to_search}']"
-      if should_be_listed
-        assert el1 || el2, " #{string_to_search} not found"
-      else
-        assert !el1 && !el2, " #{string_to_search} found"
+  def search_multiple_text_in_result_table(array_to_search)
+    array_to_search.each do |to_search|
+      within(:xpath, "//table[@id='result_table']") do
+        assert page.has_xpath?("//td[text()='#{to_search.to_s}']"), " #{to_search} not found in #{page_text(page)}"
       end
     end
   end
 
-  def submit_disputed(question_index, answer)
-    select question_index, :from => "disputed_question_index"
-    fill_in "disputed_answer", :with => answer
-    click_button "Сохранить"
-    assert_contain_multiple [question_index.to_s, answer]
+  def search_in_result_table(to_search, should_be_listed=true)
+    to_search = to_search.to_s unless to_search.is_a?(String)
+    within(:xpath, "//table[@id='result_table']") do
+      expression = "//td[text()='#{to_search}']"
+      el1 = page.has_xpath? "//td[text()='#{to_search}']"
+      el2 = page.has_xpath? "//a[text()='#{to_search}']"
+      if should_be_listed
+        assert el1 || el2, " #{to_search} not found"
+      else
+        assert !el1 && !el2, " #{to_search} found"
+      end
+    end
   end
 
   def add_team_listed(should_be_added, team, event, cap_name=nil)
@@ -182,7 +193,7 @@ class ResultTest < ActionController::IntegrationTest
   end
 
   def check_score(score)
-    search_in_result_table(score.to_s)
+    search_in_result_table(score)
     assert page.has_xpath?("//input[@type='checkbox'][@checked='checked']", :count => score)
   end
 

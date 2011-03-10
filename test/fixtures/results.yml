@@ -11,19 +11,19 @@ bb1_riga_oki:
   cap_name: Александр Мачевский
   
 bb2_frankfurt_pv:
-  score: 10
+  score: 14
   event: bb2_frankfurt
   team: pv
   cap_name: Михаил Перлин
 
 bb2_riga_oki:
-  score: 8
+  score: 10
   event: bb2_riga
   team: oki
   cap_name: Александр Мачевский
   
 bb2_frankfurt_sp:
-  score: 9
+  score: 12
   event: bb2_frankfurt
   team: sp  
   cap_name: Марк Ленивкер

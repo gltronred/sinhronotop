@@ -29,12 +29,16 @@ module IntegrationTestHelper
     end
   end
   
+  def page_text(page)
+    page.body.gsub(/<[a-zA-Z\/][^>]*>/, ' ').gsub(/\n\n/, ' ')
+  end
+  
   def assert_contain(str)
-    assert page.has_content?(str), "#{str} not found in #{page.body.gsub(/<[a-zA-Z\/][^>]*>/, ' ').gsub(/\n\n/, ' ')}"
+    assert page.has_content?(str), "#{str} not found in #{page_text(page)}"
   end
   
   def assert_not_contain(str)
-    assert !page.has_content?(str), "#{str} found in #{page.body.gsub(/<[a-zA-Z\/][^>]*>/, ' ').gsub(/\n\n/, ' ')}"
+    assert !page.has_content?(str), "#{str} found in #{page_text(page)}"
   end
 
   def login_basic_auth(user)

@@ -48,7 +48,7 @@
 <% if changeable %>
 <%= render :partial => "event" %>
 <% elsif @game %>
-<%= render :partial => "game" %>
+<%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => -1 } %>
 <% end %>
 
-<%= link_to 'Готово, больше результатов нет', home_path %>
+<%= link_to 'Готово, больше результатов нет', home_path if @event %>

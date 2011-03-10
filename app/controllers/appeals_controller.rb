@@ -10,7 +10,7 @@ class AppealsController < ApplicationController
     @appeal = Appeal.new
     @appeals = @parent.appeals.sort{|x,y| x.question_index <=> y.question_index}
     respond_to do |format|
-      @context_array = @parent.parents_top_down(:with_me) << "апелляции"
+      @context_array = @parent.parents_top_down(:with_me) << "апелляции (#{@appeals.size})"
       format.html # index.html.erb
       format.csv
       format.txt

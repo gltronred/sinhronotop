@@ -9,7 +9,7 @@ class CitiesController < ApplicationController
   def index
     @cities = City.all(:order => :name)
     respond_to do |format|
-      @context_array = ["Все города"]
+      @context_array = ["Все города (#{@cities.size})"]
       format.html # index.html.erb
     end
   end

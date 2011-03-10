@@ -1,0 +1,10 @@
+<p>
+<% for tour in 1..game.num_tours %>
+<% if tour == current_tour %>
+Тур <%=tour%>
+<% else %>
+<%= link_to "Тур #{tour}", game_result_path(game, tour) %>
+<% end %>
+<% end %>
+<br/><%= link_to "Общие результаты", game_results_path(game) if current_tour %>
+</p>

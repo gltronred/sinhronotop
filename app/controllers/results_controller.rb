@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
 
   before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
-  before_filter :load_parents, :only => [:create, :index]
+  before_filter :load_parents, :only => [:create, :index, :show]
   before_filter :check_do_changes
 
   # GET /results
@@ -18,11 +18,18 @@ class ResultsController < ApplicationController
       @results = @parent.results.sort{|x,y| y.score <=> x.score}
       calculate_places(@results)
     end
-    @context_array = @parent.parents_top_down(:with_me) << "результаты"
+    @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
       format.html # index.html.erb
       format.csv # index.html.erb
     end
+  end
+  
+  def show
+    @tour = params[:id].to_i
+    @context_array = @parent.parents_top_down(:with_me) << "результаты" << "тур #{@tour}"
+    @results = @parent.results.sort{|x,y| x.team.name <=> y.team.name}
+    @results.each {|result| result.calculate_and_save }
   end
 
   # POST /results
