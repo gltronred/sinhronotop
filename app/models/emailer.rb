@@ -15,7 +15,7 @@ class Emailer < ActionMailer::Base
     @disputeds_url = url_for(:controller => event_disputeds_path(@event))
     @appeals_url = url_for(:controller => event_appeals_path(@event))
     @results_url = url_for(:controller => event_results_path(@event))
-    recipient = [event.user.email, event.get_moderator_email].uniq.join(', ')
+    recipient = [event.user.email, event.get_moderator_email].compact.uniq.join(', ')
     send(recipient, subject)
   end
 

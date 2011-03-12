@@ -3,7 +3,7 @@ module UnitTestHelper
   def check_email(to_arr, arr_contains, arr_not_contains=[])
     assert !ActionMailer::Base.deliveries.empty?
     mail = ActionMailer::Base.deliveries.last
-    to_arr.each {|to|assert mail.to.include?(to)}
+    to_arr.each {|to|assert mail.to.include?(to), "email #{to} not found"}
     arr_contains.each do |cont|
       assert mail.body.include?(cont), "phrase '#{cont}' not found in #{mail.body}"
     end

@@ -20,6 +20,14 @@ class EventTest < ActiveSupport::TestCase
     ["Дмитрий Бочаров", "Кельн", "Василий Пупкин", "pupkin@vasi.net", (Date.today + 1.day).loc, "новая", "заявка получена и будет рассмотрена", "13:30"], 
     ["принимаюся", "Латвия"])
 
+    event.update_attributes(:moderation => nil,
+    :moderator_name => nil,
+    :moderator_email => nil,
+    :last_change => "данные заявки изменены")
+    check_email(['riga@example.com'], 
+    ["Дмитрий Бочаров", "Кельн", (Date.today + 1.day).loc, "новая", "данные заявки изменены", "13:30"], 
+    ["принимаюся", "Латвия", "Василий Пупкин", "pupkin@vasi.net"])
+
     event.update_attributes(:moderation => users(:knop),
     :moderator_name => nil,
     :moderator_email => nil,
