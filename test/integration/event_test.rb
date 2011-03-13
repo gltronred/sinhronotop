@@ -19,7 +19,7 @@ class EventTest < ActionController::IntegrationTest
       fill_in "event_num_teams", :with => '19'
       select 'Рига', :from => "event_city_id"
       click_button "Сохранить"
-      assert_contain_multiple ["Спасибо, заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc, "Будем играть голыми", '12:00', "19"]
+      assert_contain_multiple ["Заявка получена и будет рассмотрена", "Вася Пупкин", "Рига", "pupkin@vasi.net", "Дмитрий Бочаров", Date.today.loc, "Будем играть голыми", '12:00', "19"]
       assert_not_contain "Латвия"
 
       click_link "Изменить"
@@ -29,7 +29,7 @@ class EventTest < ActionController::IntegrationTest
       select_date("event_date", date.day, date.month, date.year)
       select '12:30', :from => "event_game_time"
       click_button "Сохранить"
-      assert_contain_multiple ["Параметры заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
+      assert_contain_multiple ["Данные заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
       assert_not_contain "Латвия"
 
       click_link "Изменить"
@@ -47,7 +47,7 @@ class EventTest < ActionController::IntegrationTest
       click_link "Изменить"
       choose "moderator_no"
       click_button "Сохранить"
-      assert_contain_multiple ["Параметры заявки изменены", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
+      assert_contain_multiple ["Данные заявки изменены", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
       
       click_link "этап Этап 2"
       click_link "игра в городе Рига #{(Date.today + 1.day).loc}"

@@ -8,9 +8,7 @@ class EventsController < ApplicationController
   before_filter :check_create_event, :only => [:new, :create]
 
   def change_status
-    @event.event_status = EventStatus.find_by_id(params[:new_status_id])
-    @event.last_change = "статус заявки изменен"
-    if @event.save(false)
+    if @event.update_status EventStatus.find_by_id(params[:new_status_id])
       respond_to do |format|
         format.js
       end
@@ -55,12 +53,11 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.xml
   def create
-    params[:event].merge!({:last_change => "заявка получена и будет рассмотрена", :ips => request.remote_ip})
+    params[:event].merge!(:ips => request.remote_ip)
     @event = Event.new(params[:event])
-    @event.event_status = EventStatus.find_by_short_name("new")
     respond_to do |format|
       if @event.save        
-        format.html { redirect_to(@event, :notice => 'Спасибо, заявка получена и будет рассмотрена') }
+        format.html { redirect_to(@event, :notice => @event.last_change) }
       else
         format.html {
           @game = Game.find(@event.game_id)
@@ -78,9 +75,9 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       @event.update_moderator_id params[:event][:moderation_id]
-      params[:event].merge!({:last_change => "данные заявки изменены", :ips => "#{@event.ips}#{',' if @event.ips} #{request.remote_ip}"})
+      params[:event].merge!(:ips => "#{@event.ips}#{',' if @event.ips} #{request.remote_ip}")
       if @event.update_attributes(params[:event])
-        format.html { redirect_to(@event, :notice => 'Параметры заявки изменены') }
+        format.html { redirect_to(@event, :notice => @event.last_change) }
       else
         format.html {
           load_cities(@event.game.tournament_id)

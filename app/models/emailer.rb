@@ -15,8 +15,9 @@ class Emailer < ActionMailer::Base
     @disputeds_url = url_for(:controller => event_disputeds_path(@event))
     @appeals_url = url_for(:controller => event_appeals_path(@event))
     @results_url = url_for(:controller => event_results_path(@event))
-    recipient = [event.user.email, event.get_moderator_email].compact.uniq.join(', ')
-    send(recipient, subject)
+    recipient_array = [event.user.email, event.get_moderator_email]
+    recipient_array << @event.game.tournament.user.email if @event.event_status.short_name == "new"
+    send(recipient_array.compact.uniq.join(', '), subject)
   end
 
   def error_notification(name, email, text)

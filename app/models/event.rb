@@ -18,6 +18,12 @@ class Event < ActiveRecord::Base
       errors.add_to_base game.game_dates_to_s
     end
   end
+  
+  def update_status(new_status)
+    self.event_status = new_status
+    self.last_change = "Статус заявки изменен"
+    self.save(false)
+  end
 
   def update_moderator_id(id)
     if id
