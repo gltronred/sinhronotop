@@ -1,5 +1,10 @@
 class UsersController < ApplicationController
 
+  def show
+    @user = current_user
+    @context_array = ["Информация о пользователе"]
+  end
+
   def account
     if logged_in?
       @user = current_user
@@ -9,26 +14,34 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit_password
+    @user = current_user
+    @context_array = ["Пользователь #{current_user.name}", "Сменить пароль"]
+  end
+
   # action to perform when the user wants to change their password
-  def change_password
+  def update_password
     return unless request.post?
-    if User.authenticate(current_user.login, params[:old_password])
-      #      if (params[:password] == params[:password_confirmation])
-      current_user.password_confirmation = params[:password_confirmation]
-      current_user.password = params[:password]
-      if current_user.save
-        flash[:notice] = "Новый пароль действителен"
-        redirect_to account_url
-      else
-        flash[:alert] = "Пароль сменить не удалось"
-      end
-      #      else
-      #        flash[:alert] = "New password mismatch"
-      #        @old_password = params[:old_password]
-      #      end
+    #if User.authenticate(current_user.login, params[:old_password])
+    #      if (params[:password] == params[:password_confirmation])
+    current_user.password_confirmation = params[:user][:password_confirmation]
+    current_user.password = params[:user][:password]
+    if current_user.save
+      flash[:notice] = "Новый пароль действителен"
+      redirect_to user_path(current_user)
     else
-      flash[:alert] = "Старый пароль неверен"
+      @user = current_user
+      flash[:notice] = "Пароль сменить не удалось"
+      render :action => "edit_password"
     end
+    #      else
+    #        flash[:alert] = "New password mismatch"
+    #        @old_password = params[:old_password]
+    #      end
+    #else
+    #  flash[:notice] = "Старый пароль неверен"
+    #  render :action => "edit_password"
+    #end
   end
 
   # render new.rhtml
@@ -41,9 +54,7 @@ class UsersController < ApplicationController
   def create
     logout_keeping_session!
     @user = User.new(params[:user])
-    @user.create_activation_code
-    success = @user && @user.save
-    if success && @user.errors.empty?
+    if @user && @user.save
       # Protects against session fixation attacks, causes request forgery
       # protection if visitor resubmits an earlier form using back
       # button. Uncomment if you understand the tradeoffs.
@@ -73,17 +84,17 @@ class UsersController < ApplicationController
       redirect_back_or_default(home_path)
     end
   end
-  
+
   def activate
     @user = User.find_by_activation_code(params[:activation_code]) if params[:activation_code]
-      if @user
-        self.current_user = @user
-        @user.delete_activation_code
-        flash[:notice] = "Спасибо, регистрация закончена"
-        redirect_back_or_default(home_path)
-      else
-         redirect_to home_path
-      end
+    if @user
+      self.current_user = @user
+      @user.delete_activation_code
+      flash[:notice] = "Спасибо, регистрация закончена"
+      redirect_back_or_default(home_path)
+    else
+      redirect_to home_path
+    end
   end
 
   def reset

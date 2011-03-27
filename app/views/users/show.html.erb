@@ -8,6 +8,6 @@
 </p>
 
 <p>
-<b>Статус:</b>
-<%= @user.status %>
+<%=link_to "Сменить пароль", edit_password_path %>
 </p>
+<%= link_to_function 'Назад', 'history.back()' %>

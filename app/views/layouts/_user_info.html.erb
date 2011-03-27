@@ -1,5 +1,5 @@
 <% if logged_in? %>
-  <p>Привет, <%=h current_user.name %><br/><%= link_to 'Выход', logout_path %></p>
+  <p>Привет, <%=link_to current_user.name, current_user %><br/><%= link_to 'Выход', logout_path %></p>
 <% else %>
   <p>Вход для зарегистрированных пользователей. Если вы не организатор и не представитель, регистрироваться не надо - используйте email '<%= User.find_by_status('znatok').email%>' и пароль 'znatok'</p>
   <p>

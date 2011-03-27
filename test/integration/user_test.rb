@@ -7,16 +7,29 @@ class UserTest < ActionController::IntegrationTest
   def test_registration
     visit home_path
     click_link "Зарегистрироваться"
-    fill_in "user_name", :with => "Михаэль Шумахер"
-    fill_in "user_email", :with => "schumacher@formel1.com"
-    fill_in "user_password", :with => "ferrari"
-    fill_in "user_password_confirmation", :with => "ferrari"
-    click_button "Зарегистрироваться"
+    
+    fill_in_register_form( nil, "schumacher@formel1.com", "ferrari", "ferrari")
+    assert_contain "не может быть пустым"
+    assert_not_contain_multiple ["Чтобы завершить регистрацию", "Привет"]
+    
+    fill_in_register_form( "Михаэль Шумахер", "schumacher@formel1.com", "ferrari", "ferrari4")
+    assert_contain "не совпадает"
+    assert_not_contain_multiple ["Чтобы завершить регистрацию", "Привет"]
+    
+    fill_in_register_form( "Михаэль Шумахер", "schumacher", "ferrari", "ferrari")
+    assert_contain "не похож на email"
+    assert_not_contain_multiple ["Чтобы завершить регистрацию", "Привет"]
+
+    fill_in_register_form( "Михаэль Шумахер", "schumacher@formel1.com", "f1", "f1")
+    assert_contain "пароль недостаточной длины"
+    assert_not_contain_multiple ["Чтобы завершить регистрацию", "Привет"]
+
+    fill_in_register_form( "Михаэль Шумахер", "schumacher@formel1.com", "ferrari", "ferrari")
     assert_contain "Чтобы завершить регистрацию"
     assert_not_contain_multiple ["Добро пожаловать", "Привет"]
   end
   
-  def test_accomplish_registration
+  def test_accomplish_registration_and_change_password
     login_form("milja@example.com", "znatok", false)
     url = "#{home_path}activate/234553ert"
     visit url
@@ -24,6 +37,17 @@ class UserTest < ActionController::IntegrationTest
     logout
     assert_not_contain "Привет, Эмилия Хильц"
     login_form("milja@example.com", "znatok", true)
+    
+    click_link "Эмилия Хильц"
+    click_link "Сменить пароль"
+    fill_in "user_password", :with => "miljushka"
+    fill_in "user_password_confirmation", :with => "miljushka"
+    click_button "Сохранить"
+    assert_contain "Новый пароль действителен"
+    logout
+    
+    login_form("milja@example.com", "znatok", false)
+    login_form("milja@example.com", "miljushka", true)
     logout
   end
 
@@ -71,6 +95,16 @@ class UserTest < ActionController::IntegrationTest
       assert_contain "Сообщение послано администратору, спасибо"
       logout
     end
+  end
+  
+  private
+  
+  def fill_in_register_form(user_name, user_email, user_password, user_password_confirmation)
+    fill_in "user_name", :with => user_name if user_name
+    fill_in "user_email", :with => user_email if user_email
+    fill_in "user_password", :with => user_password if user_password
+    fill_in "user_password_confirmation", :with => user_password_confirmation if user_password_confirmation
+    click_button "Зарегистрироваться"
   end
 
 end

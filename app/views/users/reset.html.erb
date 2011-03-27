@@ -1,6 +1,6 @@
 <%= error_messages_for :user %>
 <% form_for :user do |f| -%>
-<h3>Введите новый пароль для <%= @user.email %></h3>
+<h3>Введите новый пароль для <%= @user.email %> (минимум 6 символов)</h3>
 <p>Пароль: <%= f.password_field :password %></p>
 <p>Еще раз:<%= f.password_field :password_confirmation %></p>
 <p><%= submit_tag 'Сохранить' %></p>

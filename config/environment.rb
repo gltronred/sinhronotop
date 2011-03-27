@@ -150,6 +150,7 @@ class ActiveRecord::Base
     :name => "название",
     :answer => "ответ",
     :password => "пароль",
+    :password_confirmation => "подтверждение пароля",
     :moderator_name => "имя и фамилия ведущего",
     :moderator_email => "email ведущего",
     :num_tours => "количество туров",

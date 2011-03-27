@@ -1,0 +1,8 @@
+  def account
+    if logged_in?
+      @user = current_user
+    else
+      flash[:notice] = 'Вы пока не вошли в систему, попробуйте это сделать или зарегистрироваться'
+      render :controller => 'session', :action => 'new'
+    end
+  end
