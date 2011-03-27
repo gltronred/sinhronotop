@@ -1,0 +1,14 @@
+<a href="#" id="add_listed_team_link">Добавить команду из списка</a>
+<% form_for(@result, :html => {:id => 'add_listed_team_form'}) do |f| %>
+  <%= f.error_messages %>
+  <%= f.hidden_field :event_id, :value => @event.id %>
+<%= render :partial => "new_result_index", :locals => {:f => f, :prefix => 'listed'} %>
+  <p>
+    <%= collection_select(:result, :team_id, @teams, :id, :to_s) %><br/>
+	(для упрощения поиска нажмите в списке первую букву названия)
+  </p>
+<%= render :partial => "new_result_cap", :locals => {:f => f, :prefix => 'listed' } %>
+  <p>
+    <%= f.submit 'Добавить' %>
+  </p>
+<% end %>

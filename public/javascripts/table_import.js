@@ -67,9 +67,14 @@ jQuery(document).ready(function($) {
     });
     
     $('#how_to_import_link').click(function() {
-        $('#how_to_import_ul').show();
+        $('#how_to_import_ul').toggle();
     });
-
+    $('#add_new_team_link').click(function() {
+        $('#add_new_team_form').toggle();
+    });
+    $('#add_listed_team_link').click(function() {
+        $('#add_listed_team_form').toggle();
+    });
 });
 
 jQuery.do_excel_import = function() {

@@ -1,25 +1,18 @@
-<% if @event %>
-<h3>Добавить новую команду</h3>
-
-<% form_for @team, :html => { :class => "inline" } do |f|  %>
+<a href="#" id="add_new_team_link">Добавить новую команду</a>
+<% form_for @team, :html => { :id => 'add_new_team_form' } do |f|  %>
   <%= f.error_messages %>
   <%= f.hidden_field :event_id, :value => @event.id %>
   <p>
-    <%= f.label "Город" %><br />
+    <%= f.label "Город" %>
     <%= f.select :city_id, @cities.collect {|c| [c.to_s, c.id]}, :selected => @event.city_id %> 
   </p>
+<%= render :partial => "new_result_index", :locals => {:f => f, :prefix => 'new' } %>
   <p>
     <%= f.label "Название" %><br />
     <%= f.text_field :name %>
   </p>
-<% if @event.game.tournament.cap_name_required %>
-  <p>
-    <%= label_tag "Имя и фамилия капитана" %><br />
-    <%= text_field_tag("cap_name", "", :size => 30) %>
-  </p>
-<% end %>
+<%= render :partial => "new_result_cap", :locals => {:f => f, :prefix => 'new' } %>
   <p>
     <%= f.submit 'Добавить', :confirm => 'Вы уверены что этой команды нет в списке?' %>
   </p>
-<% end %>
 <% end %>

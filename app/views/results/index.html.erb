@@ -1,49 +1,24 @@
-<table id="result_table">
-  <tr>
-<% unless @event %>
-	<th>Место</th>
-<% end %>
-    <th>Команда</th>
-<% if @game.tournament.cap_name_required %>
-	<th>Капитан</th>
-<% end %>
-	<th>Город (команды)</th>
-	<th>Город (где играли)</th>
-<% for i in 1..@game.num_tours %>
-	<th>Тур <%= i %></th>
-<% end %>
-    <th>Сумма</th>
-  </tr>
-
 <% changeable = can_submit_results? @event %>
-<% @results.each do |result| %>
-  <tr>
-<% unless @event %>
-    <td><%=h result.place_to_s %></td>
-<% end %>
-    <td><%=h result.team.name %></td>
-<% if @game.tournament.cap_name_required %>
-	<td><%=h result.cap_name %></td>
-<% end %>
-	<td><%=h result.team.city %></td>
-    <td><%=h link_to result.event.city.name, event_path(result.event) %></td>
-<% for tour in 1..@game.num_tours %>
-	<%= render :partial => "tour_result", :locals => {:result => result, :tour => tour, :suffix => 'summary'} %>
-<% end %>
-    <td id='team<%=result.team.id%>'><%=h result.score %></td>
-<% if changeable %>
-    <td><%= link_to 'Удалить', result, :confirm => 'Вы уверены?', :method => :delete %>
-	<%= link_to 'Изменить данные команды', edit_result_path(result) %>
-	</td>
-<% end %>
-  </tr>
-<% end %>
-</table>
 
-<br />
-<% unless @event %>
-<%= render :partial => "common/csv", :locals => {:path => game_results_path(@game, :format => :csv) } %>
+
+<% if changeable %>
+<div id="result_helpers">
+<div id='add_new_team_div'>
+<%= render :partial => "add_result_new" %>
+</div>
+<div id='add_listed_team_div'>
+<%= render :partial => "add_result_listed" %>
+</div>
+<div id='how_to_import_div'>
+<%= render :partial => "how_to_import" %>
+</div>
+</div>
+<%= render :partial => "import_window" %>
 <% end %>
+
+<div id='result_table_div'>
+	<%= render :partial => "result_table", :locals => {:changeable => changeable} %>
+</div>
 
 <% if changeable %>
 <%= render :partial => "event" %>
@@ -51,4 +26,4 @@
 <%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => -1 } %>
 <% end %>
 
-<%= link_to 'Готово, больше результатов нет', home_path if @event %>
+<p><%= link_to 'Готово, больше результатов нет', home_path if changeable %></p>

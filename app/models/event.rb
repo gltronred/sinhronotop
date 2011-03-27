@@ -19,6 +19,15 @@ class Event < ActiveRecord::Base
     end
   end
   
+  def shift_local_indexes(changed_result, added) 
+    self.results.each do |r|
+      if r!= changed_result && r.local_index >= changed_result.local_index
+        added ? r.local_index += 1 : r.local_index -= 1
+        r.save
+      end
+    end
+  end
+  
   def update_status(new_status)
     self.event_status = new_status
     self.last_change = "Статус заявки изменен"

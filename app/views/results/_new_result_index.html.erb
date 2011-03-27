@@ -1,0 +1,4 @@
+  <p>
+    <%= f.label "Добавить под номером" %>
+    <%= select_tag(:local_index, options_for_select(1.upto(@event.results.size+1), :selected => @event.results.size+1), {:id => "#{prefix}_local_index"}) %>
+  </p>

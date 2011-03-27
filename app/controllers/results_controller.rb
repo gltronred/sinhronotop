@@ -9,13 +9,13 @@ class ResultsController < ApplicationController
   def index
     if @event
       @result = Result.new
-      @results = @parent.results.sort{|x,y| x.team.name <=> y.team.name}
+      @results = @parent.results.sort_by{|r| r.local_index }
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
       load_teams
       load_cities
     elsif
-      @results = @parent.results.sort{|x,y| y.score <=> x.score}
+      @results = @parent.results.sort_by{|r| r.score }
       calculate_places(@results)
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
@@ -28,7 +28,7 @@ class ResultsController < ApplicationController
   def show
     @tour = params[:id].to_i
     @context_array = @parent.parents_top_down(:with_me) << "результаты" << "тур #{@tour}"
-    @results = @parent.results.sort{|x,y| x.team.name <=> y.team.name}
+    @results = @parent.results.sort_by{|r| r.score }
     @results.each {|result| result.calculate_and_save }
   end
 
@@ -37,9 +37,12 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(params[:result])
     @result.score = 0
+    @result.cap_name = params[:cap_name]
+    @result.local_index = params[:local_index]
     respond_to do |format|
       if @result.save
         @result.create_resultitems
+        @result.event.shift_local_indexes(@result, true)
         format.html { redirect_to(event_results_path(@event), :notice => 'Команда добавлена') }
       else
         format.html { redirect_to(event_results_path(@event), :notice => @result.e_to_s) }
@@ -52,6 +55,7 @@ class ResultsController < ApplicationController
   def destroy
     @result.destroy
     respond_to do |format|
+      @result.event.shift_local_indexes(@result, false)
       format.html { redirect_to(event_results_path(@event)) }
     end
   end

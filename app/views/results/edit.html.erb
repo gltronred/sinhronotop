@@ -19,7 +19,7 @@
 <% if @event.game.tournament.cap_name_required %>
   <p>
     <%= f.label "Имя и фамилия капитана" %><br />
-    <%= f.text_field :cap_name %>
+    <%= f.text_field :cap_name, :id => 'listed_cap_name' %>
   </p>
 <% end %>
   <p>

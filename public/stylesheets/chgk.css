@@ -36,31 +36,28 @@ TABLE TH {
 #menu {
     color: #6B0C22;
 }
-#how_to_import {
+#result_helpers {
     float: right; 
     position: relative;
     width: 250px;
 }
+#how_to_import_div {
+	padding-top: 30px;
+}
 #how_to_import_ul {
     display:none;
 }
-#add_team {
-    width: 810px;
-    float: left;
+#add_new_team_div {
+	padding-top: 30px;
 }
-#add_team_new {
-    position:relative; 
-    float: left;
-    top:10px; 
-    width:300px; 
-    z-index:1
+#add_listed_team_div {
+	padding-top: 30px;
 }
-#add_team_listed {
-    position:relative;
-    top:10px; 
-    width:500px; 
-    float: left;
-    z-index:1
+#add_listed_team_form {
+    display:none;  
+}
+#add_new_team_form {
+    display:none;    
 }
 .nowrap {
     white-space: nowrap;

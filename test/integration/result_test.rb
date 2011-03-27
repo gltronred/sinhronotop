@@ -30,13 +30,13 @@ class ResultTest < ActionController::IntegrationTest
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
       add_team_listed(false, sp, event)
-      add_team_listed(true, sp, event, "Марк Ленивкер")
-      click_link "Изменить данные команды"
+      add_team_listed(true, sp, event, "Марк Ленивкер", 1)
+      click_link "Изменить"
       add_team_listed(true, ka, event, "Леонид К")
-      click_link "Изменить данные команды"
-      fill_in "result_cap_name", :with => "Леонид Кандыба"
+      click_link "Изменить"
+      fill_in "listed_cap_name", :with => "Леонид Кандыба"
       click_button "Сохранить"
-      search_multiple_text_in_result_table ["Крейзер Аврора", "Леонид Кандыба"]
+      search_multiple_text_in_result_table ["Крейзер Аврора", "Леонид Кандыба", 1, 2]
       search_in_result_table("Марк Ленивкер", false)
       search_in_result_table("7 пядей", false)
 
@@ -53,11 +53,11 @@ class ResultTest < ActionController::IntegrationTest
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
       add_team_new(true, "Rolling Stones", event.city)
-      click_link "Изменить данные команды"
+      click_link "Изменить"
       fill_in "team_name", :with => "Scorpions"
       click_button "Сохранить"
-      add_team_listed(true, sp, event)
-      search_multiple_text_in_result_table ["Рига", "Scorpions"]
+      add_team_listed(true, sp, event, nil, 1)
+      search_multiple_text_in_result_table ["Рига", "Scorpions", 1, 2]
       add_team_new(true, "Beatles", event.city, cities(:tallinn))
     }
   end
@@ -68,8 +68,8 @@ class ResultTest < ActionController::IntegrationTest
     ka = teams(:ka)
     do_with_users([:trodor]) {
       visit "/events/#{event.id}/results"
-      add_team_listed(true, sp, event, "Марк Ленивкер")
-      add_team_listed(true, ka, event, "Максим Ли")
+      add_team_listed(true, sp, event, "Марк Ленивкер", 1)
+      add_team_listed(true, ka, event, "Максим Ли", 2)
       click_link "Импорт тура из Excel"
       fill_in "excel_input", :with => "+\t\t+\t\t+\t\t+\t+\t+\t\t\t\r\n1\t\t\t\t\t\t\t\t\t\t\t1"
       click_link "Импортировать"
@@ -84,15 +84,17 @@ class ResultTest < ActionController::IntegrationTest
       visit "/events/#{event.id}/results"
       add_team_new(false, "Абвгдейка", event.city)
       add_team_new(true, "Абвгдейка", event.city, nil, "Татьяна Кирилловна")
-      click_link "Изменить данные команды"
+      click_link "Изменить"
       fill_in "team_name", :with => "АБВГДейка"
-      fill_in "result_cap_name", :with => "Левушкин"
+      fill_in "listed_cap_name", :with => "Левушкин"
       select "Кельн", :from => "city_id"
       click_button "Сохранить"
-      search_multiple_text_in_result_table ["АБВГДейка", "Левушкин", "Кельн"]
+      search_multiple_text_in_result_table ["АБВГДейка", "Левушкин", "Кельн", 1]
       add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")
       assert page.has_xpath?("//input[@type='checkbox']", :count => 72)
+      sleep 3
       click_remove_and_confirm
+      sleep 3
       search_in_result_table("АБВГДейка", false)
     }
   end
@@ -165,9 +167,11 @@ class ResultTest < ActionController::IntegrationTest
     end
   end
 
-  def add_team_listed(should_be_added, team, event, cap_name=nil)
+  def add_team_listed(should_be_added, team, event, cap_name=nil, local_index = nil)
+    click_link "add_listed_team_link" if has_selector?("a#add_listed_team_link")
+    select local_index.to_s, :from => "listed_local_index" if local_index
     select "#{team.name} (#{team.city.name})", :from => "result_team_id"
-    fill_in "result_cap_name", :with => cap_name if cap_name
+    fill_in "listed_cap_name", :with => cap_name if cap_name
     click_button "result_submit"
     search_in_result_table(event.city.name, should_be_added) if should_be_added
     search_in_result_table(team.city.name, should_be_added) if should_be_added
@@ -180,10 +184,12 @@ class ResultTest < ActionController::IntegrationTest
     search_in_result_table(team.name, false)
   end
 
-  def add_team_new(should_be_added, name, event_city, team_city=nil, cap_name=nil)
+  def add_team_new(should_be_added, name, event_city, team_city=nil, cap_name=nil, local_index = nil)
+    click_link "add_new_team_link" if has_selector?("a#add_new_team_link")
+    select local_index.to_s, :from => "new_local_index" if local_index
     fill_in "team_name", :with => name
     select team_city.to_s, :from => "team_city_id" if team_city
-    fill_in "cap_name", :with => cap_name if cap_name
+    fill_in "new_cap_name", :with => cap_name if cap_name
     confirm_alert
     click_button "team_submit"
     search_in_result_table(event_city.to_s, should_be_added) if should_be_added

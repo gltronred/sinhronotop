@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110308154346) do
+ActiveRecord::Schema.define(:version => 20110327135500) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -119,6 +119,7 @@ ActiveRecord::Schema.define(:version => 20110308154346) do
     t.integer  "place_begin"
     t.integer  "place_end"
     t.string   "cap_name"
+    t.integer  "local_index"
   end
 
   create_table "teams", :force => true do |t|

@@ -3,27 +3,32 @@ bb1_frankfurt_pv:
   event: bb1_frankfurt
   team: pv
   cap_name: Борис Брукман
+  local_index: 1
 
 bb1_riga_oki:
   score: 8
   event: bb1_riga
   team: oki
   cap_name: Александр Мачевский
+  local_index: 1
   
 bb2_frankfurt_pv:
   score: 14
   event: bb2_frankfurt
   team: pv
   cap_name: Михаил Перлин
+  local_index: 1
 
 bb2_riga_oki:
   score: 10
   event: bb2_riga
   team: oki
   cap_name: Александр Мачевский
+  local_index: 1
   
 bb2_frankfurt_sp:
   score: 12
   event: bb2_frankfurt
   team: sp  
   cap_name: Марк Ленивкер
+  local_index: 2
