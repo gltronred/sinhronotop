@@ -7,6 +7,8 @@ class Result < ActiveRecord::Base
   
   def calculate_and_save
     self.score = get_score self.resultitems
+    self.place_begin = nil
+    self.place_end = nil
     self.save
   end
   

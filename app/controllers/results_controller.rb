@@ -15,7 +15,7 @@ class ResultsController < ApplicationController
       load_teams
       load_cities
     elsif
-      @results = @parent.results.sort_by{|r| r.score }
+      @results = @parent.results.sort_by{|r| -r.score }
       calculate_places(@results)
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
@@ -28,7 +28,7 @@ class ResultsController < ApplicationController
   def show
     @tour = params[:id].to_i
     @context_array = @parent.parents_top_down(:with_me) << "результаты" << "тур #{@tour}"
-    @results = @parent.results.sort_by{|r| r.score }
+    @results = @parent.results.sort_by{|r| -r.score }
     @results.each {|result| result.calculate_and_save }
   end
 
@@ -109,7 +109,7 @@ class ResultsController < ApplicationController
     need_calc = ordered_results.detect{|r|!r.place_begin || !r.place_end}
     if need_calc
       teams_before = 0
-      ordered_results.group_by(&:score).each do |score, group|
+      ordered_results.group_by{|r|-r.score}.each do |score, group|
         group.each{|r|r.place_begin = teams_before+1; r.place_end = teams_before+group.size; r.save}
         teams_before += group.size
       end
