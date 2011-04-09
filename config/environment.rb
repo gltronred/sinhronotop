@@ -59,17 +59,17 @@ Rails::Initializer.run do |config|
   # config.i18n.default_locale = :de
   #config.gem "authlogic"
   #config.gem "declarative_authorization", :source => "http://gemcutter.org"
-  
+
   #config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.perform_deliveries = true
   config.action_mailer.delivery_method = :smtp
-  
-  
+
+
   config.after_initialize do
     ActionController::Dispatcher.middleware.insert_before(ActionController::Base.session_store, RackRailsCookieHeaderHack)
   end
-  
+
   config.active_record.observers = :user_observer, :event_observer
 end
 
@@ -91,7 +91,7 @@ class ActiveRecord::Base
     ret<<self if with_me
     ret
   end
-  
+
   def e_to_s
     self.errors.full_messages.join(', ')
   end
@@ -126,23 +126,23 @@ module ActionView::Helpers::DateHelper
 end
 
 module ActionView::Helpers::FormOptionsHelper
-   def options_for_select_with_include_blank(container, selected = nil, include_blank = false)
-      options = options_for_select_without_include_blank(container, selected)
-      if include_blank
-         options = "<option value=\"\">#{include_blank if include_blank.kind_of?(String)}</option>\n" + options
-      end
-      options
-   end
-   alias_method_chain :options_for_select, :include_blank
- 
-   def options_from_collection_for_select_with_include_blank(collection, value_method, text_method, selected = nil, include_blank = false)
-      options = options_from_collection_for_select_without_include_blank(collection, value_method, text_method, selected)
-      if include_blank
-         options = "<option value=\"\">#{include_blank if include_blank.kind_of?(String)}</option>\n" + options
-      end
-      options
-   end
-   alias_method_chain :options_from_collection_for_select, :include_blank
+  def options_for_select_with_include_blank(container, selected = nil, include_blank = false)
+    options = options_for_select_without_include_blank(container, selected)
+    if include_blank
+      options = "<option value=\"\">#{include_blank if include_blank.kind_of?(String)}</option>\n" + options
+    end
+    options
+  end
+  alias_method_chain :options_for_select, :include_blank
+
+  def options_from_collection_for_select_with_include_blank(collection, value_method, text_method, selected = nil, include_blank = false)
+    options = options_from_collection_for_select_without_include_blank(collection, value_method, text_method, selected)
+    if include_blank
+      options = "<option value=\"\">#{include_blank if include_blank.kind_of?(String)}</option>\n" + options
+    end
+    options
+  end
+  alias_method_chain :options_from_collection_for_select, :include_blank
 end
 
 class ActiveRecord::Base
@@ -167,5 +167,36 @@ class ActiveRecord::Base
 
   def self.human_attribute_name(attr)
     HUMANIZED_ATTRIBUTES[attr.to_sym] || attr
+  end
+end
+
+module Capybara
+  class WaitUtil
+    def self.timeout(seconds = 1, driver = nil, &block)
+
+      start_time = Time.now
+
+      result = nil
+
+      until result
+        begin
+
+          return result if result = yield
+
+        rescue Capybara::ElementNotFound,Selenium::WebDriver::Error::ObsoleteElementError => e
+
+        end
+
+        delay = seconds - (Time.now - start_time)
+        if delay <= 0
+          raise TimeoutError
+        end
+
+        driver && driver.wait_until(delay)
+
+        sleep(0.05)
+
+      end
+    end
   end
 end

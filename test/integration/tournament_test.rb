@@ -31,15 +31,15 @@ class TournamentTest < ActionController::IntegrationTest
     do_with_users([:perlin]) {
       create
       click_link "Изменить"
-
-      fill_in 'tournament[name]', :with => 'Кубок Городов'
       uncheck "every_city"
-      check "tournament_city_ids_"
-      check 'tournament[needTeams]'
-      check 'tournament[appeal_for_dismiss]'
-      check 'tournament[cap_name_required]'
-      check 'tournament[time_required]'
-      select "турнир одноэтапный, считать не надо", :from => "tournament[calc_system_id]"
+      fill_in 'tournament_name', :with => 'Кубок Городов'
+      check 'tournament_needTeams' #don't remove this - workaound as capybara doesn't fullfill the first "check"
+      check 'tournament_needTeams'
+      check 'tournament_appeal_for_dismiss'
+      check 'tournament_cap_name_required'
+      check 'tournament_time_required'
+      select "турнир одноэтапный, считать не надо", :from => "tournament_calc_system_id"
+      check cities(:cologne).id.to_s
       click_button 'Сохранить'
 
       assert_contain_multiple ["Настройки турнира изменены", "Кубок Городов", "турнир одноэтапный, считать не надо", "Кельн"]
@@ -60,7 +60,7 @@ class TournamentTest < ActionController::IntegrationTest
   def create
     visit "/tournaments"
     click_link 'Новый турнир'
-    fill_in 'tournament[name]', :with => 'ОКР'
+    fill_in 'tournament_name', :with => 'ОКР'
     select "Константин Кноп (kupr@example.com)", :from => "tournament_user_id"
     check "every_city"
     select "не знаю пока", :from => "tournament_calc_system_id"

@@ -10,18 +10,21 @@ class LongtextTest < ActionController::IntegrationTest
       visit "/games/#{game.id}"
       click_link "Добавить текст"
       fill_in "longtext_title", :with => "Вопросы 1 тура"
-      fill_in "longtext_value", :with => File.open("test/fixtures/longtext.txt",'r').read
+      text = File.open("test/fixtures/longtext.txt",'r').read
+      fill_in "longtext_value", :with => text
       click_button "Сохранить"
       click_link "Вопросы 1 тура"
       assert_contain_multiple ["Дебют Дебюсси", "Заговаривал зубы"]
-      click_link "Назад"
+      visit "/games/#{game.id}"
+      #click_link "Назад"
       click_link "Изменить текст"
       fill_in "longtext_title", :with => "Вопросы 1 тура и разминка"
       click_button "Сохранить"
       click_link "Вопросы 1 тура и разминка"
-      click_link "Назад"
+      visit "/games/#{game.id}"
+      #click_link "Назад"
       confirm_alert
-      click_link "Удалить текст"
+      click_on "Удалить текст"
       assert_contain "Этап 1"
       assert_not_contain "Вопросы 1 тура и разминка"
     }
@@ -42,7 +45,8 @@ class LongtextTest < ActionController::IntegrationTest
       click_button "Сохранить"
       click_link "Информация"
       assert_contain_multiple ["Турнир проводится федерацией интеллектуальных игр Германии", "Информация"]
-      click_link "Назад"
+      #click_link "Назад"
+      visit "/tournaments/#{t.id}"
       confirm_alert
       click_link "Удалить текст"
       assert_contain "Кубок Германии"

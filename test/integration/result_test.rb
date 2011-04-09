@@ -92,9 +92,7 @@ class ResultTest < ActionController::IntegrationTest
       search_multiple_text_in_result_table ["АБВГДейка", "Левушкин", "Кельн", 1]
       add_team_new(true, "Утренняя почта", event.city, cities(:cologne), "Юрий Николаев")
       assert page.has_xpath?("//input[@type='checkbox']", :count => 72)
-      sleep 3
       click_remove_and_confirm
-      sleep 3
       search_in_result_table("АБВГДейка", false)
     }
   end
@@ -155,16 +153,15 @@ class ResultTest < ActionController::IntegrationTest
 
   def search_in_result_table(to_search, should_be_listed=true)
     to_search = to_search.to_s unless to_search.is_a?(String)
-    within(:xpath, "//table[@id='result_table']") do
-      expression = "//td[text()='#{to_search}']"
-      el1 = page.has_xpath? "//td[text()='#{to_search}']"
-      el2 = page.has_xpath? "//a[text()='#{to_search}']"
-      if should_be_listed
-        assert el1 || el2, " #{to_search} not found"
-      else
-        assert !el1 && !el2, " #{to_search} found"
-      end
+    #within_table('result_table') do
+    el1 = page.has_xpath? "//table[@id='result_table']//td[text()='#{to_search}']"
+    el2 = page.has_xpath? "//table[@id='result_table']//a[text()='#{to_search}']"
+    if should_be_listed
+      assert el1 || el2, " #{to_search} not found in #{page_text(page)}"
+    else
+      assert !el1 && !el2, " #{to_search} found in #{page_text(page)}"
     end
+    #end
   end
 
   def add_team_listed(should_be_added, team, event, cap_name=nil, local_index = nil)
@@ -181,6 +178,7 @@ class ResultTest < ActionController::IntegrationTest
 
   def remove_team(team)
     click_remove_and_confirm
+    sleep 1
     search_in_result_table(team.name, false)
   end
 

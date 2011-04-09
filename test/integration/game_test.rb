@@ -9,15 +9,18 @@ class GameTest < ActionController::IntegrationTest
     do_with_users([:knop]) {
       visit "/tournaments/#{kupr.id}"
       click_link "Новый этап"
-      fill_in "game_name", :with => "главный этап"
-      fill_in "game_num_tours", :with =>"3"
-      fill_in "game_num_questions", :with => "14"
       uncheck "game_begin_dont_know"
       uncheck "game_game_begin_dont_know"
       uncheck "game_submit_disp_until_dont_know"
+      
+      fill_in "game_name", :with => "главный этап"
+      fill_in "game_num_tours", :with =>"3"
+      fill_in "game_num_questions", :with => "14"
+      
       select_date("game_begin", 1, 10, 2014)
       select_date("game_game_begin", 12, 10, 2014)
       select_date("game_submit_disp_until", 15, 10, 2014)
+      
       check "game_end_dont_know"
       check "game_game_end_dont_know"
       check "game_submit_appeal_until_dont_know"

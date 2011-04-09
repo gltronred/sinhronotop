@@ -9,10 +9,13 @@ require 'rake'
 
 Capybara.default_driver = :selenium
 Capybara.app_host = 'http://localhost:3000'
+Capybara.register_driver :selenium do |app|
+  Capybara::Driver::Selenium.new(app, :browser => :chrome)
+end
 
 module IntegrationTestHelper
   include Capybara
-  
+
   def login(user)
     login_form(user.email, 'znatok')
   end
@@ -28,15 +31,15 @@ module IntegrationTestHelper
       assert_contain "не удалось"
     end
   end
-  
+
   def page_text(page)
     page.body.gsub(/<[a-zA-Z\/][^>]*>/, ' ').gsub(/\n\n/, ' ')
   end
-  
+
   def assert_contain(str)
     assert page.has_content?(str), "#{str} not found in #{page_text(page)}"
   end
-  
+
   def assert_not_contain(str)
     assert !page.has_content?(str), "#{str} found in #{page_text(page)}"
   end
@@ -70,7 +73,7 @@ module IntegrationTestHelper
   end
 
   def assert_have_no_selector_multiple(arr)
-    arr.each do |el|      
+    arr.each do |el|
       assert !has_selector?(el), "found #{el}"
       #assert_have_no_selector el
     end
@@ -97,11 +100,11 @@ module IntegrationTestHelper
   end
 
   def confirm_alert
-    page.evaluate_script('window.confirm = function() { return true; }')
+    page.execute_script('window.confirm = function() { return true; }')
   end
 
   def click_remove_and_confirm
-    page.evaluate_script('window.confirm = function() { return true; }')
+    page.execute_script('window.confirm = function() { return true; }')
     click_link "Удалить"
   end
 
