@@ -7,7 +7,7 @@ class AppealsController < ApplicationController
   # GET /appeals
   # GET /appeals.xml
   def index
-    @appeal = Appeal.new
+    @appeal = Appeal.new #test
     @appeals = @parent.appeals.sort{|x,y| x.question_index <=> y.question_index}
     respond_to do |format|
       @context_array = @parent.parents_top_down(:with_me) << "апелляции (#{@appeals.size})"
