@@ -34,14 +34,29 @@
 <%= render :partial => "disable_date", :locals => {:field_id => 'game_game_end'} %>
  </p>
  <p>
+   <%= f.label "Прием спорных c" %><br />
+   <%= f.date_select :submit_disp_from, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_disp_from'} %>
+ </p>
+ <p>
    <%= f.label "Прием спорных до" %><br />
    <%= f.date_select :submit_disp_until, :include_blank => true %>
 <%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_disp_until'} %>
  </p>
  <p>
+   <%= f.label "Прием апелляций c:" %><br />
+   <%= f.date_select :submit_appeal_from, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_appeal_from'} %>
+ </p>
+ <p>
    <%= f.label "Прием апелляций до:" %><br />
    <%= f.date_select :submit_appeal_until, :include_blank => true %>
 <%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_appeal_until'} %>
+ </p>
+ <p>
+   <%= f.label "Прием результатов до c:" %><br />
+   <%= f.date_select :submit_results_from, :include_blank => true %>
+<%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_results_from'} %>
  </p>
  <p>
    <%= f.label "Прием результатов до до:" %><br />

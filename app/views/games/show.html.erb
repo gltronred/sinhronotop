@@ -29,15 +29,27 @@
 <%=h @game.game_end.loc if @game.game_end %>
 </p>
 <p>
+<b>Прием спорных c:</b>
+<%=h @game.submit_disp_from.loc if @game.submit_disp_from %>
+</p>
+<p>
 <b>Прием спорных до:</b>
 <%=h @game.submit_disp_until.loc if @game.submit_disp_until %>
 </p>
 
 <p>
+<b>Прием апелляций c:</b>
+<%=h @game.submit_appeal_from.loc if @game.submit_appeal_from %>
+</p>
+<p>
 <b>Прием апелляций до:</b>
 <%=h @game.submit_appeal_until.loc if @game.submit_appeal_until %>
 </p>
 
+<p>
+<b>Прием результатов c:</b>
+<%=h @game.submit_results_from.loc if @game.submit_results_from %>
+</p>
 <p>
 <b>Прием результатов до:</b>
 <%=h @game.submit_results_until.loc if @game.submit_results_until %>

@@ -52,16 +52,27 @@ class Game < ActiveRecord::Base
   end
 
   def can_submit_disp?
-    self.submit_disp_until ? self.submit_disp_until >= Date.today : true
+    #self.submit_disp_until ? self.submit_disp_until >= Date.today : true
+    ret = true
+    ret &&= self.submit_disp_from <= Date.today if self.submit_disp_from
+    ret &&= self.submit_disp_until >= Date.today if self.submit_disp_until
+    ret
   end
 
   def can_submit_appeal?
-    self.submit_appeal_until ? self.submit_appeal_until >= Date.today : true
+    #self.submit_appeal_until ? self.submit_appeal_until >= Date.today : true
+    ret = true
+    ret &&= self.submit_appeal_from <= Date.today if self.submit_appeal_from
+    ret &&= self.submit_appeal_until >= Date.today if self.submit_appeal_until
+    ret
   end
 
   def can_submit_results?
-    self.submit_results_until ? self.submit_results_until >= Date.today : true
+    #self.submit_results_until ? self.submit_results_until >= Date.today : true
+    ret = true
+    ret &&= self.submit_results_from <= Date.today if self.submit_results_from
+    ret &&= self.submit_results_until >= Date.today if self.submit_results_until
+    ret
   end
-
 
 end

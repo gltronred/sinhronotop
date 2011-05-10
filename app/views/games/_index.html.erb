@@ -11,8 +11,11 @@
     <th>Регистр. до</th>
     <th>Игра с</th>
     <th>Игра до</th>
+    <th>Cпорные c</th>
     <th>Cпорные до</th>
+    <th>Апелляции c</th>
     <th>Апелляции до</th>
+    <th>Результаты c</th>
     <th>Результаты до</th>
 <% if org %>
     <th>Cпорные видны</th>
@@ -30,8 +33,11 @@
     <td><%=h game.end.loc if game.end %></td>
     <td><%=h game.game_begin.loc if game.game_begin%></td>
     <td><%=h game.game_end.loc if game.game_end %></td>
+    <td><%=h game.submit_disp_from.loc if game.submit_disp_from%></td>
     <td><%=h game.submit_disp_until.loc if game.submit_disp_until%></td>
+    <td><%=h game.submit_appeal_from.loc if game.submit_appeal_from %></td>
     <td><%=h game.submit_appeal_until.loc if game.submit_appeal_until %></td>
+    <td><%=h game.submit_results_from.loc if game.submit_results_from %></td>
     <td><%=h game.submit_results_until.loc if game.submit_results_until %></td>
 <% if org %>
     <td><%=h game.publish_disp.loc %></td>
