@@ -4,7 +4,7 @@
   <%= f.hidden_field :event_id, :value => @event.id %>
 <%= render :partial => "new_result_index", :locals => {:f => f, :prefix => 'listed'} %>
   <p>
-    <%= collection_select(:result, :team_id, @teams, :id, :to_s) %><br/>
+    <%= collection_select(:result, :team_id, @teams, :id, :to_s,{:selected => @teams[0].id}, {:onchange => "select_team_from_list(jQuery(this).val())"}) %><br/>
 	(для упрощения поиска нажмите в списке первую букву названия)
   </p>
 <%= render :partial => "new_result_cap", :locals => {:f => f, :prefix => 'listed' } %>

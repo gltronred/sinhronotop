@@ -39,6 +39,8 @@ class ResultsController < ApplicationController
     @result.score = 0
     @result.cap_name = params[:cap_name]
     @result.local_index = params[:local_index]
+
+
     respond_to do |format|
       if @result.save
         @result.create_resultitems
@@ -86,7 +88,13 @@ class ResultsController < ApplicationController
   private
 
   def load_teams
-    @teams = Team.find(:all, :joins => :city, :order => "name ASC")
+    #@teams = Team.find(:all, :joins => :city, :order => "name ASC")
+    #puts "!!!!!!!!!!!!!!!!"+YAML::dump(@_event)
+    @teams_home   = Team.find(:all, :conditions => ["city_id = ?", @event.city_id], :joins => :city, :order => "name ASC")
+    @teams_guests = Team.find(:all, :conditions => ["city_id != ?", @event.city_id], :joins => :city, :order => "name ASC")
+
+    @teams_home << Team.new(:name => '--------------------') if !@teams_home.empty?
+    @teams = @teams_home + @teams_guests
     @teams = @teams - @results.map(&:team) if @results
   end
 

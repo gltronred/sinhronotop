@@ -10,6 +10,6 @@ class Team < ActiveRecord::Base
   end
   
   def to_s
-    "#{self.name} (#{self.city.name if self.city})" 
+    "#{self.name}" + (self.city ? " ("<<"#{(self.city.name)}"<<")":"")
   end
 end

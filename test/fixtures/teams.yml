@@ -17,4 +17,6 @@ sp:
   name: 7 пядей
   city: cologne
   rating_id: 2377
-  
+
+spacer:
+  name: --------------------

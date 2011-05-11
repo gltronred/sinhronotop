@@ -4,3 +4,11 @@ jQuery.disable_date = function(field_id) {
     var disable = jQuery("#"+field_id+"_dont_know").attr("checked")
     widgets.attr("disabled", disable)
 };
+
+function select_team_from_list (value){
+    if (!value){
+        jQuery("#result_submit").attr('disabled', 'disabled');
+    }else if(jQuery("#result_submit").attr('disabled')){
+        jQuery("#result_submit").removeAttr('disabled')
+    }
+}

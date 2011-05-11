@@ -31,6 +31,8 @@ class ResultTest < ActionController::IntegrationTest
       visit "/events/#{event.id}/results"
       add_team_listed(false, sp, event)
       add_team_listed(true, sp, event, "Марк Ленивкер", 1)
+      visit "/events/#{event.id}/results"
+      add_team_listed_spacer(ka)
       click_link "Изменить"
       add_team_listed(true, ka, event, "Леонид К")
       click_link "Изменить"
@@ -174,6 +176,14 @@ class ResultTest < ActionController::IntegrationTest
     search_in_result_table(team.city.name, should_be_added) if should_be_added
     search_in_result_table(team.name, should_be_added)
     search_in_result_table(cap_name, should_be_added) if cap_name && should_be_added
+  end
+
+  def add_team_listed_spacer(team)
+    click_link "add_listed_team_link" if has_selector?("a#add_listed_team_link")
+    select "#{team.name} (#{team.city.name})", :from => "result_team_id"
+    select "--------------------", :from => "result_team_id"
+    click_button "result_submit"
+    assert_not_contain "Команда добавлена"
   end
 
   def remove_team(team)
