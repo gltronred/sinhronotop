@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
 
   before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
-  before_filter :load_parents, :only => [:create, :index, :show]
+  before_filter :load_parents, :only => [:create, :index, :show, :simple_results]
   before_filter :check_do_changes
 
   # GET /results
@@ -83,6 +83,17 @@ class ResultsController < ApplicationController
         end
       }
     end
+  end
+
+  def simple_results
+    @results = @parent.results.sort_by{|r| -r.score }
+    calculate_places(@results)
+    @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
+    send_data render ('simple_results.html', :layout => false),
+              :filename => 'simple_results.html',
+              :disposition => 'attachment',
+              :type => "text/html; charset=utf-8",
+              :encoding => 'utf-8'
   end
 
   private

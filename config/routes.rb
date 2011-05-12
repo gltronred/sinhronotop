@@ -49,6 +49,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.change_status "events/:id/change_status", :controller => 'events', :action => "change_status"
 
+
   map.resources :games
   map.resources :games do |g|
     g.resources :events
@@ -57,6 +58,7 @@ ActionController::Routing::Routes.draw do |map|
     g.resources :results
     g.resources :longtexts
   end
+  map.simple_results "games/:game_id/simple_results", :controller => 'results', :action => "simple_results"
 
   map.resources :cities
 

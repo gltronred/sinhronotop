@@ -1,0 +1,22 @@
+<table border="1">
+  <tr>
+      <th>Место</th>
+      <th>Команда</th>
+      <th>Город (команды)</th>
+      <% for i in 1..@game.num_tours -%>
+        <th><%="Тур#{i}"-%></th>
+      <% end -%>
+      <th>Сумма</th>
+  </tr>
+  <% @results.each do |result| %>
+  <tr>
+      <td><%=h result.place_to_s -%></td>
+      <td><%=h result.team.name -%></td>
+      <td><%=h result.team.city -%></td>
+      <% for tour in 1..@game.num_tours -%>
+        <td><%="#{result.score_for_tour(tour)}"-%></td>
+      <% end -%>
+      <td><%=h result.score -%></td>
+  </tr>
+  <% end %>
+</table>
