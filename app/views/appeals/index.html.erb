@@ -21,4 +21,5 @@
 <% unless @event %>
 <%= render :partial => "common/csv", :locals => {:path => game_appeals_path(@game, :format => :csv) } %>
 <p><%= link_to "Экспортировать как текст", game_appeals_path(@game, :format => :txt) %></p>
+<p><%= link_to 'Экспортировать спорные и апелляции в один файл', appeals_and_controversial_path, request.parameters.merge({:format => :txt}) %></p>
 <% end %>

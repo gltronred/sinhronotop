@@ -1,0 +1,21 @@
+<%= @context_array.join(' >> ') -%>
+
+<% @export_data.each do |e_data|
+next if e_data.nil?
+%>
+Номер вопроса: <%= e_data[:q_index] %>
+<% e_data[:appeals].each do |appeal| %>
+Ответ команды: <%= appeal[:answer] %>
+Желаемый вердикт: <%= appeal[:goal] %>
+Аргументация: <%= appeal[:argument] %>
+Вердикт АЖ:
+Обоснование:
+<% end -%>
+<% if e_data[:disputes].size > 0 %>
+Спорные:
+<% e_data[:disputes].each do |disputed| %>
+Ответ команды: <%= disputed[:answer] -%>
+<% end -%>
+<% end -%>
+
+<% end -%>

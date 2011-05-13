@@ -59,6 +59,7 @@ ActionController::Routing::Routes.draw do |map|
     g.resources :longtexts
   end
   map.simple_results "games/:game_id/simple_results", :controller => 'results', :action => "simple_results"
+  map.appeals_and_controversial "games/:game_id/appeals_and_controversial", :controller => 'appeals', :action => "appeals_and_controversial"
 
   map.resources :cities
 
