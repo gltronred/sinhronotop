@@ -23,6 +23,7 @@ xml.Workbook({
         xml.Cell { xml.Data 'Email представителя', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'Команд', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'IPs', 'ss:Type' => 'String' }
+        xml.Cell { xml.Data 'Отчет', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'Дополнительная информация', 'ss:Type' => 'String' }
       end
 
@@ -40,6 +41,7 @@ xml.Workbook({
           xml.Cell { xml.Data event.user.email, 'ss:Type' => 'String' }
           xml.Cell { xml.Data event.num_teams, 'ss:Type' => 'String' }
           xml.Cell { xml.Data event.ips, 'ss:Type' => 'String' }
+          xml.Cell { xml.Data event.get_event_status, 'ss:Type' => 'String' }
           xml.Cell { xml.Data event.more_info, 'ss:Type' => 'String' }
         end
       end

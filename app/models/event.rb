@@ -62,4 +62,8 @@ class Event < ActiveRecord::Base
   def should_validate_game_time?
     self.game.tournament.time_required
   end
+
+  def get_event_status
+    (!self.disputeds.empty? ? '+' : '-') + '/' + (!self.appeals.empty? ? '+' : '-') + '/' + (!self.results.empty? ? '+' : '-')
+  end
 end

@@ -1,7 +1,7 @@
 <%= @context_array.join(' >> ') %>
 
-Город;Страна;Статус заявки;Дата<%=";Время" if @game.tournament.time_required -%>;Ведущий;Email ведущего;Представитель;Email представителя;Команд;IPs;Дополнительная информация
+Город;Страна;Статус заявки;Дата<%=";Время" if @game.tournament.time_required -%>;Ведущий;Email ведущего;Представитель;Email представителя;Команд;IPs;Отчет;Дополнительная информация
 
 <% @events.each do |event| -%>
-<%= event.city.name -%>;<%= event.city.country -%>;<%= event.event_status.name -%>;<%= event.date.loc -%><%=";#{event.game_time}" if @game.tournament.time_required -%>;<%= event.get_moderator_name -%>;<%= event.get_moderator_email -%>;<%= event.user.name -%>;<%= event.user.email -%>;<%= event.num_teams %>;<%= event.ips %>;<%= event.more_info %>
+<%= event.city.name -%>;<%= event.city.country -%>;<%= event.event_status.name -%>;<%= event.date.loc -%><%=";#{event.game_time}" if @game.tournament.time_required -%>;<%= event.get_moderator_name -%>;<%= event.get_moderator_email -%>;<%= event.user.name -%>;<%= event.user.email -%>;<%= event.num_teams %>;<%= event.ips %>;<%= event.get_event_status %>;<%= event.more_info %>
 <% end -%>
