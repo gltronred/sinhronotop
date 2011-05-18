@@ -1,6 +1,12 @@
 <table id="result_table">
   <tr>
     <th>Команда</th>
+    <% if @game.tournament.cap_name_required %>
+	<th>Капитан</th>
+    <% end %>
+    <th>Город (команды)</th>
+    <th>Город (где играли)</th>
+
 <% for question_in_tour in 1..@game.num_questions %>
 <th><%= (@tour-1)*@game.num_questions+question_in_tour %></th>
 <% end %>
@@ -9,7 +15,13 @@
 
 <% @results.each do |result| %>
   <tr>
-    <td><%= result.team.name %></td>
+    <td><%=h result.team.name %></td>
+    <% if @game.tournament.cap_name_required %>
+	<td><%=h result.cap_name %></td>
+    <% end %>
+    <td><%=h result.team.city%></td>
+    <td><%=h result.event.city.name%></td>
+
 <% for item in result.items_for_tour_sorted(@tour) %>
     <td><%= item.score %></td>
 <% end %>

@@ -28,7 +28,8 @@ class ResultsController < ApplicationController
   def show
     @tour = params[:id].to_i
     @context_array = @parent.parents_top_down(:with_me) << "результаты" << "тур #{@tour}"
-    @results = @parent.results.sort_by{|r| -r.score }
+    @results = @parent.results.sort_by{|r| -r.score_for_tour(@tour) }
+
     @results.each {|result| result.calculate_and_save }
   end
 
