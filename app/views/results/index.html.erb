@@ -16,14 +16,16 @@
 <%= render :partial => "import_window" %>
 <% end %>
 
+<% if changeable %>
+<%= render :partial => "event" %>
+<% elsif @game %>
+<div class="right_menu_block">
+<%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => -1 } %>
+</div>
+<% end %>
 <div id='result_table_div'>
 	<%= render :partial => "result_table", :locals => {:changeable => changeable} %>
 </div>
 
-<% if changeable %>
-<%= render :partial => "event" %>
-<% elsif @game %>
-<%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => -1 } %>
-<% end %>
 
 <p><%= link_to 'Готово, больше результатов нет', home_path if changeable %></p>

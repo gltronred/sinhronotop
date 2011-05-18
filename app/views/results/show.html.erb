@@ -1,3 +1,6 @@
+<div class="right_menu_block">
+<%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => @tour } %>
+</div>
 <table id="result_table">
   <tr>
     <th>Команда</th>
@@ -29,5 +32,3 @@
   </tr>
 <% end %>
 </table>
-
-<%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => @tour } %>

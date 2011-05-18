@@ -37,7 +37,7 @@ TABLE TH {
     color: #6B0C22;
 }
 #result_helpers {
-    float: right; 
+    float: right;
     position: relative;
     width: 250px;
 }
@@ -69,4 +69,10 @@ TABLE TH {
 }
 .event_denied {
     background-color: red;
+}
+.right_menu_block {
+    position:relative;
+    float:right;
+    width:300px;
+    text-align:right;
 }
