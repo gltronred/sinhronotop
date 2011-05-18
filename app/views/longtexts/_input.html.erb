@@ -16,7 +16,7 @@
   </p>
   <p>
     <%= f.label "Текст" %><br />
-    <%= f.text_area :value, {:rows => 40, :cols => 80} %>
+    <%= f.text_area :value, {:rows => 40, :cols => 80, :maxlength=> @longtext.get_max_length, :onKeypress => "validate_longtext(this, #{@longtext.get_max_length});"} %>
   </p>
   <p>
     <%= f.submit 'Сохранить' %>

@@ -12,3 +12,16 @@ function select_team_from_list (value){
         jQuery("#result_submit").removeAttr('disabled')
     }
 }
+
+function validate_longtext(obj, max_length){
+    if (obj.value.length > max_length){
+        var msg = '<p class="message">Максимальная длина - '+max_length+' символов. Попробуйте разместить большое текст как несколько небольших</p>';
+        jQuery("#mesages").hide();
+        jQuery("#mesages").html(msg);
+        jQuery("#mesages").fadeIn(700);
+        jQuery("#longtext_submit").attr('disabled', 'disabled');
+    }else if (jQuery("#longtext_submit").attr('disabled')){
+        jQuery("#mesages").html('');
+        jQuery("#longtext_submit").removeAttr('disabled');
+    }
+}
