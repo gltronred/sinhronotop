@@ -7,20 +7,15 @@
 	<th>Название</th>
     <th>Туров</th>
     <th>Вопросов в туре</th>
-    <th>Регистр. с</th>
-    <th>Регистр. до</th>
-    <th>Игра с</th>
-    <th>Игра до</th>
-    <th>Cпорные c</th>
-    <th>Cпорные до</th>
-    <th>Апелляции c</th>
-    <th>Апелляции до</th>
-    <th>Результаты c</th>
-    <th>Результаты до</th>
+    <th>Регистрация</th>
+    <th>Игра</th>
+    <th>Cпорные</th>
+    <th>Апелляции</th>
+    <th>Результаты</th>
 <% if org %>
-    <th>Cпорные видны</th>
-    <th>Апелляции видны</th>
-    <th>Результаты видны</th>
+    <th>Cпорн. видны</th>
+    <th>Апел. видны</th>
+    <th>Резул. видны</th>
 <% end %>
   </tr>
 
@@ -29,16 +24,11 @@
     <td><%= link_to game.name, game %></td>
     <td><%=h game.num_tours %></td>	
     <td><%=h game.num_questions %></td>	
-    <td><%=h game.begin.loc if game.begin %></td>
-    <td><%=h game.end.loc if game.end %></td>
-    <td><%=h game.game_begin.loc if game.game_begin%></td>
-    <td><%=h game.game_end.loc if game.game_end %></td>
-    <td><%=h game.submit_disp_from.loc if game.submit_disp_from%></td>
-    <td><%=h game.submit_disp_until.loc if game.submit_disp_until%></td>
-    <td><%=h game.submit_appeal_from.loc if game.submit_appeal_from %></td>
-    <td><%=h game.submit_appeal_until.loc if game.submit_appeal_until %></td>
-    <td><%=h game.submit_results_from.loc if game.submit_results_from %></td>
-    <td><%=h game.submit_results_until.loc if game.submit_results_until %></td>
+    <td><%= render_date_interval(game.begin, game.end) %></td>
+    <td><%= render_date_interval(game.game_begin, game.game_end) %></td>
+    <td><%= render_date_interval(game.submit_disp_from, game.submit_disp_until) %></td>
+    <td><%= render_date_interval(game.submit_appeal_from, game.submit_appeal_until) %></td>
+    <td><%= render_date_interval(game.submit_results_from, game.submit_results_until) %></td>
 <% if org %>
     <td><%=h game.publish_disp.loc %></td>
     <td><%=h game.publish_appeal.loc %></td>

@@ -16,6 +16,10 @@ module ApplicationHelper
       nil
     end
   end
+  
+  def render_date_interval(d_begin, d_end)
+    "#{d_begin ? d_begin.loc : '?'} - #{d_end ? d_end.loc : '?'}"
+  end
 
   def cut_by_count(str, count)
     str ? "#{str[0..count-1]}#{"..." if str.length>count}" : nil
