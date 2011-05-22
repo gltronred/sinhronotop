@@ -15,7 +15,7 @@ function select_team_from_list (value){
 
 function validate_longtext(obj, max_length){
     if (obj.value.length > max_length){
-        var msg = '<p class="message">Максимальная длина - '+max_length+' символов. Попробуйте разместить большое текст как несколько небольших</p>';
+        var msg = '<p class="message">Максимальная длина - '+max_length+' символов. Попробуйте разместить большой текст как несколько небольших</p>';
         jQuery("#mesages").hide();
         jQuery("#mesages").html(msg);
         jQuery("#mesages").fadeIn(700);

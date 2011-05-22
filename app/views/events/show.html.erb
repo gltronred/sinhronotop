@@ -44,6 +44,10 @@
 <b> Команд:</b>
 <%=h @event.num_teams %>
 </p>
+<p>
+<b>Отчет (спорные/апелляции/результаты):</b>
+<%=h @event.get_report_status %>
+</p>
 <% if is_org? @event.game.tournament %>
 <p>
 <b> IP, с которых была подана (и изменена) заявка:</b>

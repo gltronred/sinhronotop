@@ -90,7 +90,7 @@ class ResultsController < ApplicationController
     @results = @parent.results.sort_by{|r| -r.score }
     calculate_places(@results)
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
-    send_data render ('simple_results.html', :layout => false),
+    send_data render('simple_results.html', :layout => false),
               :filename => 'simple_results.html',
               :disposition => 'attachment',
               :type => "text/html; charset=utf-8",

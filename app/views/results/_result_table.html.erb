@@ -1,9 +1,3 @@
-<% unless @event %>
-<div class="right_menu_block">
-<%= render :partial => "common/csv", :locals => {:path => game_results_path(@game, :format => :csv) } %>
-<p><%= link_to 'Экспортировать в HTML', simple_results_path, request.parameters.merge({:format => :html}) %></p>
-</div>
-<% end %>
 <table id="result_table">
   <tr>
 <% if @event %>

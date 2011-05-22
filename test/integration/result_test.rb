@@ -188,7 +188,7 @@ class ResultTest < ActionController::IntegrationTest
 
   def remove_team(team)
     click_remove_and_confirm
-    sleep 1
+    sleep 2
     search_in_result_table(team.name, false)
   end
 

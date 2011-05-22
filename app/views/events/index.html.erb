@@ -31,7 +31,7 @@
     <td class="nowrap"><%= event.user.email %></td>
     <td class="nowrap"><%= event.num_teams %></td>
     <td class="nowrap" title="<%= event.ips %>"><%= cut_by_sign(event.ips, ',') %></td>
-    <td class="nowrap"><%= (!event.disputeds.empty? ? '+' : '-') + '/' + (!event.appeals.empty? ? '+' : '-') + '/' + (!event.results.empty? ? '+' : '-') %></td>
+    <td class="nowrap"><%= event.get_report_status %></td>
     <td class="nowrap" title="<%= event.more_info %>"><%= cut_by_count(event.more_info, 12) %></td>
 	<td class="nowrap">
 	<%= render :partial => "change_status", :locals => { :event => event } -%>

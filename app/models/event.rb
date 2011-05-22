@@ -63,7 +63,7 @@ class Event < ActiveRecord::Base
     self.game.tournament.time_required
   end
 
-  def get_event_status
-    (!self.disputeds.empty? ? '+' : '-') + '/' + (!self.appeals.empty? ? '+' : '-') + '/' + (!self.results.empty? ? '+' : '-')
+  def get_report_status
+   "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
   end
 end

@@ -73,6 +73,5 @@ TABLE TH {
 .right_menu_block {
     position:relative;
     float:right;
-    width:300px;
-    text-align:right;
+    width:250px;
 }

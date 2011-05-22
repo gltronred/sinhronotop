@@ -11,52 +11,30 @@
 <%=h @game.num_questions %>
 </p>
 <p>
-<b>Регистрация с:</b>
-<%=h @game.begin.loc if @game.begin %>
-</p>
-
-<p>
-<b>Регистрация до:</b>
-<%=h @game.end.loc if @game.end %>
+<b>Регистрация:</b>
+<%=h render_date_interval(@game.begin, @game.end) %>
 </p>
 <p>
-<b>Первый возможный день игры:</b>
-<%=h @game.game_begin.loc if @game.game_begin %>
-</p>
-
-<p>
-<b>Последний возможный день игры:</b>
-<%=h @game.game_end.loc if @game.game_end %>
+<b>Игра:</b>
+<%=h render_date_interval(@game.game_begin, @game.game_end) %>
 </p>
 <p>
-<b>Прием спорных c:</b>
-<%=h @game.submit_disp_from.loc if @game.submit_disp_from %>
+<b>Прием спорных:</b>
+<%=h render_date_interval(@game.submit_disp_from, @game.submit_disp_until) %>
 </p>
 <p>
-<b>Прием спорных до:</b>
-<%=h @game.submit_disp_until.loc if @game.submit_disp_until %>
-</p>
-
 <p>
-<b>Прием апелляций c:</b>
-<%=h @game.submit_appeal_from.loc if @game.submit_appeal_from %>
+<b>Прием апелляций:</b>
+<%=h render_date_interval(@game.submit_appeal_from, @game.submit_appeal_until) %>
 </p>
 <p>
-<b>Прием апелляций до:</b>
-<%=h @game.submit_appeal_until.loc if @game.submit_appeal_until %>
-</p>
-
 <p>
-<b>Прием результатов c:</b>
-<%=h @game.submit_results_from.loc if @game.submit_results_from %>
+<b>Прием результатов:</b>
+<%=h render_date_interval(@game.submit_results_from, @game.submit_results_until) %>
 </p>
 <p>
-<b>Прием результатов до:</b>
-<%=h @game.submit_results_until.loc if @game.submit_results_until %>
-</p>
 
 <% if is_org? @game.tournament %>
-
 <p>
 <b>Ссылка на страницу подачи заявки для потенциальных участников:</b>
 <% url = url_for(:action => 'new', :controller => game_events_path(@game), :only_path => false) %>

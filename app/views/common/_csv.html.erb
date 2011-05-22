@@ -1,5 +1,6 @@
-<p>Экспортировать в CSV (разделитель ";"), формат: 
-<% get_converters_array.each do |key| %>
-<%= link_to key, "#{path}?format=#{key}" -%>, 
+<p>Экспортировать в CSV:<br/> 
+<% get_converters_array.each_with_index do |key, index| %>
+<%= ', ' unless index == 0 -%>
+<%= link_to key, "#{path}?format=#{key}" -%>  
 <% end %>
 </p>
