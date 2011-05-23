@@ -66,4 +66,8 @@ class Event < ActiveRecord::Base
   def get_report_status
    "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
   end
+
+  def validate_event_date
+    self.date >= Date.today
+  end
 end

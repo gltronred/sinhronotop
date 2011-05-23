@@ -144,4 +144,15 @@ class EventTest < ActionController::IntegrationTest
     }
   end
 
+  def test_new_event_date_validation
+    bb1 = games(:kg2)
+    do_with_users([:marina]) {
+      visit "/games/#{bb1.id}/events/new"
+      sleep(4)
+      date = Date.today - 1.day
+      select_date("event_date", date.day, date.month, date.year)
+      click_button "Сохранить"
+      assert_contain "Неверно указана дата игры."
+    }
+  end
 end

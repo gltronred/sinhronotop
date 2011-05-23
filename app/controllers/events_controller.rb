@@ -55,17 +55,26 @@ class EventsController < ApplicationController
   def create
     params[:event].merge!(:ips => request.remote_ip)
     @event = Event.new(params[:event])
-    respond_to do |format|
-      if @event.save        
-        format.html { redirect_to(@event, :notice => @event.last_change) }
-      else
-        format.html {
-          @game = Game.find(@event.game_id)
-          load_users
-          load_cities(@game.tournament_id)
-          render :action => "new"
-        }
+
+    if (@event.validate_event_date)
+      respond_to do |format|
+        if @event.save
+          format.html { redirect_to(@event, :notice => @event.last_change) }
+        else
+          format.html {
+            @game = Game.find(@event.game_id)
+            load_users
+            load_cities(@game.tournament_id)
+            render :action => "new"
+          }
+        end
       end
+    else
+      @game = Game.find(@event.game_id)
+      load_users
+      load_cities(@game.tournament_id)
+      flash[:notice] = 'Неверно указана дата игры.'
+      render :action => "new"
     end
   end
 
