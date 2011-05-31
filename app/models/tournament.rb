@@ -2,6 +2,8 @@ class Tournament < ActiveRecord::Base
   has_many :games, :dependent => :delete_all
   has_many :tournament_results, :dependent => :delete_all
   has_many :longtexts, :dependent => :delete_all
+  has_many :links, :dependent => :delete_all
+
   has_and_belongs_to_many :cities
   belongs_to :user
   belongs_to :calc_system

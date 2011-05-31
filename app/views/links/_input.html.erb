@@ -1,0 +1,18 @@
+<% form_for(@link) do |f| %>
+<% if @game %>
+<%= f.hidden_field :game_id, :value => @game.id %>
+<% elsif @tournament %>
+<%= f.hidden_field :tournament_id, :value => @tournament.id %>
+<% end %>
+
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label "URL" %><br />
+    <%= f.text_field :url %>
+  </p>
+  <p>
+    <%= f.submit 'Сохранить' %>
+  </p>
+<% end %>
+<%= link_to_function 'Назад', 'history.back()' %>

@@ -31,8 +31,10 @@
 	  <%=h @tournament.calc_system %>
 </p>
 <%= render :partial => "common/longtexts", :locals => {:longtexts => @tournament.longtexts} %>
+<%= render :partial => "common/links", :locals => {:links => @tournament.links} %>
 
 <%= link_to 'Добавить текст', new_tournament_longtext_path(@tournament) if is_org? @tournament %>
+<%= link_to 'Добавить ссылку', new_tournament_link_path(@tournament) if is_org? @tournament %>
 <%= link_to 'Изменить', edit_tournament_path(@tournament) if is_org? @tournament %>
 <%= link_to "Удалить", @tournament, :confirm => 'Вы уверены?', :method => :delete if is_admin? %>
 <%= render :partial => 'games/index'%>

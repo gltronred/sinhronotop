@@ -1,5 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
   map.resources :longtexts
+  map.resources :links
 
   map.home '', :controller => 'home', :action => 'index'
 
@@ -57,6 +58,7 @@ ActionController::Routing::Routes.draw do |map|
     g.resources :appeals
     g.resources :results
     g.resources :longtexts
+    g.resources :links
   end
   map.simple_results "games/:game_id/simple_results", :controller => 'results', :action => "simple_results"
   map.appeals_and_controversial "games/:game_id/appeals_and_controversial", :controller => 'appeals', :action => "appeals_and_controversial"
@@ -67,6 +69,7 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :tournaments do |t|
     t.resources :games
     t.resources :longtexts
+    t.resources :links
   end
   map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
 

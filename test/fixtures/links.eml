@@ -1,0 +1,7 @@
+link_bb:
+  url: "www.google.com"
+  tournament: bb
+
+link_bb1:
+  url: "www.some_internal_link.com"
+  game: bb1
