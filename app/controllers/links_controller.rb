@@ -5,11 +5,11 @@ class LinksController < ApplicationController
   before_filter :check_do_changes, :except => :show
 
   def show
-    @context_array = @parent.parents_top_down(:with_me) << "#{@link.url.html_safe}"
+    @context_array = @parent.parents_top_down(:with_me) << "#{@link.text.html_safe}"
   end
 
   def edit
-    @context_array = @parent.parents_top_down(:with_me) << "изменить '#{@link.url.html_safe}'"
+    @context_array = @parent.parents_top_down(:with_me) << "изменить '#{@link.text.html_safe}'"
   end
 
   def new

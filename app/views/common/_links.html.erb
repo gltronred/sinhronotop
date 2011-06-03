@@ -1,5 +1,5 @@
 <% links.each do |l| %>
-<%= render :partial => "common/link", :locals => {:url => l.url} %>
+<%= render :partial => "common/link", :locals => {:url => l.url, :text => l.text} %>
 <% if is_org? @tournament %>
 <%= link_to 'Изменить ссылку', edit_link_path(l) %>
 <%= link_to 'Удалить ссылку', l, :confirm => 'Вы уверены?', :method => :delete %>

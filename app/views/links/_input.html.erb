@@ -7,9 +7,14 @@
 
   <%= f.error_messages %>
 
+
+  <p>
+    <%= f.label "Текст" %><br />
+    <%= f.text_field :text, :size => 40 %>
+  </p>
   <p>
     <%= f.label "URL" %><br />
-    <%= f.text_field :url %>
+    <%= f.text_field :url, :size => 75 %>
   </p>
   <p>
     <%= f.submit 'Сохранить' %>

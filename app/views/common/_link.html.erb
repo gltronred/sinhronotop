@@ -1,5 +1,5 @@
 <p>
 <% if url -%>
-<%= (h url).html_safe %>
+<%= link_to (h text).html_safe, (h url).html_safe, :target => '_blank' %>
 <% end -%>
 </p>
