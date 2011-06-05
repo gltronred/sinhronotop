@@ -9,8 +9,8 @@ class Event < ActiveRecord::Base
   belongs_to :moderation, :class_name => 'User'
 
   validates_presence_of :city_id, :user_id, :date
-  validates_format_of :moderator_email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_nil => true
-  validates_length_of :more_info, :maximum => 1023, :allow_nil => true
+  validates_format_of :moderator_email, :moderator_email2, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :allow_nil => true, :allow_blank => true
+  validates_length_of :more_info, :maximum => 1023, :allow_nil => true, :allow_blank => true
   validates_presence_of :game_time, :if => :should_validate_game_time?
 
   def validate
@@ -38,6 +38,7 @@ class Event < ActiveRecord::Base
     if id
       self.moderator_name = nil
       self.moderator_email = nil
+      self.moderator_email2 = nil
     else
       self.moderation_id = nil
     end
@@ -57,6 +58,10 @@ class Event < ActiveRecord::Base
 
   def get_moderator_email
     self.moderation ? self.moderation.email : self.moderator_email
+  end
+  
+  def get_moderator_email2
+    self.moderation ? nil : self.moderator_email2
   end
 
   def should_validate_game_time?

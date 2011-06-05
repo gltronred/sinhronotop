@@ -34,30 +34,30 @@
 	<%=radio_button_tag("moderator", "from_list", from_list_active)%><%= f.label "Зарегистрированный пользователь" -%>
     <%= select_tag :moderator_list, options_from_collection_for_select_with_include_blank(@users, :id, :name, @event.moderation_id, true) %><br/>
 	<%=radio_button_tag("moderator", "other", other_active)%><%= f.label "Другой человек" %><br />
-	<%= f.label "Имя и фамилия:" %><%= f.text_field :moderator_name %><br /><%= f.label "Email:" %><%= f.text_field :moderator_email %><br/>
+	<%= f.label "Имя и фамилия:" %><%= f.text_field :moderator_name %><br /><%= f.label "Email:" %><%= f.text_field :moderator_email %><br/><%= f.label "Доп. Email:" %><%= f.text_field :moderator_email2 %><br/>
 	<%=radio_button_tag("moderator", "no", no)%><%= f.label "Пока не определились, добавим в заявку позже" %>
   </p>
 <script type="text/javascript">
 	jQuery.activate_self = function() {
 		jQuery("#event_moderation_id").attr('value', '<%= user.id %>')
-		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email").attr('value', '')
-		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email").attr('disabled', true)
+		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('value', '')
+		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('disabled', true)
 	};
 	jQuery.activate_from_list = function() {
-		jQuery("#event_moderator_name, #event_moderator_email").attr('value', '')
-		jQuery("#event_moderator_name, #event_moderator_email").attr('disabled', true)
+		jQuery("#event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('value', '')
+		jQuery("#event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('disabled', true)
 		jQuery("#moderator_list").attr('disabled', false)	
 	};
 	jQuery.activate_other = function() {
 		jQuery("#event_moderation_id").attr('value', '')
 		jQuery("#moderator_list").attr('value', '')
-		jQuery("#event_moderator_name, #event_moderator_email").attr('disabled', false)
+		jQuery("#event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('disabled', false)
 		jQuery("#moderator_list").attr('disabled', true)		
 	};	
 	jQuery.activate_no = function() {
 		jQuery("#event_moderation_id").attr('value', '')
-		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email").attr('value', '')
-		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email").attr('disabled', true)
+		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('value', '')
+		jQuery("#moderator_list, #event_moderator_name, #event_moderator_email, #event_moderator_email2").attr('disabled', true)
 	};
 	jQuery("#moderator_self").click(function(e) {
 		jQuery.activate_self()

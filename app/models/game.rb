@@ -27,11 +27,13 @@ class Game < ActiveRecord::Base
   end
   
   def get_approved_moderator_emails
-    self.events.select{|e| 'approved' == e.event_status.short_name}.map(&:get_moderator_email).uniq.join(',')
+    approved_events = self.events.select{|e| 'approved' == e.event_status.short_name}
+    emails = approved_events.map(&:get_moderator_email) + approved_events.map(&:get_moderator_email2)
+    emails.compact.uniq.join(',')
   end
 
   def get_approved_resp_emails
-    self.events.select{|e| 'approved' == e.event_status.short_name}.map(&:user).map(&:email).uniq.join(',')
+    self.events.select{|e| 'approved' == e.event_status.short_name}.map(&:user).map(&:email).compact.uniq.join(',')
   end
 
   def get_parent

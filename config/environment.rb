@@ -148,11 +148,13 @@ end
 class ActiveRecord::Base
   HUMANIZED_ATTRIBUTES = {
     :name => "название",
+    :event => "регистрация",    
     :answer => "ответ",
     :password => "пароль",
     :password_confirmation => "подтверждение пароля",
     :moderator_name => "имя и фамилия ведущего",
     :moderator_email => "email ведущего",
+    :moderator_email2 => "дополнительный email ведущего",    
     :num_tours => "количество туров",
     :num_questions => "количество вопросов в туре",
     :question_index => "номер вопроса",

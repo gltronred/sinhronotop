@@ -11,6 +11,7 @@ kg1_riga:
     date: <%= 23.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
+    moderator_email2: vasja@deneg.net    
     user: trodor
     city: riga
     game: kg1
@@ -29,6 +30,7 @@ kg2_riga:
     date: <%= 3.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
+    moderator_email2: vasja@deneg.net
     user: trodor
     city: riga
     game: kg2
@@ -49,6 +51,7 @@ bb1_riga:
     date: <%= 23.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
+    moderator_email2: vasja@deneg.net
     user: trodor
     city: riga
     game: bb1
@@ -70,6 +73,7 @@ bb2_riga:
     date: <%= 3.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
+    moderator_email2: vasja@deneg.net
     user: trodor
     city: riga
     game: bb2
@@ -80,6 +84,7 @@ bb2_tallinn:
     date: <%= 2.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
+    moderator_email2: vasja@deneg.net
     user: trodor
     city: tallinn
     game: bb2
@@ -90,6 +95,7 @@ bb2_cologne:
     date: <%= 2.days.ago.to_s :db %>
     moderator_name: Вася
     moderator_email: vasja@example.org
+    moderator_email2: vasja@deneg.net
     user: hudjakov
     city: cologne
     game: bb2

@@ -19,6 +19,7 @@ xml.Workbook({
         xml.Cell { xml.Data 'Время', 'ss:Type' => 'String' } if @game.tournament.time_required
         xml.Cell { xml.Data 'Ведущий', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'Email ведущего', 'ss:Type' => 'String' }
+        xml.Cell { xml.Data 'Доп. Email ведущего', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'Представитель', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'Email представителя', 'ss:Type' => 'String' }
         xml.Cell { xml.Data 'Команд', 'ss:Type' => 'String' }
@@ -37,6 +38,7 @@ xml.Workbook({
           xml.Cell { xml.Data event.game_time, 'ss:Type' => 'String' }  if @game.tournament.time_required
           xml.Cell { xml.Data event.get_moderator_name, 'ss:Type' => 'String' }
           xml.Cell { xml.Data event.get_moderator_email, 'ss:Type' => 'String' }
+          xml.Cell { xml.Data event.get_moderator_email2, 'ss:Type' => 'String' }          
           xml.Cell { xml.Data event.user.name, 'ss:Type' => 'String' }
           xml.Cell { xml.Data event.user.email, 'ss:Type' => 'String' }
           xml.Cell { xml.Data event.num_teams, 'ss:Type' => 'String' }

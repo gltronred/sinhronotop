@@ -26,22 +26,23 @@ class EventTest < ActionController::IntegrationTest
       date = Date.today + 1.day
       fill_in "event_moderator_name", :with => 'Василий Пупкин'
       fill_in "event_more_info", :with => 'Будем играть в темноте'
+      fill_in "event_moderator_email2", :with => 'pupkin@deneg.net'
       select_date("event_date", date.day, date.month, date.year)
       select '12:30', :from => "event_game_time"
       click_button "Сохранить"
-      assert_contain_multiple ["Данные заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
+      assert_contain_multiple ["Данные заявки изменены", "Василий Пупкин", "pupkin@vasi.net", "pupkin@deneg.net", "Рига", "Дмитрий Бочаров", (Date.today + 1.day).loc, 'Будем играть в темноте', '12:30', "19"]
       assert_not_contain "Латвия"
 
       click_link "Изменить"
       choose "moderator_self"
       click_button "Сохранить"
-      assert_not_contain_multiple ["Василий Пупкин", "pupkin@vasi.net"]
+      assert_not_contain_multiple ["Василий Пупкин", "pupkin@vasi.net", "pupkin@deneg.net"]
 
       click_link "Изменить"
       choose "moderator_from_list"
       select "Константин Кноп", :from => "moderator_list"
       click_button "Сохранить"
-      assert_not_contain_multiple ["Василий Пупкин", "pupkin@vasi.net"]
+      assert_not_contain_multiple ["Василий Пупкин", "pupkin@vasi.net", "pupkin@deneg.net"]
       assert_contain_multiple ["Константин Кноп", "kupr@example.com"]
 
       click_link "Изменить"
@@ -111,7 +112,7 @@ class EventTest < ActionController::IntegrationTest
     bb1 = games(:bb1)
     do_with_users([:marina]) {
       visit "/games/#{bb1.id}/events"
-      assert_contain_multiple ["Вася", "vasja@example.org", "Дмитрий Бочаров", "Рига"]
+      assert_contain_multiple ["Вася", "vasja@example.org", "vasja@deneg.net", "Дмитрий Бочаров", "Рига"]
       assert_contain_multiple ["Иван Иванов", "ivan@example.org", "Борис Шойхет", "Франкфурт"]
     }
   end
