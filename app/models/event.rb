@@ -61,7 +61,11 @@ class Event < ActiveRecord::Base
   end
   
   def get_moderator_email2
-    self.moderation ? nil : self.moderator_email2
+    if self.moderation 
+      self.moderation.email
+    else
+      self.moderator_email2 && !self.moderator_email2.empty? ? self.moderator_email2 : nil
+    end
   end
 
   def should_validate_game_time?
