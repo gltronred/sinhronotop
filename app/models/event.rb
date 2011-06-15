@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   has_many :disputeds, :dependent => :delete_all
   has_many :appeals, :dependent => :delete_all
   has_many :results, :dependent => :delete_all
+  has_many :plays, :dependent => :delete_all
   belongs_to :user
   belongs_to :event_status
   belongs_to :moderation, :class_name => 'User'
