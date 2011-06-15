@@ -8,6 +8,7 @@
 <% end -%>
 Ведущий: <%=h @event.get_moderator_name %>
 Email ведущего: <%=h @event.get_moderator_email %>
+Дополнительный Email ведущего: <%=h @event.get_moderator_email2 %>
 Представитель: <%=h @event.user.name %> 
 Email представителя: <%=h @event.user.email %>
 Количество команд: <%=h @event.num_teams %>

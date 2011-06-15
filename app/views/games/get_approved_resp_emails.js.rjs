@@ -1,1 +1,1 @@
-page.replace_html "resp_emails", "<span id='moderator_emails'>#{@game.get_approved_resp_emails}</span>"
+page.replace_html "resp_emails", "<span id='resp_emails'>#{@game.get_approved_resp_emails}</span>"
