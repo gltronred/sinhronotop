@@ -106,6 +106,14 @@ class EventsController < ApplicationController
     end
   end
 
+  def casts
+    load_parents
+    load_cities(@event.game.tournament_id)
+    load_users
+    @context_array = @event.parents_top_down(:with_me) << 'Составы'
+    @results = @event.results.sort_by{|r| r.local_index }
+  end
+
   protected
 
   def load_cities(tournament_id)

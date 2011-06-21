@@ -25,3 +25,24 @@ function validate_longtext(obj, max_length){
         jQuery("#longtext_submit").removeAttr('disabled');
     }
 }
+
+function show_add_player_fm(team_id){
+    jQuery("#add_player_fm").hide();
+    jQuery("#team_id").val(team_id);
+    jQuery("#add_player_"+team_id).html(jQuery("#add_player_fm"));
+    jQuery("#add_player_fm").fadeIn(700);
+
+}
+
+function set_captain(play_id, team_id){
+    jQuery("#play_id").val(play_id);
+    jQuery.ajax({
+        type: 'POST',
+        url: "/plays/set_captain/"+play_id,
+        data:'id='+play_id+'&team_id='+team_id+'&event_id='+jQuery("#event_id").val(),
+        success: function(){
+            return false;
+        }
+    });
+    return false;
+}

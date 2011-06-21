@@ -26,6 +26,7 @@ Email представителя: <%=h @event.user.email %>
 <% end %>
 <% if @event.game.submit_results_until %>
 Результаты принимаются до <%=h @event.game.submit_results_until.loc %> по адресу:  <%= @results_url %>
+Составы принимаются до <%=h @event.game.submit_results_until.loc %> по адресу:  <%= @casts_url %>
 <% end %>
 <% end %>
 По всем вопросам обращайтесь в оргкомитет турнира: <%= @event.game.tournament.user.email %>

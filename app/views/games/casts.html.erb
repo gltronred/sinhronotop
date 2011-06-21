@@ -1,0 +1,33 @@
+<table id="casts_table" border="1" style="border:solid 1px #ccc;">
+  <tr>
+    <th>Место</th>
+    <th>Команда</th>
+    <th>Город</th>
+    <th>Состав</th>
+  </tr>
+
+<% @results.each do |result| %>
+    <tr>
+      <td><%=h result.place_to_s -%></td>
+      <td><%=h result.team.name -%></td>
+      <td><%=h result.team.city -%></td>
+      <td>
+        <% if result.team.plays.size > 0 %>
+            <% casts_list = '' %>
+            <% result.team.plays.each do |play| %>
+                <%
+                    player = Player.find(play.player_id)
+                    casts_list << '<strong>' if play.status == 'captain'
+                    casts_list << "#{player.firstName} #{player.lastName}, "
+                    casts_list << '</strong>' if play.status == 'captain'
+                %>
+            <% end
+            casts_list = casts_list.chop.chop
+            %>
+            <%= casts_list %>
+        <% end %>
+      </td>
+    </tr>
+
+<% end %>
+</table>

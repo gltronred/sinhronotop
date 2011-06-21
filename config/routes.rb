@@ -49,6 +49,7 @@ ActionController::Routing::Routes.draw do |map|
     e.resources :results
   end
   map.change_status "events/:id/change_status", :controller => 'events', :action => "change_status"
+  map.event_casts "events/:event_id/casts", :controller => 'events', :action => "casts"
 
 
   map.resources :games
@@ -62,6 +63,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.simple_results "games/:game_id/simple_results", :controller => 'results', :action => "simple_results"
   map.appeals_and_controversial "games/:game_id/appeals_and_controversial", :controller => 'appeals', :action => "appeals_and_controversial"
+  map.game_casts "games/:game_id/casts", :controller => 'games', :action => "casts"
 
   map.resources :cities
 
@@ -73,7 +75,14 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
 
-  map.resources :cities
+  #map.resources :cities
+  map.resources :plays
+  map.resources :plays do |p|
+    p.resources :events
+  end
+
+  map.set_captain "plays/set_captain/:id", :controller => 'plays', :action => "set_captain", :method => :post
+  #map.add_play "add_play", :controller => 'plays', :action => "create"
 
   map.root :controller => 'tournaments'
 

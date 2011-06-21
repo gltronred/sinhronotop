@@ -70,7 +70,10 @@ class Event < ActiveRecord::Base
   end
 
   def get_report_status
-   "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
+    report_status = "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
+    if self.game.tournament.needTeams?
+      report_status << " / #{self.plays.empty? ? '-' : '+'}"
+    end
   end
 
   def validate_event_date

@@ -75,4 +75,9 @@
 <%= link_to 'Апелляции', event_appeals_path(@event) %>
 <%= link_to 'Результаты', event_results_path(@event) %>
 <% end %>
+
+<% if @event.game.tournament.needTeams %>
+<%=  link_to 'Составы', event_casts_path(@event) %>
+<% end %>
+
 <%= render :partial => "change_status", :locals => { :event => @event } %>
