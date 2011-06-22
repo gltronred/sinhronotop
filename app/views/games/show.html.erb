@@ -72,6 +72,9 @@
 <%= link_to 'Спорные ответы', game_disputeds_path(@game) %>
 <%= link_to 'Апелляции', game_appeals_path(@game) %>
 <%= link_to 'Результаты', game_results_path(@game) %>
+<% if @game.tournament.needTeams %>
+<%=  link_to 'Составы', game_casts_path(@game) %>
+<% end %>
 <%= link_to 'Изменить', edit_tournament_game_path(@game.tournament, @game) %>
 <%= link_to 'Добавить текст', new_game_longtext_path(@game) %>
 <%= link_to 'Добавить ссылку', new_game_link_path(@game) %>

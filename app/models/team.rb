@@ -1,5 +1,8 @@
 class Team < ActiveRecord::Base
   has_many :results
+  has_many :plays
+  has_many :players
+
   belongs_to :city
   validates_presence_of :name
   validates_uniqueness_of :rating_id

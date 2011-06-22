@@ -4,6 +4,7 @@ class Event < ActiveRecord::Base
   has_many :disputeds, :dependent => :delete_all
   has_many :appeals, :dependent => :delete_all
   has_many :results, :dependent => :delete_all
+  has_many :plays, :dependent => :delete_all
   belongs_to :user
   belongs_to :event_status
   belongs_to :moderation, :class_name => 'User'
@@ -73,7 +74,10 @@ class Event < ActiveRecord::Base
   end
 
   def get_report_status
-   "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
+    report_status = "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
+    if self.game.tournament.needTeams?
+      report_status << " / #{self.plays.empty? ? '-' : '+'}"
+    end
   end
 
   def validate_event_date
