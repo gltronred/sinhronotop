@@ -13,6 +13,7 @@ jQuery(document).ready(function($) {
         excel_input.attr("num_questions", $(this).attr('num_questions'))
         excel_input.attr("teams", $(this).attr('teams'))
         excel_input.attr("tour", $(this).attr('tour'))
+        excel_input.attr("event_id", $(this).attr('event_id'))
 
         //Get the screen height and width
         var maskHeight = $(document).height();
@@ -25,8 +26,8 @@ jQuery(document).ready(function($) {
         });
 
         //transition effect		
-        $('#mask').fadeIn(1000);
-        $('#mask').fadeTo("slow", 0.8);
+        $('#mask').fadeIn(100);
+        $('#mask').fadeTo("fast", 0.8);
 
         //Get the window height and width
         var winH = $(window).height();
@@ -53,11 +54,14 @@ jQuery(document).ready(function($) {
     //if close button is clicked
     $('.window .import').click(function(e) {
         //Cancel the link behavior
-        e.preventDefault();
+        e.preventDefault()
         $.do_excel_import()
 
-        $('#mask').hide();
-        $('.window').hide();
+        $('#mask').hide()
+        $('.window').hide()
+        setTimeout(function() {
+            location.reload()
+        }, 2000);        
     });
 
     //if mask is clicked
@@ -82,18 +86,28 @@ jQuery.do_excel_import = function() {
     var teams = excel_input.attr('teams').split(",")
     var text = excel_input.val()
     var tour = excel_input.attr("tour")
+    var event_id = excel_input.attr("event_id")
     var num_questions = excel_input.attr("num_questions")
     var lines = text.replace(/\s+$/g, "").split("\n")
+    var items = []
     for (var l = 0; l < lines.length; l++) {
         var scores = lines[l].split(/\t/gi)
         for (var s = 0; s < scores.length; s++) {
-            var checkbox_id = "#team" + teams[l] + "_tour" + tour + "_question" + (num_questions * (tour - 1) + s + 1)
-            var new_value = (scores[s] == "1" || scores[s] == "+")
-            checkbox = jQuery(checkbox_id)
-            var existing_value = checkbox.attr('checked')
-            if (new_value != existing_value) {
-                checkbox.click()
+            if (scores[s] == "1" || scores[s] == "+") {
+                var checkbox_id = "#team" + teams[l] + "_tour" + tour + "_question" + (num_questions * (tour - 1) + s + 1)
+                items.push( jQuery(checkbox_id).attr('item_id') )
             }
+            
+            
+            //checkbox = jQuery(checkbox_id)
+            //var existing_value = checkbox.attr('checked')
+            //if (new_value != existing_value) {
+            //    var item_id = checkbox.attr('item_id')
+            //    var new_value_int = new_value==true ? 1 : 0
+                //checkbox.click()
+            //} 
         }
     }
+    jQuery.ajax({url: "/events/"+event_id+"/results/update_tour?tour="+tour+"&event_id="+event_id+"&items="+items.join(',')})
+    
 };

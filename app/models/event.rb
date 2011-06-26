@@ -56,16 +56,20 @@ class Event < ActiveRecord::Base
   def get_moderator_name
     self.moderation ? self.moderation.name : self.moderator_name
   end
+  
+  def get_moderator_emails
+    [get_moderator_email, get_moderator_email2].compact.uniq
+  end
 
   def get_moderator_email
     self.moderation ? self.moderation.email : self.moderator_email
   end
   
   def get_moderator_email2
-    if self.moderation 
-      self.moderation.email
+    if self.moderation || !self.moderator_email2 || self.moderator_email2.empty?
+      nil
     else
-      self.moderator_email2 && !self.moderator_email2.empty? ? self.moderator_email2 : nil
+      self.moderator_email2
     end
   end
 

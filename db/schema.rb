@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110605061244) do
+ActiveRecord::Schema.define(:version => 20110615093119) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -111,6 +111,25 @@ ActiveRecord::Schema.define(:version => 20110605061244) do
     t.boolean  "new_page"
     t.integer  "game_id"
     t.integer  "tournament_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "players", :force => true do |t|
+    t.string   "firstName"
+    t.string   "lastName"
+    t.string   "patronymic"
+    t.integer  "team_id"
+    t.integer  "rating_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "plays", :force => true do |t|
+    t.integer  "player_id"
+    t.integer  "event_id"
+    t.integer  "team_id"
+    t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -1,11 +1,9 @@
 class ResultsController < ApplicationController
 
   before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
-  before_filter :load_parents, :only => [:create, :index, :show, :simple_results]
+  before_filter :load_parents, :only => [:create, :index, :show, :simple_results, :update_tour]
   before_filter :check_do_changes
 
-  # GET /results
-  # GET /results.xml
   def index
     if @event
       @result = Result.new
@@ -24,7 +22,20 @@ class ResultsController < ApplicationController
       format.csv # index.html.erb
     end
   end
-  
+
+  def update_tour
+    event = Event.find(params[:event_id])
+    tour = params[:tour].to_i
+    items = params[:items].split(',').map(&:to_i)
+    event.results.each do |result|
+      result.items_for_tour(tour).each do |item|
+        item.score = items.include?(item.id) ? 1 : 0
+        item.save
+      end
+    end
+    render :text => ''
+  end
+
   def show
     @tour = params[:id].to_i
     @context_array = @parent.parents_top_down(:with_me) << "результаты" << "тур #{@tour}"
@@ -33,14 +44,11 @@ class ResultsController < ApplicationController
     @results.each {|result| result.calculate_and_save }
   end
 
-  # POST /results
-  # POST /results.xml
   def create
     @result = Result.new(params[:result])
     @result.score = 0
     @result.cap_name = params[:cap_name]
     @result.local_index = params[:local_index]
-
 
     respond_to do |format|
       if @result.save
@@ -91,10 +99,10 @@ class ResultsController < ApplicationController
     calculate_places(@results)
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     send_data render('simple_results.html', :layout => false),
-              :filename => 'simple_results.html',
-              :disposition => 'attachment',
-              :type => "text/html; charset=utf-8",
-              :encoding => 'utf-8'
+    :filename => 'simple_results.html',
+    :disposition => 'attachment',
+    :type => "text/html; charset=utf-8",
+    :encoding => 'utf-8'
   end
 
   private

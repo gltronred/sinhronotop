@@ -26,7 +26,7 @@
 	<td class="nowrap"><%= event.game_time %></td>
 <% end %>
     <td class="nowrap"><%= event.get_moderator_name %></td>
-    <td class="nowrap"><%= event.get_moderator_email %><%=',' if event.get_moderator_email2 %><%= event.get_moderator_email2 %></td>
+    <td class="nowrap"><%= event.get_moderator_emails.join(',') %></td>
     <td class="nowrap"><%= event.user.name %></td>
     <td class="nowrap"><%= event.user.email %></td>
     <td class="nowrap"><%= event.num_teams %></td>

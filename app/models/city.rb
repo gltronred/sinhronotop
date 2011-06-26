@@ -7,7 +7,7 @@ class City < ActiveRecord::Base
   validates_length_of :name, :maximum => 255
 
   def to_s
-    self.name  #{self.country ? self.country.opt_brackets : ""}"
+    self.name
   end
 
 end

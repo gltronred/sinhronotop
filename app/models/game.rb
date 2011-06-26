@@ -27,9 +27,7 @@ class Game < ActiveRecord::Base
   end
   
   def get_approved_moderator_emails
-    approved_events = self.events.select{|e| 'approved' == e.event_status.short_name}
-    emails = approved_events.map(&:get_moderator_email) + approved_events.map(&:get_moderator_email2)
-    emails.compact.uniq.join(',')
+    self.events.select{|e| 'approved' == e.event_status.short_name}.map(&:get_moderator_emails).flatten.compact.uniq.join(',')
   end
 
   def get_approved_resp_emails
@@ -41,40 +39,31 @@ class Game < ActiveRecord::Base
   end
   
   def can_play_at?(date)
-    ret = true
-    ret &&= self.game_end >= date if ret && self.game_end
-    ret &&= self.game_begin <= date if ret && self.game_begin
-    ret
+    check_between_dates(self.game_begin, self.game_end)
   end
 
   def can_register?
-    ret = true
-    ret &&= self.end >= Date.today if ret && self.end
-    ret &&= self.begin <= Date.today if ret && self.begin
-    ret
+    check_between_dates(self.begin, self.end)
   end
 
   def can_submit_disp?
-    #self.submit_disp_until ? self.submit_disp_until >= Date.today : true
-    ret = true
-    ret &&= self.submit_disp_from <= Date.today if self.submit_disp_from
-    ret &&= self.submit_disp_until >= Date.today if self.submit_disp_until
-    ret
+    check_between_dates(self.submit_disp_from, self.submit_disp_from)
   end
 
   def can_submit_appeal?
-    #self.submit_appeal_until ? self.submit_appeal_until >= Date.today : true
-    ret = true
-    ret &&= self.submit_appeal_from <= Date.today if self.submit_appeal_from
-    ret &&= self.submit_appeal_until >= Date.today if self.submit_appeal_until
-    ret
+    check_between_dates(self.submit_appeal_from, self.submit_appeal_until)
   end
 
   def can_submit_results?
-    #self.submit_results_until ? self.submit_results_until >= Date.today : true
+    check_between_dates(self.submit_results_from, self.submit_results_until)
+  end
+  
+  private
+  
+  def check_between_dates(date_from, date_until)
     ret = true
-    ret &&= self.submit_results_from <= Date.today if self.submit_results_from
-    ret &&= self.submit_results_until >= Date.today if self.submit_results_until
+    ret &&= date_from <= Date.today if date_from
+    ret &&= date_until >= Date.today if date_until
     ret
   end
 

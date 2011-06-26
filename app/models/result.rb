@@ -47,6 +47,10 @@ class Result < ActiveRecord::Base
     end
   end
   
+  def items_for_tour(tour) 
+    self.resultitems.select{|item| (item.question_index-1) / self.event.game.num_questions == tour-1 }
+  end
+  
   def to_s
     self.score
   end
@@ -55,10 +59,6 @@ class Result < ActiveRecord::Base
   
   def get_score(items)
     items.map(&:score).count(1)
-  end
-  
-  def items_for_tour(tour) 
-    self.resultitems.select{|item| (item.question_index-1) / self.event.game.num_questions == tour-1 }
   end
   
   def get_parent

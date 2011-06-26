@@ -17,7 +17,7 @@
 <% for item in result.items_for_tour_sorted(tour) %>
     <td>
 <% field_id = "team#{result.team.id}_tour#{tour}_question#{item.question_index}" %>
-<%= check_box_tag field_id, 1, item.score==1 %>
+<%= check_box_tag field_id, 1, item.score==1, :item_id => item.id %>
 <%= observe_field field_id, :url => "../../resultitems/update/#{item.id}", :with => "checked"  %>
     </td>
 <% end %>
@@ -25,6 +25,6 @@
   </tr>
 <% end %>
 </table>
-<a href="#dialog" name="modal" num_questions=<%= @event.game.num_questions %> tour="<%= tour %>" teams="<%= @results.map{|result| result.team.id.to_s}.join(',') %>">Импорт тура из Excel</a>
+<a href="#dialog" name="modal" event_id="<%=@event.id%>" num_questions=<%= @event.game.num_questions %> tour="<%= tour %>" teams="<%= @results.map{|result| result.team.id.to_s}.join(',') %>">Импорт тура из Excel</a>
 
 <% end %>
