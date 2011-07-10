@@ -11,6 +11,7 @@
       <th>Место</th>
       <th>Команда</th>
       <th>Город</th>
+      <th>Капитан</th>
       <% for i in 1..@game.num_tours -%>
         <th><%="Тур#{i}"-%></th>
       <% end -%>
@@ -21,6 +22,7 @@
       <td><%=h result.place_to_s -%></td>
       <td><%=h result.team.name -%></td>
       <td><%=h result.team.city -%></td>
+      <td><%=h result.cap_name %></td>
       <% for tour in 1..@game.num_tours -%>
         <td><%="#{result.score_for_tour(tour)}"-%></td>
       <% end -%>

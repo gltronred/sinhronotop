@@ -10,7 +10,7 @@ require 'rake'
 Capybara.default_driver = :selenium
 Capybara.app_host = 'http://localhost:3000'
 Capybara.register_driver :selenium do |app|
-  Capybara::Driver::Selenium.new(app, :browser => :firefox)
+  Capybara::Driver::Selenium.new(app, :browser => :chrome)
 end
 
 module IntegrationTestHelper

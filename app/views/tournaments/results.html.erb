@@ -2,7 +2,7 @@
 <thead>
 <th>Команда</th>
 <% @games.each do |game| %>
-<th><%= game.name %></th>
+<th><%= link_to game.name, game %></th>
 <% end%>
 </thead>
 <tbody>

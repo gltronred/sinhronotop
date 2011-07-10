@@ -16,7 +16,8 @@ class Tournament < ActiveRecord::Base
   end
   
   def get_teams
-    self.games.collect(&:events).flatten.collect(&:results).flatten.collect(&:team).uniq
+    puts "   get_teams #{self.games[0].results.map(&:team)}"
+    self.games.collect(&:events).flatten.collect(&:results).flatten.map(&:team).uniq
   end
   
   def get_parent

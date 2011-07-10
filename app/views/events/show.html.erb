@@ -76,8 +76,10 @@
 <%= link_to 'Результаты', event_results_path(@event) %>
 <% end %>
 
+<!--CASTS
 <% if @event.game.tournament.needTeams %>
 <%=  link_to 'Составы', event_casts_path(@event) %>
 <% end %>
+-->
 
 <%= render :partial => "change_status", :locals => { :event => @event } %>
