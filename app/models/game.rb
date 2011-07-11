@@ -39,31 +39,31 @@ class Game < ActiveRecord::Base
   end
   
   def can_play_at?(date)
-    check_between_dates(self.game_begin, self.game_end)
+    check_between_dates(date, self.game_begin, self.game_end)
   end
 
   def can_register?
-    check_between_dates(self.begin, self.end)
+    check_between_dates(Date.today, self.begin, self.end)
   end
 
   def can_submit_disp?
-    check_between_dates(self.submit_disp_from, self.submit_disp_from)
+    check_between_dates(Date.today, self.submit_disp_from, self.submit_disp_from)
   end
 
   def can_submit_appeal?
-    check_between_dates(self.submit_appeal_from, self.submit_appeal_until)
+    check_between_dates(Date.today, self.submit_appeal_from, self.submit_appeal_until)
   end
 
   def can_submit_results?
-    check_between_dates(self.submit_results_from, self.submit_results_until)
+    check_between_dates(Date.today, self.submit_results_from, self.submit_results_until)
   end
   
   private
   
-  def check_between_dates(date_from, date_until)
+  def check_between_dates(date, date_from, date_until)
     ret = true
-    ret &&= date_from <= Date.today if date_from
-    ret &&= date_until >= Date.today if date_until
+    ret &&= date_from <= date if date_from
+    ret &&= date_until >= date if date_until
     ret
   end
 
