@@ -1,0 +1,29 @@
+pl_1:
+  firstName: Славский
+  lastName: Геннадий
+  patronymic: Николаевич
+
+pl_2:
+  firstName: Никитина
+  lastName: Ирина
+  patronymic: Александровна
+
+pl_3:
+  firstName: Корнеев
+  lastName: Андрей
+  patronymic: Васильевич
+
+pl_4:
+  firstName:
+  lastName: Виталий
+  patronymic:
+
+pl_5:
+  firstName: Ростоцкий
+  lastName:
+  patronymic:
+
+pl_6:
+  firstName:
+  lastName:
+  patronymic: Сергеевич

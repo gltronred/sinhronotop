@@ -13,18 +13,18 @@
       <td><%=h result.team.city -%></td>
       <td>
         <% if result.team.plays.size > 0 %>
-            <% casts_list = '' %>
+            <% casts_list = [] %>
             <% result.team.plays.each do |play| %>
                 <%
                     player = Player.find(play.player_id)
-                    casts_list << '<strong>' if play.status == 'captain'
-                    casts_list << "#{player.firstName} #{player.lastName}, "
-                    casts_list << '</strong>' if play.status == 'captain'
+                   casts_item = ''
+                    casts_item << '<strong>' if play.status == 'captain'
+                    casts_item << "#{player.firstName} #{player.lastName}"
+                    casts_item << '</strong>' if play.status == 'captain'
+                   casts_list << casts_item
                 %>
-            <% end
-            casts_list = casts_list.chop.chop
-            %>
-            <%= casts_list %>
+            <% end %>
+            <%= casts_list.join(', ') %>
         <% end %>
       </td>
     </tr>

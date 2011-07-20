@@ -11,16 +11,30 @@ class PlaysController < ApplicationController
     player.lastName = params[:lastName]
     player.patronymic = params[:patronymic]
     player.team_id = params[:team][:id]
-    player.save
 
-    #add new play
-    play = Play.new
-    play.player_id = player.id
-    play.event_id = params[:event_id]
-    play.team_id = params[:team][:id]
-    play.save
 
-    redirect_to(event_casts_path(params[:event_id]), :notice => 'Игрок добавлен.')
+    # @TODO: maybe this block could be refactored
+    if player.save
+        #add new play
+        play = Play.new
+        play.player_id = player.id
+        play.event_id = params[:event_id]
+        play.team_id = params[:team][:id]
+        play.save
+        #redirect_to(event_casts_path(params[:event_id]), :notice => 'Игрок добавлен.')
+        flash[:notice] = 'Игрок добавлен.'
+        @err_flag = false
+    else
+       flash[:notice] = player.errors.full_messages.to_sentence
+       @err_flag = true
+     end
+
+    #@messages_block = render :partial => "layouts/mesages"
+    @messages_block = "<p class=\"message\">#{flash[:notice]}</p>"
+    respond_to do |format|
+      format.js {render :partial => 'play_error', :content_type => 'text/javascript'}
+    end
+    # @TODO: maybe this block could be refactored
 
   end
 

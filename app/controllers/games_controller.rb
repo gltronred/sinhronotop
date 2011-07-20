@@ -80,8 +80,14 @@ class GamesController < ApplicationController
     load_users
 
     @context_array = @parent.parents_top_down(:with_me) << 'Составы'
-    @results = @parent.results.sort_by{|r| r.local_index }
-    #puts "++++"+ YAML::dump(@results)
+
+
+    @results = @parent.results.sort_by{|r| -r.score }
+    calculate_places(@results)
+
+
+    #@show_place = (@results.first.place_to_s == "")? false : true
+
   end
 
   protected

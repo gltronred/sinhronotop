@@ -133,15 +133,4 @@ class ResultsController < ApplicationController
     end
   end
 
-  def calculate_places(ordered_results)
-    need_calc = ordered_results.detect{|r|!r.place_begin || !r.place_end}
-    if need_calc
-      teams_before = 0
-      ordered_results.group_by{|r|-r.score}.each do |score, group|
-        group.each{|r|r.place_begin = teams_before+1; r.place_end = teams_before+group.size; r.save}
-        teams_before += group.size
-      end
-    end
-  end
-
 end

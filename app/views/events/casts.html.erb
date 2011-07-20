@@ -1,8 +1,9 @@
+<% changeable = can_submit_results? @event %>
+
 <div id="add_player_fm" style="display:none;text-align:right;background-color: #85bd44;">
-  <% form_tag("#{plays_path}", :method=>'post') do %>
 
+  <% form_remote_tag (:url => {:controller => 'plays', :action=>"create"})  do %>
       <%= hidden_field(:team, :id) %>
-
       <%= hidden_field_tag 'event_id', @event.id, :id=>'event_id' %>
       <p>
       <%= label_tag "Фамилия" %>
@@ -57,7 +58,7 @@
             @checked = true
           end
           %>
-          <%= radio_button "captaign_#{result.team.id}",
+          <%= radio_button "captain_#{result.team.id}",
                            "captain",
                            "yes",
                             :onclick => "set_captain(#{play.id},#{play.team_id})",
@@ -81,3 +82,5 @@
   </tr>
   <% end %>
 </table>
+
+<p><%= link_to 'Готово, все составы введены', home_path if changeable %></p>

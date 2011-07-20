@@ -30,7 +30,12 @@ function show_add_player_fm(team_id){
     jQuery("#add_player_fm").hide();
     jQuery("#team_id").val(team_id);
     jQuery("#add_player_"+team_id).html(jQuery("#add_player_fm"));
+    jQuery("#firstName").val('');
+    jQuery("#lastName").val('');
+    jQuery("#patronymic").val('');
+
     jQuery("#add_player_fm").fadeIn(700);
+    jQuery("#lastName").focus();
 
 }
 

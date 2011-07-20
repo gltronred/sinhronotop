@@ -6,6 +6,7 @@ class EventsController < ApplicationController
   before_filter :do_org_actions, :only => [:index, :change_status]
   before_filter :check_change_event, :only => [:edit, :update, :destroy]
   before_filter :check_create_event, :only => [:new, :create]
+  before_filter :check_do_changes, :only => [:casts]
 
   def change_status
     if @event.update_status EventStatus.find_by_id(params[:new_status_id])
@@ -110,6 +111,7 @@ class EventsController < ApplicationController
     load_parents
     load_cities(@event.game.tournament_id)
     load_users
+#    check_change_event
     @context_array = @event.parents_top_down(:with_me) << 'Составы'
     @results = @event.results.sort_by{|r| r.local_index }
   end
@@ -154,7 +156,18 @@ class EventsController < ApplicationController
     check_permissions { is_resp? @event } && check_time_constrains(@game){ can_register? @game }
   end
 
+  def check_do_changes
+    load_parents
+    if @event
+      check_time_constrains(@event) {can_submit_results? @event}
+    else
+      check_permissions{can_see_results? @game}
+    end
+  end
+
   def check_create_event
     check_permissions { is_registrated? } && check_time_constrains(@game){ can_register? @game }
   end
+
+
 end
