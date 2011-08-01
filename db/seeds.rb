@@ -46,7 +46,25 @@ module SeedTasks
     end
     es
   end
-  
+
+  def self.create_payer(first_name, last_name, patronymic, rating_id)
+    player = Player.find_by_rating_id(rating_id)
+    unless player
+      player = Player.create(:firstName => first_name, :lastName => last_name, :patronymic => patronymic, :rating_id => rating_id)
+    end
+    player
+  end
+
+  def self.set_player_team(team_id, player_id)
+    player = Player.find_by_rating_id(player_id)
+    team = Team.find_by_rating_id(team_id)
+
+    if !player.nil? && !team.nil?
+      player.update_attributes(:team_id => team.id)
+    end
+    player
+  end
+
 end
 
 File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
@@ -66,6 +84,24 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city) if city
   end
 end
+
+File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
+  file.each_line do |line|
+    atributes = line.split(';')
+    rating_id, last_name, first_name, patronymic = atributes[0], atributes[1], atributes[2], atributes[3]
+    player = SeedTasks.create_payer(first_name, last_name, patronymic, rating_id)
+  end
+end
+
+File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
+  Player.update_all(:team_id => nil)
+  file.each_line do |line|
+    atributes = line.split(';')
+    team_id, player_id = atributes[0], atributes[3]
+    player = SeedTasks.set_player_team(team_id, player_id)
+  end
+end
+
 
 SeedTasks.create_event_status("new", "новая")
 SeedTasks.create_event_status("approved", "принята")
