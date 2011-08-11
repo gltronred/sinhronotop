@@ -77,6 +77,7 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.set_captain "plays/set_captain/:id", :controller => 'plays', :action => "set_captain", :method => :post
+  map.auto_complete "plays/auto_complete", :controller => 'plays', :action => "auto_complete", :method => :post
   
   map.root :controller => 'tournaments'
 

@@ -1,6 +1,6 @@
 class PlaysController < ApplicationController
-  before_filter :load_parents
-  before_filter :check_do_changes
+  before_filter :load_parents, :except => [:auto_complete]
+  before_filter :check_do_changes, :except => [:auto_complete]
 
 
   # POST /plays
@@ -49,10 +49,21 @@ class PlaysController < ApplicationController
     Play.update_all "status=''", "id <> #{params[:id]} AND team_id = #{params[:team_id]} AND event_id = #{params[:event_id]}"
     play = Play.find(params[:id])
     play.update_attribute :status, 'captain'
-
     respond_to do |format|
       format.js
     end
+  end
+
+  def auto_complete
+    ActiveRecord::Base.include_root_in_json = false
+    @players = Player.find(
+                          :all,
+                          :conditions => ["lastName LIKE ?", params[:lastName].to_s + '%'],
+                          :order => "lastName, firstName, patronymic"
+    )
+    render :json => @players.to_json(
+        :except => [:created_at, :updated_at]
+    )
   end
 
   private

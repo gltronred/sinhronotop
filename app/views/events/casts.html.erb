@@ -1,14 +1,23 @@
 <% changeable = can_submit_results? @event %>
 
+<% javascript_tag do %>
+    <!--jQuery(document).ready(function(){-->
+        <!--&lt;!&ndash;Init auto-complete handler&ndash;&gt;-->
+        <!--jQuery("#lastName").keyup(player_autocomplete);-->
+    <!--});-->
+<% end %>
+
 <div id="add_player_fm" style="display:none;text-align:right;background-color: #85bd44;">
 
   <% form_remote_tag (:url => {:controller => 'plays', :action=>"create"})  do %>
       <%= hidden_field(:team, :id) %>
       <%= hidden_field_tag 'event_id', @event.id, :id=>'event_id' %>
-      <p>
-      <%= label_tag "Фамилия" %>
-      <%= text_field_tag "lastName" %>
-      </p>
+
+
+         <%= label_tag "Фамилия" %>
+          <%= text_field_tag "lastName", nil, :onkeyup => "player_autocomplete();" %>
+          <div class="auto_complete_box" id="ac_container"></div>
+
 
       <p>
       <%= label_tag "Имя" %>

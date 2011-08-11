@@ -28,6 +28,7 @@ function validate_longtext(obj, max_length){
 
 function show_add_player_fm(team_id){
     jQuery("#add_player_fm").hide();
+    jQuery("#ac_container").hide();
     jQuery("#team_id").val(team_id);
     jQuery("#add_player_"+team_id).html(jQuery("#add_player_fm"));
     jQuery("#firstName").val('');
@@ -50,4 +51,47 @@ function set_captain(play_id, team_id){
         }
     });
     return false;
+}
+
+function player_autocomplete(){
+    var lastName = jQuery.trim(jQuery("#lastName").val());
+
+    if (lastName.length > 1){
+       jQuery.ajax({
+            type: 'POST',
+            url: "/plays/auto_complete/",
+            data:'lastName=' + lastName,
+            dataType:'json',
+            success: function(players){
+                // generate UL with players
+                jQuery("#ac_container").html('<ul class="auto_complete_ul" id="auto_complete_ul"></ul>');
+
+                if (players.length > 0){
+                    for (var i=0; i < players.length; i++){
+                      //alert(players[i].lastName + ' ' + players[i].firstName);
+                      jQuery("#auto_complete_ul").append('<li>' +
+                                                                players[i].lastName +
+                                                                ' ' + players[i].firstName +
+                                                                ' ' + players[i].patronymic +
+                                                        '</li>');
+                    }
+
+
+                    jQuery("#auto_complete_ul li").mouseover(function(){
+                        jQuery(this).addClass("ac_li_hover");
+                    });
+                    jQuery("#auto_complete_ul li").mouseout(function(){
+                        jQuery(this).removeClass("ac_li_hover");
+                    });
+                    jQuery("#auto_complete_ul li").click(function(){
+                        alert("Selected Item: " + jQuery(this).html());
+                    });
+                    jQuery("#ac_container").fadeIn(500);
+                }else{
+                    jQuery("#ac_container").hide();
+                }
+            }
+        });
+    }
+
 }

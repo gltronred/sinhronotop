@@ -75,3 +75,24 @@ TABLE TH {
     float:right;
     width:250px;
 }
+
+.auto_complete_box {
+    padding:0px;
+    border:solid 1px;
+    max-height:100px;
+    overflow-x:hidden;
+    overflow-y:scroll;
+    text-align:left;
+    background-color:#fff;
+    display:none;
+}
+.auto_complete_ul {
+    list-style: none;
+    background-color:#fff;
+    margin:0px;
+    padding:0px;
+}
+
+.ac_li_hover {
+    background-color: #5096ff;
+}
