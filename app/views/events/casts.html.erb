@@ -1,23 +1,18 @@
 <% changeable = can_submit_results? @event %>
 
-<% javascript_tag do %>
-    <!--jQuery(document).ready(function(){-->
-        <!--&lt;!&ndash;Init auto-complete handler&ndash;&gt;-->
-        <!--jQuery("#lastName").keyup(player_autocomplete);-->
-    <!--});-->
-<% end %>
+
+<%= javascript_include_tag "jquery-ui-1.8.15.custom.min" %>
+<%= stylesheet_link_tag 'smoothness/jquery-ui-1.8.15.custom.css' %>
 
 <div id="add_player_fm" style="display:none;text-align:right;background-color: #85bd44;">
 
-  <% form_remote_tag (:url => {:controller => 'plays', :action=>"create"})  do %>
+  <% form_remote_tag (:url => {:controller => 'plays', :action=>"create"}, :html => {:id=>"add_fm"})  do %>
       <%= hidden_field(:team, :id) %>
       <%= hidden_field_tag 'event_id', @event.id, :id=>'event_id' %>
-
-
+      <%= hidden_field_tag 'player_id', '', :id=>'player_id' %>
          <%= label_tag "Фамилия" %>
-          <%= text_field_tag "lastName", nil, :onkeyup => "player_autocomplete(event);", :autocomplete => "off" %>
+          <%= text_field_tag "lastName" %>
           <div class="auto_complete_box" id="ac_container"></div>
-
 
       <p>
       <%= label_tag "Имя" %>
@@ -31,7 +26,7 @@
       <p>
         начните набирать фамилию,<br /> система Вам подскажет
       </p>
-      <%= submit_tag 'Добавить' %>
+      <%= submit_tag 'Добавить', :confirm => 'Вы уверены что этого игрока нет в списке?' %>
 
   <% end %>
 </div>

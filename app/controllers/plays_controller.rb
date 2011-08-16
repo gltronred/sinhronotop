@@ -5,37 +5,48 @@ class PlaysController < ApplicationController
 
   # POST /plays
   def create
-    #add new player
-    player = Player.new
-    player.firstName = params[:firstName]
-    player.lastName = params[:lastName]
-    player.patronymic = params[:patronymic]
-    player.team_id = params[:team][:id]
 
+    @err_flag = false
 
-    # @TODO: maybe this block could be refactored
-    if player.save
-        #add new play
+    if params[:player_id].to_i > 0
+      player = Player.find(params[:player_id].to_i)
+      if !player
+          flash[:notice] = "Не удалось найти игрока."
+          @err_flag = true
+      end
+    else
+      #add new player
+      player = Player.new
+      player.firstName = params[:firstName]
+      player.lastName = params[:lastName]
+      player.patronymic = params[:patronymic]
+      player.team_id = params[:team][:id]
+      if !player.save
+        flash[:notice] = player.errors.full_messages.to_sentence
+        @err_flag = true
+      end
+    end
+
+    # if no errors - add player to play
+    if !@err_flag
+      params[:player_id] = player.id
+      if Play.is_player_in_play(params).size > 0
+        @err_flag = true
+        flash[:notice] = 'Игрок уже добавлен в команду.'
+      else
         play = Play.new
         play.player_id = player.id
         play.event_id = params[:event_id]
         play.team_id = params[:team][:id]
         play.save
-        #redirect_to(event_casts_path(params[:event_id]), :notice => 'Игрок добавлен.')
         flash[:notice] = 'Игрок добавлен.'
-        @err_flag = false
-    else
-       flash[:notice] = player.errors.full_messages.to_sentence
-       @err_flag = true
-     end
+      end
+    end
 
-    #@messages_block = render :partial => "layouts/mesages"
     @messages_block = "<p class=\"message\">#{flash[:notice]}</p>"
     respond_to do |format|
       format.js {render :partial => 'play_error', :content_type => 'text/javascript'}
     end
-    # @TODO: maybe this block could be refactored
-
   end
 
   def destroy
@@ -46,7 +57,11 @@ class PlaysController < ApplicationController
   end
 
   def set_captain
-    Play.update_all "status=''", "id <> #{params[:id]} AND team_id = #{params[:team_id]} AND event_id = #{params[:event_id]}"
+    Play.update_all(
+        {:status => ""},
+        ['id <> ? AND team_id = ? AND event_id = ?', params[:id], params[:team_id], params[:event_id]]
+      )
+
     play = Play.find(params[:id])
     play.update_attribute :status, 'captain'
     respond_to do |format|
@@ -56,11 +71,7 @@ class PlaysController < ApplicationController
 
   def auto_complete
     ActiveRecord::Base.include_root_in_json = false
-    @players = Player.find(
-                          :all,
-                          :conditions => ["lastName LIKE ?", params[:lastName].to_s + '%'],
-                          :order => "lastName, firstName, patronymic"
-    )
+    @players = Player.autocomplete(params)
     render :json => @players.to_json(
         :except => [:created_at, :updated_at]
     )

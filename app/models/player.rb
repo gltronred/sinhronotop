@@ -7,4 +7,11 @@ class Player < ActiveRecord::Base
   validates_presence_of :lastName, :message => "Фамилия не может быть пустой."
   validates_length_of :firstName, :maximum => 255
   validates_length_of :lastName, :maximum => 255
+
+  named_scope :autocomplete, lambda { |p|
+    {
+      :conditions => ["lastName LIKE ?", p[:lastName].to_s + '%'],
+      :order => "lastName, firstName, patronymic"
+    }
+  }
 end

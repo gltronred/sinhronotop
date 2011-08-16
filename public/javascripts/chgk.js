@@ -31,11 +31,13 @@ function show_add_player_fm(team_id){
     jQuery("#ac_container").hide();
     jQuery("#team_id").val(team_id);
     jQuery("#add_player_"+team_id).html(jQuery("#add_player_fm"));
+    jQuery("#player_id").val('');
     jQuery("#firstName").val('');
     jQuery("#lastName").val('');
     jQuery("#patronymic").val('');
 
     jQuery("#add_player_fm").fadeIn(700);
+    init_autocomplete();
     jQuery("#lastName").focus();
 
 }
@@ -53,87 +55,43 @@ function set_captain(play_id, team_id){
     return false;
 }
 
-function player_autocomplete(event){
-    var lastName = jQuery.trim(jQuery("#lastName").val());
-//    console.log(event.keyCode);
-
-    switch (event.keyCode) {
-        case 27 :
-            jQuery("#ac_container").fadeOut(500);
-            break;
-        case 40 :
-            if (!jQuery(".ac_li_hover").length){
-              jQuery("#auto_complete_ul li").first().addClass("ac_li_hover");
-            }else{
-                jQuery(".ac_li_hover").removeClass("ac_li_hover").next().addClass("ac_li_hover");
-            }
-
-//            if (jQuery(".ac_li_hover").html() != null){
-//                jQuery("#lastName").val(jQuery(".ac_li_hover").html());
-//            }else{
-//                jQuery("#lastName").val(lastName)
-//            }
-            break;
-
-        case 38 :
-            if (!jQuery(".ac_li_hover").length){
-              jQuery("#auto_complete_ul li").last().addClass("ac_li_hover");
-            }else{
-                jQuery(".ac_li_hover").removeClass("ac_li_hover").prev().addClass("ac_li_hover");
-            }
-
-            break;
-
-         case 13 :
-            if (jQuery(".ac_li_hover").html() != null){
-              alert("Selected Item: " + jQuery(".ac_li_hover").html());
-            }
-            return false;
-            break;
-
-        default : {
-            if (lastName.length > 1){
-               jQuery.ajax({
-                    type: 'POST',
-                    url: "/plays/auto_complete/",
-                    data:'lastName=' + lastName,
-                    dataType:'json',
-                    success: function(players){
-                        // generate UL with players
-                        jQuery("#ac_container").html('<ul class="auto_complete_ul" id="auto_complete_ul"></ul>');
-
-                        if (players.length > 0){
-                            for (var i=0; i < players.length; i++){
-                              //alert(players[i].lastName + ' ' + players[i].firstName);
-                              jQuery("#auto_complete_ul").append('<li>' +
-                                                                        players[i].lastName +
-                                                                        ' ' + players[i].firstName +
-                                                                        ' ' + players[i].patronymic +
-                                                                '</li>');
-                            }
-
-
-                            jQuery("#auto_complete_ul li").mouseover(function(){
-                                jQuery(this).addClass("ac_li_hover");
-                            });
-                            jQuery("#auto_complete_ul li").mouseout(function(){
-                                jQuery(this).removeClass("ac_li_hover");
-                            });
-                            jQuery("#auto_complete_ul li").click(function(){
-                                alert("Selected Item: " + jQuery(this).html());
-                            });
-                            jQuery("#ac_container").fadeIn(500);
-                        }else{
-                            jQuery("#ac_container").hide();
+function init_autocomplete(){
+    jQuery( "#lastName" ).autocomplete({
+        source: function( request, response ) {
+             jQuery.ajax({
+                type: 'POST',
+                url: "/plays/auto_complete/",
+                data:'lastName=' + request.term,
+                dataType: "json",
+                success: function( players ) {
+                    response( jQuery.map( players, function( item ) {
+                        var player = item.lastName + ((item.firstName != "")?" ":"") + item.firstName + ((jQuery.trim(item.patronymic) != "")?" ":"") + item.patronymic;
+                        return {
+                            label: player,
+                            value: player,
+                            player_id: item.id
                         }
-                    }
-                });
-            }else{
-                jQuery("#ac_container").fadeOut(500);
-            }
+                    }));
+
+                }
+            });
+
+        },
+        minLength: 2,
+        select: function( event, ui ) {
+            add_player_from_list(ui.item.player_id);
+        },
+        open: function() {
+            jQuery( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
+        },
+        close: function() {
+            jQuery( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
         }
-    }
+    });
+}
 
-
-
+function add_player_from_list(player_id){
+    jQuery("#player_id").val(player_id);
+    jQuery("#add_fm").submit();
+    return false;
 }
