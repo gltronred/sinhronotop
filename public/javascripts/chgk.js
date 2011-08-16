@@ -53,45 +53,87 @@ function set_captain(play_id, team_id){
     return false;
 }
 
-function player_autocomplete(){
+function player_autocomplete(event){
     var lastName = jQuery.trim(jQuery("#lastName").val());
+//    console.log(event.keyCode);
 
-    if (lastName.length > 1){
-       jQuery.ajax({
-            type: 'POST',
-            url: "/plays/auto_complete/",
-            data:'lastName=' + lastName,
-            dataType:'json',
-            success: function(players){
-                // generate UL with players
-                jQuery("#ac_container").html('<ul class="auto_complete_ul" id="auto_complete_ul"></ul>');
-
-                if (players.length > 0){
-                    for (var i=0; i < players.length; i++){
-                      //alert(players[i].lastName + ' ' + players[i].firstName);
-                      jQuery("#auto_complete_ul").append('<li>' +
-                                                                players[i].lastName +
-                                                                ' ' + players[i].firstName +
-                                                                ' ' + players[i].patronymic +
-                                                        '</li>');
-                    }
-
-
-                    jQuery("#auto_complete_ul li").mouseover(function(){
-                        jQuery(this).addClass("ac_li_hover");
-                    });
-                    jQuery("#auto_complete_ul li").mouseout(function(){
-                        jQuery(this).removeClass("ac_li_hover");
-                    });
-                    jQuery("#auto_complete_ul li").click(function(){
-                        alert("Selected Item: " + jQuery(this).html());
-                    });
-                    jQuery("#ac_container").fadeIn(500);
-                }else{
-                    jQuery("#ac_container").hide();
-                }
+    switch (event.keyCode) {
+        case 27 :
+            jQuery("#ac_container").fadeOut(500);
+            break;
+        case 40 :
+            if (!jQuery(".ac_li_hover").length){
+              jQuery("#auto_complete_ul li").first().addClass("ac_li_hover");
+            }else{
+                jQuery(".ac_li_hover").removeClass("ac_li_hover").next().addClass("ac_li_hover");
             }
-        });
+
+//            if (jQuery(".ac_li_hover").html() != null){
+//                jQuery("#lastName").val(jQuery(".ac_li_hover").html());
+//            }else{
+//                jQuery("#lastName").val(lastName)
+//            }
+            break;
+
+        case 38 :
+            if (!jQuery(".ac_li_hover").length){
+              jQuery("#auto_complete_ul li").last().addClass("ac_li_hover");
+            }else{
+                jQuery(".ac_li_hover").removeClass("ac_li_hover").prev().addClass("ac_li_hover");
+            }
+
+            break;
+
+         case 13 :
+            if (jQuery(".ac_li_hover").html() != null){
+              alert("Selected Item: " + jQuery(".ac_li_hover").html());
+            }
+            return false;
+            break;
+
+        default : {
+            if (lastName.length > 1){
+               jQuery.ajax({
+                    type: 'POST',
+                    url: "/plays/auto_complete/",
+                    data:'lastName=' + lastName,
+                    dataType:'json',
+                    success: function(players){
+                        // generate UL with players
+                        jQuery("#ac_container").html('<ul class="auto_complete_ul" id="auto_complete_ul"></ul>');
+
+                        if (players.length > 0){
+                            for (var i=0; i < players.length; i++){
+                              //alert(players[i].lastName + ' ' + players[i].firstName);
+                              jQuery("#auto_complete_ul").append('<li>' +
+                                                                        players[i].lastName +
+                                                                        ' ' + players[i].firstName +
+                                                                        ' ' + players[i].patronymic +
+                                                                '</li>');
+                            }
+
+
+                            jQuery("#auto_complete_ul li").mouseover(function(){
+                                jQuery(this).addClass("ac_li_hover");
+                            });
+                            jQuery("#auto_complete_ul li").mouseout(function(){
+                                jQuery(this).removeClass("ac_li_hover");
+                            });
+                            jQuery("#auto_complete_ul li").click(function(){
+                                alert("Selected Item: " + jQuery(this).html());
+                            });
+                            jQuery("#ac_container").fadeIn(500);
+                        }else{
+                            jQuery("#ac_container").hide();
+                        }
+                    }
+                });
+            }else{
+                jQuery("#ac_container").fadeOut(500);
+            }
+        }
     }
+
+
 
 }

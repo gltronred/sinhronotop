@@ -15,7 +15,7 @@
 
 
          <%= label_tag "Фамилия" %>
-          <%= text_field_tag "lastName", nil, :onkeyup => "player_autocomplete();" %>
+          <%= text_field_tag "lastName", nil, :onkeyup => "player_autocomplete(event);", :autocomplete => "off" %>
           <div class="auto_complete_box" id="ac_container"></div>
 
 
