@@ -47,7 +47,7 @@ class Game < ActiveRecord::Base
   end
 
   def can_submit_disp?
-    check_between_dates(Date.today, self.submit_disp_from, self.submit_disp_from)
+    check_between_dates(Date.today, self.submit_disp_from, self.submit_results_until)
   end
 
   def can_submit_appeal?
