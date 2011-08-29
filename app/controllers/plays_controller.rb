@@ -77,6 +77,19 @@ class PlaysController < ApplicationController
     )
   end
 
+  def load_casts
+    event = Event.find(params[:event_id].to_i)
+    results = event.results.sort_by{|r| r.local_index }
+    results.each do |result|
+      add_team_players(result.team.id, params[:event_id].to_i)
+    end
+
+    flash[:notice] = "Составы загружены."
+    resp = {}
+    resp[:status] = "ok"
+    render :json => resp.to_json
+  end
+
   private
 
   def check_do_changes
@@ -87,4 +100,13 @@ class PlaysController < ApplicationController
     end
   end
 
+  def add_team_players(team_id, event_id)
+    team = Team.find(team_id)
+    team.players.each do |player|
+      play = Play.find(:first, :conditions => ["event_id= ? AND team_id= ? AND player_id= ?", event_id, team_id, player.id])
+      unless play
+        Play.create(:player_id => player.id, :event_id => event_id, :team_id => team_id)
+      end
+    end
+  end
 end

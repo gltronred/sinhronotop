@@ -96,3 +96,16 @@ function add_player_from_list(player_id){
     jQuery("#add_fm").submit();
     return false;
 }
+
+function load_casts_from_rating(event_id){
+    jQuery.ajax({
+        type: 'POST',
+        url: "/plays/load_casts/"+event_id,
+        data:'',
+        success: function(){
+            location.reload();
+            return false;
+        }
+    });
+    return false;
+}

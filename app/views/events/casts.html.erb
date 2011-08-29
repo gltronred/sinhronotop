@@ -85,6 +85,12 @@
     <td colspan="4">&nbsp;</td>
   </tr>
   <% end %>
+  <tr>
+      <td align="right" colspan="4">
+        <%= button_to_function "Загрузить составы, указанные в рейтинге", "load_casts_from_rating(#{@event.id})" %>
+      </td>
+  </tr>
+
 </table>
 
 <p><%= link_to 'Готово, все составы введены', home_path if changeable %></p>
