@@ -13,7 +13,8 @@ class Result < ActiveRecord::Base
   end
   
   def should_validate_cap_name?
-    self.event.game.tournament.cap_name_required
+    t = self.event.game.tournament
+    t.cap_name_required && !t.needTeams
   end
   
   def items_for_tour_sorted(tour) 
@@ -30,6 +31,16 @@ class Result < ActiveRecord::Base
     else
       ""
     end
+  end
+  
+  def get_cap_name
+    cap_name || get_cap_from_cast || ""
+  end
+  
+  def get_cap_from_cast
+    play = Play.find(:first, :conditions => ["event_id = ? and team_id = ? and status = 'captain'", self.event.id, self.team.id])
+    puts "get_cap_from_cast #{play}"
+    return play ? play.player.to_s : nil
   end
   
   def tour_for_question(question_index)

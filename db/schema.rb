@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110615093119) do
+ActiveRecord::Schema.define(:version => 20110730105752) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -124,6 +124,8 @@ ActiveRecord::Schema.define(:version => 20110615093119) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "players", ["rating_id"], :name => "index_players_on_rating_id", :unique => true
 
   create_table "plays", :force => true do |t|
     t.integer  "player_id"

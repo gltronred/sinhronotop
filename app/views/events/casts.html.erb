@@ -1,10 +1,16 @@
-<% changeable = can_submit_results? @event %>
-
-
 <%= javascript_include_tag "jquery-ui-1.8.15.custom.min" %>
 <%= stylesheet_link_tag 'smoothness/jquery-ui-1.8.15.custom.css' %>
 
-<div id="add_player_fm" style="display:none;text-align:right;background-color: #85bd44;">
+<% changeable = can_submit_results? @event %>
+
+
+<% if changeable %>
+<div id="result_helpers">
+    <%= link_to_function "Загрузить составы, указанные в рейтинге", "load_casts_from_rating(#{@event.id})" %>
+</div>
+<% end %>
+
+<div id="add_player_fm">
 
   <% form_remote_tag (:url => {:controller => 'plays', :action=>"create"}, :html => {:id=>"add_fm"})  do %>
       <%= hidden_field(:team, :id) %>
@@ -14,48 +20,42 @@
           <%= text_field_tag "lastName" %>
           <div class="auto_complete_box" id="ac_container"></div>
 
-      <p>
       <%= label_tag "Имя" %>
       <%= text_field_tag "firstName" %>
-      </p>
-
-      <p>
       <%= label_tag "Отчество" %>
       <%= text_field_tag "patronymic" %>
-      </p>
-      <p>
-        начните набирать фамилию,<br /> система Вам подскажет
-      </p>
+		<br/>
+        начните набирать фамилию, система Вам подскажет&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= submit_tag 'Добавить', :confirm => 'Вы уверены что этого игрока нет в списке?' %>
-
+	<%= button_to_function "Отменить", "hide_add_player_fm()" %>
   <% end %>
 </div>
 
 
 
-<table id="result_table" width="450" border="1" style="border:solid 1px #ccc;">
+<table id="result_table" width="1000" >
   <tr>
     <th>Команда</th>
     <th>Капитан</th>
-    <th colspan="2">Действие</th>
+    <th></th>
+    <th width="600px"></th>
   </tr>
   <% @results.each do |result| %>
 
   <tr>
-    <td><strong><%=h result.team.name %></strong></td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
-    <td>&nbsp;</td>
+    <td ALIGN="LEFT"><strong><%=h result.team.name %></strong></td>
+	<td></td>
+    <td ALIGN="LEFT"><%= link_to_function "добавить игрока", "show_add_player_fm(#{result.team.id})" %></td>
+    <td rowspan=<%=result.team.plays.size+1%>><div id="add_player_<%= result.team.id %>"></div></td>
   </tr>
-
 
 
   <% if result.team.plays.size > 0 %>
      <% result.team.plays.each do |play| %>
        <% @player = Player.find(play.player_id)%>
        <tr>
-        <td><%= "#{@player.firstName} #{@player.lastName}" %></td>
-        <td align="center">
+        <td ALIGN="LEFT"><%= "#{@player}" %></td>
+        <td>
           <%
           @checked = false
           if (!play.status.nil? && play.status == 'captain')
@@ -69,27 +69,16 @@
                             :checked => @checked
           %>
         </td>
-        <td align="center">
+        <td ALIGN="LEFT">
             <%= link_to 'убрать', {:action => "destroy", :controller => "plays", :id => play.id, :event_id => @event.id }, :confirm => 'Вы уверены?', :method => :delete%>
         </td>
-
-        <td>&nbsp;</td>
        </tr>
      <% end %>
   <% end %>
   <tr>
-    <td colspan="3"><div id="add_player_<%= result.team.id %>"></div></td>
-    <td align="center" valign="middle"><%= button_to_function "добавить игрока", "show_add_player_fm(#{result.team.id})" %></td>
-  </tr>
-  <tr>
-    <td colspan="4">&nbsp;</td>
+    <td colspan="3">&nbsp;</td>
   </tr>
   <% end %>
-  <tr>
-      <td align="right" colspan="4">
-        <%= button_to_function "Загрузить составы, указанные в рейтинге", "load_casts_from_rating(#{@event.id})" %>
-      </td>
-  </tr>
 
 </table>
 

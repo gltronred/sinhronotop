@@ -27,6 +27,10 @@ function validate_longtext(obj, max_length){
     }
 }
 
+function hide_add_player_fm(){
+    jQuery("#add_player_fm").fadeOut(100);
+}
+
 function show_add_player_fm(team_id){
     jQuery("#add_player_fm").hide();
     jQuery("#ac_container").hide();
@@ -100,7 +104,7 @@ function add_player_from_list(player_id){
 function load_casts_from_rating(event_id){
     jQuery.ajax({
         type: 'POST',
-        url: "/plays/load_casts/"+event_id,
+        url: "/plays/load_casts/?event_id="+event_id,
         data:'',
         success: function(){
             location.reload();

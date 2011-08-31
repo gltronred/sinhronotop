@@ -78,8 +78,7 @@ class PlaysController < ApplicationController
   end
 
   def load_casts
-    event = Event.find(params[:event_id].to_i)
-    results = event.results.sort_by{|r| r.local_index }
+    results = @event.results.sort_by{|r| r.local_index }
     results.each do |result|
       add_team_players(result.team.id, params[:event_id].to_i)
     end

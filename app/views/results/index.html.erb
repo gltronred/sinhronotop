@@ -16,6 +16,10 @@
 <%= render :partial => "import_window" %>
 <% end %>
 
+<div id='result_table_div'>
+	<%= render :partial => "result_table", :locals => {:changeable => changeable} %>
+</div>
+
 <% if changeable %>
 <%= render :partial => "event" %>
 <% elsif @game %>
@@ -27,9 +31,6 @@
 <% end %>
 </div>
 <% end %>
-<div id='result_table_div'>
-	<%= render :partial => "result_table", :locals => {:changeable => changeable} %>
-</div>
 
 
 <p><%= link_to 'Готово, больше результатов нет', home_path if changeable %></p>

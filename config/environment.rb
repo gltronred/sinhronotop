@@ -164,7 +164,9 @@ class ActiveRecord::Base
     :cap_name => "имя и фамилия капитана",
     :num_teams => "количество команд",
     :more_info => "дополнительна информация",
-    :game_time => "время начала игры"
+    :game_time => "время начала игры",
+    :firstName => "имя",
+    :lastName => "фамилия"
   }
 
   def self.human_attribute_name(attr)

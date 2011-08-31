@@ -59,6 +59,12 @@ TABLE TH {
 #add_new_team_form {
     display:none;    
 }
+#add_player_fm {
+    display:none;
+    text-align:right;
+    background-color: #85bd44;"
+    width: 599px;
+}
 .nowrap {
     white-space: nowrap;
 }

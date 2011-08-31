@@ -3,8 +3,8 @@ class Player < ActiveRecord::Base
   belongs_to :team
 
 
-  validates_presence_of :firstName, :message => "Имя не может быть пустым."
-  validates_presence_of :lastName, :message => "Фамилия не может быть пустой."
+  validates_presence_of :firstName
+  validates_presence_of :lastName
   validates_length_of :firstName, :maximum => 255
   validates_length_of :lastName, :maximum => 255
 
@@ -14,4 +14,9 @@ class Player < ActiveRecord::Base
       :order => "lastName, firstName, patronymic"
     }
   }
+  
+  def to_s
+    "#{firstName} #{lastName}"
+  end
+  
 end

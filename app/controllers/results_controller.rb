@@ -47,7 +47,7 @@ class ResultsController < ApplicationController
   def create
     @result = Result.new(params[:result])
     @result.score = 0
-    @result.cap_name = params[:cap_name]
+    @result.cap_name = params[:cap_name] unless params[:cap_name].blank?
     @result.local_index = params[:local_index]
 
     respond_to do |format|

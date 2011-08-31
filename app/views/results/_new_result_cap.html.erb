@@ -1,4 +1,5 @@
-<% if @event.game.tournament.cap_name_required %>
+<% t = @event.game.tournament %>
+<% if t.cap_name_required && !t.needTeams %>
   <p>
     <%= label_tag "Имя и фамилия капитана" %><br />
     <%= text_field_tag("cap_name", "", {:size => 30, :id => "#{prefix}_cap_name"}) %>
