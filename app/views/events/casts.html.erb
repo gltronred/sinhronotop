@@ -19,10 +19,9 @@
          <%= label_tag "Фамилия" %>
           <%= text_field_tag "lastName" %>
           <div class="auto_complete_box" id="ac_container"></div>
-
       <%= label_tag "Имя" %>
       <%= text_field_tag "firstName" %>
-      <%= label_tag "Отчество" %>
+      <%= label_tag "Отч." %>
       <%= text_field_tag "patronymic" %>
 		<br/>
         начните набирать фамилию, система Вам подскажет&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -33,12 +32,12 @@
 
 
 
-<table id="result_table" width="1000" >
+<table id="result_table" width="1020" >
   <tr>
     <th>Команда</th>
     <th>Капитан</th>
     <th></th>
-    <th width="600px"></th>
+    <th width="620px"></th>
   </tr>
   <% @results.each do |result| %>
 
