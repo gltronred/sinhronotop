@@ -39,7 +39,6 @@ class Result < ActiveRecord::Base
   
   def get_cap_from_cast
     play = Play.find(:first, :conditions => ["event_id = ? and team_id = ? and status = 'captain'", self.event.id, self.team.id])
-    puts "get_cap_from_cast #{play}"
     return play ? play.player.to_s : nil
   end
   
