@@ -8,6 +8,7 @@
 <div id="result_helpers">
     <%= link_to_function "Загрузить составы, указанные в рейтинге", "load_casts_from_rating(#{@event.id})" %>
 </div>
+<p>Чтобы добавить команду, надо добавить ее результат на странице <%=link_to "результатов", url_for(:controller => event_results_path(@event)) %></p>
 <% end %>
 
 <div id="add_player_fm">
@@ -29,8 +30,6 @@
 	<%= button_to_function "Отменить", "hide_add_player_fm()" %>
   <% end %>
 </div>
-
-
 
 <table id="result_table" width="1020" >
   <tr>
