@@ -10,7 +10,7 @@ class Player < ActiveRecord::Base
 
   named_scope :autocomplete, lambda { |p|
     {
-      :conditions => ["\"lastName\” LIKE ?", p[:lastName].to_s + '%'],
+      :conditions => ["\"lastName\" LIKE ?", p[:lastName].to_s + '%'],
       :order => "lastName, firstName, patronymic"
     }
   }
