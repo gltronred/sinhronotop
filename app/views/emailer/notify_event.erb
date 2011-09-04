@@ -15,7 +15,7 @@ Email представителя: <%=h @event.user.email %>
 Дополнительная информация: <%=h @event.more_info %>
 
 Статус заявки: <%=h @event.event_status.name %>
-Посмотреть данные заявки можно по адресу:  <%=link_to event_path(@event) %>
+Посмотреть данные заявки можно по адресу:  <%= event_path(@event) %>
 
 Изменить данные заявки можно по адресу:  <%= @update_url %>
 <% if 'approved' == @event.event_status.short_name %>
