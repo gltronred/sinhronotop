@@ -11,6 +11,7 @@ class Emailer < ActionMailer::Base
     subject = "ChGK game registration"
     @event = event
     @action = @event.last_change
+    @event_url = url_for(:controller => event_path(@event))
     @update_url = url_for(:controller => edit_event_path(@event))
     @disputeds_url = url_for(:controller => event_disputeds_path(@event))
     @appeals_url = url_for(:controller => event_appeals_path(@event))
