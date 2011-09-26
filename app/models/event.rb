@@ -79,7 +79,7 @@ class Event < ActiveRecord::Base
 
   def get_report_status
     report_status = "#{self.disputeds.empty? ? '-' : '+'} / #{self.appeals.empty? ? '-' : '+'} / #{self.results.empty? ? '-' : '+'}"
-    if self.game.tournament.needTeams?
+    if self.game.tournament.needTeams
       report_status << " / #{self.plays.empty? ? '-' : '+'}"
     end
   end
