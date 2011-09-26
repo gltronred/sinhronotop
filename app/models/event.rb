@@ -82,6 +82,7 @@ class Event < ActiveRecord::Base
     if self.game.tournament.needTeams
       report_status << " / #{self.plays.empty? ? '-' : '+'}"
     end
+    report_status
   end
 
   def validate_event_date
