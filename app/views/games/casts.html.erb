@@ -14,7 +14,7 @@
       <td>
         <% if result.team.plays.size > 0 %>
             <% casts_list = [] %>
-            <% result.team.plays.each do |play| %>
+            <% result.team.plays.find_all{|item|item.event_id == result.event.id}.each do |play| %>
                 <%
                     player = Player.find(play.player_id)
                    casts_item = ''

@@ -48,8 +48,7 @@
   </tr>
 
 
-  <% if result.team.plays.size > 0 %>
-     <% result.team.plays.each do |play| %>
+     <% result.team.plays.find_all{|item|item.event_id == @event.id}.each do |play| %>
        <% @player = Player.find(play.player_id)%>
        <tr>
         <td ALIGN="LEFT"><%= "#{@player}" %></td>
@@ -72,7 +71,6 @@
         </td>
        </tr>
      <% end %>
-  <% end %>
   <tr>
     <td colspan="3">&nbsp;</td>
   </tr>
