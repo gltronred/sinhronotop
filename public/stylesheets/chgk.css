@@ -81,7 +81,15 @@ TABLE TH {
     float:right;
     width:250px;
 }
-
+td.worst {
+    background-color: #D3D3D3;
+}
+td.missing {
+    background-color: #D3D300;
+}
+td.duty {
+    background-color: #D3D399;
+}
 .ui-autocomplete {
     width:300px;
     max-height: 100px;

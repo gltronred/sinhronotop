@@ -1,3 +1,7 @@
+st:
+ name: Старый Таллинн
+ city: tallinn
+
 pv:
   name: Против ветра
   city: cologne
@@ -7,7 +11,19 @@ oki:
   name: Оки-доки
   city: riga
   rating_id: 2694
+
+rb:
+    name: Рижский бальзам
+    city: riga
   
+k2:
+    name: K2
+    city: frankfurt
+
+uu:
+  name: У умывальника
+  city: frankfurt
+
 ka:
   name: Крейзер Аврора
   city: cologne

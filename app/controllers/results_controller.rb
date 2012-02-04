@@ -3,6 +3,8 @@ class ResultsController < ApplicationController
   before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
   before_filter :load_parents, :only => [:create, :index, :show, :simple_results, :update_tour]
   before_filter :check_do_changes
+  
+  @@calculator = Calculator.new()
 
   def index
     if @event
@@ -14,7 +16,8 @@ class ResultsController < ApplicationController
       load_cities
     elsif
       @results = @parent.results.sort_by{|r| -r.score }
-      calculate_places(@results)
+      @@calculator.calculate_places(@results)
+      @results.each{|r|r.save}
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
@@ -96,7 +99,8 @@ class ResultsController < ApplicationController
 
   def simple_results
     @results = @parent.results.sort_by{|r| -r.score }
-    calculate_places(@results)
+    @@calculator.calculate_places(@results)
+    @results.each{|r|r.save}
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     send_data render('simple_results.html', :layout => false),
     :filename => 'simple_results.html',
@@ -108,8 +112,6 @@ class ResultsController < ApplicationController
   private
 
   def load_teams
-    #@teams = Team.find(:all, :joins => :city, :order => "name ASC")
-    #puts "!!!!!!!!!!!!!!!!"+YAML::dump(@_event)
     @teams_home   = Team.find(:all, :conditions => ["city_id = ?", @event.city_id], :joins => :city, :order => "name ASC")
     @teams_guests = Team.find(:all, :conditions => ["city_id != ?", @event.city_id], :joins => :city, :order => "name ASC")
 

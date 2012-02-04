@@ -4,6 +4,8 @@ class GamesController < ApplicationController
   before_filter :find_tournament, :only => [:new, :create ]
   before_filter :check_do_change, :only => [:edit, :update, :destroy, :new, :create]
 
+  @@calculator = Calculator.new()
+
   def get_approved_moderator_emails
     respond_to do |format|
       format.js
@@ -83,8 +85,8 @@ class GamesController < ApplicationController
 
 
     @results = @parent.results.sort_by{|r| -r.score }
-    calculate_places(@results)
-
+    @@calculator.calculate_places(@results)
+    @results.each{|r|r.save}
 
     #@show_place = (@results.first.place_to_s == "")? false : true
 

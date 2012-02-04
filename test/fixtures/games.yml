@@ -52,3 +52,36 @@ kg2:
   publish_disp: false
   publish_appeal: false
   publish_results: false  
+ 
+sl1:
+  tournament: sl
+  city: tallinn
+  name: sl1
+  num_tours: 1
+  num_questions: 10
+  publish_results: true
+    
+sl2:
+    tournament: sl
+    name: sl2
+    num_tours: 1
+    num_questions: 10
+    city: riga
+    publish_results: true
+
+sl3:
+    tournament: sl
+    name: sl3
+    num_tours: 1
+    num_questions: 10
+    city: frankfurt
+    publish_results: true
+
+sl4:
+    tournament: sl
+    name: sl4
+    num_tours: 1
+    num_questions: 10
+    city: cologne
+    publish_results: true
+    

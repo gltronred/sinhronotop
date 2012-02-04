@@ -1,0 +1,32 @@
+<table>
+<thead>
+<th>Команда</th>
+<% @games.each do |game| %>
+<th><%= link_to game.name, game %></th>
+<% end%>
+<th>Среднее</th>
+<th>Место</th>
+</thead>
+<tbody>
+<% @results.each do |team_result| %>
+<tr>
+<td><%= team_result.team.name %></td>
+<% @games.each do |game| %>
+<% result = team_result.events[game.id] %>
+<% td_class = result.duty? ? 'duty' : result.missing? ? 'missing' : result.worst? ? 'worst' : 'normal' %>
+<td class='<%=td_class%>'><%= result.get_score() %></td>
+<% end %>
+<td><%= team_result.score %></td>
+<td><%= team_result.place_to_s %></td>
+</tr>
+<% end %>
+</tbody>
+</table>
+<p>
+<table>
+<tr>
+<td>Условные обозначения:</td>
+<td class='missing'>команда не участвовала в игре</td>
+<td class='worst'>худший результат</td>
+<td class='duty'>команда дежурила</td></tr>
+</table>

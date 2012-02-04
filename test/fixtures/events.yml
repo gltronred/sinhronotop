@@ -1,3 +1,102 @@
+sl1_riga:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: riga
+    game: sl1
+    event_status: approved    
+
+sl1_frankfurt:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: frankfurt
+    game: sl1
+    event_status: approved    
+
+sl1_cologne:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: cologne
+    game: sl1
+    event_status: approved
+    
+sl2_frankfurt:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: frankfurt
+    game: sl2
+    event_status: approved    
+
+sl2_tallinn:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: tallinn
+    game: sl2
+    event_status: approved    
+
+sl2_cologne:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: cologne
+    game: sl2
+    event_status: approved
+
+sl3_riga:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: riga
+    game: sl3
+    event_status: approved    
+
+sl3_tallinn:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: tallinn
+    game: sl3
+    event_status: approved
+
+sl4_frankfurt:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: frankfurt
+    game: sl4
+    event_status: approved
+
+sl4_riga:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: riga
+    game: sl4
+    event_status: approved    
+
+sl4_tallinn:
+    date: <%= 2.days.ago.to_s :db %>
+    moderator_name: Вася
+    moderator_email: vasja@example.org
+    user: hudjakov
+    city: tallinn
+    game: sl4
+    event_status: approved
+
 kg1_frankfurt:
   date: <%= 25.days.ago.to_s :db %>
   moderator_name: Иван Иванов
@@ -101,3 +200,4 @@ bb2_cologne:
     game: bb2
     event_status: approved    
     game_time: "14:30"
+

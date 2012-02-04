@@ -108,6 +108,7 @@ SeedTasks.create_event_status("approved", "принята")
 SeedTasks.create_event_status("denied", "отклонена")
 
 SeedTasks.create_calс_system("mm", "микроматчи")
+SeedTasks.create_calс_system("sl", "формула Сибирской лиги")
 SeedTasks.create_calс_system("nn", "не знаю пока")
 SeedTasks.create_calс_system("one_game", "турнир одноэтапный, считать не надо")
 

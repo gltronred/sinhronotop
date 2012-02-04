@@ -28,3 +28,13 @@ kg:
   cap_name_required: false
   time_required: false
   
+sl:
+    name: Сибирская лига
+    needTeams: false
+    appeal_for_dismiss: false
+    user: rodionov
+    cities: frankfurt, cologne, riga, tallinn
+    calc_system: sl
+    cap_name_required: false
+    time_required: false
+ 

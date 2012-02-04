@@ -79,7 +79,7 @@ class AppealsController < ApplicationController
       @export_data[disputed.question_index][:disputes] << {:answer => disputed.answer}
       @export_data[disputed.question_index][:q_index] = disputed.question_index
     end
-    @context_array = @parent.parents_top_down(:with_me) << "апелляции (#{@appeals.size}) и спроные (#{@disputeds.size})"
+    @context_array = @parent.parents_top_down(:with_me) << "апелляции (#{@appeals.size}) и спорные (#{@disputeds.size})"
     send_data render('appeals_and_controversial.txt', :layout => false),
               :filename => 'appeals_and_controversial.txt',
               :disposition => 'attachment',

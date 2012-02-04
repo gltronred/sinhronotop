@@ -41,6 +41,11 @@
 <input type="text" id="registration_link" size="<%= url.length + 15 %>" value="<%=h url  %>" />
 </p>
 
+<% if @game.tournament.calc_system.short_name == 'sl'%>
+<b>Дежурный город:</b>
+<%=h City.find @game.city_id if @game.city_id %>
+<% end %>
+
 <p>
 <b>Cпорные видны:</b>
 <%=h @game.publish_disp.loc %>
@@ -64,7 +69,6 @@
 
 <%= render :partial => "common/longtexts", :locals => {:longtexts => @game.longtexts} %>
 <%= render :partial => "common/links", :locals => {:links => @game.links} %>
-
 
 <%= link_to 'Зарегистрироваться', new_game_event_path(@game) if can_register? @game %>
 <% if is_org? @game.tournament %>

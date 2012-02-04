@@ -63,6 +63,12 @@
    <%= f.date_select :submit_results_until, :include_blank => true %>
 <%= render :partial => "disable_date", :locals => {:field_id => 'game_submit_results_until'} %>
  </p>
+
+<% if @tournament.calc_system.short_name == 'sl'%>
+<%= f.label "Дежурный город:" %><br />
+<%= f.select :city_id, @tournament.get_cities.collect {|c| [ c.name, c.id ] } %>
+<% end %>
+
 <p>Следующие три настройки означают, что спорные/апелляции/результаты видны <b>любому</b>, пользователю системы. Подумайте, когда их имеет смысл активировать. Возможно пакет пока нельзя светить и поэтому нельзя показывать спорные-апелляции? Возможно не все еще сыграли и поэтому нельзя светить результаты?</p>
  <p>
    <%= f.label "Спорные видны всем" %><br />

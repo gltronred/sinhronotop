@@ -1,7 +1,7 @@
 class TournamentsController < ApplicationController
 
   before_filter :check_create_or_destroy, :only => [:new, :create, :destroy]
-  before_filter :find, :only => [:update, :edit, :destroy, :results, :show ]
+  before_filter :find, :only => [:update, :edit, :destroy, :results, :results_calc, :show ]
   before_filter :check_update, :only => [:edit, :update]
 
   # GET /tournaments
@@ -81,6 +81,14 @@ class TournamentsController < ApplicationController
     @context_array = [@tournament, "поэтапные результаты"]
     @teams = @tournament.get_teams
     @games = @tournament.games.reject{|game|!game.publish_results}.sort_by_nilable(:end)
+  end
+  
+  def results_calc
+    @context_array = [@tournament, "результаты по формуле"]
+    @teams = @tournament.get_teams
+    @games = @tournament.games.reject{|game|!game.publish_results}.sort_by_nilable(:end)
+    c = Calculator.new
+    @results = c.calc(@teams, @games, @tournament.calc_system)
   end
 
   protected

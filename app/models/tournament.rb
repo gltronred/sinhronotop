@@ -16,8 +16,12 @@ class Tournament < ActiveRecord::Base
   end
   
   def get_teams
-    puts "   get_teams #{self.games[0].results.map(&:team)}"
     self.games.collect(&:events).flatten.collect(&:results).flatten.map(&:team).uniq
+  end
+  
+  def get_cities
+    cities = self.every_city ? City.all : self.cities
+    cities.sort_by{|c|c.name}
   end
   
   def get_parent

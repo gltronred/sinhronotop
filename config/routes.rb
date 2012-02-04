@@ -70,6 +70,7 @@ ActionController::Routing::Routes.draw do |map|
     t.resources :links
   end
   map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
+  map.tournament_results_calc "tournaments/:id/results_calc", :controller => 'tournaments', :action => "results_calc"
 
   map.resources :plays
   map.resources :plays do |p|

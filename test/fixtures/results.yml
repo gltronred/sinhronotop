@@ -1,3 +1,70 @@
+    #    g1   g2   g3   g4
+    #st  duty 5    0    5
+    #rb   8   duty 7    6
+    #k2   1   7   duty  6
+    #uu   1   x   duty  x
+    #ka   2   5    x   duty
+
+sl1_riga_rb:
+    score: 8
+    event: sl1_riga
+    team: rb
+    
+sl1_frankfurt_k2:
+    score: 1
+    event: sl1_frankfurt
+    team: k2
+
+sl1_frankfurt_uu:
+    score: 1
+    event: sl1_frankfurt
+    team: uu
+
+sl1_cologne_ka:
+    score: 2
+    event: sl1_cologne
+    team: ka
+
+sl2_tallinn_st:
+    score: 5
+    event: sl2_tallinn
+    team: st
+    
+sl2_frankfurt_k2:
+    score: 7
+    event: sl2_frankfurt
+    team: k2
+
+sl2_cologne_ka:
+    score: 5
+    event: sl2_cologne
+    team: ka
+
+sl3_tallinn_st:
+    score: 0
+    event: sl3_tallinn
+    team: st
+    
+sl3_riga_rb:
+    score: 7
+    event: sl3_riga
+    team: rb
+
+sl4_tallinn_st:
+    score: 5
+    event: sl4_tallinn
+    team: st
+    
+sl4_riga_rb:
+    score: 6
+    event: sl4_riga
+    team: rb
+
+sl4_frankfurt_k2:
+    score: 6
+    event: sl4_frankfurt
+    team: k2
+
 bb1_frankfurt_pv:
   score: 10
   event: bb1_frankfurt
