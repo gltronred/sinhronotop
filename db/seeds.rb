@@ -67,6 +67,7 @@ module SeedTasks
 
 end
 
+=begin
 File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
@@ -101,7 +102,7 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
     player = SeedTasks.set_player_team(team_id, player_id)
   end
 end
-
+=end
 
 SeedTasks.create_event_status("new", "новая")
 SeedTasks.create_event_status("approved", "принята")
