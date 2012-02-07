@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120128011425) do
+ActiveRecord::Schema.define(:version => 20120207224650) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -156,6 +156,8 @@ ActiveRecord::Schema.define(:version => 20120128011425) do
     t.string   "cap_name"
     t.integer  "local_index"
   end
+
+  add_index "results", ["event_id"], :name => "index_results_on_event_id"
 
   create_table "teams", :force => true do |t|
     t.string   "name"
