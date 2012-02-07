@@ -65,6 +65,14 @@ class Result < ActiveRecord::Base
     self.score
   end
   
+  protected
+  
+  def Result.save_multiple(results)
+    Result.transaction do
+      results.each{|r|r.save}
+    end
+  end
+  
   private
   
   def get_score(items)

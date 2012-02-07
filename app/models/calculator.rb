@@ -20,7 +20,7 @@ class Calculator
         teams_before += group.size
       end
     end
-    sorted_results
+    need_calc
   end
   
   private
@@ -40,7 +40,9 @@ class Calculator
       calc_average(team, games, results)
     end
     
-    calculate_places(results.values.to_a.sort{|a,b| b.score <=> a.score})
+    sorted_results = results.values.to_a.sort{|a,b| b.score <=> a.score}
+    calculate_places(sorted_results)
+    sorted_results
   end
   
   def calc_percentages(teams, games, results)

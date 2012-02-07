@@ -16,8 +16,8 @@ class ResultsController < ApplicationController
       load_cities
     elsif
       @results = @parent.results.sort_by{|r| -r.score }
-      @@calculator.calculate_places(@results)
-      @results.each{|r|r.save}
+      calc_performed = @@calculator.calculate_places(@results)
+      Result.save_multiple(@results) if calc_performed
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
@@ -99,8 +99,8 @@ class ResultsController < ApplicationController
 
   def simple_results
     @results = @parent.results.sort_by{|r| -r.score }
-    @@calculator.calculate_places(@results)
-    @results.each{|r|r.save}
+    calc_performed = @@calculator.calculate_places(@results)
+    Result.save_multiple(@results) if calc_performed
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     send_data render('simple_results.html', :layout => false),
     :filename => 'simple_results.html',

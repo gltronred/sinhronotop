@@ -85,11 +85,8 @@ class GamesController < ApplicationController
 
 
     @results = @parent.results.sort_by{|r| -r.score }
-    @@calculator.calculate_places(@results)
-    @results.each{|r|r.save}
-
-    #@show_place = (@results.first.place_to_s == "")? false : true
-
+    calc_performed = @@calculator.calculate_places(@results)
+    Result.save_multiple(@results) if calc_performed
   end
 
   protected
