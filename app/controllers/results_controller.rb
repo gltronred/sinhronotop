@@ -15,7 +15,8 @@ class ResultsController < ApplicationController
       load_teams
       load_cities
     elsif
-      @results = @parent.results.sort_by{|r| -r.score }
+      @results = Result.find(:all, :include => [:team, :event], :conditions => ["events.game_id = ?", @parent.id]).sort_by{|r| -r.score }
+      #@results = @parent.results.sort_by{|r| -r.score }
       calc_performed = @@calculator.calculate_places(@results)
       Result.save_multiple(@results) if calc_performed
     end
