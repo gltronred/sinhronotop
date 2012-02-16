@@ -29,13 +29,12 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :results do |r|
     r.resources :resultitems
   end
-
+  map.show_local_teams "events/:event_id/results/show_local_teams", :controller => 'results', :action => 'show_local_teams'
+  map.add_local_teams "events/:event_id/results/add_local_teams", :controller => 'results', :action => 'add_local_teams'
+  
   map.resources :teams
-
   map.resources :users
-
   map.resources :appeals
-
   map.resources :disputeds
 
   map.resources :events

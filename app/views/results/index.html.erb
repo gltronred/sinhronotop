@@ -9,6 +9,11 @@
 <div id='add_listed_team_div'>
 <%= render :partial => "add_result_listed" %>
 </div>
+<div id='show_local_teams_div'>
+<p>
+<%= link_to 'Добавить местные команды', show_local_teams_path(@event) %>
+</p>
+</div>
 <div id='how_to_import_div'>
 <%= render :partial => "how_to_import" %>
 </div>

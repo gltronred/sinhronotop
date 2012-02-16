@@ -11,12 +11,13 @@ class Player < ActiveRecord::Base
   named_scope :autocomplete, lambda { |p|
     {
       :conditions => ["\"lastName\" LIKE ?", p[:lastName].to_s + '%'],
+      :joins => :team,
       :order => "\"lastName\", \"firstName\", \"patronymic\""
     }
   }
   
   def to_s
-    "#{firstName} #{lastName}"
+    "#{lastName} #{firstName} #{patronymic if patronymic} #{team ? "(#{team.to_s})" : '(без команды)'}"
   end
   
 end

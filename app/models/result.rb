@@ -13,8 +13,7 @@ class Result < ActiveRecord::Base
   end
   
   def should_validate_cap_name?
-    t = self.event.game.tournament
-    t.cap_name_required && !t.needTeams
+    self.event.game.tournament.validate_cap_name?
   end
   
   def items_for_tour_sorted(tour) 

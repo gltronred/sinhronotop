@@ -1,0 +1,33 @@
+<% cap = @event.game.tournament.validate_cap_name?%>
+<% form_tag("add_local_teams") do %>
+<% if cap %>
+<table>
+<thead>
+<th>Команда</th>
+<th>Капитан</th>
+</thead>
+<tbody>
+<% @teams.sort_by{|t|t.name}.each {|team|%>
+<tr>
+<td>
+	<%= check_box_tag 'event[team_ids][]', "#{team.id}" %>
+    <%= team.name -%>
+</td>
+<td>
+	<%= text_field_tag "event[cap_names][#{team.id}]" %>
+</td>
+</tr>
+<% } %>
+</tbody>
+</table>
+<% else %>
+<% @teams.sort_by{|t|t.name}.each {|team|%>
+	<%= check_box_tag 'event[team_ids][]', "#{team.id}" %>
+    <%= team.name -%>
+<% } %>
+<% end %>
+<p>
+<%= submit_tag "Добавить" %>
+<%= link_to_function 'Назад', 'history.back()' %>
+</p>
+<% end %>

@@ -1,7 +1,7 @@
 class ResultsController < ApplicationController
 
   before_filter :load_result_with_parents, :only => [:edit, :update, :destroy]
-  before_filter :load_parents, :only => [:create, :index, :show, :simple_results, :update_tour]
+  before_filter :load_parents, :only => [:create, :index, :show, :simple_results, :update_tour, :show_local_teams, :add_local_teams]
   before_filter :check_do_changes
   
   @@calculator = Calculator.new()
@@ -109,6 +109,29 @@ class ResultsController < ApplicationController
     :type => "text/html; charset=utf-8",
     :encoding => 'utf-8'
   end
+  
+  def add_local_teams
+    size = @event.results.size
+    cap = @event.game.tournament.validate_cap_name?
+    params[:event][:team_ids].each { |team_id|
+      result = Result.new(:event => @event, :team => Team.find(team_id))
+      result.cap_name = params[:event][:cap_names][team_id] if cap
+      result.score = 0
+      result.local_index = size+=1
+      result.save
+      result.create_resultitems
+    }
+    respond_to do |format|
+      format.html { redirect_to(event_results_path(@event), :notice => 'Команды добавлены') }
+    end
+    
+  end
+  
+  def show_local_teams
+    @context_array = @event.parents_top_down(:with_me) << "добавить команды, приписанные к городу #{@event.city.name}"
+    @teams = Team.find(:all, :conditions => ["city_id = ?", @event.city_id])
+    @teams = @teams - @parent.results.map(&:team) if @parent.results
+  end
 
   private
 
@@ -117,8 +140,7 @@ class ResultsController < ApplicationController
     @teams_guests = Team.find(:all, :conditions => ["city_id != ?", @event.city_id], :joins => :city, :order => "name ASC")
 
     @teams_home << Team.new(:name => '--------------------') if !@teams_home.empty?
-    @teams = @teams_home + @teams_guests
-    @teams = @teams - @results.map(&:team) if @results
+    @teams = @teams_home + @teams_guests - @results.map(&:team) if @results
   end
 
   def load_result_with_parents

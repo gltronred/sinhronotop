@@ -72,9 +72,7 @@ class PlaysController < ApplicationController
   def auto_complete
     ActiveRecord::Base.include_root_in_json = false
     @players = Player.autocomplete(params)
-    render :json => @players.to_json(
-        :except => [:created_at, :updated_at]
-    )
+    render :json => @players.to_json(:methods => :to_s)
   end
 
   def load_casts

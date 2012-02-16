@@ -70,10 +70,9 @@ function init_autocomplete(){
                 dataType: "json",
                 success: function( players ) {
                     response( jQuery.map( players, function( item ) {
-                        var player = item.lastName + ((item.firstName != "")?" ":"") + item.firstName + ((jQuery.trim(item.patronymic) != "")?" ":"") + item.patronymic;
                         return {
-                            label: player,
-                            value: player,
+                            label: item.to_s,
+                            value: item.to_s,
                             player_id: item.id
                         }
                     }));

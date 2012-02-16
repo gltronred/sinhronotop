@@ -6,7 +6,9 @@
 
 <% if changeable %>
 <div id="result_helpers">
-    <%= link_to_function "Загрузить составы, указанные в рейтинге", "load_casts_from_rating(#{@event.id})" %>
+<p>
+    <%= link_to_function "Загрузить составы, указанные в рейтинге", "load_casts_from_rating(#{@event.id})" %></p>
+<p><%= link_to 'Готово, все составы введены', home_path if changeable %></p>
 </div>
 <p>Чтобы добавить команду, надо добавить ее результат на странице <%=link_to "результатов", url_for(:controller => event_results_path(@event)) %></p>
 <% end %>
@@ -24,30 +26,18 @@
       <%= text_field_tag "firstName" %>
       <%= label_tag "Отч." %>
       <%= text_field_tag "patronymic" %>
-		<br/>
-        начните набирать фамилию, система Вам подскажет&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       <%= submit_tag 'Добавить', :confirm => 'Вы уверены что этого игрока нет в списке?' %>
 	<%= button_to_function "Отменить", "hide_add_player_fm()" %>
   <% end %>
 </div>
 
-<table id="result_table" width="1020" >
-  <tr>
-    <th>Команда</th>
-    <th>Капитан</th>
-    <th></th>
-    <th width="620px"></th>
-  </tr>
+<table id="result_table" width="820" >
   <% @results.each do |result| %>
-
   <tr>
-    <td ALIGN="LEFT"><strong><%=h result.team.name %></strong></td>
-	<td></td>
+    <td ALIGN="LEFT"><strong>Команда: <%=h result.team.name %></strong></td>
+	<td>Капитан</td>
     <td ALIGN="LEFT"><%= link_to_function "добавить игрока", "show_add_player_fm(#{result.team.id})" %></td>
-    <td rowspan=<%=result.team.plays.size+1%>><div id="add_player_<%= result.team.id %>"></div></td>
   </tr>
-
-
      <% result.team.plays.find_all{|item|item.event_id == @event.id}.each do |play| %>
        <% @player = Player.find(play.player_id)%>
        <tr>
@@ -72,10 +62,8 @@
        </tr>
      <% end %>
   <tr>
-    <td colspan="3">&nbsp;</td>
+	<td colspan="3"><div id="add_player_<%= result.team.id %>"></div></td>
   </tr>
   <% end %>
 
 </table>
-
-<p><%= link_to 'Готово, все составы введены', home_path if changeable %></p>

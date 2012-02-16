@@ -23,6 +23,10 @@ class Tournament < ActiveRecord::Base
     cities.sort_by{|c|c.name}
   end
   
+  def validate_cap_name?
+    self.cap_name_required && !self.needTeams
+  end
+  
   def get_parent
     nil
   end
