@@ -1,0 +1,14 @@
+<% form_tag("merge") do %>
+<p>
+  <%= label_tag "Приписать все заслуги команды" %><br />
+  <%= select_tag :duplicate, options_from_collection_for_select(@teams_no_rating, :id, :to_s_full) %> 
+</p>
+<p>
+  <%= label_tag "команде" %><br />
+  <%= select_tag :real, options_from_collection_for_select(@teams_all, :id, :to_s_full) %> 
+</p>
+<p>
+<%= submit_tag 'Merge!', :confirm => 'Вы уверены?' %>
+<%= link_to_function 'Назад', 'history.back()' %>
+</p>
+<% end %>

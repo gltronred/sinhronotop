@@ -79,10 +79,10 @@ bb1_riga_oki:
   cap_name: Александр Мачевский
   local_index: 1
   
-bb2_frankfurt_pv:
+bb2_frankfurt_pv_dup:
   score: 14
   event: bb2_frankfurt
-  team: pv
+  team: pv_dup
   cap_name: Михаил Перлин
   local_index: 1
 

@@ -8,5 +8,9 @@ class Play < ActiveRecord::Base
       :conditions => ["player_id=? AND event_id=? AND team_id=?", p[:player_id], p[:event_id], p[:team][:id]]
     }
   }
+  
+  def to_s
+    "#{player} сыграл в #{event} за команду #{team}"
+  end
 
 end

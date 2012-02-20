@@ -1,0 +1,60 @@
+1:
+    player: brukman
+    team: pv
+    event: bb1_frankfurt
+
+2:
+    player: lanin
+    team: pv
+    event: bb1_frankfurt
+
+3:
+    player: sirotkin
+    team: pv
+    event: bb1_frankfurt
+
+4:
+    player: rodionov
+    team: pv
+    event: bb1_frankfurt
+
+5:
+    player: galkin
+    team: pv
+    event: bb1_frankfurt
+
+6:
+    player: perlin
+    team: pv
+    event: bb1_frankfurt
+
+7:
+    player: brukman2
+    team: pv_dup
+    event: bb2_frankfurt
+
+8:
+    player: lanin
+    team: pv_dup
+    event: bb2_frankfurt
+
+9:
+    player: sirotkin2
+    team: pv_dup
+    event: bb2_frankfurt
+
+10:
+    player: rodionov
+    team: pv_dup
+    event: bb2_frankfurt
+
+11:
+    player: teytelman
+    team: pv_dup
+    event: bb2_frankfurt
+
+12:
+    player: perlin2
+    team: pv_dup
+    event: bb2_frankfurt
+    

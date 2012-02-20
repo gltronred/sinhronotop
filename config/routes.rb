@@ -32,7 +32,10 @@ ActionController::Routing::Routes.draw do |map|
   map.show_local_teams "events/:event_id/results/show_local_teams", :controller => 'results', :action => 'show_local_teams'
   map.add_local_teams "events/:event_id/results/add_local_teams", :controller => 'results', :action => 'add_local_teams'
   
+  map.duplicates "teams/duplicates", :controller => 'teams', :action => "duplicates"
+  map.merge "teams/merge", :controller => 'teams', :action => "merge"
   map.resources :teams
+  
   map.resources :users
   map.resources :appeals
   map.resources :disputeds

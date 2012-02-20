@@ -7,6 +7,10 @@ pv:
   city: cologne
   rating_id: 330
   
+pv_dup:
+    name: Против ветра ложная
+    city: cologne
+  
 oki:
   name: Оки-доки
   city: riga

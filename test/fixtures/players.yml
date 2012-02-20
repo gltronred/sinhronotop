@@ -1,30 +1,51 @@
-pl_1:
+brukman:
   firstName: Борис
   lastName: Брукман
   patronymic: Юрьевич
   team: pv
 
-pl_2:
+sirotkin:
   firstName: Павел
   lastName: Сироткин
   team: pv
 
-pl_3:
+perlin:
   firstName: Михаил
   lastName: Перлин
   team: pv
 
-pl_4:
+lanin:
   firstName: Александр
   lastName: Ланин
   team: pv
 
-pl_5:
+galkin:
   firstName: Александр
   lastName: Галкин
   team: pv
 
-pl_6:
+rodionov:
   firstName: Дмитрий
   lastName: Родионов
   team: pv
+  
+brukman2:
+  firstName: Борис
+  lastName: Брукман
+  patronymic: Юрьевич
+  team: pv_dup
+
+sirotkin2:
+  firstName: Павел
+  lastName: Сироткин
+  team: pv_dup
+
+perlin2:
+  firstName: Михаил
+  lastName: Перлин
+  team: pv_dup
+
+teytelman:
+  firstName: Дмитрий
+  lastName: Тейтельман
+  team: pv_dup

@@ -1,7 +1,22 @@
 class TeamsController < ApplicationController
+  before_filter :check_duplicates, :only => [:duplicates, :merge]
 
-  # POST /teams
-  # POST /teams.xml
+  def duplicates
+    @teams_all = Team.find(:all)
+    @teams_no_rating = Team.find(:all, :conditions => "rating_id is null")
+  end
+  
+  def merge
+    real = Team.find_by_id params[:real]
+    duplicate = Team.find_by_id params[:duplicate]
+    Team.merge(real, duplicate)
+    if Team.merge(real, duplicate)
+      format.html { redirect_to(team_duplicates_path, :notice => 'ОК') }
+    else
+      format.html { render :action => "duplicates" }
+    end
+  end
+
   def create
     input_for_team = params[:team].except(:event_id)
     input_for_team[:rating_id] = [Team.minimum(:rating_id) - 1, -1].min
@@ -25,5 +40,11 @@ class TeamsController < ApplicationController
       end
     end
   end
+  
+  protected
 
+  def check_duplicates
+    check_permissions { is_admin? }
+  end
+  
 end
