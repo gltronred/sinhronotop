@@ -10,10 +10,13 @@ class TeamsController < ApplicationController
     real = Team.find_by_id params[:real]
     duplicate = Team.find_by_id params[:duplicate]
     Team.merge(real, duplicate)
-    if Team.merge(real, duplicate)
-      format.html { redirect_to(team_duplicates_path, :notice => 'ОК') }
-    else
-      format.html { render :action => "duplicates" }
+    respond_to do |format|
+      if Team.merge(real, duplicate)
+        format.html { redirect_to(duplicates_path, :notice => 'ОК') }
+      else
+        flash[:error] = real.errors.full_messages
+        format.html { render :action=>"duplicates", :controller=>"teams" }
+      end
     end
   end
 

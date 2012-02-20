@@ -10,19 +10,15 @@ class Team < ActiveRecord::Base
   
   def Team.merge(real, duplicate)
     raise "real is #{real}" unless real && real.kind_of?(Team)
-    raise "duplicate is #{duplicate}" unless duplicate && duplicate.kind_of?(Team)
-    raise "duplicate has rating-id" if duplicate.rating_id
+    real.errors.add "duplicate is #{duplicate}" unless duplicate && duplicate.kind_of?(Team)
+    real.errors.add "duplicate has rating-id #{duplicate.rating_id}" if duplicate.rating_id && duplicate.rating_id > 0
+    return false unless real.errors.empty?
 
-    #real.players = (real.players + duplicate.players).uniq
-    #real.plays = (duplicate.plays + real.plays).uniq
-    #real.results = (duplicate.results + real.results).uniq
     duplicate.players.each {|pl| pl.team = real; pl.save! }
     duplicate.plays.each {|play| play.team = real; play.save! }
     duplicate.results.each {|r| r.team = real; r.save! }
-    #Team.transaction do
-      real.save!
+    real.save!
     duplicate.destroy
-    #end
   end
   
   def from_rating?
