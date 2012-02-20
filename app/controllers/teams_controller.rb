@@ -2,8 +2,8 @@ class TeamsController < ApplicationController
   before_filter :check_duplicates, :only => [:duplicates, :merge]
 
   def duplicates
-    @teams_all = Team.find(:all)
-    @teams_no_rating = Team.find(:all, :conditions => "rating_id is null")
+    @teams_all = Team.find(:all).sort_by{|t| t.name }
+    @teams_no_rating = Team.find(:all, :conditions => "rating_id is null or rating_id < 0").sort_by{|t| t.name }
   end
   
   def merge
