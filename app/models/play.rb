@@ -9,13 +9,17 @@ class Play < ActiveRecord::Base
     }
   }
   
+  def get_team_rating_id
+    team.rating_id && team.rating_id > 0 ? team.rating_id : ''
+  end
+  
   def get_rating_status
     self.status == 'captain' ? 'К' : self.team.players.detect{|p|p.id == self.player.id} ? 'Б' : 'Л'
   end
   
   def get_rating_id
   #tugarev: при экспорте НЕ ПРОСТАВЛЯТЬ ID игрокам, не входящим в базовые составы, независимо от того, выбраны они из списка или введены вручную;
-    self.team.players.detect{|p|p.id == self.player.id} && self.player.rating_id && self.player.rating_id > 0 ? self.player.rating_id : ''
+    team.rating_id && team.rating_id > 0 && team.players.detect{|p|p.id == self.player.id} && self.player.rating_id && self.player.rating_id > 0 ? self.player.rating_id : ''
   end
   
   def to_s

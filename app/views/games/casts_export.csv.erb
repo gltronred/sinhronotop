@@ -2,6 +2,6 @@
 <% @results.each do |result|-%>
 <% result.team.plays.find_all{|item|item.event_id == result.event.id}.each do |play|-%>
 <% player = Player.find(play.player_id) -%>
-<%=h result.team.rating_id %>;<%=h result.team.name %>;<%=h result.team.city.name %>;<%=play.get_rating_status()%>;<%=h play.get_rating_id %>;<%=h player.lastName %>;<%=h player.firstName %>;<%=h player.patronymic %>
+<%=h play.get_team_rating_id %>;<%=h result.team.name %>;<%=h result.team.city.name %>;<%=play.get_rating_status()%>;<%=h play.get_rating_id %>;<%=h player.lastName %>;<%=h player.firstName %>;<%=h player.patronymic %>
 <%end-%>
 <%end-%>
