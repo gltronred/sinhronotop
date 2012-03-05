@@ -2,31 +2,37 @@ brukman:
   firstName: Борис
   lastName: Брукман
   patronymic: Юрьевич
+  rating_id: 888
   team: pv
 
 sirotkin:
   firstName: Павел
   lastName: Сироткин
+  rating_id: 889
   team: pv
 
 perlin:
   firstName: Михаил
   lastName: Перлин
+  rating_id: 890
   team: pv
 
 lanin:
   firstName: Александр
   lastName: Ланин
+  rating_id: 891
   team: pv
 
 galkin:
   firstName: Александр
   lastName: Галкин
+  rating_id: 892
   team: pv
 
 rodionov:
   firstName: Дмитрий
   lastName: Родионов
+  rating_id: 893
   team: pv
   
 brukman2:
@@ -48,4 +54,5 @@ perlin2:
 teytelman:
   firstName: Дмитрий
   lastName: Тейтельман
-  team: pv_dup
+  rating_id: 894
+  team: tormoza

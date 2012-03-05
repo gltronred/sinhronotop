@@ -83,10 +83,21 @@ class GamesController < ApplicationController
 
     @context_array = @parent.parents_top_down(:with_me) << 'Составы'
 
-
     @results = @parent.results.sort_by{|r| -r.score }
     calc_performed = @@calculator.calculate_places(@results)
     Result.save_multiple(@results) if calc_performed
+  end
+  
+  def casts_export
+    load_parents
+    load_cities
+    load_users
+    @results = @parent.results.sort_by{|r| -r.score }
+    send_data render('casts_export.csv', :layout => false),
+    :filename => "#{@game.id}_sostavy.csv",
+    :disposition => 'attachment',
+    :type => "text/csv; charset=ISO-8859-5",
+    :encoding => 'ISO-8859-5'
   end
 
   protected

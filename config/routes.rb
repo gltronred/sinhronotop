@@ -62,6 +62,7 @@ ActionController::Routing::Routes.draw do |map|
   map.simple_results "games/:game_id/simple_results", :controller => 'results', :action => "simple_results"
   map.appeals_and_controversial "games/:game_id/appeals_and_controversial", :controller => 'appeals', :action => "appeals_and_controversial"
   map.game_casts "games/:game_id/casts", :controller => 'games', :action => "casts"
+  map.game_casts_export "games/:game_id/casts_export", :controller => 'games', :action => "casts_export"
 
   map.resources :cities
 

@@ -10,6 +10,10 @@ pv:
 pv_dup:
     name: Против ветра ложная
     city: cologne
+    
+tormoza:
+    name: Тормоза
+    city: cologne    
   
 oki:
   name: Оки-доки

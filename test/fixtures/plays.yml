@@ -2,7 +2,7 @@
     player: brukman
     team: pv
     event: bb1_frankfurt
-
+    status: captain
 2:
     player: lanin
     team: pv
@@ -32,6 +32,7 @@
     player: brukman2
     team: pv_dup
     event: bb2_frankfurt
+    status: captain
 
 8:
     player: lanin
@@ -57,4 +58,8 @@
     player: perlin2
     team: pv_dup
     event: bb2_frankfurt
-    
+
+13:
+    player: teytelman
+    team: pv
+    event: bb1_frankfurt
