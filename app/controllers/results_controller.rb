@@ -106,7 +106,7 @@ class ResultsController < ApplicationController
     send_data render('simple_results.html', :layout => false),
     :filename => 'simple_results.html',
     :disposition => 'attachment',
-    :type => "text/html; charset=utf-8",
+    :type => "text/html; charset=utf-8; header=present",
     :encoding => 'utf-8'
   end
   
