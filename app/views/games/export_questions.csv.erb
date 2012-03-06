@@ -1,0 +1,10 @@
+Номер команды;Название;Город;Тур<% for q in 1..@game.num_questions -%>;<%=q-%><% end %>
+
+<% @results.each do |r| -%>
+<% for t in 1..@game.num_tours -%>
+<%=r.team.get_rating_id -%>;<%=r.team.name -%>;<%=r.team.city.name -%>;<%=t -%>
+<% for item in r.items_for_tour_sorted(t) -%>
+;<%=item.score -%>
+<% end %>
+<% end %>
+<% end %>

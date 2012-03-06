@@ -22,7 +22,11 @@ class Team < ActiveRecord::Base
   end
   
   def from_rating?
-    self.rating_id >= 0
+    rating_id && rating_id >= 0
+  end
+  
+  def get_rating_id
+    from_rating? ? rating_id : ''
   end
   
   def to_s

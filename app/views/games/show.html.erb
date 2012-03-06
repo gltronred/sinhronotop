@@ -70,6 +70,7 @@
 <%= render :partial => "common/longtexts", :locals => {:longtexts => @game.longtexts} %>
 <%= render :partial => "common/links", :locals => {:links => @game.links} %>
 
+<p>
 <%= link_to 'Зарегистрироваться', new_game_event_path(@game) if can_register? @game %>
 <% if is_org? @game.tournament %>
 <%= link_to 'Все заявки', game_events_path(@game) %>
@@ -77,10 +78,24 @@
 <%= link_to 'Апелляции', game_appeals_path(@game) %>
 <%= link_to 'Результаты', game_results_path(@game) %>
 <% if @game.tournament.needTeams %>
-<%=  link_to 'Составы', game_casts_path(@game) %>
-<%=  link_to 'Экспортировать составы', game_casts_export_path(@game, :format => 'ISO-8859-5') %>
+<%= link_to 'Составы', game_casts_path(@game) %>
 <% end %>
+</p>
+
+<% if is_org? @game.tournament %>
+<p>
+<% if @game.tournament.needTeams %>
+Экспортировать: <%=  link_to 'составы', game_export_casts_path(@game, :format => 'ISO-8859-5') %>
+<% end %>
+<%= link_to 'повопросные результаты', game_export_questions_path(@game, :format => 'ISO-8859-5') %>
+</p>
+<% end %>
+
+<% if is_org? @game.tournament %>
+<p>
 <%= link_to 'Изменить', edit_tournament_game_path(@game.tournament, @game) %>
 <%= link_to 'Добавить текст', new_game_longtext_path(@game) %>
 <%= link_to 'Добавить ссылку', new_game_link_path(@game) %>
+</p>
+<% end %>
 <% end %>

@@ -88,15 +88,26 @@ class GamesController < ApplicationController
     Result.save_multiple(@results) if calc_performed
   end
   
-  def casts_export
+  def export_casts
     load_parents
     load_cities
     load_users
-    @results = @parent.results.sort_by{|r| -r.score }
-    send_data render('casts_export.csv', :layout => false),
-    :filename => "#{@game.id}_sostavy.csv",
+    @results = @parent.results
+    send_data render('export_casts.csv', :layout => false),
+    :filename => "igra_#{@game.id}_sostavy.csv",
     :disposition => 'attachment',
-    :type => "text/csv; charset=ISO-8859-5",
+    :type => "text/csv",
+    :encoding => 'ISO-8859-5'
+  end
+  
+  def export_questions
+    @game = Game.find params[:game_id]
+    load_parents
+    @results = @parent.results
+    send_data render('export_questions.csv', :layout => false),
+    :filename => "igra_#{@game.id}_povoprosnye_rezultaty.csv",
+    :disposition => 'attachment',
+    :type => "text/csv",
     :encoding => 'ISO-8859-5'
   end
 
