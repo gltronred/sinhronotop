@@ -84,8 +84,9 @@
 
 <% if is_org? @game.tournament %>
 <p>
+Экспортировать:
 <% if @game.tournament.needTeams %>
-Экспортировать: <%=  link_to 'составы', game_export_casts_path(@game, :format => 'ISO-8859-5') %>
+<%=  link_to 'составы', game_export_casts_path(@game, :format => 'ISO-8859-5') %>
 <% end %>
 <%= link_to 'повопросные результаты', game_export_questions_path(@game, :format => 'ISO-8859-5') %>
 </p>
