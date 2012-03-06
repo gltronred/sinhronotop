@@ -96,7 +96,7 @@ class GamesController < ApplicationController
     send_data render('export_casts.csv', :layout => false),
     :filename => "igra_#{@game.id}_sostavy.csv",
     :disposition => 'attachment',
-    :type => "text/csv, charset=ISO-8859-5",
+    :type => "text/csv; charset=ISO-8859-5",
     :encoding => 'ISO-8859-5'
   end
   
@@ -107,7 +107,7 @@ class GamesController < ApplicationController
     send_data render('export_questions.csv', :layout => false),
     :filename => "igra_#{@game.id}_povoprosnye_rezultaty.csv",
     :disposition => 'attachment',
-    :type => "text/csv, charset=ISO-8859-5",
+    :type => "text/csv; charset=ISO-8859-5",
     :encoding => 'ISO-8859-5'
   end
 
