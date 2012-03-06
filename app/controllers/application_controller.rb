@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter do |controller|
     controller.authenticate unless controller.is_a?(SessionsController) || controller.is_a?(UsersController)
   end
-  after_filter { |c| c.response.headers['Content-Type'].include?("text/csv") then c.response.body = c.to_cyrillic(c.request.query_parameters[:format], c.response.body) end  }
+  after_filter { |c| ct = c.response.headers['Content-Type']; if ct && ct.include?("text/csv") then c.response.body = c.to_cyrillic(c.request.query_parameters[:format], c.response.body) end  }
 
   helper_method :all
   helper :all # include all helpers, all the time
