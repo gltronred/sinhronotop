@@ -1,4 +1,6 @@
 class GamesController < ApplicationController
+  
+  @@ENCODING = "WINDOWS-1251"
 
   before_filter :find, :only => [:update, :edit, :destroy, :show, :get_approved_moderator_emails, :get_approved_resp_emails ]
   before_filter :find_tournament, :only => [:new, :create ]
@@ -93,23 +95,24 @@ class GamesController < ApplicationController
     load_cities
     load_users
     @results = @parent.results
-    send_data render('export_casts.csv', :layout => false),
+    data = to_cyrillic(@@ENCODING, render('export_casts.csv', :layout => false))
+    send_data data,
     :filename => "igra_#{@game.id}_sostavy.csv",
     :disposition => 'attachment',
-    :type => "text/csv; charset=ISO-8859-5; header=present",
-    :encoding => 'ISO-8859-5'
+    :type => "text/csv; charset=#{@@ENCODING} ; header=present",
+    :encoding => @@ENCODING
   end
   
   def export_questions
     @game = Game.find params[:game_id]
     load_parents
     @results = @parent.results
-    data = to_cyrillic("ISO-8859-5", render('export_questions.csv', :layout => false))
+    data = to_cyrillic(@@ENCODING , render('export_questions.csv', :layout => false))
     send_data data,
     :filename => "igra_#{@game.id}_povoprosnye_rezultaty.csv",
     :disposition => 'attachment',
-    :type => "text/csv; charset=ISO-8859-5; header=present",
-    :encoding => 'ISO-8859-5'
+    :type => "text/csv; charset=#{@@ENCODING}; header=present",
+    :encoding => @@ENCODING 
   end
 
   protected

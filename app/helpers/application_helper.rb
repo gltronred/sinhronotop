@@ -52,6 +52,7 @@ module ApplicationHelper
   end
 
   @@converters = {
+    'WINDOWS-1251' => Iconv.new('WINDOWS-1251//IGNORE', 'UTF-8'),
     'ISO-8859-5' => Iconv.new('ISO-8859-5//IGNORE', 'UTF-8'),
     'UTF-8' => Iconv.new('UTF-8//IGNORE', 'UTF-8'),
     'KOI8-R' => Iconv.new('KOI8-R//IGNORE', 'UTF-8')
