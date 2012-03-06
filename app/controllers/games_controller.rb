@@ -104,7 +104,8 @@ class GamesController < ApplicationController
     @game = Game.find params[:game_id]
     load_parents
     @results = @parent.results
-    send_data render('export_questions.csv', :layout => false),
+    data = to_cyrillic("ISO-8859-5", render('export_questions.csv', :layout => false))
+    send_data data,
     :filename => "igra_#{@game.id}_povoprosnye_rezultaty.csv",
     :disposition => 'attachment',
     :type => "text/csv; charset=ISO-8859-5; header=present",
