@@ -95,8 +95,8 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
   Player.update_all(:team_id => nil)
   file.each_line do |line|
     atributes = line.split(';')
-    team_id, player_id = atributes[0], atributes[3]
-    SeedTasks.set_player_team(team_id, player_id)
+    SeedTasks.create_team(atributes[0], atributes[1], atributes[2])
+    SeedTasks.set_player_team(atributes[0], atributes[3])
   end
 end
 
