@@ -13,7 +13,7 @@ class TeamTest < ActiveSupport::TestCase
 
     assert_nil duplicate_new
     assert real_new
-    assert_equal 4, real_new.players.size - real_players_old
+    assert_equal 3, real_new.players.size - real_players_old
     assert_equal 6, real_new.plays.size - real_plays_old
     assert_equal 1, real_new.results.size - real_results_old    
   end

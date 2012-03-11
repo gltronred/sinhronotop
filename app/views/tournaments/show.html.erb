@@ -30,6 +30,11 @@
 	<b>Система подсчета результатов:</b>
 	  <%=h @tournament.calc_system %>
 </p>
+<p>
+	<b>Возможные категории:</b>
+	<%=h @tournament.tags.join(', ') %>  
+</p>
+
 <%= render :partial => "common/longtexts", :locals => {:longtexts => @tournament.longtexts} %>
 <%= render :partial => "common/links", :locals => {:links => @tournament.links} %>
 

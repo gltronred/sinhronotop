@@ -14,11 +14,17 @@ class ResultsController < ApplicationController
       @team = Team.new
       load_teams
       load_cities
-    elsif
-      @results = Result.find(:all, :include => [{:team => :city}, :event], :conditions => ["events.game_id = ?", @parent.id]).sort_by{|r| -r.score }
-      #@results = @parent.results.sort_by{|r| -r.score }
-      calc_performed = @@calculator.calculate_places(@results)
-      Result.save_multiple(@results) if calc_performed
+    else
+      tag = params[:tag]
+      tag_id = tag ? Tag.find_by_short_name(tag) : nil
+      if tag_id
+        results_unsorted = Result.find(:all, :include => [{:team => :city}, :event, :tag], :conditions => ["events.game_id = ? and tag_id = ?", @parent.id, tag_id])
+      else
+        results_unsorted = Result.find(:all, :include => [{:team => :city}, :event], :conditions => ["events.game_id = ?", @parent.id])
+      end
+      @results = results_unsorted.sort_by{|r| -r.score }
+      calc_performed = @@calculator.calculate_places(@results, tag_id)
+      Result.save_multiple(@results) if calc_performed && !tag_id
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
@@ -53,6 +59,7 @@ class ResultsController < ApplicationController
     @result.score = 0
     @result.cap_name = params[:cap_name] unless params[:cap_name].blank?
     @result.local_index = params[:local_index]
+    @result.tag_id = params[:tag_id]
 
     respond_to do |format|
       if @result.save
@@ -83,15 +90,11 @@ class ResultsController < ApplicationController
   def update
     respond_to do |format|
       @team = Team.find(params[:team_id])
-      unless @team.from_rating?
-        @team.name = params[:team_name]
-        @team.city_id = params[:city_id]
-      end
+      ok = @team.from_rating? ? true : update_team(@team, params)
       format.html {
-        if @team.save && @result.update_attributes(params[:result])
+        if ok && @result.update_attributes(params[:result])
           redirect_to(event_results_path(@event), :notice => 'Данные команды обновлены')
         else
-          #@team.from_rating? ? load_teams : load_cities
           redirect_to(edit_result_path(@result), :notice => "#{@team.e_to_s} #{@result.e_to_s}")
         end
       }
@@ -134,13 +137,20 @@ class ResultsController < ApplicationController
   end
 
   private
+  
+  def update_team(team, params) 
+    team.name = params[:team_name]
+    team.city_id = params[:city_id]
+    team.save
+  end
 
   def load_teams
     @teams_home   = Team.find(:all, :conditions => ["city_id = ?", @event.city_id], :joins => :city, :order => "name ASC")
     @teams_guests = Team.find(:all, :conditions => ["city_id != ?", @event.city_id], :joins => :city, :order => "name ASC")
 
     @teams_home << Team.new(:name => '--------------------') if !@teams_home.empty?
-    @teams = @teams_home + @teams_guests - @results.map(&:team) if @results
+    @teams = @teams_home + @teams_guests
+    @teams = @teams - @results.map(&:team) if @results
   end
 
   def load_result_with_parents

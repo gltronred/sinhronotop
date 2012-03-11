@@ -37,4 +37,5 @@ sl:
     calc_system: sl
     cap_name_required: false
     time_required: false
+    tags: school, uni
  

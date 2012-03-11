@@ -1,0 +1,7 @@
+school:
+    short_name: school
+    name: школьники
+
+uni:
+    short_name: uni
+    name: студенты

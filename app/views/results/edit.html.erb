@@ -2,6 +2,7 @@
   <%= f.error_messages %>
   <%= f.hidden_field :event_id, :value => @event.id %>
   <%= hidden_field_tag :team_id, @team.id %>
+
 <% if @result.team.from_rating? %>
 <p>
   <%= f.select(:team_id, @teams.collect{|u|[u.to_s, u.id]}, :selected => @result.team.id) %> 
@@ -16,14 +17,24 @@
     <%= text_field_tag :team_name, @team.name %>
   </p>
 <% end %>
+
 <% if @event.game.tournament.cap_name_required %>
   <p>
     <%= f.label "Имя и фамилия капитана" %><br />
     <%= f.text_field :cap_name, :id => 'listed_cap_name' %>
   </p>
 <% end %>
+
+<% unless @event.game.tournament.tags.empty? %>
+  <p>
+    <%= f.label "Категория" %><br />
+    <%= f.select :tag_id, options_from_collection_for_select(Tag.all, :id, :to_s, @result.tag_id, {:include_blank => true}) %> 
+  </p>
+<% end %>
+
   <p>
     <%= f.submit 'Сохранить' %>
   </p>
+
 <% end %>
 <%= link_to_function 'Назад', 'history.back()' %>

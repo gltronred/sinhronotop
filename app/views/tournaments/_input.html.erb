@@ -37,7 +37,12 @@
          <%= check_box_tag "tournament[city_ids][]", c.id, city(c), {:class => 'city_checkbox', :id => c.id} %>
          <%= c.name -%>
       <% end -%><br />
-<!-- Если список потенциальных городов-участников неполон, вы можете дополнить его <%= link_to 'здесь', cities_path %> -->
+  </p>
+ <p>Возможные категории<br />
+      <% for t in Tag.all -%>
+         <%= check_box_tag "tournament[tag_ids][]", t.id, get_tag(t), {:id => t.id} %>
+         <%= t.name -%>
+      <% end -%><br />
   </p>
   <p>
     <%= f.submit 'Сохранить' %>

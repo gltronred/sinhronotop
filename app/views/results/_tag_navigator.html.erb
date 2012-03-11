@@ -1,0 +1,9 @@
+<% unless game.tournament.tags.empty? %>
+<p>
+Спецзачет: 
+<%= link_to "все", game_results_path(game) %>
+<% for t in game.tournament.tags %>
+<%= link_to t.name, game_results_path(game, :tag => t.short_name) %>
+<% end %>
+</p>
+<% end %>

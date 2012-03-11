@@ -5,7 +5,7 @@ class Team < ActiveRecord::Base
 
   belongs_to :city
   validates_presence_of :name
-  validates_uniqueness_of :rating_id
+  validates_uniqueness_of :rating_id, :allow_blank => true, :allow_nil => true
   validates_length_of :name, :maximum => 255
   
   def Team.merge(real, duplicate)

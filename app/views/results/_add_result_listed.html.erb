@@ -8,6 +8,7 @@
 	(для упрощения поиска нажмите в списке первую букву названия)
   </p>
 <%= render :partial => "new_result_cap", :locals => {:f => f, :prefix => 'listed' } %>
+<%= render :partial => "tag", :locals => {:f => f, :tag_id => '' } %>
   <p>
     <%= f.submit 'Добавить' %>
   </p>

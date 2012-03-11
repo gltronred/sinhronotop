@@ -39,7 +39,15 @@ module SeedTasks
     end
     cs
   end
-  
+
+  def self.create_tag(short_name, name)
+    t = Tag.find_by_short_name short_name
+    unless t
+      t = Tag.create(:short_name => short_name, :name => name)
+    end
+    t
+  end
+    
   def self.create_event_status(short_name, name)
     es = EventStatus.find_by_short_name short_name
     unless es
@@ -90,7 +98,6 @@ File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
     player = SeedTasks.create_payer(first_name, last_name, patronymic, rating_id)
   end
 end
-=end
 
 File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
   Player.update_all(:team_id => nil)
@@ -100,6 +107,10 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
     SeedTasks.set_player_team(atributes[0], atributes[3])
   end
 end
+=end
+
+SeedTasks.create_tag("school", "школьники")
+SeedTasks.create_tag("uni", "студенты")
 
 =begin
 SeedTasks.create_event_status("new", "новая")

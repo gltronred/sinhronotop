@@ -29,6 +29,7 @@
 <%= render :partial => "event" %>
 <% elsif @game %>
 <div class="right_menu_block">
+<%= render :partial => "tag_navigator", :locals => {:game => @game } %>
 <%= render :partial => "tour_navigator", :locals => {:game => @game, :current_tour => -1 } %>
 <% unless @event %>
 <%= render :partial => "common/csv", :locals => {:path => game_results_path(@game, :format => :csv) } %>

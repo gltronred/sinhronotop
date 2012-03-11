@@ -1,4 +1,6 @@
-<% show_cap = @game.tournament.cap_name_required || @game.tournament.needTeams %>
+<% t = @game.tournament %>
+<% show_cap = t.cap_name_required || t.needTeams %>
+<% show_tags = t.tags && t.tags.size > 0 %>
 <table id="result_table">
   <tr>
 <% if @event %>
@@ -8,6 +10,11 @@
 <% end %>
 
     <th>Команда</th>
+
+<% if show_tags %>
+	<th>Категория</th>
+<% end %>
+
 <% if show_cap %>
 	<th>Капитан</th>
 <% end %>
@@ -26,10 +33,17 @@
 <% else %>
     <td><%=h result.place_to_s %></td>
 <% end %>
+
     <td><%=h result.team.name %></td>
+
+<% if show_tags %>
+	<td><%=h result.tag %></td>
+<% end %>
+
 <% if show_cap %>
 	<td><%=h result.get_cap_name %></td>
 <% end %>
+
 	<td><%=h result.team.city %></td>
     <td><%=h link_to result.event.city.name, event_path(result.event) %></td>
 <% for tour in 1..@game.num_tours %>

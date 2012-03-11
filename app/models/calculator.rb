@@ -11,8 +11,8 @@ class Calculator
     end
   end
   
-  def calculate_places(sorted_results)
-    need_calc = sorted_results.detect{|r|!r.place_begin || !r.place_end}
+  def calculate_places(sorted_results, force_calc = false)
+    need_calc = force_calc || sorted_results.detect{|r|!r.place_begin || !r.place_end}
     if need_calc
       teams_before = 0
       sorted_results.group_by{|r|-r.score}.each do |score, group|

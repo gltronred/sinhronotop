@@ -3,6 +3,7 @@ class Result < ActiveRecord::Base
   belongs_to :event
   has_many :resultitems, :dependent => :delete_all
   validates_presence_of :cap_name, :if => :should_validate_cap_name?
+  belongs_to :tag  
   
   
   def calculate_and_save

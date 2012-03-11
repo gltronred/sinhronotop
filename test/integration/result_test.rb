@@ -103,15 +103,15 @@ class ResultTest < ActionController::IntegrationTest
     game = games(:bb2)
     do_with_users([:marina]) {
       visit "/games/#{game.id}/results"
-      search_multiple_text_in_result_table ["Против ветра", 14, "Оки-доки", 10, "7 пядей", 12]
+      search_multiple_text_in_result_table ["Против ветра ложная", 14, "Оки-доки", 10, "7 пядей", 12]
       click_link "Тур 1"
-      search_multiple_text_in_result_table ["Против ветра", 8, "Оки-доки", 4, "7 пядей", 5]
+      search_multiple_text_in_result_table ["Против ветра ложная", 8, "Оки-доки", 4, "7 пядей", 5]
       click_link "Тур 2"
-      search_multiple_text_in_result_table ["Против ветра", 2, "Оки-доки", 3, "7 пядей", 5]
+      search_multiple_text_in_result_table ["Против ветра ложная", 2, "Оки-доки", 3, "7 пядей", 5]
       click_link "Тур 3"
-      search_multiple_text_in_result_table ["Против ветра", 4, "Оки-доки", 3, "7 пядей", 2]
+      search_multiple_text_in_result_table ["Против ветра ложная", 4, "Оки-доки", 3, "7 пядей", 2]
       click_link "Общие результаты"
-      search_multiple_text_in_result_table ["Против ветра", 14, "Оки-доки", 10, "7 пядей", 12]
+      search_multiple_text_in_result_table ["Против ветра ложная", 14, "Оки-доки", 10, "7 пядей", 12]
       assert !page.has_xpath?("//input")
     }
   end
@@ -169,7 +169,7 @@ class ResultTest < ActionController::IntegrationTest
   def add_team_listed(should_be_added, team, event, cap_name=nil, local_index = nil)
     click_link "add_listed_team_link" if has_selector?("a#add_listed_team_link")
     select local_index.to_s, :from => "listed_local_index" if local_index
-    select "#{team.name} (#{team.city.name})", :from => "result_team_id"
+    select "#{team.name}, #{team.city.name}", :from => "result_team_id"
     fill_in "listed_cap_name", :with => cap_name if cap_name
     click_button "result_submit"
     search_in_result_table(event.city.name, should_be_added) if should_be_added
@@ -180,7 +180,7 @@ class ResultTest < ActionController::IntegrationTest
 
   def add_team_listed_spacer(team)
     click_link "add_listed_team_link" if has_selector?("a#add_listed_team_link")
-    select "#{team.name} (#{team.city.name})", :from => "result_team_id"
+    select "#{team.name}, #{team.city.name}", :from => "result_team_id"
     select "--------------------", :from => "result_team_id"
     click_button "result_submit"
     assert_not_contain "Команда добавлена"
