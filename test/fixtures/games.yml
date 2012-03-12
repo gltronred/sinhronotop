@@ -55,7 +55,7 @@ kg2:
  
 sl1:
   tournament: sl
-  city: tallinn
+  cities: tallinn
   name: sl1
   num_tours: 1
   num_questions: 10
@@ -66,7 +66,7 @@ sl2:
     name: sl2
     num_tours: 1
     num_questions: 10
-    city: riga
+    cities: riga
     publish_results: true
 
 sl3:
@@ -74,7 +74,7 @@ sl3:
     name: sl3
     num_tours: 1
     num_questions: 10
-    city: frankfurt
+    cities: frankfurt
     publish_results: true
 
 sl4:
@@ -82,6 +82,6 @@ sl4:
     name: sl4
     num_tours: 1
     num_questions: 10
-    city: cologne
+    cities: cologne
     publish_results: true
     

@@ -6,7 +6,7 @@ class Game < ActiveRecord::Base
   has_many :results, :through => :events
   has_many :longtexts, :dependent => :delete_all
   has_many :links, :dependent => :delete_all
-  belongs_to :city
+  has_and_belongs_to_many :cities
 
   validates_presence_of :num_tours, :num_questions
   validates_numericality_of :num_tours, :num_questions, :integer_only => true

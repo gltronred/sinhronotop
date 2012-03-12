@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120309221832) do
+ActiveRecord::Schema.define(:version => 20120311224858) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -35,6 +35,11 @@ ActiveRecord::Schema.define(:version => 20120309221832) do
     t.integer  "time_shift"
     t.string   "time_zone"
     t.integer  "rating_id"
+  end
+
+  create_table "cities_games", :id => false, :force => true do |t|
+    t.integer "city_id"
+    t.integer "game_id"
   end
 
   create_table "cities_tournaments", :id => false, :force => true do |t|
@@ -94,7 +99,6 @@ ActiveRecord::Schema.define(:version => 20120309221832) do
     t.date     "submit_disp_from"
     t.date     "submit_appeal_from"
     t.date     "submit_results_from"
-    t.integer  "city_id"
   end
 
   create_table "links", :force => true do |t|

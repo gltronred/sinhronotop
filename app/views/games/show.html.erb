@@ -42,8 +42,8 @@
 </p>
 
 <% if @game.tournament.calc_system.short_name == 'sl'%>
-<b>Дежурный город:</b>
-<%=h City.find @game.city_id if @game.city_id %>
+<b>Дежурные города:</b>
+<%=h @game.cities.map(&:name).join(', ') %>
 <% end %>
 
 <p>

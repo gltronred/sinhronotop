@@ -61,7 +61,7 @@ class Calculator
   def set_duty_teams(games, teams, results)
     games.each do |game|  
       teams.each do |team|
-        if game.city && team.city_id == game.city_id          
+        if game.cities.include? team.city          
           results[team.id].events[game.id] = EventResult.new(0.0, false, true) 
         end
       end
