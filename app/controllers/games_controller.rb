@@ -31,6 +31,7 @@ class GamesController < ApplicationController
   # GET /games/new.xml
   def new
     @game = Game.new
+    @game.tournament = @tournament
     @context_array = @tournament.parents_top_down(:with_me) << "новый этап"
   end
 
