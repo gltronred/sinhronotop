@@ -1,0 +1,18 @@
+<% form_tag("update_payment")  do %>
+  <p>
+    <%= label_tag "Мы заплатили" %><br />
+    <%= check_box_tag :payment_done, 1, @event.payment_done %>
+  </p>
+  <p>
+    <%= label_tag "Общая сумма, валюта (например '120 долларов')" %><br />
+    <%= text_field_tag :payment_amount, @event.payment_amount %>
+  </p>
+  <p>
+    <%= label_tag "Способ оплаты (например 'PayPal', 'оказия', 'Яндекс.Деньги')" %><br />
+    <%= text_field_tag :payment_way, @event.payment_way %>
+  </p>
+  <p>
+    <%= submit_tag 'Сохранить' %>
+  </p>
+<% end %>
+<%= link_to_function 'Назад', 'history.back()' %>

@@ -1,10 +1,10 @@
 class EventsController < ApplicationController
 
-  before_filter :find, :only => [:edit, :update, :destroy, :show, :change_status]
+  before_filter :find, :only => [:edit, :update, :destroy, :show, :change_status, :payment, :update_payment]
   before_filter :find_game, :only => [:index, :new, :create]
 
   before_filter :do_org_actions, :only => [:index, :change_status]
-  before_filter :check_change_event, :only => [:edit, :update, :destroy]
+  before_filter :check_change_event, :only => [:edit, :update, :destroy, :update_payment]
   before_filter :check_create_event, :only => [:new, :create]
   before_filter :check_do_changes, :only => [:casts]
 
@@ -115,6 +115,23 @@ class EventsController < ApplicationController
     @context_array = @event.parents_top_down(:with_me) << 'Составы'
     @results = @event.results.sort_by{|r| r.local_index }
   end
+  
+  def payment
+    load_parents
+    @context_array = @event.parents_top_down(:with_me) << 'Платеж'
+  end
+  
+  def update_payment
+    load_parents
+    @event.payment_done = params[:payment_done]
+    @event.payment_amount = params[:payment_amount]
+    @event.payment_way = params[:payment_way]
+    if @event.save
+      redirect_to event_path(@event)
+    else
+      render :action => "payment"
+    end
+  end  
 
   protected
 

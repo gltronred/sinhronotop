@@ -68,8 +68,26 @@
 <span id='event_status_<%= @event.id %>'><%=h @event.event_status.name -%></span>
 </p>
 
+<% if @event.game.tournament.payments %>
+<p>
+<b>Платеж совершен:</b>
+<%=h @event.payment_done.loc if @event.payment_done %>
+</p>
+<p>
+<b>Сумма, валюта:</b>
+<%=h @event.payment_amount %>
+</p>
+<p>
+<b>Способ оплаты:</b>
+<%=h @event.payment_way %>
+</p>
+<% end %>
+
 <%= link_to 'Все заявки', game_events_path(@event.game) %>
 <%= link_to 'Изменить', edit_event_path(@event) if is_resp? @event %>
+<% if @event.game.tournament.payments %>
+<%= link_to 'Изменить информацию об оплате', event_payment_path(@event) %>
+<% end %>
 <% if is_resp? @event %>
 <%= link_to 'Спорные ответы', event_disputeds_path(@event) %>
 <%= link_to 'Апелляции', event_appeals_path(@event) %>
@@ -79,5 +97,4 @@
 <% if @event.game.tournament.needTeams %>
 <%=  link_to 'Составы', event_casts_path(@event) %>
 <% end %>
-
 <%= render :partial => "change_status", :locals => { :event => @event } %>

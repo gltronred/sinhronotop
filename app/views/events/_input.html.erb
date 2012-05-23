@@ -91,12 +91,12 @@
     <%= f.label "Количество команд (примерное)" %><br />
     <%= f.text_field :num_teams %>
   </p>
-	<% unless @event.new_record? %>
+<% unless @event.new_record? %>
   <p>
     <%= f.label "Статус заявки" %><br />
 	<span id='event_status_<%= @event.id %>'><%= f.label @event.event_status.name %></span><br />
   </p>
-	<% end %>
+<% end %>
   <p>
     <%= f.label "Дополнительная информация (например просьба об изменении даты игры)" %><br />
     <%= f.text_area :more_info %>
@@ -106,3 +106,4 @@
   </p>
 <% end %>
 <%= link_to_function 'Назад', 'history.back()' %>
+

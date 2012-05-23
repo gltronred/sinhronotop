@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120311224858) do
+ActiveRecord::Schema.define(:version => 20120518144555) do
 
   create_table "appeals", :force => true do |t|
     t.integer  "question_index"
@@ -77,6 +77,9 @@ ActiveRecord::Schema.define(:version => 20120311224858) do
     t.string   "last_change"
     t.string   "ips"
     t.string   "moderator_email2"
+    t.boolean  "payment_done"
+    t.string   "payment_amount"
+    t.string   "payment_way"
   end
 
   create_table "games", :force => true do |t|
@@ -201,6 +204,7 @@ ActiveRecord::Schema.define(:version => 20120311224858) do
     t.boolean  "every_city"
     t.boolean  "cap_name_required"
     t.boolean  "time_required"
+    t.boolean  "payments"
   end
 
   create_table "users", :force => true do |t|

@@ -29,6 +29,10 @@
     <%= f.label "Система подсчета результатов" %><br />
     <%= collection_select(:tournament, :calc_system_id, CalcSystem.all, :id, :name) %> 
   </p>
+  <p>
+    <%= f.label "Информация о платежах" %><br />
+    <%= f.check_box :payments %>
+  </p>
  <p>Возможные города-участники<br />
     <%= f.label "Все" %>
     <%= f.check_box :every_city, {:id => "every_city"} %>

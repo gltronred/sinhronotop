@@ -23,6 +23,10 @@
   <%=h @tournament.time_required.loc %>
 </p>
 <p>
+  <b>Требуется ли информация о платежах?</b>
+  <%=h @tournament.payments.loc %>
+</p>
+<p>
   <b>Возможные города-участники:</b>
    <%=h @tournament.every_city ? 'все' : @tournament.cities.map(&:name).sort.join(', ') %>
  </p>

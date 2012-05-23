@@ -80,6 +80,8 @@ ActionController::Routing::Routes.draw do |map|
   map.resources :plays do |p|
     p.resources :events
   end
+  map.event_payment "event/:id/payment", :controller => 'events', :action => "payment"  
+  map.event_update_payment "event/:id/update_payment", :controller => 'events', :action => "update_payment"  
 
   map.set_captain "plays/set_captain/:id", :controller => 'plays', :action => "set_captain", :method => :post
   map.auto_complete "plays/auto_complete", :controller => 'plays', :action => "auto_complete", :method => :post
