@@ -75,6 +75,8 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.tournament_results "tournaments/:id/results", :controller => 'tournaments', :action => "results"
   map.tournament_results_calc "tournaments/:id/results_calc", :controller => 'tournaments', :action => "results_calc"
+  map.tournament_export_casts "tournament/:id/export_casts", :controller => 'tournaments', :action => "export_casts"
+  map.tournament_export_questions "tournament/:id/export_questions", :controller => 'tournaments', :action => "export_questions"
 
   map.resources :plays
   map.resources :plays do |p|

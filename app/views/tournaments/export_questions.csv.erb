@@ -1,0 +1,4 @@
+Место;Номер команды;Название;Город
+<% @results.each do |r| -%>
+<%=(r.place_begin+r.place_end).to_f/2 -%>;<%=r.team.get_rating_id -%>;<%=r.team.name -%>;<%=r.team.city.name %>
+<% end %>

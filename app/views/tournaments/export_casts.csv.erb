@@ -1,0 +1,10 @@
+"IDteam";Название;Город;Флаг;"IDplayer";Фамилия;Имя;Отчество
+<% @teams.each do |t| -%>
+<% set = Set.new %>
+<% t.players.each do |p| -%>
+<% unless set.include? p.lastName -%>
+<% set.add p.lastName -%>
+<%= p.team.rating_id -%>;<%= p.team.name -%>;<%= p.team.city.name -%>;<%=p.get_rating_status(t)%>;<%= p.rating_id -%>;<%= p.lastName -%>;<%= p.firstName -%>;<%= p.patronymic %>
+<%end-%>
+<%end-%>
+<%end-%>

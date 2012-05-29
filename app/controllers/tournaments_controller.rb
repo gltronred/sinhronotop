@@ -1,7 +1,9 @@
 class TournamentsController < ApplicationController
+  
+  @@ENCODING = "WINDOWS-1251"
 
   before_filter :check_create_or_destroy, :only => [:new, :create, :destroy]
-  before_filter :find, :only => [:update, :edit, :destroy, :results, :results_calc, :show ]
+  before_filter :find, :only => [:update, :edit, :destroy, :results, :results_calc, :show, :export_casts, :export_questions ]
   before_filter :check_update, :only => [:edit, :update]
 
   # GET /tournaments
@@ -89,6 +91,28 @@ class TournamentsController < ApplicationController
     @games = @tournament.games.reject{|game|!game.publish_results}.sort_by_nilable(:end)
     c = Calculator.new
     @results = c.calc(@teams, @games, @tournament.calc_system)
+  end
+  
+  def export_casts
+    @teams = @tournament.get_teams
+    @games = @tournament.games.reject{|game|!game.publish_results}.sort_by_nilable(:end)
+    data = to_cyrillic(@@ENCODING, render('export_casts.csv', :layout => false))
+    send_data data,
+    :filename => "turnir_#{@tournament.id}_sostavy.csv",
+    :disposition => 'attachment',
+    :type => "text/csv; charset=#{@@ENCODING} ; header=present",
+    :encoding => @@ENCODING
+  end
+  
+  def export_questions
+    @teams = @tournament.get_teams
+    @games = @tournament.games.reject{|game|!game.publish_results}.sort_by_nilable(:end)
+    data = to_cyrillic(@@ENCODING , render('export_questions.csv', :layout => false))
+    send_data data,
+    :filename => "turnir_#{@tournament.id}_rezultaty.csv",
+    :disposition => 'attachment',
+    :type => "text/csv; charset=#{@@ENCODING}; header=present",
+    :encoding => @@ENCODING 
   end
 
   protected

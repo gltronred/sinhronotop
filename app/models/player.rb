@@ -16,6 +16,10 @@ class Player < ActiveRecord::Base
     }
   }
   
+  def get_rating_status(team)
+    self.team.id == team.id ? 'Б' : 'Л'
+  end
+  
   def to_s
     "#{lastName} #{firstName} #{patronymic if patronymic} #{team ? "(#{team.to_s})" : '(без команды)'}"
   end

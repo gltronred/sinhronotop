@@ -24,7 +24,7 @@
 </p>
 <p>
   <b>Требуется ли информация о платежах?</b>
-  <%=h @tournament.payments.loc %>
+  <%=h @tournament.payments.loc if @tournament.payments %>
 </p>
 <p>
   <b>Возможные города-участники:</b>
@@ -46,6 +46,15 @@
 <%= link_to 'Добавить ссылку', new_tournament_link_path(@tournament) if is_org? @tournament %>
 <%= link_to 'Изменить', edit_tournament_path(@tournament) if is_org? @tournament %>
 <%= link_to "Удалить", @tournament, :confirm => 'Вы уверены?', :method => :delete if is_admin? %>
+<% if is_org? @tournament %>
+<p>
+Экспортировать:
+<% if @tournament.needTeams %>
+<%=  link_to 'составы', tournament_export_casts_path(@tournament, :format => 'ISO-8859-5') %>
+<% end %>
+<%= link_to 'результаты', tournament_export_questions_path(@tournament, :format => 'ISO-8859-5') %>
+</p>
+<% end %>
 <%= render :partial => 'games/index'%>
 
 <% unless ['one_game', 'nn'].include?(@tournament.calc_system.short_name) %>
