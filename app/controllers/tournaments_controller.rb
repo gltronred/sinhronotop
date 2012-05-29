@@ -107,6 +107,8 @@ class TournamentsController < ApplicationController
   def export_questions
     @teams = @tournament.get_teams
     @games = @tournament.games.reject{|game|!game.publish_results}.sort_by_nilable(:end)
+    c = Calculator.new
+    @results = c.calc(@teams, @games, @tournament.calc_system)
     data = to_cyrillic(@@ENCODING , render('export_questions.csv', :layout => false))
     send_data data,
     :filename => "turnir_#{@tournament.id}_rezultaty.csv",
