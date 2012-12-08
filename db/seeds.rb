@@ -95,6 +95,7 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   end
 end
 
+=begin
 File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
@@ -111,6 +112,7 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
     SeedTasks.set_player_team(atributes[0], atributes[3])
   end
 end
+=end
 
 =begin
 
