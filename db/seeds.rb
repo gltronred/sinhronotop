@@ -72,6 +72,10 @@ module SeedTasks
 
 end
 
+#how to encode
+#conv -f CP1252 -t UTF-8 p.csv >> pn.csv
+#http://www.artlebedev.ru/tools/decoder/
+
 =begin
 File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
   file.each_line do |line|
@@ -80,12 +84,12 @@ File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
     city = SeedTasks.create_city(rating_id, city_name, province, country, time_shift, time_zone)
   end
 end
+=end
 
 File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
     rating_id, team_name, city_name = atributes[0], atributes[1], atributes[2]
-    #city = SeedTasks.create_city(city_name
     city = City.find_by_name city_name
     SeedTasks.create_team(rating_id, team_name, city) if city
   end
@@ -107,12 +111,12 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
     SeedTasks.set_player_team(atributes[0], atributes[3])
   end
 end
-=end
+
+=begin
 
 SeedTasks.create_tag("school", "школьники")
 SeedTasks.create_tag("uni", "студенты")
 
-=begin
 SeedTasks.create_event_status("new", "новая")
 SeedTasks.create_event_status("approved", "принята")
 SeedTasks.create_event_status("denied", "отклонена")
