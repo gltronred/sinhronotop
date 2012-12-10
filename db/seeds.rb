@@ -23,10 +23,9 @@ module SeedTasks
     city
   end
   
-  def self.create_team(rating_id, name, city_name)
+  def self.create_team(rating_id, name, city)
     team = Team.find_by_rating_id rating_id
     unless team
-      city = City.find_by_name city_name
       team = Team.create(:name => name, :rating_id => rating_id, :city_id => city.id) if city
     end
     team
@@ -86,7 +85,6 @@ File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
 end
 =end
 
-=begin
 File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
@@ -95,7 +93,6 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city) if city
   end
 end
-=end
 
 File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
   file.each_line do |line|
