@@ -26,7 +26,7 @@ module SeedTasks
   def self.create_team(rating_id, name, city)
     team = Team.find_by_rating_id rating_id
     unless team
-      team = Team.create(:name => name, :rating_id => rating_id, :city_id => city.id) if city
+      team = Team.create(:name => name, :rating_id => rating_id, :city_id => city.id) if city && city.id < 1000000000
     end
     team
   end
