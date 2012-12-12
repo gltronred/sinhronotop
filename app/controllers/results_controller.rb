@@ -27,6 +27,7 @@ class ResultsController < ApplicationController
       @results = results_unsorted.sort_by{|r| -r.score }
       calc_performed = @@calculator.calculate_places(@results, tag_id)
       Result.save_multiple(@results) if calc_performed && !tag_id
+      puts Time.now
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
