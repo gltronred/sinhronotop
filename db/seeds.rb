@@ -25,7 +25,9 @@ module SeedTasks
   
   def self.create_team(rating_id, name, city)
     team = Team.find_by_rating_id rating_id
-    unless team
+    if team
+      team.update_attributes(:name => name, :city_id => city.id) if city && city.id < 1000000000
+    else
       team = Team.create(:name => name, :rating_id => rating_id, :city_id => city.id) if city && city.id < 1000000000
     end
     team
@@ -57,7 +59,9 @@ module SeedTasks
 
   def self.create_payer(first_name, last_name, patronymic, rating_id)
     player = Player.find_by_rating_id(rating_id)
-    unless player
+    if player
+      player.update_attributes(:firstName => first_name, :lastName => last_name, :patronymic => patronymic)
+    else
       player = Player.create(:firstName => first_name, :lastName => last_name, :patronymic => patronymic, :rating_id => rating_id)
     end
     player
@@ -83,7 +87,6 @@ File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
     city = SeedTasks.create_city(rating_id, city_name, province, country, time_shift, time_zone)
   end
 end
-=end
 
 File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
@@ -101,11 +104,14 @@ File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
     player = SeedTasks.create_payer(first_name, last_name, patronymic, rating_id)
   end
 end
+=end
+
 
 File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
   Player.update_all(:team_id => nil)
   file.each_line do |line|
     atributes = line.split(';')
+    SeedTasks.create_player(atributes[5], atributes[4], atributes[6], atributes[3])
     SeedTasks.create_team(atributes[0], atributes[1], atributes[2])
     SeedTasks.set_player_team(atributes[0], atributes[3])
   end
