@@ -30,9 +30,4 @@ config.action_view.cache_template_loading            = true
 config.action_mailer.default_url_options = { :host => 'sinhronotop.heroku.com' }
 config.action_mailer.perform_deliveries = true
 
-Sinhronotop::Application.configure do
-
-  # add this line
-  config.logger = Logger.new(STDOUT)
-
-end
+config.logger = Logger.new(STDOUT)
