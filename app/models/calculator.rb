@@ -51,7 +51,7 @@ class Calculator
       teams.each do |team|
         r_new = results[team.id].events[game.id]
         unless r_new && r_new.duty?
-          r = game.result_for(team)          
+          r = game.result_for(team)                    
           results[team.id].events[game.id] = r ? EventResult.new((r.score.to_f * 100 / max.to_f).round(DECIMAL_PLACES)) : EventResult.new(0.0, true)
         end
       end

@@ -17,17 +17,14 @@ class ResultsController < ApplicationController
     else
       tag = params[:tag]
       tag_id = tag ? Tag.find_by_short_name(tag) : nil
-      puts Time.now
       if tag_id
         results_unsorted = Result.find(:all, :include => [{:team => :city}, :event, :tag], :conditions => ["events.game_id = ? and tag_id = ?", @parent.id, tag_id])
       else
         results_unsorted = Result.find(:all, :include => [{:team => :city}, :event], :conditions => ["events.game_id = ?", @parent.id])
       end
-      puts Time.now
       @results = results_unsorted.sort_by{|r| -r.score }
       calc_performed = @@calculator.calculate_places(@results, tag_id)
       Result.save_multiple(@results) if calc_performed && !tag_id
-      puts Time.now
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
