@@ -96,7 +96,6 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city) if city
   end
 end
-=end
 
 File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
   file.each_line do |line|
@@ -105,6 +104,7 @@ File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
     player = SeedTasks.create_player(first_name, last_name, patronymic, rating_id)
   end
 end
+=end
 
 File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
   Player.update_all(:team_id => nil)
