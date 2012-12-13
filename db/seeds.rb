@@ -27,8 +27,6 @@ module SeedTasks
     team = Team.find_by_rating_id rating_id
     if team
       team.update_attributes(:name => name, :city_id => city.id) if city && city.id < 1000000000
-      upd = team.save
-      puts "Updated team #{team} in #{city} : #{upd}"
     else
       team = Team.create(:name => name, :rating_id => rating_id, :city_id => city.id) if city && city.id < 1000000000
     end
@@ -98,6 +96,7 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
     SeedTasks.create_team(rating_id, team_name, city) if city
   end
 end
+=end
 
 File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
   file.each_line do |line|
@@ -106,8 +105,6 @@ File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
     player = SeedTasks.create_player(first_name, last_name, patronymic, rating_id)
   end
 end
-=end
-
 
 File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
   Player.update_all(:team_id => nil)
@@ -118,7 +115,6 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
     SeedTasks.set_player_team(atributes[0], atributes[3])
   end
 end
-
 
 =begin
 
