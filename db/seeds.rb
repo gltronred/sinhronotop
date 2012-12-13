@@ -27,6 +27,8 @@ module SeedTasks
     team = Team.find_by_rating_id rating_id
     if team
       team.update_attributes(:name => name, :city_id => city.id) if city && city.id < 1000000000
+      upd = team.save
+      puts "Updated team #{team} in #{city} : #{upd}"
     else
       team = Team.create(:name => name, :rating_id => rating_id, :city_id => city.id) if city && city.id < 1000000000
     end
