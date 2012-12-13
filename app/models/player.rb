@@ -11,17 +11,17 @@ class Player < ActiveRecord::Base
   named_scope :autocomplete, lambda { |p|
     {
       :conditions => ["\"lastName\" LIKE ?", p[:lastName].to_s + '%'],
-      :joins => :team,
+      #:joins => :team,
       :order => "\"lastName\", \"firstName\", \"patronymic\""
     }
   }
   
   def get_rating_status(team)
-    self.team.id == team.id ? 'Б' : 'Л'
+    self.team && self.team.id == team.id ? 'Б' : 'Л'
   end
   
   def to_s
-    "#{lastName} #{firstName} #{patronymic if patronymic} #{team ? "(#{team.to_s})" : '(без команды)'}"
+    "#{lastName} #{firstName} #{patronymic if patronymic} #{self.team ? "(#{self.team.to_s})" : '(без команды)'}"
   end
   
 end
