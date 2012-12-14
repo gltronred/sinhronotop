@@ -21,7 +21,7 @@ class Player < ActiveRecord::Base
   end
   
   def to_s
-    "#{lastName} #{firstName} #{patronymic if patronymic} #{self.team ? "(#{self.team.to_s})" : '(без команды)'}"
+    "#{lastName} #{firstName} #{patronymic if patronymic} #{self.rating_id ? "(#{self.rating_id})" : ''}"
   end
   
 end
