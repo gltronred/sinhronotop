@@ -6,8 +6,8 @@ class Result < ActiveRecord::Base
   belongs_to :tag  
   
   def calculate_excluding(questions)
-    questions.each do |q|
-      self.resultitems[q-1].score = 0
+    for ri in self.resultitems
+      ri.score = 0 if questions.include?(ri.question_index)
     end
     self.score = get_score self.resultitems
     self.place_begin = nil
