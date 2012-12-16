@@ -5,6 +5,14 @@ class Result < ActiveRecord::Base
   validates_presence_of :cap_name, :if => :should_validate_cap_name?
   belongs_to :tag  
   
+  def calculate_excluding(questions)
+    questions.each do |q|
+      self.resultitems[q-1].score = 0
+    end
+    self.score = get_score self.resultitems
+    self.place_begin = nil
+    self.place_end = nil
+  end
   
   def calculate_and_save
     self.score = get_score self.resultitems

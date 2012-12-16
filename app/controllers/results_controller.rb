@@ -22,9 +22,15 @@ class ResultsController < ApplicationController
       else
         results_unsorted = Result.find(:all, :include => [{:team => :city}, :event, :resultitems], :conditions => ["events.game_id = ?", @parent.id])
       end
+      exclude = params[:exclude]
+      if exclude
+        results_unsorted.each do |r|
+          r.calculate_excluding(exclude.split(/,/).map{|element|element.to_i})
+        end
+      end
       @results = results_unsorted.sort_by{|r| -r.score }
       calc_performed = @@calculator.calculate_places(@results, tag_id)
-      Result.save_multiple(@results) if calc_performed && !tag_id
+      Result.save_multiple(@results) if calc_performed && !tag_id && !exclude
     end
     @context_array = @parent.parents_top_down(:with_me) << "результаты (#{@results.size})"
     respond_to do |format|
