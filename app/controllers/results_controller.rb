@@ -24,8 +24,9 @@ class ResultsController < ApplicationController
       end
       exclude = params[:exclude]
       if exclude
+        exclude_as_array = exclude.split(/,/).map{|element|element.to_i}
         results_unsorted.each do |r|
-          r.calculate_excluding(exclude.split(/,/).map{|element|element.to_i})
+          r.calculate_excluding(exclude_as_array)
         end
       end
       @results = results_unsorted.sort_by{|r| -r.score }
