@@ -87,6 +87,7 @@ File.open(File.join(Rails.root, 'db', "cities.csv"), 'r') do |file|
     city = SeedTasks.create_city(rating_id, city_name, province, country, time_shift, time_zone)
   end
 end
+=end
 
 File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   file.each_line do |line|
@@ -97,6 +98,7 @@ File.open(File.join(Rails.root, 'db', "teams.csv"), 'r') do |file|
   end
 end
 
+=begin
 File.open(File.join(Rails.root, 'db', "players.csv"), 'r') do |file|
   file.each_line do |line|
     atributes = line.split(';')
@@ -110,8 +112,8 @@ File.open(File.join(Rails.root, 'db', "players_with_teams.csv"), 'r') do |file|
   Player.update_all(:team_id => nil)
   file.each_line do |line|
     atributes = line.split(';')
-    SeedTasks.create_player(atributes[5], atributes[4], atributes[6], atributes[3])
-    SeedTasks.create_team(atributes[0], atributes[1], atributes[2])
+    #SeedTasks.create_player(atributes[5], atributes[4], atributes[6], atributes[3])
+    #SeedTasks.create_team(atributes[0], atributes[1], atributes[2])
     SeedTasks.set_player_team(atributes[0], atributes[3])
   end
 end
