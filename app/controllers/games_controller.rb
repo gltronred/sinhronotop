@@ -95,7 +95,8 @@ class GamesController < ApplicationController
     load_parents
     load_cities
     load_users
-    @results = @parent.results
+    #@results = @parent.results
+    @results = Result.find(:all, :include => [{:team => [:city, :plays]}, :event], :conditions => ["events.game_id = ?", @parent.id])
     data = to_cyrillic(@@ENCODING, render('export_casts.csv', :layout => false))
     send_data data,
     :filename => "igra_#{@game.id}_sostavy.csv",
