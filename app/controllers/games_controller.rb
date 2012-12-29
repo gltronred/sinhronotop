@@ -107,7 +107,8 @@ class GamesController < ApplicationController
   def export_questions
     @game = Game.find params[:game_id]
     load_parents
-    @results = @parent.results
+    #@results = @parent.results
+    @results = Result.find(:all, :include => [{:team => :city}, :event, :resultitems], :conditions => ["events.game_id = ?", @parent.id])
     data = to_cyrillic(@@ENCODING , render('export_questions.csv', :layout => false))
     send_data data,
     :filename => "igra_#{@game.id}_povoprosnye_rezultaty.csv",
