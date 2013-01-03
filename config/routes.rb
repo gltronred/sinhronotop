@@ -48,7 +48,7 @@ ActionController::Routing::Routes.draw do |map|
   end
   map.change_status "events/:id/change_status", :controller => 'events', :action => "change_status"
   map.event_casts "events/:event_id/casts", :controller => 'events', :action => "casts"
-  map.event_export_casts "event/:event_id/export_casts", :controller => 'events', :action => "export_casts"
+  map.event_export_casts "events/:event_id/export_casts", :controller => 'events', :action => "export_casts"
 
   map.resources :games
   map.resources :games do |g|

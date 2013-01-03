@@ -1,5 +1,7 @@
 class EventsController < ApplicationController
 
+  @@ENCODING = "WINDOWS-1251"
+
   before_filter :find, :only => [:edit, :update, :destroy, :show, :change_status, :payment, :update_payment]
   before_filter :find_game, :only => [:index, :new, :create]
 
@@ -135,7 +137,6 @@ class EventsController < ApplicationController
 
   def export_casts
     load_parents
-    load_cities
     load_users
     @results = @event.results
     data = to_cyrillic(@@ENCODING, render('export_casts.csv', :layout => false))
