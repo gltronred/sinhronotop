@@ -1,7 +1,6 @@
 "IDteam";Название;Город;Флаг;"IDplayer";Фамилия;Имя;Отчество
 <% @results.each do |result| -%>
 <% result.team.plays.find_all{|item|item.event_id == result.event.id}.each do |play| -%>
-<% #player = Player.find(play.player_id) -%>
-<%= play.get_team_rating_id -%>;<%= result.team.name -%>;<%= result.team.city.name -%>;<%=play.get_rating_status -%>;<%= play.get_rating_id -%>;<%= #player.lastName -%>;<%= #player.firstName -%>;<%= #player.patronymic %>
+<%= play.get_team_rating_id -%>;<%= result.team.name -%>;<%= result.team.city.name -%>;<%=play.get_rating_status -%>;<%= play.get_rating_id -%>;
 <%end-%>
 <%end-%>
