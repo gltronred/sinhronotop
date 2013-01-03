@@ -98,7 +98,8 @@ class GamesController < ApplicationController
     #@results = @parent.results
     @results = Result.find(:all, :include => [{:team => [:city, :plays]}, :event], :conditions => ["events.game_id = ?", @parent.id])
     data = to_cyrillic(@@ENCODING, render('export_casts.csv', :layout => false))
-    send_data data,
+    send_file data,
+    :stream => true,
     :filename => "igra_#{@game.id}_sostavy.csv",
     :disposition => 'attachment',
     :type => "text/csv; charset=#{@@ENCODING} ; header=present",
@@ -111,7 +112,8 @@ class GamesController < ApplicationController
     #@results = @parent.results
     @results = Result.find(:all, :include => [{:team => :city}, :event, :resultitems], :conditions => ["events.game_id = ?", @parent.id])
     data = to_cyrillic(@@ENCODING , render('export_questions.csv', :layout => false))
-    send_data data,
+    send_file data,
+    :stream => true,
     :filename => "igra_#{@game.id}_povoprosnye_rezultaty.csv",
     :disposition => 'attachment',
     :type => "text/csv; charset=#{@@ENCODING}; header=present",
