@@ -131,7 +131,20 @@ class EventsController < ApplicationController
     else
       render :action => "payment"
     end
-  end  
+  end
+
+  def export_casts
+    load_parents
+    load_cities
+    load_users
+    @results = @event.results
+    data = to_cyrillic(@@ENCODING, render('export_casts.csv', :layout => false))
+    send_data data,
+    :filename => "event_#{@event.id}_sostavy.csv",
+    :disposition => 'attachment',
+    :type => "text/csv; charset=#{@@ENCODING} ; header=present",
+    :encoding => @@ENCODING
+  end
 
   protected
 
