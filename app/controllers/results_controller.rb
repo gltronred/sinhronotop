@@ -9,7 +9,8 @@ class ResultsController < ApplicationController
   def index
     if @event
       @result = Result.new
-      @results = @parent.results.sort_by{|r| r.local_index }
+      @results = Result.find(:all, :include => [{:team => :city}, :resultitems], :conditions => ["event_id = ?", @event.id]).sort_by{|r| r.local_index }      
+      #@results = @parent.results.sort_by{|r| r.local_index }
       @results.each {|result| result.calculate_and_save }
       @team = Team.new
       load_teams
