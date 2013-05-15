@@ -6,9 +6,17 @@ chgk_db_generic: &chgk_db_generic
   encoding: utf8
 
 development:
-  <<: *chgk_db_generic
+  adapter: postgresql
+  username: chgk
+  password: geheim
+  host: 127.0.0.1
+  encoding: utf8
   database: chgk_dev
   
 test:
-  <<: *chgk_db_generic  
+  adapter: postgresql
+  username: chgk
+  password: geheim
+  host: 127.0.0.1
+  encoding: utf8
   database: chgk_test
