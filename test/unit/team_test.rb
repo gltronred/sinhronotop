@@ -1,4 +1,5 @@
-require 'test_helper'
+# -*- coding: utf-8 -*-
+require_relative '../test_helper'
 
 class TeamTest < ActiveSupport::TestCase
   def test_merge

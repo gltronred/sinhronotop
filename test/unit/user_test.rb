@@ -1,5 +1,6 @@
-require File.dirname(__FILE__) + '/../test_helper'
-require 'unit/unit_test_helper'
+# -*- coding: utf-8 -*-
+require_relative '../test_helper'
+require_relative 'unit/unit_test_helper'
 
 class UserTest < ActiveSupport::TestCase
   include UnitTestHelper

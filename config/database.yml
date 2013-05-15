@@ -1,6 +1,6 @@
 chgk_db_generic: &chgk_db_generic
-  adapter: mysql
-  username: root
+  adapter: postgresql
+  username: chgk
   password: geheim
   host: 127.0.0.1
   encoding: utf8
