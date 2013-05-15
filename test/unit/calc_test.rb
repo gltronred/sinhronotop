@@ -1,5 +1,5 @@
 require_relative '../test_helper'
-require_relative 'unit/unit_test_helper'
+require_relative 'unit_test_helper'
 
 class CalcTest < ActiveSupport::TestCase
   
