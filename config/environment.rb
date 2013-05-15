@@ -8,7 +8,6 @@ RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
 
 # Bootstrap the Rails environment, frameworks, and default configuration
 require File.join(File.dirname(__FILE__), 'boot')
-require 'iconv'
 class RackRailsCookieHeaderHack
   def initialize(app)
     @app = app
