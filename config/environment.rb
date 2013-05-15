@@ -1,6 +1,8 @@
 # encoding: utf-8 -*- coding: utf-8 -*-
 # Be sure to restart your server when you modify this file
 
+Encoding.default_external = Encoding.default_internal = Encoding::UTF_8
+
 # Specifies gem version of Rails to use when vendor/rails is not present
 RAILS_GEM_VERSION = '2.3.18' unless defined? RAILS_GEM_VERSION
 
