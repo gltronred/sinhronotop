@@ -1,27 +1,30 @@
+# encoding: utf-8 -*- coding: utf-8 -*-
 require 'rubygems'
 require 'capybara'
+require 'selenium-webdriver'
 require 'capybara/dsl'
+require 'capybara/rails'
 require 'rake'
 
 #require 'akephalos'
 #Capybara.javascript_driver = :akephalos
 #Capybara.default_driver = :akephalos
 
-Capybara.default_driver = :selenium
 Capybara.app_host = 'http://localhost:3000'
 Capybara.register_driver :selenium do |app|
-  Capybara::Driver::Selenium.new(app, :browser => :chrome)
+  Capybara::Selenium::Driver.new(app, :browser => :firefox)
 end
+Capybara.default_driver = :selenium
 
 module IntegrationTestHelper
-  include Capybara
+  include Capybara::DSL
 
   def login(user)
     login_form(user.email, 'znatok')
   end
 
   def login_form(email, password, success=true)
-    visit home_path
+    visit "/"
     fill_in "email", :with => email
     fill_in "password", :with => password
     click_button "Войти"

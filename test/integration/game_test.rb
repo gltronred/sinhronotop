@@ -1,5 +1,6 @@
-require 'test_helper'
-require 'integration/integration_test_helper'
+# -*- coding: utf-8 -*-
+require_relative '../test_helper'
+require_relative 'integration_test_helper'
 
 class GameTest < ActionController::IntegrationTest
   include IntegrationTestHelper
