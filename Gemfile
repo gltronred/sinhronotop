@@ -5,5 +5,7 @@ gem 'rails', '~> 2.3.8'
 gem 'pg'
 gem "heroku_backup_task"
 gem "right_aws"
-# gem 'russian'
+gem "capybara"
+gem "selenium-webdriver"
+gem "capybara-webkit"
 
